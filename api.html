@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,  maximum-scale=1,  minimum-scale=1, user-scalable=no">
+   
+    <title>/api</title>
+    <script src="./moonshine.min.js"></script>
+    <script>
+        var query = window.location.search
+        var searchParams = new URLSearchParams(query);
+        var search = searchParams.get("search")
+        if (search) {
+            env = {
+		        args: search,
+            };
+        } else {
+            env = {}
+        }
+
+        var vm = new shine.VM(env);
+
+        shine.stdout.write = function () {
+            var outputElement = document.querySelector("pre");
+	        var args = Array.prototype.slice.call(arguments);
+	        outputElement.innerHTML  += args.join('\t') + '\n';
+        }
+
+        vm.load('./api.lua.json');
+    </script>
+    <style>
+        body {
+            color:white;
+            background-color: #1f1f21;
+        }
+        a {  text-decoration: none; }
+        input { color:white; background-color: #1f1f21; }
+        form { display: inline; }
+    </style>
+
+</head>
+<body>
+    <h1>World Of Warcraft 8.0 beta - Blizzard API Documentation - Offline /api Addon</h1>
+    <a href="?">Usage</a> - 
+    <a href="?search=system list">List all systems</a><br/><br/>
+    /api <form method="GET"><input type="text" name="search" /></form>
+    <br/><br/>
+    <pre class="output"></pre>
+
+    <pre>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <span style="text-align: center">contact: buds#0500 @ discord</span>
+</body>

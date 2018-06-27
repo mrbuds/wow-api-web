@@ -76,8 +76,9 @@ FunctionsAPIMixin.lua
 SystemsAPIMixin.lua
 TablesAPIMixin.lua
 EventsAPIMixin.lua
-Blizzard_APIDocumentation.lua
+Blizzard_APIDocumentation.lua]]
 
+--[[ we concatenate all of them in fulldoc.lua with compile.sh
 # Start documentation files here
 AccountInfoDocumentation.lua
 AchievementInfoDocumentation.lua
@@ -209,15 +210,16 @@ WowTokenUIDocumentation.lua
 ZoneAbilityDocumentation.lua
 CalendarDocumentation.lua
 ClubDocumentation.lua
-FriendsDocumentation.lua]]
+FriendsDocumentation.lua
+]]--
 
 --for line in io.lines(tocfile) do    -- don't work with js
 for _,line in pairs(("\n"):split2(stringtocfile)) do 
     local char1 = line:sub(1,1)
     if char1 ~= "" and char1 ~= "#" then
         require("Blizzard_APIDocumentation." .. line:sub(1,-5))
-        -- replace some mixin function to remove links & color codes after they are loaded 
-        -- i don't like how i do it but couldn't find a proper way
+        -- replace some mixin functions to remove links & color codes after they are loaded 
+        -- i don't like how i do it but can't find a proper way
         if removelinks then  
             if line == "BaseAPIMixin.lua" then
                 function BaseAPIMixin:GenerateAPILink()
@@ -319,6 +321,8 @@ function APIDocumentation:OutputUsage()
 	self:WriteLine(" ");
 	self:WriteLine("All searches support Lua patterns.");
 end
+
+require("fulldoc")
 
 if args and args:sub(1,4) == "api:" then
     APIDocumentation:HandleAPILink(args, nil)

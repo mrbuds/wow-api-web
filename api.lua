@@ -234,7 +234,7 @@ for _,line in pairs(("\n"):split2(stringtocfile)) do
                     --local includeColorCodes = false
                     local prefix = decorateOptionals ~= false and self:IsOptional() and "optional " or "";
                     if includeColorCodes ~= false then
-                        return ("<span style='color: #%s'>%s%s%s</span>"):format(self:GetLinkHexColor(), prefix, self:GetName());
+                        return ("<span style='color: #%s'>%s%s</span>"):format(self:GetLinkHexColor(), prefix, self:GetName());
                     end
                     return ("%s%s"):format(prefix, self:GetName());
                 end

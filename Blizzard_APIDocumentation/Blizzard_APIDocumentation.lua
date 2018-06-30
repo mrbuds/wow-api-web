@@ -343,6 +343,7 @@ end
 
 function APIDocumentationMixin:AddEvent(documentationInfo)
 	Mixin(documentationInfo, EventsAPIMixin);
+
 	table.insert(self.events, documentationInfo);
 
 	if documentationInfo.Payload then

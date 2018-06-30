@@ -9224,6 +9224,20 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 			},
 		},
 		{
+			Name = "GuildControlGetRankFlags",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "rankOrder", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "permissions", Type = "table", InnerType = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsGuildRankAssignmentAllowed",
 			Type = "Function",
 
@@ -9646,6 +9660,7 @@ APIDocumentation:AddDocumentationTable(InvasionInfo);local IslandsInfo =
 {
 	Name = "IslandsInfo",
 	Type = "System",
+	Namespace = "C_IslandsInfo",
 
 	Functions =
 	{
@@ -9686,12 +9701,21 @@ APIDocumentation:AddDocumentationTable(IslandsInfo);local IslandsQueueUI =
 			Type = "Function",
 		},
 		{
-			Name = "GetIslandDifficultyIds",
+			Name = "GetIslandDifficultyInfo",
 			Type = "Function",
 
 			Returns =
 			{
-				{ Name = "lfgIslandDifficultyIds", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "islandDifficultyInfo", Type = "table", InnerType = "IslandsQueueDifficultyInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetIslandsMaxGroupSize",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "maxGroupSize", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -9712,6 +9736,15 @@ APIDocumentation:AddDocumentationTable(IslandsInfo);local IslandsQueueUI =
 				{ Name = "difficultyID", Type = "number", Nilable = false },
 			},
 		},
+		{
+			Name = "RequestPreloadRewardData",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questId", Type = "number", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -9730,6 +9763,15 @@ APIDocumentation:AddDocumentationTable(IslandsInfo);local IslandsQueueUI =
 
 	Tables =
 	{
+		{
+			Name = "IslandsQueueDifficultyInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "difficultyId", Type = "number", Nilable = false },
+				{ Name = "previewRewardQuestId", Type = "number", Nilable = false },
+			},
+		},
 	},
 };
 
@@ -10188,15 +10230,15 @@ APIDocumentation:AddDocumentationTable(IslandsQueueUI);local Item =
 			MaxValue = 8,
 			Fields =
 			{
-				{ Name = "ItemQualityPoor", Type = "ItemQuality", EnumValue = 0 },
-				{ Name = "ItemQualityStandard", Type = "ItemQuality", EnumValue = 1 },
-				{ Name = "ItemQualityGood", Type = "ItemQuality", EnumValue = 2 },
-				{ Name = "ItemQualitySuperior", Type = "ItemQuality", EnumValue = 3 },
-				{ Name = "ItemQualityEpic", Type = "ItemQuality", EnumValue = 4 },
-				{ Name = "ItemQualityLegendary", Type = "ItemQuality", EnumValue = 5 },
-				{ Name = "ItemQualityArtifact", Type = "ItemQuality", EnumValue = 6 },
-				{ Name = "ItemQualityHeirloom", Type = "ItemQuality", EnumValue = 7 },
-				{ Name = "ItemQualityWoWToken", Type = "ItemQuality", EnumValue = 8 },
+				{ Name = "Poor", Type = "ItemQuality", EnumValue = 0 },
+				{ Name = "Standard", Type = "ItemQuality", EnumValue = 1 },
+				{ Name = "Good", Type = "ItemQuality", EnumValue = 2 },
+				{ Name = "Superior", Type = "ItemQuality", EnumValue = 3 },
+				{ Name = "Epic", Type = "ItemQuality", EnumValue = 4 },
+				{ Name = "Legendary", Type = "ItemQuality", EnumValue = 5 },
+				{ Name = "Artifact", Type = "ItemQuality", EnumValue = 6 },
+				{ Name = "Heirloom", Type = "ItemQuality", EnumValue = 7 },
+				{ Name = "WoWToken", Type = "ItemQuality", EnumValue = 8 },
 			},
 		},
 	},
@@ -12606,6 +12648,20 @@ APIDocumentation:AddDocumentationTable(MountJournal);local MythicPlusInfo =
 			},
 		},
 		{
+			Name = "GetRewardLevelFromKeystoneLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "keystoneLevel", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "rewardLevel", Type = "number", Nilable = true },
+			},
+		},
+		{
 			Name = "GetSeasonBestForMap",
 			Type = "Function",
 
@@ -13641,6 +13697,8 @@ APIDocumentation:AddDocumentationTable(PetJournalInfo);local PlayerLocation =
 
 			Returns =
 			{
+				{ Name = "className", Type = "string", Nilable = true },
+				{ Name = "classFilename", Type = "string", Nilable = true },
 				{ Name = "classID", Type = "number", Nilable = true },
 			},
 		},
@@ -13684,6 +13742,20 @@ APIDocumentation:AddDocumentationTable(PetJournalInfo);local PlayerLocation =
 			Returns =
 			{
 				{ Name = "sex", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "IsConnected",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "playerLocation", Type = "table", Mixin = "PlayerLocationMixin", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "isConnected", Type = "bool", Nilable = true },
 			},
 		},
 	},
@@ -13743,7 +13815,8 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			{
 				{ Name = "honor", Type = "number", Nilable = false },
 				{ Name = "experience", Type = "number", Nilable = false },
-				{ Name = "rewards", Type = "table", InnerType = "BattlefieldReward", Nilable = true },
+				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
+				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
 			},
 		},
 		{
@@ -13754,7 +13827,8 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			{
 				{ Name = "honor", Type = "number", Nilable = false },
 				{ Name = "experience", Type = "number", Nilable = false },
-				{ Name = "rewards", Type = "table", InnerType = "BattlefieldReward", Nilable = true },
+				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
+				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
 			},
 		},
 		{
@@ -13780,7 +13854,8 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			{
 				{ Name = "honor", Type = "number", Nilable = false },
 				{ Name = "experience", Type = "number", Nilable = false },
-				{ Name = "rewards", Type = "table", InnerType = "BattlefieldReward", Nilable = true },
+				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
+				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
 				{ Name = "hasWon", Type = "bool", Nilable = false },
 			},
 		},
@@ -13871,7 +13946,8 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			{
 				{ Name = "honor", Type = "number", Nilable = false },
 				{ Name = "experience", Type = "number", Nilable = false },
-				{ Name = "rewards", Type = "table", InnerType = "BattlefieldReward", Nilable = true },
+				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
+				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
 			},
 		},
 		{
@@ -13891,7 +13967,8 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			{
 				{ Name = "honor", Type = "number", Nilable = false },
 				{ Name = "experience", Type = "number", Nilable = false },
-				{ Name = "rewards", Type = "table", InnerType = "BattlefieldReward", Nilable = true },
+				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
+				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
 			},
 		},
 		{
@@ -13902,7 +13979,8 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			{
 				{ Name = "honor", Type = "number", Nilable = false },
 				{ Name = "experience", Type = "number", Nilable = false },
-				{ Name = "rewards", Type = "table", InnerType = "BattlefieldReward", Nilable = true },
+				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
+				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
 			},
 		},
 		{
@@ -14213,7 +14291,16 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
-			Name = "BattlefieldReward",
+			Name = "BattlefieldCurrencyReward",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "BattlefieldItemReward",
 			Type = "Structure",
 			Fields =
 			{
@@ -15358,6 +15445,15 @@ APIDocumentation:AddDocumentationTable(ScenarioInfo);local ScrappingMachineUI =
 			Returns =
 			{
 				{ Name = "spellID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetScrappingMachineName",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -17656,11 +17752,7 @@ APIDocumentation:AddDocumentationTable(UIManager);local UIModelInfo =
 
 			Returns =
 			{
-				{ Name = "animation", Type = "number", Nilable = false },
-				{ Name = "animationVariation", Type = "number", Nilable = false },
-				{ Name = "animSpeed", Type = "number", Nilable = false },
-				{ Name = "alpha", Type = "number", Nilable = false },
-				{ Name = "scale", Type = "number", Nilable = false },
+				{ Name = "actorDisplayInfo", Type = "UIModelSceneActorDisplayInfo", Nilable = false },
 			},
 		},
 		{
@@ -17755,6 +17847,20 @@ APIDocumentation:AddDocumentationTable(UIManager);local UIModelInfo =
 				{ Name = "AzeriteItemLevelUpToast", Type = "ModelSceneType", EnumValue = 13 },
 				{ Name = "AzeritePowers", Type = "ModelSceneType", EnumValue = 14 },
 				{ Name = "AzeriteRewardGlow", Type = "ModelSceneType", EnumValue = 15 },
+			},
+		},
+		{
+			Name = "UIModelSceneActorDisplayInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "animation", Type = "number", Nilable = false },
+				{ Name = "animationVariation", Type = "number", Nilable = false },
+				{ Name = "animSpeed", Type = "number", Nilable = false },
+				{ Name = "animationKitID", Type = "number", Nilable = true },
+				{ Name = "spellVisualKitID", Type = "number", Nilable = true },
+				{ Name = "alpha", Type = "number", Nilable = false },
+				{ Name = "scale", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -18383,22 +18489,6 @@ APIDocumentation:AddDocumentationTable(UIWidgetManager);local Unit =
 
 			Returns =
 			{
-				{ Name = "classFilename", Type = "string", Nilable = false },
-				{ Name = "classID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "UnitClassByPlayerLocation",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "playerLocation", Type = "table", Mixin = "PlayerLocationMixin", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "className", Type = "string", Nilable = false },
 				{ Name = "classFilename", Type = "string", Nilable = false },
 				{ Name = "classID", Type = "number", Nilable = false },
 			},
@@ -19833,6 +19923,15 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 			},
 		},
 		{
+			Name = "CanPlayerUseVoiceChat",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canUseVoiceChat", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CreateChannel",
 			Type = "Function",
 
@@ -20135,21 +20234,6 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 			},
 		},
 		{
-			Name = "IsMemberConnected",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "memberID", Type = "number", Nilable = false },
-				{ Name = "channelID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "isConnected", Type = "bool", Nilable = false },
-			},
-		},
-		{
 			Name = "IsMemberLocalPlayer",
 			Type = "Function",
 
@@ -20215,6 +20299,24 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 			Returns =
 			{
 				{ Name = "isMuted", Type = "bool", Nilable = true },
+			},
+		},
+		{
+			Name = "IsParentalDisabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isParentalDisabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsParentalMuted",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isParentalMuted", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -20772,9 +20874,9 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 		{
 			Name = "VoiceChatStatusCode",
 			Type = "Enumeration",
-			NumValues = 22,
+			NumValues = 23,
 			MinValue = 0,
-			MaxValue = 21,
+			MaxValue = 22,
 			Fields =
 			{
 				{ Name = "Success", Type = "VoiceChatStatusCode", EnumValue = 0 },
@@ -20799,6 +20901,7 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 				{ Name = "UnsupportedChatChannelType", Type = "VoiceChatStatusCode", EnumValue = 19 },
 				{ Name = "InvalidCommunityStream", Type = "VoiceChatStatusCode", EnumValue = 20 },
 				{ Name = "PlayerSilenced", Type = "VoiceChatStatusCode", EnumValue = 21 },
+				{ Name = "PlayerVoiceChatParentalDisabled", Type = "VoiceChatStatusCode", EnumValue = 22 },
 			},
 		},
 		{
@@ -22602,6 +22705,15 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			},
 		},
 		{
+			Name = "GetGuildClubId",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "guildClubId", Type = "string", Nilable = true },
+			},
+		},
+		{
 			Name = "GetInfoFromLastCommunityChatLine",
 			Type = "Function",
 
@@ -22735,9 +22847,27 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			},
 		},
 		{
+			Name = "GetMessagesBefore",
+			Type = "Function",
+			Documentation = { "Get downloaded messages before (and including) the specified messageId limited by count. These are filtered by ignored players" },
+
+			Arguments =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+				{ Name = "streamId", Type = "string", Nilable = false },
+				{ Name = "newest", Type = "ClubMessageIdentifier", Nilable = false },
+				{ Name = "count", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "messages", Type = "table", InnerType = "ClubMessageInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "GetMessagesInRange",
 			Type = "Function",
-			Documentation = { "Get all downloaded messages in the given range." },
+			Documentation = { "Get downloaded messages in the given range. These are filtered by ignored players" },
 
 			Arguments =
 			{
@@ -22821,6 +22951,23 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			},
 		},
 		{
+			Name = "IsBeginningOfStream",
+			Type = "Function",
+			Documentation = { "Returns whether the given message is the first message in the stream, taking into account ignored messages" },
+
+			Arguments =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+				{ Name = "streamId", Type = "string", Nilable = false },
+				{ Name = "messageId", Type = "ClubMessageIdentifier", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isBeginningOfStream", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsEnabled",
 			Type = "Function",
 
@@ -22884,18 +23031,6 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			},
 		},
 		{
-			Name = "RequestMoreMessagesAfter",
-			Type = "Function",
-			Documentation = { "Call this when the user scrolls near the bottom of the message view, and more need to be displayed." },
-
-			Arguments =
-			{
-				{ Name = "clubId", Type = "string", Nilable = false },
-				{ Name = "streamId", Type = "string", Nilable = false },
-				{ Name = "messageId", Type = "ClubMessageIdentifier", Nilable = false },
-			},
-		},
-		{
 			Name = "RequestMoreMessagesBefore",
 			Type = "Function",
 			Documentation = { "Call this when the user scrolls near the top of the message view, and more need to be displayed. The history will be downloaded backwards (newest to oldest)." },
@@ -22905,6 +23040,12 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 				{ Name = "clubId", Type = "string", Nilable = false },
 				{ Name = "streamId", Type = "string", Nilable = false },
 				{ Name = "messageId", Type = "ClubMessageIdentifier", Nilable = true },
+				{ Name = "count", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "alreadyHasMessages", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -23234,6 +23375,16 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			},
 		},
 		{
+			Name = "ClubRemovedMessage",
+			Type = "Event",
+			LiteralName = "CLUB_REMOVED_MESSAGE",
+			Payload =
+			{
+				{ Name = "clubName", Type = "string", Nilable = false },
+				{ Name = "clubRemovedReason", Type = "ClubRemovedReason", Nilable = false },
+			},
+		},
+		{
 			Name = "ClubSelfMemberRoleUpdated",
 			Type = "Event",
 			LiteralName = "CLUB_SELF_MEMBER_ROLE_UPDATED",
@@ -23373,14 +23524,15 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 		{
 			Name = "ClubType",
 			Type = "Enumeration",
-			NumValues = 3,
+			NumValues = 4,
 			MinValue = 0,
-			MaxValue = 2,
+			MaxValue = 3,
 			Fields =
 			{
 				{ Name = "BattleNet", Type = "ClubType", EnumValue = 0 },
 				{ Name = "Character", Type = "ClubType", EnumValue = 1 },
 				{ Name = "Guild", Type = "ClubType", EnumValue = 2 },
+				{ Name = "Other", Type = "ClubType", EnumValue = 3 },
 			},
 		},
 		{
@@ -23423,9 +23575,9 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 		{
 			Name = "ClubErrorType",
 			Type = "Enumeration",
-			NumValues = 37,
+			NumValues = 39,
 			MinValue = 0,
-			MaxValue = 36,
+			MaxValue = 38,
 			Fields =
 			{
 				{ Name = "ErrorCommunitiesNone", Type = "ClubErrorType", EnumValue = 0 },
@@ -23441,30 +23593,32 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 				{ Name = "ErrorCommunitiesUnknownTicket", Type = "ClubErrorType", EnumValue = 10 },
 				{ Name = "ErrorCommunitiesMissingShortName", Type = "ClubErrorType", EnumValue = 11 },
 				{ Name = "ErrorCommunitiesProfanity", Type = "ClubErrorType", EnumValue = 12 },
-				{ Name = "ErrorClubFull", Type = "ClubErrorType", EnumValue = 13 },
-				{ Name = "ErrorClubNoClub", Type = "ClubErrorType", EnumValue = 14 },
-				{ Name = "ErrorClubNotMember", Type = "ClubErrorType", EnumValue = 15 },
-				{ Name = "ErrorClubAlreadyMember", Type = "ClubErrorType", EnumValue = 16 },
-				{ Name = "ErrorClubNoSuchMember", Type = "ClubErrorType", EnumValue = 17 },
-				{ Name = "ErrorClubNoSuchInvitation", Type = "ClubErrorType", EnumValue = 18 },
-				{ Name = "ErrorClubInvitationAlreadyExists", Type = "ClubErrorType", EnumValue = 19 },
-				{ Name = "ErrorClubInvalidRoleID", Type = "ClubErrorType", EnumValue = 20 },
-				{ Name = "ErrorClubInsufficientPrivileges", Type = "ClubErrorType", EnumValue = 21 },
-				{ Name = "ErrorClubTooManyClubsJoined", Type = "ClubErrorType", EnumValue = 22 },
-				{ Name = "ErrorClubVoiceFull", Type = "ClubErrorType", EnumValue = 23 },
-				{ Name = "ErrorClubStreamNoStream", Type = "ClubErrorType", EnumValue = 24 },
-				{ Name = "ErrorClubStreamInvalidName", Type = "ClubErrorType", EnumValue = 25 },
-				{ Name = "ErrorClubStreamCountAtMin", Type = "ClubErrorType", EnumValue = 26 },
-				{ Name = "ErrorClubStreamCountAtMax", Type = "ClubErrorType", EnumValue = 27 },
-				{ Name = "ErrorClubMemberHasRequiredRole", Type = "ClubErrorType", EnumValue = 28 },
-				{ Name = "ErrorClubSentInvitationCountAtMax", Type = "ClubErrorType", EnumValue = 29 },
-				{ Name = "ErrorClubReceivedInvitationCountAtMax", Type = "ClubErrorType", EnumValue = 30 },
-				{ Name = "ErrorClubTargetIsBanned", Type = "ClubErrorType", EnumValue = 31 },
-				{ Name = "ErrorClubBanAlreadyExists", Type = "ClubErrorType", EnumValue = 32 },
-				{ Name = "ErrorClubBanCountAtMax", Type = "ClubErrorType", EnumValue = 33 },
-				{ Name = "ErrorClubTicketCountAtMax", Type = "ClubErrorType", EnumValue = 34 },
-				{ Name = "ErrorClubTicketNoSuchTicket", Type = "ClubErrorType", EnumValue = 35 },
-				{ Name = "ErrorClubTicketHasConsumedAllowedRedeemCount", Type = "ClubErrorType", EnumValue = 36 },
+				{ Name = "ErrorCommunitiesTrial", Type = "ClubErrorType", EnumValue = 13 },
+				{ Name = "ErrorCommunitiesVeteranTrial", Type = "ClubErrorType", EnumValue = 14 },
+				{ Name = "ErrorClubFull", Type = "ClubErrorType", EnumValue = 15 },
+				{ Name = "ErrorClubNoClub", Type = "ClubErrorType", EnumValue = 16 },
+				{ Name = "ErrorClubNotMember", Type = "ClubErrorType", EnumValue = 17 },
+				{ Name = "ErrorClubAlreadyMember", Type = "ClubErrorType", EnumValue = 18 },
+				{ Name = "ErrorClubNoSuchMember", Type = "ClubErrorType", EnumValue = 19 },
+				{ Name = "ErrorClubNoSuchInvitation", Type = "ClubErrorType", EnumValue = 20 },
+				{ Name = "ErrorClubInvitationAlreadyExists", Type = "ClubErrorType", EnumValue = 21 },
+				{ Name = "ErrorClubInvalidRoleID", Type = "ClubErrorType", EnumValue = 22 },
+				{ Name = "ErrorClubInsufficientPrivileges", Type = "ClubErrorType", EnumValue = 23 },
+				{ Name = "ErrorClubTooManyClubsJoined", Type = "ClubErrorType", EnumValue = 24 },
+				{ Name = "ErrorClubVoiceFull", Type = "ClubErrorType", EnumValue = 25 },
+				{ Name = "ErrorClubStreamNoStream", Type = "ClubErrorType", EnumValue = 26 },
+				{ Name = "ErrorClubStreamInvalidName", Type = "ClubErrorType", EnumValue = 27 },
+				{ Name = "ErrorClubStreamCountAtMin", Type = "ClubErrorType", EnumValue = 28 },
+				{ Name = "ErrorClubStreamCountAtMax", Type = "ClubErrorType", EnumValue = 29 },
+				{ Name = "ErrorClubMemberHasRequiredRole", Type = "ClubErrorType", EnumValue = 30 },
+				{ Name = "ErrorClubSentInvitationCountAtMax", Type = "ClubErrorType", EnumValue = 31 },
+				{ Name = "ErrorClubReceivedInvitationCountAtMax", Type = "ClubErrorType", EnumValue = 32 },
+				{ Name = "ErrorClubTargetIsBanned", Type = "ClubErrorType", EnumValue = 33 },
+				{ Name = "ErrorClubBanAlreadyExists", Type = "ClubErrorType", EnumValue = 34 },
+				{ Name = "ErrorClubBanCountAtMax", Type = "ClubErrorType", EnumValue = 35 },
+				{ Name = "ErrorClubTicketCountAtMax", Type = "ClubErrorType", EnumValue = 36 },
+				{ Name = "ErrorClubTicketNoSuchTicket", Type = "ClubErrorType", EnumValue = 37 },
+				{ Name = "ErrorClubTicketHasConsumedAllowedRedeemCount", Type = "ClubErrorType", EnumValue = 38 },
 			},
 		},
 		{
@@ -23487,16 +23641,17 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 		{
 			Name = "ClubMemberPresence",
 			Type = "Enumeration",
-			NumValues = 5,
+			NumValues = 6,
 			MinValue = 0,
-			MaxValue = 4,
+			MaxValue = 5,
 			Fields =
 			{
 				{ Name = "Unknown", Type = "ClubMemberPresence", EnumValue = 0 },
 				{ Name = "Online", Type = "ClubMemberPresence", EnumValue = 1 },
-				{ Name = "Offline", Type = "ClubMemberPresence", EnumValue = 2 },
-				{ Name = "Away", Type = "ClubMemberPresence", EnumValue = 3 },
-				{ Name = "Busy", Type = "ClubMemberPresence", EnumValue = 4 },
+				{ Name = "OnlineMobile", Type = "ClubMemberPresence", EnumValue = 2 },
+				{ Name = "Offline", Type = "ClubMemberPresence", EnumValue = 3 },
+				{ Name = "Away", Type = "ClubMemberPresence", EnumValue = 4 },
+				{ Name = "Busy", Type = "ClubMemberPresence", EnumValue = 5 },
 			},
 		},
 		{
@@ -23510,6 +23665,20 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 				{ Name = "Available", Type = "ClubInvitationCandidateStatus", EnumValue = 0 },
 				{ Name = "InvitePending", Type = "ClubInvitationCandidateStatus", EnumValue = 1 },
 				{ Name = "AlreadyMember", Type = "ClubInvitationCandidateStatus", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "ClubRemovedReason",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "None", Type = "ClubRemovedReason", EnumValue = 0 },
+				{ Name = "Banned", Type = "ClubRemovedReason", EnumValue = 1 },
+				{ Name = "Removed", Type = "ClubRemovedReason", EnumValue = 2 },
+				{ Name = "ClubDestroyed", Type = "ClubRemovedReason", EnumValue = 3 },
 			},
 		},
 		{

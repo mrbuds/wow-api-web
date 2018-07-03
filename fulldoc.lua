@@ -7117,6 +7117,21 @@ APIDocumentation:AddDocumentationTable(CreatureInfo);local CurrencyInfo =
 			},
 		},
 		{
+			Name = "GetFactionGrantedByCurrency",
+			Type = "Function",
+			Documentation = { "Gets the faction ID for currency that is immediately converted into reputation with that faction instead." },
+
+			Arguments =
+			{
+				{ Name = "currencyID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "factionID", Type = "number", Nilable = true },
+			},
+		},
+		{
 			Name = "GetWarResourcesCurrencyID",
 			Type = "Function",
 
@@ -11244,6 +11259,17 @@ APIDocumentation:AddDocumentationTable(LoadingScreen);local Loot =
 			LiteralName = "PLAYER_LOOT_SPEC_UPDATED",
 		},
 		{
+			Name = "QuestCurrencyLootReceived",
+			Type = "Event",
+			LiteralName = "QUEST_CURRENCY_LOOT_RECEIVED",
+			Payload =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+				{ Name = "currencyId", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "QuestLootReceived",
 			Type = "Event",
 			LiteralName = "QUEST_LOOT_RECEIVED",
@@ -11645,6 +11671,20 @@ APIDocumentation:AddDocumentationTable(MailInfo);local Map =
 			Returns =
 			{
 				{ Name = "position", Type = "MapCanvasPosition", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMapArtID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "uiMapID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "uiMapArtID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -12612,6 +12652,16 @@ APIDocumentation:AddDocumentationTable(MountJournal);local MythicPlusInfo =
 			Returns =
 			{
 				{ Name = "affixIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLastWeeklyBestInformation",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "challengeMapId", Type = "number", Nilable = false },
+				{ Name = "level", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -14529,10 +14579,21 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 		{
 			Name = "GetMaxNumQuests",
 			Type = "Function",
+			Documentation = { "This is the maximum number of quests a player can be on, including hidden quests, world quests, emissaries etc" },
 
 			Returns =
 			{
 				{ Name = "maxNumQuests", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMaxNumQuestsCanAccept",
+			Type = "Function",
+			Documentation = { "This is the maximum number of standard quests a player can accept. These are quests that are normally visible in the quest log." },
+
+			Returns =
+			{
+				{ Name = "maxNumQuestsCanAccept", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -14604,6 +14665,20 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			Returns =
 			{
 				{ Name = "isOnQuest", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "QuestHasWarModeBonus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasBonus", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -14862,6 +14937,20 @@ APIDocumentation:AddDocumentationTable(QuestOffer);local QuestTaskInfo =
 
 	Functions =
 	{
+		{
+			Name = "DoesMapShowTaskQuestObjectives",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "uiMapID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "showsTaskQuestObjectives", Type = "bool", Nilable = false },
+			},
+		},
 		{
 			Name = "GetDistanceSqToQuest",
 			Type = "Function",
@@ -20641,6 +20730,16 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 			},
 		},
 		{
+			Name = "VoiceChatChannelMemberGuidUpdated",
+			Type = "Event",
+			LiteralName = "VOICE_CHAT_CHANNEL_MEMBER_GUID_UPDATED",
+			Payload =
+			{
+				{ Name = "memberID", Type = "number", Nilable = false },
+				{ Name = "channelID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "VoiceChatChannelMemberMuteForAllChanged",
 			Type = "Event",
 			LiteralName = "VOICE_CHAT_CHANNEL_MEMBER_MUTE_FOR_ALL_CHANGED",
@@ -22977,6 +23076,15 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			},
 		},
 		{
+			Name = "IsRestricted",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "restrictionReason", Type = "ClubRestrictionReason", Nilable = false },
+			},
+		},
+		{
 			Name = "IsSubscribedToStream",
 			Type = "Function",
 
@@ -23075,6 +23183,16 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			Arguments =
 			{
 				{ Name = "clubId", Type = "string", Nilable = false },
+				{ Name = "memberId", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SendBattleTagFriendRequest",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "guildClubId", Type = "string", Nilable = false },
 				{ Name = "memberId", Type = "number", Nilable = false },
 			},
 		},
@@ -23191,6 +23309,20 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			{
 				{ Name = "clubId", Type = "string", Nilable = false },
 				{ Name = "enabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ShouldAllowClubType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubType", Type = "ClubType", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "clubTypeIsAllowed", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -23493,6 +23625,11 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			},
 		},
 		{
+			Name = "InitialClubsLoaded",
+			Type = "Event",
+			LiteralName = "INITIAL_CLUBS_LOADED",
+		},
+		{
 			Name = "StreamViewMarkerUpdated",
 			Type = "Event",
 			LiteralName = "STREAM_VIEW_MARKER_UPDATED",
@@ -23679,6 +23816,18 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 				{ Name = "Banned", Type = "ClubRemovedReason", EnumValue = 1 },
 				{ Name = "Removed", Type = "ClubRemovedReason", EnumValue = 2 },
 				{ Name = "ClubDestroyed", Type = "ClubRemovedReason", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "ClubRestrictionReason",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "None", Type = "ClubRestrictionReason", EnumValue = 0 },
+				{ Name = "Unavailable", Type = "ClubRestrictionReason", EnumValue = 1 },
 			},
 		},
 		{

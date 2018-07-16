@@ -9,13 +9,18 @@
 #      or beta branch : https://github.com/Gethe/wow-ui-source/tree/beta/AddOns/Blizzard_APIDocumentation
 
 BLIZZDOC='Blizzard_APIDocumentation'
+UPDATEDDOCPATH="../wow-ui-source/AddOns/${BLIZZDOC}"
 TOCFILE="${BLIZZDOC}/${BLIZZDOC}.toc"
 CONCATFILE="fulldoc.lua"
+
+
 
 # clean files
 if [ -e ${CONCATFILE} ]; then
   echo ". delete old files"
-  rm ${CONCATFILE} *.luac api.lua.json ${BLIZZDOC}/*.luac ${BLIZZDOC}/*.json
+  rm ${CONCATFILE} *.luac api.lua.json ${BLIZZDOC}/*.lua ${BLIZZDOC}/*.luac ${BLIZZDOC}/*.json
+  echo ". copy data from ${UPDATEDDOCPATH}"
+  cp ${UPDATEDDOCPATH}/* ${BLIZZDOC}/
 fi
 
 # concatenate documentation

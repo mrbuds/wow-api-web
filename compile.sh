@@ -9,7 +9,7 @@
 #      or beta branch : https://github.com/Gethe/wow-ui-source/tree/beta/AddOns/Blizzard_APIDocumentation
 
 BLIZZDOC='Blizzard_APIDocumentation'
-UPDATEDDOCPATH="../wow-ui-source/AddOns/${BLIZZDOC}"
+UPDATEDDOCPATH="../wow-ui-source/Interface/AddOns/${BLIZZDOC}"
 TOCFILE="${BLIZZDOC}/${BLIZZDOC}.toc"
 CONCATFILE="fulldoc.lua"
 

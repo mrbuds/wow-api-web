@@ -8493,6 +8493,15 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 				{ Name = "treeIDs", Type = "table", InnerType = "number", Nilable = false },
 			},
 		},
+		{
+			Name = "IsAtGarrisonMissionNPC",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "atGarrisonMissionNPC", Type = "bool", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -22570,6 +22579,22 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 		{
 			Name = "ClearClubPresenceSubscription",
 			Type = "Function",
+		},
+		{
+			Name = "CompareBattleNetDisplayName",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+				{ Name = "lhsMemberId", Type = "number", Nilable = false },
+				{ Name = "rhsMemberId", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "comparison", Type = "number", Nilable = false },
+			},
 		},
 		{
 			Name = "CreateClub",

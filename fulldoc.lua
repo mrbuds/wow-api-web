@@ -9234,6 +9234,15 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 	Functions =
 	{
 		{
+			Name = "CanSpeakInGuildChat",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canSpeakInGuildChat", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "GetGuildRankOrder",
 			Type = "Function",
 
@@ -10762,6 +10771,15 @@ APIDocumentation:AddDocumentationTable(LFGInfo);local LFGListInfo =
 	Functions =
 	{
 		{
+			Name = "CanActiveEntryUseAutoAccept",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canUseAutoAccept", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CanCreateQuestGroup",
 			Type = "Function",
 
@@ -10784,6 +10802,10 @@ APIDocumentation:AddDocumentationTable(LFGInfo);local LFGListInfo =
 			Type = "Function",
 		},
 		{
+			Name = "ClearSearchTextFields",
+			Type = "Function",
+		},
+		{
 			Name = "CopyActiveEntryInfoToCreationFields",
 			Type = "Function",
 		},
@@ -10794,10 +10816,27 @@ APIDocumentation:AddDocumentationTable(LFGInfo);local LFGListInfo =
 			Arguments =
 			{
 				{ Name = "categoryID", Type = "number", Nilable = false },
-				{ Name = "searchTerms", Type = "table", InnerType = "LFGSearchTerms", Nilable = false, Documentation = { "The outer table represents AND terms and the inner tables represent OR terms." } },
 				{ Name = "filter", Type = "number", Nilable = false, Default = 0 },
 				{ Name = "preferredFilters", Type = "number", Nilable = false, Default = 0 },
 				{ Name = "languageFilter", Type = "WowLocale", Nilable = true },
+			},
+		},
+		{
+			Name = "SetSearchToActivity",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "activityID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SetSearchToQuestID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
 			},
 		},
 	},
@@ -10899,14 +10938,6 @@ APIDocumentation:AddDocumentationTable(LFGInfo);local LFGListInfo =
 
 	Tables =
 	{
-		{
-			Name = "LFGSearchTerms",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "matches", Type = "table", InnerType = "string", Nilable = false, Documentation = { "Represent OR terms, 3 is the max terms considered. Terms beyond the primary are only considered on fuzzy match enabled activities, like Mythic+." } },
-			},
-		},
 		{
 			Name = "WowLocale",
 			Type = "Structure",
@@ -23092,6 +23123,20 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			},
 		},
 		{
+			Name = "IsAccountMuted",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "accountMuted", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsBeginningOfStream",
 			Type = "Function",
 			Documentation = { "Returns whether the given message is the first message in the stream, taking into account ignored messages" },
@@ -23754,9 +23799,9 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 		{
 			Name = "ClubErrorType",
 			Type = "Enumeration",
-			NumValues = 39,
+			NumValues = 40,
 			MinValue = 0,
-			MaxValue = 38,
+			MaxValue = 39,
 			Fields =
 			{
 				{ Name = "ErrorCommunitiesNone", Type = "ClubErrorType", EnumValue = 0 },
@@ -23774,30 +23819,31 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 				{ Name = "ErrorCommunitiesProfanity", Type = "ClubErrorType", EnumValue = 12 },
 				{ Name = "ErrorCommunitiesTrial", Type = "ClubErrorType", EnumValue = 13 },
 				{ Name = "ErrorCommunitiesVeteranTrial", Type = "ClubErrorType", EnumValue = 14 },
-				{ Name = "ErrorClubFull", Type = "ClubErrorType", EnumValue = 15 },
-				{ Name = "ErrorClubNoClub", Type = "ClubErrorType", EnumValue = 16 },
-				{ Name = "ErrorClubNotMember", Type = "ClubErrorType", EnumValue = 17 },
-				{ Name = "ErrorClubAlreadyMember", Type = "ClubErrorType", EnumValue = 18 },
-				{ Name = "ErrorClubNoSuchMember", Type = "ClubErrorType", EnumValue = 19 },
-				{ Name = "ErrorClubNoSuchInvitation", Type = "ClubErrorType", EnumValue = 20 },
-				{ Name = "ErrorClubInvitationAlreadyExists", Type = "ClubErrorType", EnumValue = 21 },
-				{ Name = "ErrorClubInvalidRoleID", Type = "ClubErrorType", EnumValue = 22 },
-				{ Name = "ErrorClubInsufficientPrivileges", Type = "ClubErrorType", EnumValue = 23 },
-				{ Name = "ErrorClubTooManyClubsJoined", Type = "ClubErrorType", EnumValue = 24 },
-				{ Name = "ErrorClubVoiceFull", Type = "ClubErrorType", EnumValue = 25 },
-				{ Name = "ErrorClubStreamNoStream", Type = "ClubErrorType", EnumValue = 26 },
-				{ Name = "ErrorClubStreamInvalidName", Type = "ClubErrorType", EnumValue = 27 },
-				{ Name = "ErrorClubStreamCountAtMin", Type = "ClubErrorType", EnumValue = 28 },
-				{ Name = "ErrorClubStreamCountAtMax", Type = "ClubErrorType", EnumValue = 29 },
-				{ Name = "ErrorClubMemberHasRequiredRole", Type = "ClubErrorType", EnumValue = 30 },
-				{ Name = "ErrorClubSentInvitationCountAtMax", Type = "ClubErrorType", EnumValue = 31 },
-				{ Name = "ErrorClubReceivedInvitationCountAtMax", Type = "ClubErrorType", EnumValue = 32 },
-				{ Name = "ErrorClubTargetIsBanned", Type = "ClubErrorType", EnumValue = 33 },
-				{ Name = "ErrorClubBanAlreadyExists", Type = "ClubErrorType", EnumValue = 34 },
-				{ Name = "ErrorClubBanCountAtMax", Type = "ClubErrorType", EnumValue = 35 },
-				{ Name = "ErrorClubTicketCountAtMax", Type = "ClubErrorType", EnumValue = 36 },
-				{ Name = "ErrorClubTicketNoSuchTicket", Type = "ClubErrorType", EnumValue = 37 },
-				{ Name = "ErrorClubTicketHasConsumedAllowedRedeemCount", Type = "ClubErrorType", EnumValue = 38 },
+				{ Name = "ErrorCommunitiesChatMute", Type = "ClubErrorType", EnumValue = 15 },
+				{ Name = "ErrorClubFull", Type = "ClubErrorType", EnumValue = 16 },
+				{ Name = "ErrorClubNoClub", Type = "ClubErrorType", EnumValue = 17 },
+				{ Name = "ErrorClubNotMember", Type = "ClubErrorType", EnumValue = 18 },
+				{ Name = "ErrorClubAlreadyMember", Type = "ClubErrorType", EnumValue = 19 },
+				{ Name = "ErrorClubNoSuchMember", Type = "ClubErrorType", EnumValue = 20 },
+				{ Name = "ErrorClubNoSuchInvitation", Type = "ClubErrorType", EnumValue = 21 },
+				{ Name = "ErrorClubInvitationAlreadyExists", Type = "ClubErrorType", EnumValue = 22 },
+				{ Name = "ErrorClubInvalidRoleID", Type = "ClubErrorType", EnumValue = 23 },
+				{ Name = "ErrorClubInsufficientPrivileges", Type = "ClubErrorType", EnumValue = 24 },
+				{ Name = "ErrorClubTooManyClubsJoined", Type = "ClubErrorType", EnumValue = 25 },
+				{ Name = "ErrorClubVoiceFull", Type = "ClubErrorType", EnumValue = 26 },
+				{ Name = "ErrorClubStreamNoStream", Type = "ClubErrorType", EnumValue = 27 },
+				{ Name = "ErrorClubStreamInvalidName", Type = "ClubErrorType", EnumValue = 28 },
+				{ Name = "ErrorClubStreamCountAtMin", Type = "ClubErrorType", EnumValue = 29 },
+				{ Name = "ErrorClubStreamCountAtMax", Type = "ClubErrorType", EnumValue = 30 },
+				{ Name = "ErrorClubMemberHasRequiredRole", Type = "ClubErrorType", EnumValue = 31 },
+				{ Name = "ErrorClubSentInvitationCountAtMax", Type = "ClubErrorType", EnumValue = 32 },
+				{ Name = "ErrorClubReceivedInvitationCountAtMax", Type = "ClubErrorType", EnumValue = 33 },
+				{ Name = "ErrorClubTargetIsBanned", Type = "ClubErrorType", EnumValue = 34 },
+				{ Name = "ErrorClubBanAlreadyExists", Type = "ClubErrorType", EnumValue = 35 },
+				{ Name = "ErrorClubBanCountAtMax", Type = "ClubErrorType", EnumValue = 36 },
+				{ Name = "ErrorClubTicketCountAtMax", Type = "ClubErrorType", EnumValue = 37 },
+				{ Name = "ErrorClubTicketNoSuchTicket", Type = "ClubErrorType", EnumValue = 38 },
+				{ Name = "ErrorClubTicketHasConsumedAllowedRedeemCount", Type = "ClubErrorType", EnumValue = 39 },
 			},
 		},
 		{

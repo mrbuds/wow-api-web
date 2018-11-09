@@ -1853,6 +1853,22 @@ APIDocumentation:AddDocumentationTable(AuctionHouse);local AzeriteEmpoweredItem 
 			},
 		},
 		{
+			Name = "GetPowerText",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "azeriteEmpoweredItemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "powerID", Type = "number", Nilable = false },
+				{ Name = "upgraded", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "powerText", Type = "AzeriteEmpoweredItemPowerText", Nilable = false },
+			},
+		},
+		{
 			Name = "GetSpecsForPower",
 			Type = "Function",
 
@@ -1864,21 +1880,6 @@ APIDocumentation:AddDocumentationTable(AuctionHouse);local AzeriteEmpoweredItem 
 			Returns =
 			{
 				{ Name = "specInfo", Type = "table", InnerType = "AzeriteSpecInfo", Nilable = false },
-			},
-		},
-		{
-			Name = "GetUpgradedAzeritePowerInfo",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "azeriteEmpoweredItemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
-				{ Name = "powerID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "upgradePowerInfo", Type = "UpgradedAzeritePowerInfo", Nilable = false },
 			},
 		},
 		{
@@ -1953,6 +1954,15 @@ APIDocumentation:AddDocumentationTable(AuctionHouse);local AzeriteEmpoweredItem 
 			},
 		},
 		{
+			Name = "IsHeartOfAzerothEquipped",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isHeartOfAzerothEquipped", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsPowerAvailableForSpec",
 			Type = "Function",
 
@@ -2011,6 +2021,15 @@ APIDocumentation:AddDocumentationTable(AuctionHouse);local AzeriteEmpoweredItem 
 	Events =
 	{
 		{
+			Name = "AzeriteEmpoweredItemEquippedStatusChanged",
+			Type = "Event",
+			LiteralName = "AZERITE_EMPOWERED_ITEM_EQUIPPED_STATUS_CHANGED",
+			Payload =
+			{
+				{ Name = "isHeartEquipped", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "AzeriteEmpoweredItemSelectionUpdated",
 			Type = "Event",
 			LiteralName = "AZERITE_EMPOWERED_ITEM_SELECTION_UPDATED",
@@ -2043,6 +2062,15 @@ APIDocumentation:AddDocumentationTable(AuctionHouse);local AzeriteEmpoweredItem 
 			},
 		},
 		{
+			Name = "AzeriteEmpoweredItemPowerText",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "description", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "AzeriteEmpoweredItemTierInfo",
 			Type = "Structure",
 			Fields =
@@ -2058,15 +2086,6 @@ APIDocumentation:AddDocumentationTable(AuctionHouse);local AzeriteEmpoweredItem 
 			{
 				{ Name = "classID", Type = "number", Nilable = false },
 				{ Name = "specID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "UpgradedAzeritePowerInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "description", Type = "string", Nilable = false },
 			},
 		},
 	},
@@ -2988,20 +3007,6 @@ APIDocumentation:AddDocumentationTable(ChatBubbles);local ChatInfo =
 	Functions =
 	{
 		{
-			Name = "CanReportPlayer",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "playerLocation", Type = "table", Mixin = "PlayerLocationMixin", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "canReport", Type = "bool", Nilable = false },
-			},
-		},
-		{
 			Name = "GetChannelRosterInfo",
 			Type = "Function",
 
@@ -3092,17 +3097,6 @@ APIDocumentation:AddDocumentationTable(ChatBubbles);local ChatInfo =
 			Returns =
 			{
 				{ Name = "successfulRequest", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "ReportPlayer",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "complaintType", Type = "string", Nilable = false },
-				{ Name = "playerLocation", Type = "table", Mixin = "PlayerLocationMixin", Nilable = true },
-				{ Name = "comment", Type = "string", Nilable = true },
 			},
 		},
 		{
@@ -8462,84 +8456,7 @@ APIDocumentation:AddDocumentationTable(Expansion);local FogOfWar =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(FogOfWar);local GMTicketInfo =
-{
-	Name = "GMTicketInfo",
-	Type = "System",
-	Namespace = "C_GMTicketInfo",
-
-	Functions =
-	{
-	},
-
-	Events =
-	{
-		{
-			Name = "GmPlayerInfo",
-			Type = "Event",
-			LiteralName = "GM_PLAYER_INFO",
-			Payload =
-			{
-				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "info", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "ItemRestorationButtonStatus",
-			Type = "Event",
-			LiteralName = "ITEM_RESTORATION_BUTTON_STATUS",
-		},
-		{
-			Name = "PetitionClosed",
-			Type = "Event",
-			LiteralName = "PETITION_CLOSED",
-		},
-		{
-			Name = "PetitionShow",
-			Type = "Event",
-			LiteralName = "PETITION_SHOW",
-		},
-		{
-			Name = "PlayerReportSubmitted",
-			Type = "Event",
-			LiteralName = "PLAYER_REPORT_SUBMITTED",
-			Payload =
-			{
-				{ Name = "invitedByGUID", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "QuickTicketSystemStatus",
-			Type = "Event",
-			LiteralName = "QUICK_TICKET_SYSTEM_STATUS",
-		},
-		{
-			Name = "QuickTicketThrottleChanged",
-			Type = "Event",
-			LiteralName = "QUICK_TICKET_THROTTLE_CHANGED",
-		},
-		{
-			Name = "UpdateWebTicket",
-			Type = "Event",
-			LiteralName = "UPDATE_WEB_TICKET",
-			Payload =
-			{
-				{ Name = "hasTicket", Type = "bool", Nilable = false },
-				{ Name = "numTickets", Type = "number", Nilable = true },
-				{ Name = "ticketStatus", Type = "number", Nilable = true },
-				{ Name = "caseIndex", Type = "number", Nilable = true },
-				{ Name = "waitTimeMinutes", Type = "number", Nilable = true },
-				{ Name = "waitMessage", Type = "string", Nilable = true },
-			},
-		},
-	},
-
-	Tables =
-	{
-	},
-};
-
-APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
+APIDocumentation:AddDocumentationTable(FogOfWar);local GarrisonInfo =
 {
 	Name = "GarrisonInfo",
 	Type = "System",
@@ -9658,29 +9575,6 @@ APIDocumentation:AddDocumentationTable(HeirloomInfo);local IncomingSummon =
 
 	Functions =
 	{
-		{
-			Name = "ClearSummonInfo",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "unit", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "GetSummonResponseTime",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "unit", Type = "string", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "reponseTime", Type = "number", Nilable = false },
-			},
-		},
 		{
 			Name = "HasIncomingSummon",
 			Type = "Function",
@@ -11369,6 +11263,15 @@ APIDocumentation:AddDocumentationTable(LoadingScreen);local Loot =
 
 	Functions =
 	{
+		{
+			Name = "IsLegacyLootModeEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isLegacyLootModeEnabled", Type = "bool", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -11410,6 +11313,7 @@ APIDocumentation:AddDocumentationTable(LoadingScreen);local Loot =
 				{ Name = "sex", Type = "number", Nilable = false },
 				{ Name = "personalLootToast", Type = "bool", Nilable = false },
 				{ Name = "currencyID", Type = "number", Nilable = true },
+				{ Name = "isSecondaryResult", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -11468,6 +11372,7 @@ APIDocumentation:AddDocumentationTable(LoadingScreen);local Loot =
 			Payload =
 			{
 				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -12417,6 +12322,7 @@ APIDocumentation:AddDocumentationTable(MailInfo);local Map =
 				{ Name = "areaPoiID", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "atlasName", Type = "string", Nilable = false },
+				{ Name = "uiTextureKit", Type = "string", Nilable = true },
 			},
 		},
 		{
@@ -13041,7 +12947,16 @@ APIDocumentation:AddDocumentationTable(MountJournal);local MythicPlusInfo =
 
 			Returns =
 			{
-				{ Name = "affixIDs", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "affixIDs", Type = "table", InnerType = "MythicPlusKeystoneAffix", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCurrentSeason",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "seasonID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -13214,6 +13129,15 @@ APIDocumentation:AddDocumentationTable(MountJournal);local MythicPlusInfo =
 
 	Tables =
 	{
+		{
+			Name = "MythicPlusKeystoneAffix",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "seasonID", Type = "number", Nilable = false },
+			},
+		},
 		{
 			Name = "MythicPlusDate",
 			Type = "Structure",
@@ -13843,7 +13767,7 @@ APIDocumentation:AddDocumentationTable(PartyInfo);local PartyPoseUI =
 			{
 				{ Name = "partyPoseID", Type = "number", Nilable = false },
 				{ Name = "mapID", Type = "number", Nilable = false },
-				{ Name = "widgetSetID", Type = "number", Nilable = false },
+				{ Name = "widgetSetID", Type = "number", Nilable = true },
 				{ Name = "victoryModelSceneID", Type = "number", Nilable = false },
 				{ Name = "defeatModelSceneID", Type = "number", Nilable = false },
 				{ Name = "victorySoundKitID", Type = "number", Nilable = false },
@@ -14269,6 +14193,11 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			Name = "CanToggleWarMode",
 			Type = "Function",
 
+			Arguments =
+			{
+				{ Name = "toggle", Type = "bool", Nilable = false },
+			},
+
 			Returns =
 			{
 				{ Name = "canTogglePvP", Type = "bool", Nilable = false },
@@ -14481,6 +14410,21 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
+			Name = "GetRewardItemLevelsByTierEnum",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "pvpTierEnum", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "activityItemLevel", Type = "number", Nilable = false },
+				{ Name = "weeklyItemLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetSeasonBestInfo",
 			Type = "Function",
 
@@ -14502,6 +14446,36 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			Returns =
 			{
 				{ Name = "battlemasterListInfo", Type = "BattlemasterListInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetWarModeRewardBonus",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "rewardBonus", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetWarModeRewardBonusDefault",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "defaultBonus", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetWeeklyChestInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "rewardAchieved", Type = "bool", Nilable = false },
+				{ Name = "lastWeekRewardAchieved", Type = "bool", Nilable = false },
+				{ Name = "lastWeekRewardClaimed", Type = "bool", Nilable = false },
+				{ Name = "pvpTierMaxFromWins", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -14894,6 +14868,33 @@ APIDocumentation:AddDocumentationTable(PvpInfo);local QuestChoice =
 
 	Functions =
 	{
+		{
+			Name = "GetQuestChoiceOptionInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "optionIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "responseID", Type = "number", Nilable = false },
+				{ Name = "buttonText", Type = "string", Nilable = false },
+				{ Name = "description", Type = "string", Nilable = false },
+				{ Name = "header", Type = "string", Nilable = false },
+				{ Name = "choiceArtID", Type = "number", Nilable = false },
+				{ Name = "confirmation", Type = "string", Nilable = true },
+				{ Name = "widgetSetID", Type = "number", Nilable = true },
+				{ Name = "disabledButton", Type = "bool", Nilable = false },
+				{ Name = "desaturatedArt", Type = "bool", Nilable = false },
+				{ Name = "groupID", Type = "number", Nilable = true },
+				{ Name = "headerIconAtlasElement", Type = "string", Nilable = true },
+				{ Name = "subHeader", Type = "string", Nilable = true },
+				{ Name = "buttonTooltip", Type = "string", Nilable = true },
+				{ Name = "rewardQuestID", Type = "number", Nilable = true },
+			},
+		},
 	},
 
 	Events =
@@ -14964,6 +14965,15 @@ APIDocumentation:AddDocumentationTable(QuestChoice);local QuestLineInfo =
 			Returns =
 			{
 				{ Name = "questIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestQuestLinesForMap",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "uiMapID", Type = "number", Nilable = false },
 			},
 		},
 	},
@@ -15044,6 +15054,20 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			},
 		},
 		{
+			Name = "GetNumQuestObjectives",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "leaderboardCount", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetQuestInfo",
 			Type = "Function",
 
@@ -15098,6 +15122,20 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			{
 				{ Name = "achievementID", Type = "number", Nilable = false },
 				{ Name = "storyMapID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "IsLegendaryQuest",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isLegendaryQuest", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -15322,6 +15360,8 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 				{ Name = "questID", Type = "number", Nilable = false },
 				{ Name = "x", Type = "number", Nilable = false },
 				{ Name = "y", Type = "number", Nilable = false },
+				{ Name = "type", Type = "number", Nilable = false },
+				{ Name = "isMapIndicatorQuest", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -19177,6 +19217,15 @@ APIDocumentation:AddDocumentationTable(UIWidgetManager);local Unit =
 
 	Functions =
 	{
+		{
+			Name = "PlayerVehicleHasComboPoints",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "vehicleHasComboPoints", Type = "bool", Nilable = false },
+			},
+		},
 		{
 			Name = "SetPortraitTexture",
 			Type = "Function",
@@ -23213,14 +23262,13 @@ APIDocumentation:AddDocumentationTable(Calendar);local Club =
 			},
 		},
 		{
-			Name = "AddClubStreamToChatWindow",
+			Name = "AddClubStreamChatChannel",
 			Type = "Function",
 
 			Arguments =
 			{
 				{ Name = "clubId", Type = "string", Nilable = false },
 				{ Name = "streamId", Type = "string", Nilable = false },
-				{ Name = "chatWindowIndex", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -25377,4 +25425,176 @@ APIDocumentation:AddDocumentationTable(Club);local FriendList =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(FriendList);
+APIDocumentation:AddDocumentationTable(FriendList);local GMTicketInfo =
+{
+	Name = "GMTicketInfo",
+	Type = "System",
+	Namespace = "C_GMTicketInfo",
+
+	Functions =
+	{
+	},
+
+	Events =
+	{
+		{
+			Name = "GmPlayerInfo",
+			Type = "Event",
+			LiteralName = "GM_PLAYER_INFO",
+			Payload =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "info", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ItemRestorationButtonStatus",
+			Type = "Event",
+			LiteralName = "ITEM_RESTORATION_BUTTON_STATUS",
+		},
+		{
+			Name = "PetitionClosed",
+			Type = "Event",
+			LiteralName = "PETITION_CLOSED",
+		},
+		{
+			Name = "PetitionShow",
+			Type = "Event",
+			LiteralName = "PETITION_SHOW",
+		},
+		{
+			Name = "PlayerReportSubmitted",
+			Type = "Event",
+			LiteralName = "PLAYER_REPORT_SUBMITTED",
+			Payload =
+			{
+				{ Name = "invitedByGUID", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "QuickTicketSystemStatus",
+			Type = "Event",
+			LiteralName = "QUICK_TICKET_SYSTEM_STATUS",
+		},
+		{
+			Name = "QuickTicketThrottleChanged",
+			Type = "Event",
+			LiteralName = "QUICK_TICKET_THROTTLE_CHANGED",
+		},
+		{
+			Name = "UpdateWebTicket",
+			Type = "Event",
+			LiteralName = "UPDATE_WEB_TICKET",
+			Payload =
+			{
+				{ Name = "hasTicket", Type = "bool", Nilable = false },
+				{ Name = "numTickets", Type = "number", Nilable = true },
+				{ Name = "ticketStatus", Type = "number", Nilable = true },
+				{ Name = "caseIndex", Type = "number", Nilable = true },
+				{ Name = "waitTimeMinutes", Type = "number", Nilable = true },
+				{ Name = "waitMessage", Type = "string", Nilable = true },
+			},
+		},
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(GMTicketInfo);local ReportSystem =
+{
+	Name = "ReportSystem",
+	Type = "System",
+	Namespace = "C_ReportSystem",
+
+	Functions =
+	{
+		{
+			Name = "CanReportPlayer",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "playerLocation", Type = "table", Mixin = "PlayerLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "canReport", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ReportPlayer",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "complaintType", Type = "string", Nilable = false },
+				{ Name = "playerLocation", Type = "table", Mixin = "PlayerLocationMixin", Nilable = true },
+				{ Name = "comment", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "SetPendingReportPetTarget",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "target", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "set", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetPendingReportTarget",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "target", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "set", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetPendingReportTargetByGuid",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "guid", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "set", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+		{
+			Name = "ReportPlayerResult",
+			Type = "Event",
+			LiteralName = "REPORT_PLAYER_RESULT",
+			Payload =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(ReportSystem);

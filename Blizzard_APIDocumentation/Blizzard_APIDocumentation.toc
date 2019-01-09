@@ -1,4 +1,4 @@
-## Interface: 80000
+## Interface: 80100
 ## Title: Blizzard API Documentation
 ## Secure: 1
 ## Author: Blizzard Entertainment
@@ -125,6 +125,7 @@ SummonInfoDocumentation.lua
 SystemDocumentation.lua
 TalkingHeadDocumentation.lua
 TaxiMapDocumentation.lua
+TextureUtilsDocumentation.lua
 ToyBoxInfoDocumentation.lua
 TradeInfoDocumentation.lua
 TradeSkillUIDocumentation.lua

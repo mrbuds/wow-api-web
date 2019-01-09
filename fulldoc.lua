@@ -6633,6 +6633,22 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 			},
 		},
 		{
+			Name = "GetLastTicketResponse",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ticket", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "error", Type = "ClubErrorType", Nilable = false },
+				{ Name = "info", Type = "ClubInfo", Nilable = true },
+				{ Name = "showError", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "GetMemberInfo",
 			Type = "Function",
 
@@ -7365,9 +7381,7 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 			LiteralName = "CLUB_TICKET_RECEIVED",
 			Payload =
 			{
-				{ Name = "error", Type = "ClubErrorType", Nilable = false },
 				{ Name = "ticket", Type = "string", Nilable = false },
-				{ Name = "info", Type = "ClubInfo", Nilable = true },
 			},
 		},
 		{
@@ -12851,7 +12865,7 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 				{ Name = "emblemColorR", Type = "number", Nilable = true },
 				{ Name = "emblemColorG", Type = "number", Nilable = true },
 				{ Name = "emblemColorB", Type = "number", Nilable = true },
-				{ Name = "emblemFilename", Type = "string", Nilable = true },
+				{ Name = "emblemFileID", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -15915,6 +15929,20 @@ APIDocumentation:AddDocumentationTable(MapExploration);local MerchantFrame =
 			Returns =
 			{
 				{ Name = "buybackItemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "IsMerchantItemRefundable",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "refundable", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -19192,19 +19220,33 @@ APIDocumentation:AddDocumentationTable(RecruitAFriend);local ReportSystem =
 			},
 		},
 		{
-			Name = "ReportPlayer",
+			Name = "InitiateReportPlayer",
 			Type = "Function",
 
 			Arguments =
 			{
 				{ Name = "complaintType", Type = "string", Nilable = false },
 				{ Name = "playerLocation", Type = "table", Mixin = "PlayerLocationMixin", Nilable = true },
-				{ Name = "comment", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "token", Type = "number", Nilable = false },
 			},
 		},
 		{
 			Name = "ReportServerLag",
 			Type = "Function",
+		},
+		{
+			Name = "SendReportPlayer",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "token", Type = "number", Nilable = false },
+				{ Name = "comment", Type = "string", Nilable = true },
+			},
 		},
 		{
 			Name = "SetPendingReportPetTarget",
@@ -21064,7 +21106,57 @@ APIDocumentation:AddDocumentationTable(TalkingHead);local TaxiMap =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(TaxiMap);local ToyBoxInfo =
+APIDocumentation:AddDocumentationTable(TaxiMap);local TextureUtils =
+{
+	Name = "TextureUtils",
+	Type = "System",
+	Namespace = "C_Texture",
+
+	Functions =
+	{
+		{
+			Name = "GetAtlasInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "atlas", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "AtlasInfo", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+		{
+			Name = "AtlasInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "width", Type = "number", Nilable = false },
+				{ Name = "height", Type = "number", Nilable = false },
+				{ Name = "leftTexCoord", Type = "number", Nilable = false },
+				{ Name = "rightTexCoord", Type = "number", Nilable = false },
+				{ Name = "topTexCoord", Type = "number", Nilable = false },
+				{ Name = "bottomTexCoord", Type = "number", Nilable = false },
+				{ Name = "tilesHorizontally", Type = "bool", Nilable = false },
+				{ Name = "tilesVertically", Type = "bool", Nilable = false },
+				{ Name = "file", Type = "number", Nilable = true },
+				{ Name = "filename", Type = "string", Nilable = true },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(TextureUtils);local ToyBoxInfo =
 {
 	Name = "ToyBoxInfo",
 	Type = "System",
@@ -22549,9 +22641,9 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 		{
 			Name = "StatusBarValueTextType",
 			Type = "Enumeration",
-			NumValues = 6,
+			NumValues = 7,
 			MinValue = 0,
-			MaxValue = 5,
+			MaxValue = 6,
 			Fields =
 			{
 				{ Name = "Hidden", Type = "StatusBarValueTextType", EnumValue = 0 },
@@ -22560,6 +22652,19 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "Time", Type = "StatusBarValueTextType", EnumValue = 3 },
 				{ Name = "TimeShowOneLevelOnly", Type = "StatusBarValueTextType", EnumValue = 4 },
 				{ Name = "ValueOverMax", Type = "StatusBarValueTextType", EnumValue = 5 },
+				{ Name = "ValueOverMaxNormalized", Type = "StatusBarValueTextType", EnumValue = 6 },
+			},
+		},
+		{
+			Name = "WidgetCurrencyClass",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Currency", Type = "WidgetCurrencyClass", EnumValue = 0 },
+				{ Name = "Item", Type = "WidgetCurrencyClass", EnumValue = 1 },
 			},
 		},
 		{
@@ -23018,6 +23123,20 @@ APIDocumentation:AddDocumentationTable(UIWidgetManager);local Unit =
 			Returns =
 			{
 				{ Name = "sex", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "UnitWidgetSet",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "uiWidgetSet", Type = "number", Nilable = false },
 			},
 		},
 	},

@@ -2723,7 +2723,130 @@ APIDocumentation:AddDocumentationTable(BlackMarketInfo);local Browser =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(Browser);local Calendar =
+APIDocumentation:AddDocumentationTable(Browser);local CVar =
+{
+	Name = "CVarScripts",
+	Type = "System",
+	Namespace = "C_CVar",
+
+	Functions =
+	{
+		{
+			Name = "GetCVar",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "value", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCVarBitfield",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "value", Type = "bool", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCVarBool",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "value", Type = "bool", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCVarDefault",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "defaultValue", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "RegisterCVar",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "value", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "ResetTestCVars",
+			Type = "Function",
+		},
+		{
+			Name = "SetCVar",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "value", Type = "string", Nilable = true },
+				{ Name = "scriptCVar", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetCVarBitfield",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "index", Type = "number", Nilable = false },
+				{ Name = "value", Type = "bool", Nilable = false },
+				{ Name = "scriptCVar", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(CVar);local Calendar =
 {
 	Name = "Calendar",
 	Type = "System",
@@ -3088,7 +3211,7 @@ APIDocumentation:AddDocumentationTable(Browser);local Calendar =
 
 			Arguments =
 			{
-				{ Name = "eventIndex", Type = "number", Nilable = false },
+				{ Name = "inviteIndex", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -3490,6 +3613,11 @@ APIDocumentation:AddDocumentationTable(Browser);local Calendar =
 				{ Name = "monthDay", Type = "number", Nilable = false },
 				{ Name = "index", Type = "number", Nilable = false },
 			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
 		},
 		{
 			Name = "RemoveEvent",
@@ -3763,6 +3891,8 @@ APIDocumentation:AddDocumentationTable(Browser);local Calendar =
 			Type = "Structure",
 			Fields =
 			{
+				{ Name = "eventID", Type = "string", Nilable = false },
+				{ Name = "year", Type = "number", Nilable = false },
 				{ Name = "month", Type = "number", Nilable = false },
 				{ Name = "monthDay", Type = "number", Nilable = false },
 				{ Name = "weekday", Type = "number", Nilable = false },
@@ -3772,6 +3902,8 @@ APIDocumentation:AddDocumentationTable(Browser);local Calendar =
 				{ Name = "title", Type = "string", Nilable = false },
 				{ Name = "calendarType", Type = "string", Nilable = false },
 				{ Name = "texture", Type = "number", Nilable = false },
+				{ Name = "inviteStatus", Type = "number", Nilable = false },
+				{ Name = "clubID", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -4239,6 +4371,22 @@ APIDocumentation:AddDocumentationTable(ChatBubbles);local ChatInfo =
 			Returns =
 			{
 				{ Name = "successfulRequest", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ReplaceIconAndGroupExpressions",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "input", Type = "string", Nilable = false },
+				{ Name = "noIconReplacement", Type = "bool", Nilable = true },
+				{ Name = "noGroupReplacement", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "output", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -10247,6 +10395,15 @@ APIDocumentation:AddDocumentationTable(Cursor);local DateAndTime =
 				{ Name = "date", Type = "CalendarTime", Nilable = false },
 			},
 		},
+		{
+			Name = "GetServerTimeLocal",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "serverTimeLocal", Type = "number", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -10667,6 +10824,20 @@ APIDocumentation:AddDocumentationTable(EncounterInfo);local EncounterJournal =
 			Returns =
 			{
 				{ Name = "hasLoot", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsEncounterComplete",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "journalEncounterID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isEncounterComplete", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -13853,6 +14024,10 @@ APIDocumentation:AddDocumentationTable(Item);local ItemSocketInfo =
 
 	Functions =
 	{
+		{
+			Name = "CompleteSocketing",
+			Type = "Function",
+		},
 	},
 
 	Events =
@@ -13861,6 +14036,11 @@ APIDocumentation:AddDocumentationTable(Item);local ItemSocketInfo =
 			Name = "SocketInfoAccept",
 			Type = "Event",
 			LiteralName = "SOCKET_INFO_ACCEPT",
+		},
+		{
+			Name = "SocketInfoBindConfirm",
+			Type = "Event",
+			LiteralName = "SOCKET_INFO_BIND_CONFIRM",
 		},
 		{
 			Name = "SocketInfoClose",
@@ -17981,6 +18161,15 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
+			Name = "IsActiveBattlefield",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isActiveBattlefield", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsBattlegroundEnlistmentBonusActive",
 			Type = "Function",
 
@@ -19035,6 +19224,20 @@ APIDocumentation:AddDocumentationTable(QuestOffer);local QuestTaskInfo =
 			Returns =
 			{
 				{ Name = "minutesLeft", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQuestTimeLeftSeconds",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "secondsLeft", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -20226,6 +20429,15 @@ APIDocumentation:AddDocumentationTable(Sound);local SpecializationInfo =
 			Returns =
 			{
 				{ Name = "spellID", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "IsInitialized",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isSpecializationDataInitialized", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -22377,6 +22589,20 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
+			Name = "GetDoubleStateIconRowVisualizationInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "widgetID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "widgetInfo", Type = "DoubleStateIconRowVisualizationInfo", Nilable = true },
+			},
+		},
+		{
 			Name = "GetDoubleStatusBarWidgetVisualizationInfo",
 			Type = "Function",
 
@@ -22588,11 +22814,41 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
+			Name = "IconState",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Hidden", Type = "IconState", EnumValue = 0 },
+				{ Name = "ShowState1", Type = "IconState", EnumValue = 1 },
+				{ Name = "ShowState2", Type = "IconState", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "StatusBarValueTextType",
+			Type = "Enumeration",
+			NumValues = 7,
+			MinValue = 0,
+			MaxValue = 6,
+			Fields =
+			{
+				{ Name = "Hidden", Type = "StatusBarValueTextType", EnumValue = 0 },
+				{ Name = "Percentage", Type = "StatusBarValueTextType", EnumValue = 1 },
+				{ Name = "Value", Type = "StatusBarValueTextType", EnumValue = 2 },
+				{ Name = "Time", Type = "StatusBarValueTextType", EnumValue = 3 },
+				{ Name = "TimeShowOneLevelOnly", Type = "StatusBarValueTextType", EnumValue = 4 },
+				{ Name = "ValueOverMax", Type = "StatusBarValueTextType", EnumValue = 5 },
+				{ Name = "ValueOverMaxNormalized", Type = "StatusBarValueTextType", EnumValue = 6 },
+			},
+		},
+		{
 			Name = "UIWidgetVisualizationType",
 			Type = "Enumeration",
-			NumValues = 14,
+			NumValues = 15,
 			MinValue = 0,
-			MaxValue = 13,
+			MaxValue = 14,
 			Fields =
 			{
 				{ Name = "IconAndText", Type = "UIWidgetVisualizationType", EnumValue = 0 },
@@ -22609,6 +22865,7 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "ScenarioHeaderCurrenciesAndBackground", Type = "UIWidgetVisualizationType", EnumValue = 11 },
 				{ Name = "TextureWithState", Type = "UIWidgetVisualizationType", EnumValue = 12 },
 				{ Name = "SpellDisplay", Type = "UIWidgetVisualizationType", EnumValue = 13 },
+				{ Name = "DoubleStateIconRow", Type = "UIWidgetVisualizationType", EnumValue = 14 },
 			},
 		},
 		{
@@ -22636,23 +22893,6 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "Small", Type = "SpellDisplayIconSizeType", EnumValue = 0 },
 				{ Name = "Medium", Type = "SpellDisplayIconSizeType", EnumValue = 1 },
 				{ Name = "Large", Type = "SpellDisplayIconSizeType", EnumValue = 2 },
-			},
-		},
-		{
-			Name = "StatusBarValueTextType",
-			Type = "Enumeration",
-			NumValues = 7,
-			MinValue = 0,
-			MaxValue = 6,
-			Fields =
-			{
-				{ Name = "Hidden", Type = "StatusBarValueTextType", EnumValue = 0 },
-				{ Name = "Percentage", Type = "StatusBarValueTextType", EnumValue = 1 },
-				{ Name = "Value", Type = "StatusBarValueTextType", EnumValue = 2 },
-				{ Name = "Time", Type = "StatusBarValueTextType", EnumValue = 3 },
-				{ Name = "TimeShowOneLevelOnly", Type = "StatusBarValueTextType", EnumValue = 4 },
-				{ Name = "ValueOverMax", Type = "StatusBarValueTextType", EnumValue = 5 },
-				{ Name = "ValueOverMaxNormalized", Type = "StatusBarValueTextType", EnumValue = 6 },
 			},
 		},
 		{
@@ -22712,6 +22952,30 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
+			Name = "UIWidgetStateIconInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "iconState", Type = "IconState", Nilable = false },
+				{ Name = "state1Tooltip", Type = "string", Nilable = false },
+				{ Name = "state2Tooltip", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "DoubleStateIconRowVisualizationInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "shownState", Type = "WidgetShownState", Nilable = false },
+				{ Name = "leftIcons", Type = "table", InnerType = "UIWidgetStateIconInfo", Nilable = false },
+				{ Name = "rightIcons", Type = "table", InnerType = "UIWidgetStateIconInfo", Nilable = false },
+				{ Name = "textureKitID", Type = "number", Nilable = false },
+				{ Name = "hasTimer", Type = "bool", Nilable = false },
+				{ Name = "orderIndex", Type = "number", Nilable = false },
+				{ Name = "widgetTag", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "DoubleStatusBarWidgetVisualizationInfo",
 			Type = "Structure",
 			Fields =
@@ -22723,6 +22987,7 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "rightBarMin", Type = "number", Nilable = false },
 				{ Name = "rightBarMax", Type = "number", Nilable = false },
 				{ Name = "rightBarValue", Type = "number", Nilable = false },
+				{ Name = "barValueTextType", Type = "StatusBarValueTextType", Nilable = false },
 				{ Name = "text", Type = "string", Nilable = false },
 				{ Name = "textureKitID", Type = "number", Nilable = false },
 				{ Name = "hasTimer", Type = "bool", Nilable = false },
@@ -23123,6 +23388,20 @@ APIDocumentation:AddDocumentationTable(UIWidgetManager);local Unit =
 			Returns =
 			{
 				{ Name = "sex", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "UnitTreatAsPlayerForDisplay",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "treatAsPlayer", Type = "bool", Nilable = false },
 			},
 		},
 		{

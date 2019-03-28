@@ -7,6 +7,20 @@ local AccountInfo =
 	Functions =
 	{
 		{
+			Name = "GetIDFromBattleNetAccountGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "battleNetAccountGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "battleNetAccountID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "IsGUIDBattleNetAccountType",
 			Type = "Function",
 
@@ -3804,6 +3818,7 @@ APIDocumentation:AddDocumentationTable(CVar);local Calendar =
 				{ Name = "difficultyName", Type = "string", Nilable = false },
 				{ Name = "dontDisplayBanner", Type = "bool", Nilable = false },
 				{ Name = "dontDisplayEnd", Type = "bool", Nilable = false },
+				{ Name = "clubID", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -7211,15 +7226,6 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 			},
 		},
 		{
-			Name = "SetCommunityID",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "communityID", Type = "number", Nilable = false },
-			},
-		},
-		{
 			Name = "SetFavorite",
 			Type = "Function",
 
@@ -10220,6 +10226,9 @@ APIDocumentation:AddDocumentationTable(CreatureInfo);local CurrencyInfo =
 			{
 				{ Name = "currencyType", Type = "number", Nilable = true },
 				{ Name = "quantity", Type = "number", Nilable = true },
+				{ Name = "quantityChange", Type = "number", Nilable = true },
+				{ Name = "quantityGainSource", Type = "number", Nilable = true },
+				{ Name = "quantityLostSource", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -13037,6 +13046,7 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 				{ Name = "emblemColorG", Type = "number", Nilable = true },
 				{ Name = "emblemColorB", Type = "number", Nilable = true },
 				{ Name = "emblemFileID", Type = "number", Nilable = true },
+				{ Name = "emblemIndex", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -17843,6 +17853,20 @@ APIDocumentation:AddDocumentationTable(PetJournalInfo);local PlayerLocation =
 				{ Name = "isConnected", Type = "bool", Nilable = true },
 			},
 		},
+		{
+			Name = "UnitIsSameServer",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "playerLocation", Type = "table", Mixin = "PlayerLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "unitIsSameServer", Type = "bool", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -17883,6 +17907,15 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			Returns =
 			{
 				{ Name = "canTogglePvPInArea", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetActiveBrawlInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "brawlInfo", Type = "PvpBrawlInfo", Nilable = true },
 			},
 		},
 		{
@@ -17931,7 +17964,7 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
-			Name = "GetBrawlInfo",
+			Name = "GetAvailableBrawlInfo",
 			Type = "Function",
 			Documentation = { "If nil is returned, PVP_BRAWL_INFO_UPDATED event will be sent when the data is ready." },
 
@@ -18485,9 +18518,8 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "shortDescription", Type = "string", Nilable = false },
 				{ Name = "longDescription", Type = "string", Nilable = false },
-				{ Name = "active", Type = "bool", Nilable = false },
+				{ Name = "canQueue", Type = "bool", Nilable = false },
 				{ Name = "timeLeftUntilNextChange", Type = "number", Nilable = false },
-				{ Name = "lfgDungeonID", Type = "number", Nilable = false },
 				{ Name = "brawlType", Type = "BrawlType", Nilable = false },
 				{ Name = "mapNames", Type = "table", InnerType = "string", Nilable = false },
 			},
@@ -20048,10 +20080,126 @@ APIDocumentation:AddDocumentationTable(SkillInfo);local SocialInfo =
 {
 	Name = "SocialInfo",
 	Type = "System",
-	Namespace = "C_SocialInfo",
+	Namespace = "C_Social",
 
 	Functions =
 	{
+		{
+			Name = "GetLastAchievement",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "achievementID", Type = "number", Nilable = false },
+				{ Name = "achievementName", Type = "string", Nilable = false },
+				{ Name = "achievementDesc", Type = "string", Nilable = false },
+				{ Name = "iconFileID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLastItem",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "itemName", Type = "string", Nilable = false },
+				{ Name = "iconFileID", Type = "number", Nilable = false },
+				{ Name = "itemQuality", Type = "number", Nilable = false },
+				{ Name = "itemLevel", Type = "number", Nilable = false },
+				{ Name = "itemLinkString", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLastScreenshotIndex",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "screenShotIndex", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMaxTweetLength",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "maxTweetLength", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetScreenshotInfoByIndex",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "screenWidth", Type = "number", Nilable = false },
+				{ Name = "screenHeight", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTweetLength",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "tweetText", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "tweetLength", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSocialEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isEnabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "TwitterCheckStatus",
+			Type = "Function",
+			Documentation = { "Not allowed to be called by addons" },
+		},
+		{
+			Name = "TwitterConnect",
+			Type = "Function",
+			Documentation = { "Not allowed to be called by addons" },
+		},
+		{
+			Name = "TwitterDisconnect",
+			Type = "Function",
+			Documentation = { "Not allowed to be called by addons" },
+		},
+		{
+			Name = "TwitterGetMSTillCanPost",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "msTimeLeft", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "TwitterPostMessage",
+			Type = "Function",
+			Documentation = { "Not allowed to be called by addons" },
+
+			Arguments =
+			{
+				{ Name = "message", Type = "string", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -21376,10 +21524,42 @@ APIDocumentation:AddDocumentationTable(TextureUtils);local ToyBoxInfo =
 
 	Functions =
 	{
+		{
+			Name = "ClearFanfare",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "NeedsFanfare",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "needsFanfare", Type = "bool", Nilable = false },
+			},
+		},
 	},
 
 	Events =
 	{
+		{
+			Name = "NewToyAdded",
+			Type = "Event",
+			LiteralName = "NEW_TOY_ADDED",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
 		{
 			Name = "ToysUpdated",
 			Type = "Event",
@@ -21388,6 +21568,7 @@ APIDocumentation:AddDocumentationTable(TextureUtils);local ToyBoxInfo =
 			{
 				{ Name = "itemID", Type = "number", Nilable = true },
 				{ Name = "isNew", Type = "bool", Nilable = true },
+				{ Name = "hasFanfare", Type = "bool", Nilable = true },
 			},
 		},
 	},
@@ -22989,6 +23170,7 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "rightBarValue", Type = "number", Nilable = false },
 				{ Name = "barValueTextType", Type = "StatusBarValueTextType", Nilable = false },
 				{ Name = "text", Type = "string", Nilable = false },
+				{ Name = "barWidth", Type = "number", Nilable = false },
 				{ Name = "textureKitID", Type = "number", Nilable = false },
 				{ Name = "hasTimer", Type = "bool", Nilable = false },
 				{ Name = "orderIndex", Type = "number", Nilable = false },
@@ -23374,6 +23556,20 @@ APIDocumentation:AddDocumentationTable(UIWidgetManager);local Unit =
 			Returns =
 			{
 				{ Name = "maxPower", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitPvpClassification",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "classification", Type = "PvpUnitClassification", Nilable = true },
 			},
 		},
 		{
@@ -24399,6 +24595,27 @@ APIDocumentation:AddDocumentationTable(UIWidgetManager);local Unit =
 				{ Name = "Fury", Type = "PowerType", EnumValue = 17 },
 				{ Name = "Pain", Type = "PowerType", EnumValue = 18 },
 				{ Name = "NumPowerTypes", Type = "PowerType", EnumValue = 19 },
+			},
+		},
+		{
+			Name = "PvpUnitClassification",
+			Type = "Enumeration",
+			NumValues = 11,
+			MinValue = 0,
+			MaxValue = 10,
+			Fields =
+			{
+				{ Name = "FlagCarrierHorde", Type = "PvpUnitClassification", EnumValue = 0 },
+				{ Name = "FlagCarrierAlliance", Type = "PvpUnitClassification", EnumValue = 1 },
+				{ Name = "FlagCarrierNeutral", Type = "PvpUnitClassification", EnumValue = 2 },
+				{ Name = "CartRunnerHorde", Type = "PvpUnitClassification", EnumValue = 3 },
+				{ Name = "CartRunnerAlliance", Type = "PvpUnitClassification", EnumValue = 4 },
+				{ Name = "AssassinHorde", Type = "PvpUnitClassification", EnumValue = 5 },
+				{ Name = "AssassinAlliance", Type = "PvpUnitClassification", EnumValue = 6 },
+				{ Name = "OrbCarrierBlue", Type = "PvpUnitClassification", EnumValue = 7 },
+				{ Name = "OrbCarrierGreen", Type = "PvpUnitClassification", EnumValue = 8 },
+				{ Name = "OrbCarrierOrange", Type = "PvpUnitClassification", EnumValue = 9 },
+				{ Name = "OrbCarrierPurple", Type = "PvpUnitClassification", EnumValue = 10 },
 			},
 		},
 	},

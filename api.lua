@@ -26,10 +26,10 @@ end
 
 
 ChatTypeInfo = {
-    ["SYSTEM"] = { 
-        ["r"] = 1, 
+    ["SYSTEM"] = {
+        ["r"] = 1,
         ["b"] = 0,
-        ["g"] = 1, 
+        ["g"] = 1,
         ["id"] = 1,
         ["sticky"] = 0,
         colorNameByClass = false,
@@ -40,7 +40,8 @@ ChatTypeInfo = {
 
 function string:split(inputstr)
     if not inputstr then return nil end
-    local t={} ; i=1
+    local t = {}
+    local i = 1
     for str in string.gmatch(inputstr, "([^"..self.."]+)") do
             t[i] = str
             i = i + 1
@@ -50,7 +51,8 @@ end
 
 function string:split2(inputstr)
     if not inputstr then return nil end
-    local t={} ; i=1
+    local t = {}
+    local i = 1
     for str in string.gmatch(inputstr, "([^"..self.."]+)") do
             t[i] = str
             i = i + 1
@@ -61,13 +63,10 @@ end
 unpack = table.unpack
 
 DEFAULT_CHAT_FRAME = {} -- configure output here
-function DEFAULT_CHAT_FRAME:AddMessage(message, r, g, b, id)
+function DEFAULT_CHAT_FRAME:AddMessage(message)
     print(message)
 end
 local removelinks = true
-
--- read lua files from Blizzard_APIDocumentation.toc
-local tocfile = "Blizzard_APIDocumentation\\Blizzard_APIDocumentation.toc"
 
 -- with .js we can't read Blizzard_APIDocumentation.toc
 local stringtocfile = [[BaseAPIMixin.lua
@@ -78,149 +77,13 @@ TablesAPIMixin.lua
 EventsAPIMixin.lua
 Blizzard_APIDocumentation.lua]]
 
---[[ we concatenate all of them in fulldoc.lua with compile.sh
-# Start documentation files here
-AccountInfoDocumentation.lua
-AchievementInfoDocumentation.lua
-ActionBarFrameDocumentation.lua
-AddOnsDocumentation.lua
-AdventureJournalDocumentation.lua
-AdventureMapDocumentation.lua
-AlliedRacesFrameDocumentation.lua
-AreaPoiInfoDocumentation.lua
-ArtifactUIDocumentation.lua
-AuctionHouseDocumentation.lua
-AzeriteEmpoweredItemDocumentation.lua
-AzeriteItemDocumentation.lua
-BankDocumentation.lua
-BarberShopDocumentation.lua
-BattleNetDocumentation.lua
-BattlePetDocumentation.lua
-BlackMarketInfoDocumentation.lua
-BrowserDocumentation.lua
-ChallengeModeInfoDocumentation.lua
-ChatBubblesDocumentation.lua
-ChatInfoDocumentation.lua
-CinematicDocumentation.lua
-ClassTrialDocumentation.lua
-CombatLogDocumentation.lua
-CommentatorFrameDocumentation.lua
-CompactUnitFramesDocumentation.lua
-ConfigurationWarningsDocumentation.lua
-ConsoleDocumentation.lua
-ContainerDocumentation.lua
-ContributionCollectorDocumentation.lua
-CreatureInfoDocumentation.lua
-CurrencyInfoDocumentation.lua
-CursorDocumentation.lua
-DateAndTimeDocumentation.lua
-DeathInfoDocumentation.lua
-DuelInfoDocumentation.lua
-EncounterInfoDocumentation.lua
-EncounterJournalDocumentation.lua
-EquipmentManagerDocumentation.lua
-ExpansionDocumentation.lua
-FogOfWarDocumentation.lua
-GMTicketInfoDocumentation.lua
-GarrisonInfoDocumentation.lua
-GlyphInfoDocumentation.lua
-GossipInfoDocumentation.lua
-GuildBankDocumentation.lua
-GuildInfoDocumentation.lua
-HeirloomInfoDocumentation.lua
-InstanceEncounterDocumentation.lua
-InvasionInfoDocumentation.lua
-IslandsInfoDocumentation.lua
-IslandsQueueUIDocumentation.lua
-ItemDocumentation.lua
-ItemSocketInfoDocumentation.lua
-ItemTextDocumentation.lua
-ItemUpgradeDocumentation.lua
-KeyBindingsDocumentation.lua
-KnowledgeBaseDocumentation.lua
-LFGInfoDocumentation.lua
-LFGListInfoDocumentation.lua
-LFGuildInfoDocumentation.lua
-LoadingScreenDocumentation.lua
-LootDocumentation.lua
-LootJournalDocumentation.lua
-LossOfControlDocumentation.lua
-MailInfoDocumentation.lua
-MapDocumentation.lua
-MapExplorationDocumentation.lua
-MerchantFrameDocumentation.lua
-MinimapDocumentation.lua
-MountJournalDocumentation.lua
-MythicPlusInfoDocumentation.lua
-NamePlateManagerDocumentation.lua
-PaperDollInfoDocumentation.lua
-PartyInfoDocumentation.lua
-PartyPoseUIDocumentation.lua
-PetInfoDocumentation.lua
-PetJournalInfoDocumentation.lua
-PlayerLocationDocumentation.lua
-PvpInfoDocumentation.lua
-QuestChoiceDocumentation.lua
-QuestLineInfoDocumentation.lua
-QuestLogDocumentation.lua
-QuestOfferDocumentation.lua
-QuestTaskInfoDocumentation.lua
-RecruitAFriendDocumentation.lua
-ReputationInfoDocumentation.lua
-ResearchInfoDocumentation.lua
-RestrictedActionsDocumentation.lua
-ScenarioInfoDocumentation.lua
-ScrappingMachineUIDocumentation.lua
-ScriptWarningsDocumentation.lua
-SecureTransferDocumentation.lua
-SkillInfoDocumentation.lua
-SocialInfoDocumentation.lua
-SocialQueueDocumentation.lua
-SoundDocumentation.lua
-SpecializationInfoDocumentation.lua
-SpellDocumentation.lua
-SpellActivationOverlayDocumentation.lua
-SpellBookDocumentation.lua
-StableInfoDocumentation.lua
-StorePublicUIDocumentation.lua
-SystemDocumentation.lua
-TalkingHeadDocumentation.lua
-TaxiMapDocumentation.lua
-ToyBoxInfoDocumentation.lua
-TradeInfoDocumentation.lua
-TradeSkillUIDocumentation.lua
-TrainerDocumentation.lua
-TransmogDocumentation.lua
-TransmogItemsDocumentation.lua
-TransmogSetsDocumentation.lua
-TutorialDocumentation.lua
-UIMacrosDocumentation.lua
-UIManagerDocumentation.lua
-UIModelInfoDocumentation.lua
-UIWidgetManagerDocumentation.lua
-UnitDocumentation.lua
-VehicleDocumentation.lua
-VideoDocumentation.lua
-VignetteInfoDocumentation.lua
-VoiceChatDocumentation.lua
-VoidStorageInfoDocumentation.lua
-WarCampaignDocumentation.lua
-WorldStateInfoDocumentation.lua
-WowTokenUIDocumentation.lua
-ZoneAbilityDocumentation.lua
-CalendarDocumentation.lua
-ClubDocumentation.lua
-FriendsDocumentation.lua
-]]--
-
---for line in io.lines(tocfile) do    -- don't work with js
-for _,line in pairs(("\n"):split2(stringtocfile)) do 
+for _,line in pairs(("\n"):split2(stringtocfile)) do
     local char1 = line:sub(1,1)
     if char1 ~= "" and char1 ~= "#" then
         require("Blizzard_APIDocumentation." .. line:sub(1,-5))
-        -- replace some mixin functions to remove links & color codes after they are loaded 
+        -- replace some mixin functions to remove links & color codes after they are loaded
         -- i don't like how i do it but can't find a proper way
-        if removelinks then  
+        if removelinks then
             if line == "BaseAPIMixin.lua" then
                 function BaseAPIMixin:GenerateAPILink()
                 --  return ("|cff%s|Hapi:%s:%s:%s|h%s|h|r"):format(self:GetLinkHexColor(), self:GetType(), self:GetName(), self:GetParentName(), self:GetFullName());
@@ -245,7 +108,7 @@ for _,line in pairs(("\n"):split2(stringtocfile)) do
                     --local includeColorCodes = false
                     if self.Payload then
                         local values = {};
-                        for i, payloadInfo in ipairs(self.Payload) do
+                        for _, payloadInfo in ipairs(self.Payload) do
                             if includeColorCodes ~= false then
                                 table.insert(values, ("%s<span style='color: #%s'/>"):format(payloadInfo:GetPayloadString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
                             else
@@ -258,11 +121,11 @@ for _,line in pairs(("\n"):split2(stringtocfile)) do
                 end
             end
             if line == "FunctionsAPIMixin.lua" then
-                function FunctionsAPIMixin:GetArgumentString(decorateOptionals, includeColorCodes)
+                function FunctionsAPIMixin:GetArgumentString(decorateOptionals)
                     local includeColorCodes = false
                     if self.Arguments then
                         local values = {};
-                        for i, argumentInfo in ipairs(self.Arguments) do
+                        for _, argumentInfo in ipairs(self.Arguments) do
                             if includeColorCodes ~= false then
                                 table.insert(values, ("%s|cff%s"):format(argumentInfo:GetArgumentString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
                             else
@@ -273,7 +136,7 @@ for _,line in pairs(("\n"):split2(stringtocfile)) do
                     end
                     return "";
                 end
-                function FunctionsAPIMixin:GetReturnString(decorateOptionals, includeColorCodes)
+                function FunctionsAPIMixin:GetReturnString(decorateOptionals)
                     local includeColorCodes = false
                     if self.Returns then
                         local values = {};

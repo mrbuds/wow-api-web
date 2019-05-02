@@ -2162,7 +2162,7 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 			Arguments =
 			{
 				{ Name = "essenceID", Type = "number", Nilable = false },
-				{ Name = "slot", Type = "AzeriteEssence", Nilable = false },
+				{ Name = "milestoneID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -2172,7 +2172,7 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 			Arguments =
 			{
 				{ Name = "essenceID", Type = "number", Nilable = false },
-				{ Name = "slot", Type = "AzeriteEssence", Nilable = false },
+				{ Name = "milestoneID", Type = "number", Nilable = false },
 			},
 
 			Returns =
@@ -2198,26 +2198,18 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 			Type = "Function",
 		},
 		{
-			Name = "GetActionSpell",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "spellID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetActiveEssence",
+			Name = "GetEssenceHyperlink",
 			Type = "Function",
 
 			Arguments =
 			{
-				{ Name = "slot", Type = "AzeriteEssence", Nilable = false },
+				{ Name = "essenceID", Type = "number", Nilable = false },
+				{ Name = "rank", Type = "number", Nilable = false },
 			},
 
 			Returns =
 			{
-				{ Name = "essenceID", Type = "number", Nilable = false },
+				{ Name = "link", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -2244,8 +2236,13 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 			},
 		},
 		{
-			Name = "GetPendingActivationEssence",
+			Name = "GetMilestoneEssence",
 			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "milestoneID", Type = "number", Nilable = false },
+			},
 
 			Returns =
 			{
@@ -2253,19 +2250,49 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 			},
 		},
 		{
-			Name = "GetSlotInfo",
+			Name = "GetMilestoneInfo",
 			Type = "Function",
 
 			Arguments =
 			{
-				{ Name = "slot", Type = "AzeriteEssence", Nilable = false },
+				{ Name = "milestoneID", Type = "number", Nilable = false },
 			},
 
 			Returns =
 			{
-				{ Name = "locked", Type = "bool", Nilable = false, Default = false },
-				{ Name = "unlockLevel", Type = "number", Nilable = false, Default = 0 },
-				{ Name = "unlockDescription", Type = "string", Nilable = true },
+				{ Name = "info", Type = "AzeriteMilestoneInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMilestoneSpell",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "milestoneID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "spellID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMilestones",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "milestones", Type = "table", InnerType = "AzeriteMilestoneInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPendingActivationEssence",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "essenceID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -2293,6 +2320,15 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 			Arguments =
 			{
 				{ Name = "essenceID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnlockMilestone",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "milestoneID", Type = "number", Nilable = false },
 			},
 		},
 	},
@@ -2340,6 +2376,15 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 			LiteralName = "AZERITE_ESSENCE_FORGE_OPEN",
 		},
 		{
+			Name = "AzeriteEssenceMilestoneUnlocked",
+			Type = "Event",
+			LiteralName = "AZERITE_ESSENCE_MILESTONE_UNLOCKED",
+			Payload =
+			{
+				{ Name = "milestoneID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "AzeriteEssenceUpdate",
 			Type = "Event",
 			LiteralName = "AZERITE_ESSENCE_UPDATE",
@@ -2381,6 +2426,18 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 				{ Name = "unlocked", Type = "bool", Nilable = false },
 				{ Name = "valid", Type = "bool", Nilable = false },
 				{ Name = "icon", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "AzeriteMilestoneInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "ID", Type = "number", Nilable = false },
+				{ Name = "requiredLevel", Type = "number", Nilable = false },
+				{ Name = "canUnlock", Type = "bool", Nilable = false },
+				{ Name = "unlocked", Type = "bool", Nilable = false },
+				{ Name = "slot", Type = "AzeriteEssence", Nilable = true },
 			},
 		},
 	},
@@ -2453,6 +2510,15 @@ APIDocumentation:AddDocumentationTable(AzeriteEssence);local AzeriteItem =
 			Returns =
 			{
 				{ Name = "isAzeriteItem", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsAzeriteItemAtMaxLevel",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isAtMax", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -8320,6 +8386,24 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 	Functions =
 	{
 		{
+			Name = "ApplicantAcceptClubInvite",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ApplicantDeclineClubInvite",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "CancelMembershipRequest",
 			Type = "Function",
 
@@ -8330,6 +8414,18 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 		},
 		{
 			Name = "CheckAllPlayerApplicantSettings",
+			Type = "Function",
+		},
+		{
+			Name = "ClearAllFinderCache",
+			Type = "Function",
+		},
+		{
+			Name = "ClearClubApplicantsCache",
+			Type = "Function",
+		},
+		{
+			Name = "ClearClubFinderPostingsCache",
 			Type = "Function",
 		},
 		{
@@ -8360,12 +8456,21 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			},
 		},
 		{
+			Name = "PlayerGetClubInvitationList",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "inviteList", Type = "table", InnerType = "RecruitingClubInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "PlayerRequestPendingClubsList",
 			Type = "Function",
 
 			Arguments =
 			{
-				{ Name = "requestGuildList", Type = "bool", Nilable = false },
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
 			},
 		},
 		{
@@ -8404,6 +8509,11 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 		{
 			Name = "RequestApplicantList",
 			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+			},
 		},
 		{
 			Name = "RequestClubsList",
@@ -8497,7 +8607,7 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			Documentation = { "Signals when we recieve club data that can be used" },
 			Payload =
 			{
-				{ Name = "isGuildList", Type = "bool", Nilable = false },
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
 			},
 		},
 		{
@@ -8511,7 +8621,7 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			LiteralName = "CLUB_FINDER_PLAYER_PENDING_LIST_RECIEVED",
 			Payload =
 			{
-				{ Name = "isGuildList", Type = "bool", Nilable = false },
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
 			},
 		},
 		{
@@ -8535,50 +8645,87 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 	Tables =
 	{
 		{
+			Name = "PlayerClubRequestStatus",
+			Type = "Enumeration",
+			NumValues = 8,
+			MinValue = 0,
+			MaxValue = 7,
+			Fields =
+			{
+				{ Name = "None", Type = "PlayerClubRequestStatus", EnumValue = 0 },
+				{ Name = "Pending", Type = "PlayerClubRequestStatus", EnumValue = 1 },
+				{ Name = "AutoApproved", Type = "PlayerClubRequestStatus", EnumValue = 2 },
+				{ Name = "Declined", Type = "PlayerClubRequestStatus", EnumValue = 3 },
+				{ Name = "Approved", Type = "PlayerClubRequestStatus", EnumValue = 4 },
+				{ Name = "Joined", Type = "PlayerClubRequestStatus", EnumValue = 5 },
+				{ Name = "JoinedAnother", Type = "PlayerClubRequestStatus", EnumValue = 6 },
+				{ Name = "Canceled", Type = "PlayerClubRequestStatus", EnumValue = 7 },
+			},
+		},
+		{
+			Name = "ClubFinderApplicationUpdateType",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "None", Type = "ClubFinderApplicationUpdateType", EnumValue = 0 },
+				{ Name = "AcceptInvite", Type = "ClubFinderApplicationUpdateType", EnumValue = 1 },
+				{ Name = "DeclineInvite", Type = "ClubFinderApplicationUpdateType", EnumValue = 2 },
+				{ Name = "Cancel", Type = "ClubFinderApplicationUpdateType", EnumValue = 3 },
+			},
+		},
+		{
 			Name = "ClubFinderRequestType",
 			Type = "Enumeration",
-			NumValues = 3,
+			NumValues = 4,
 			MinValue = 0,
-			MaxValue = 2,
+			MaxValue = 3,
 			Fields =
 			{
 				{ Name = "None", Type = "ClubFinderRequestType", EnumValue = 0 },
 				{ Name = "Guild", Type = "ClubFinderRequestType", EnumValue = 1 },
 				{ Name = "Community", Type = "ClubFinderRequestType", EnumValue = 2 },
+				{ Name = "All", Type = "ClubFinderRequestType", EnumValue = 3 },
 			},
 		},
 		{
-			Name = "ClubFinderSettingFlags",
-			Type = "Enumeration",
-			NumValues = 11,
-			MinValue = 0,
-			MaxValue = 10,
-			Fields =
-			{
-				{ Name = "Dungeon", Type = "ClubFinderSettingFlags", EnumValue = 0 },
-				{ Name = "Raiding", Type = "ClubFinderSettingFlags", EnumValue = 1 },
-				{ Name = "Pvp", Type = "ClubFinderSettingFlags", EnumValue = 2 },
-				{ Name = "Rp", Type = "ClubFinderSettingFlags", EnumValue = 3 },
-				{ Name = "Social", Type = "ClubFinderSettingFlags", EnumValue = 4 },
-				{ Name = "Small", Type = "ClubFinderSettingFlags", EnumValue = 5 },
-				{ Name = "Medium", Type = "ClubFinderSettingFlags", EnumValue = 6 },
-				{ Name = "Large", Type = "ClubFinderSettingFlags", EnumValue = 7 },
-				{ Name = "Tank", Type = "ClubFinderSettingFlags", EnumValue = 8 },
-				{ Name = "Healer", Type = "ClubFinderSettingFlags", EnumValue = 9 },
-				{ Name = "Damage", Type = "ClubFinderSettingFlags", EnumValue = 10 },
-			},
-		},
-		{
-			Name = "PlayerClubRequestStatus",
+			Name = "ClubFinderReportType",
 			Type = "Enumeration",
 			NumValues = 3,
 			MinValue = 0,
 			MaxValue = 2,
 			Fields =
 			{
-				{ Name = "Requested", Type = "PlayerClubRequestStatus", EnumValue = 0 },
-				{ Name = "Accepted", Type = "PlayerClubRequestStatus", EnumValue = 1 },
-				{ Name = "Declined", Type = "PlayerClubRequestStatus", EnumValue = 2 },
+				{ Name = "Any", Type = "ClubFinderReportType", EnumValue = 0 },
+				{ Name = "InapropriateName", Type = "ClubFinderReportType", EnumValue = 1 },
+				{ Name = "InapropriateComment", Type = "ClubFinderReportType", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "ClubFinderSettingFlags",
+			Type = "Enumeration",
+			NumValues = 15,
+			MinValue = 0,
+			MaxValue = 14,
+			Fields =
+			{
+				{ Name = "None", Type = "ClubFinderSettingFlags", EnumValue = 0 },
+				{ Name = "Dungeons", Type = "ClubFinderSettingFlags", EnumValue = 1 },
+				{ Name = "Raids", Type = "ClubFinderSettingFlags", EnumValue = 2 },
+				{ Name = "Pvp", Type = "ClubFinderSettingFlags", EnumValue = 3 },
+				{ Name = "Rp", Type = "ClubFinderSettingFlags", EnumValue = 4 },
+				{ Name = "Social", Type = "ClubFinderSettingFlags", EnumValue = 5 },
+				{ Name = "Small", Type = "ClubFinderSettingFlags", EnumValue = 6 },
+				{ Name = "Medium", Type = "ClubFinderSettingFlags", EnumValue = 7 },
+				{ Name = "Large", Type = "ClubFinderSettingFlags", EnumValue = 8 },
+				{ Name = "Tank", Type = "ClubFinderSettingFlags", EnumValue = 9 },
+				{ Name = "Healer", Type = "ClubFinderSettingFlags", EnumValue = 10 },
+				{ Name = "Damage", Type = "ClubFinderSettingFlags", EnumValue = 11 },
+				{ Name = "EnableListing", Type = "ClubFinderSettingFlags", EnumValue = 12 },
+				{ Name = "MaxLevelOnly", Type = "ClubFinderSettingFlags", EnumValue = 13 },
+				{ Name = "AutoAccept", Type = "ClubFinderSettingFlags", EnumValue = 14 },
 			},
 		},
 		{
@@ -8586,6 +8733,7 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			Type = "Structure",
 			Fields =
 			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
 				{ Name = "playerGUID", Type = "string", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "message", Type = "string", Nilable = false },
@@ -8593,6 +8741,7 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 				{ Name = "classID", Type = "number", Nilable = false },
 				{ Name = "ilvl", Type = "number", Nilable = false },
 				{ Name = "specIds", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "requestStatus", Type = "PlayerClubRequestStatus", Nilable = false },
 			},
 		},
 		{
@@ -8635,9 +8784,12 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 				{ Name = "comment", Type = "string", Nilable = false },
 				{ Name = "guildLeader", Type = "string", Nilable = false },
 				{ Name = "isGuild", Type = "bool", Nilable = false },
+				{ Name = "emblemInfo", Type = "number", Nilable = false },
 				{ Name = "tabardInfo", Type = "ClubFinderGuildTabardInfo", Nilable = true },
 				{ Name = "clubStatus", Type = "PlayerClubRequestStatus", Nilable = true },
 				{ Name = "recruitingSpecIds", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "cached", Type = "number", Nilable = false },
+				{ Name = "cacheRequested", Type = "number", Nilable = false },
 			},
 		},
 	},
@@ -13529,6 +13681,20 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 			},
 		},
 		{
+			Name = "GetGuildNewsInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "newsInfo", Type = "GuildNewsInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "GetGuildRankOrder",
 			Type = "Function",
 
@@ -13555,6 +13721,10 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 			{
 				{ Name = "permissions", Type = "table", InnerType = "bool", Nilable = false },
 			},
+		},
+		{
+			Name = "GuildRoster",
+			Type = "Function",
 		},
 		{
 			Name = "IsGuildRankAssignmentAllowed",
@@ -13794,6 +13964,25 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 
 	Tables =
 	{
+		{
+			Name = "GuildNewsInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "isSticky", Type = "bool", Nilable = false },
+				{ Name = "isHeader", Type = "bool", Nilable = false },
+				{ Name = "newsType", Type = "number", Nilable = false },
+				{ Name = "whoText", Type = "string", Nilable = true },
+				{ Name = "whatText", Type = "string", Nilable = true },
+				{ Name = "newsDataID", Type = "number", Nilable = false },
+				{ Name = "data", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "weekday", Type = "number", Nilable = false },
+				{ Name = "day", Type = "number", Nilable = false },
+				{ Name = "month", Type = "number", Nilable = false },
+				{ Name = "year", Type = "number", Nilable = false },
+				{ Name = "guildMembersPresent", Type = "number", Nilable = false },
+			},
+		},
 	},
 };
 
@@ -16996,7 +17185,7 @@ APIDocumentation:AddDocumentationTable(Minimap);local MountJournal =
 			},
 		},
 		{
-			Name = "GetMountEquipmentLevelRequirement",
+			Name = "GetMountEquipmentUnlockLevel",
 			Type = "Function",
 
 			Returns =
@@ -17150,6 +17339,15 @@ APIDocumentation:AddDocumentationTable(Minimap);local MountJournal =
 			Returns =
 			{
 				{ Name = "isApplied", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsMountEquipmentUnlocked",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isUnlocked", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -19110,6 +19308,24 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
+			Name = "IsRatedArena",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isRatedArena", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsRatedBattleground",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isRatedBattleground", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsRatedMap",
 			Type = "Function",
 
@@ -20576,6 +20792,7 @@ APIDocumentation:AddDocumentationTable(RecruitAFriend);local ReportSystem =
 		{
 			Name = "InitiateReportPlayer",
 			Type = "Function",
+			Documentation = { "Not allowed to be called by addons" },
 
 			Arguments =
 			{
@@ -20589,12 +20806,25 @@ APIDocumentation:AddDocumentationTable(RecruitAFriend);local ReportSystem =
 			},
 		},
 		{
+			Name = "OpenReportPlayerDialog",
+			Type = "Function",
+			Documentation = { "Addons should use this to open the ReportPlayer dialog. InitiateReportPlayer and SendReportPlayer are no longer accessible to addons." },
+
+			Arguments =
+			{
+				{ Name = "reportType", Type = "string", Nilable = false },
+				{ Name = "playerName", Type = "string", Nilable = false },
+				{ Name = "playerLocation", Type = "table", Mixin = "PlayerLocationMixin", Nilable = true },
+			},
+		},
+		{
 			Name = "ReportServerLag",
 			Type = "Function",
 		},
 		{
 			Name = "SendReportPlayer",
 			Type = "Function",
+			Documentation = { "Not allowed to be called by addons" },
 
 			Arguments =
 			{
@@ -20648,6 +20878,17 @@ APIDocumentation:AddDocumentationTable(RecruitAFriend);local ReportSystem =
 
 	Events =
 	{
+		{
+			Name = "OpenReportPlayer",
+			Type = "Event",
+			LiteralName = "OPEN_REPORT_PLAYER",
+			Payload =
+			{
+				{ Name = "token", Type = "number", Nilable = false },
+				{ Name = "reportType", Type = "string", Nilable = false },
+				{ Name = "playerName", Type = "string", Nilable = false },
+			},
+		},
 		{
 			Name = "ReportPlayerResult",
 			Type = "Event",
@@ -24089,6 +24330,20 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "setID", Type = "number", Nilable = false },
 			},
 		},
+		{
+			Name = "GetZoneControlVisualizationInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "widgetID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "widgetInfo", Type = "ZoneControlVisualizationInfo", Nilable = true },
+			},
+		},
 	},
 
 	Events =
@@ -24194,9 +24449,9 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 		{
 			Name = "UIWidgetVisualizationType",
 			Type = "Enumeration",
-			NumValues = 16,
+			NumValues = 17,
 			MinValue = 0,
-			MaxValue = 15,
+			MaxValue = 16,
 			Fields =
 			{
 				{ Name = "IconAndText", Type = "UIWidgetVisualizationType", EnumValue = 0 },
@@ -24215,6 +24470,7 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "SpellDisplay", Type = "UIWidgetVisualizationType", EnumValue = 13 },
 				{ Name = "DoubleStateIconRow", Type = "UIWidgetVisualizationType", EnumValue = 14 },
 				{ Name = "TextureAndTextRow", Type = "UIWidgetVisualizationType", EnumValue = 15 },
+				{ Name = "ZoneControl", Type = "UIWidgetVisualizationType", EnumValue = 16 },
 			},
 		},
 		{
@@ -24245,6 +24501,18 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
+			Name = "SpellDisplayIconDisplayType",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Buff", Type = "SpellDisplayIconDisplayType", EnumValue = 0 },
+				{ Name = "Debuff", Type = "SpellDisplayIconDisplayType", EnumValue = 1 },
+			},
+		},
+		{
 			Name = "StatusBarOverrideBarTextShownType",
 			Type = "Enumeration",
 			NumValues = 4,
@@ -24270,6 +24538,44 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "Medium", Type = "UIWidgetTextSizeType", EnumValue = 1 },
 				{ Name = "Large", Type = "UIWidgetTextSizeType", EnumValue = 2 },
 				{ Name = "Huge", Type = "UIWidgetTextSizeType", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "ZoneControlState",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "State1", Type = "ZoneControlState", EnumValue = 0 },
+				{ Name = "State2", Type = "ZoneControlState", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "ZoneControlActiveState",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Inactive", Type = "ZoneControlActiveState", EnumValue = 0 },
+				{ Name = "Active", Type = "ZoneControlActiveState", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "ZoneControlFillType",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "SingleFillClockwise", Type = "ZoneControlFillType", EnumValue = 0 },
+				{ Name = "SingleFillCounterClockwise", Type = "ZoneControlFillType", EnumValue = 1 },
+				{ Name = "DoubleFillClockwise", Type = "ZoneControlFillType", EnumValue = 2 },
+				{ Name = "DoubleFillCounterClockwise", Type = "ZoneControlFillType", EnumValue = 3 },
 			},
 		},
 		{
@@ -24521,6 +24827,10 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			{
 				{ Name = "spellID", Type = "number", Nilable = false },
 				{ Name = "tooltip", Type = "string", Nilable = false },
+				{ Name = "text", Type = "string", Nilable = false },
+				{ Name = "stackDisplay", Type = "number", Nilable = false },
+				{ Name = "iconSizeType", Type = "SpellDisplayIconSizeType", Nilable = false },
+				{ Name = "iconDisplayType", Type = "SpellDisplayIconDisplayType", Nilable = false },
 			},
 		},
 		{
@@ -24531,7 +24841,6 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "shownState", Type = "WidgetShownState", Nilable = false },
 				{ Name = "enabledState", Type = "WidgetEnabledState", Nilable = false },
 				{ Name = "spellInfo", Type = "UIWidgetSpellInfo", Nilable = false },
-				{ Name = "iconSizeType", Type = "SpellDisplayIconSizeType", Nilable = false },
 				{ Name = "widgetSizeSetting", Type = "number", Nilable = false },
 				{ Name = "textureKitID", Type = "number", Nilable = false },
 				{ Name = "frameTextureKitID", Type = "number", Nilable = false },
@@ -24636,6 +24945,38 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "shownState", Type = "WidgetShownState", Nilable = false },
 				{ Name = "text", Type = "string", Nilable = false },
 				{ Name = "tooltip", Type = "string", Nilable = false },
+				{ Name = "widgetSizeSetting", Type = "number", Nilable = false },
+				{ Name = "textureKitID", Type = "number", Nilable = false },
+				{ Name = "frameTextureKitID", Type = "number", Nilable = false },
+				{ Name = "hasTimer", Type = "bool", Nilable = false },
+				{ Name = "orderIndex", Type = "number", Nilable = false },
+				{ Name = "widgetTag", Type = "string", Nilable = false },
+				{ Name = "inAnimType", Type = "WidgetAnimationType", Nilable = false },
+				{ Name = "outAnimType", Type = "WidgetAnimationType", Nilable = false },
+			},
+		},
+		{
+			Name = "ZoneEntry",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "state", Type = "ZoneControlState", Nilable = false },
+				{ Name = "activeState", Type = "ZoneControlActiveState", Nilable = false },
+				{ Name = "fillType", Type = "ZoneControlFillType", Nilable = false },
+				{ Name = "min", Type = "number", Nilable = false },
+				{ Name = "max", Type = "number", Nilable = false },
+				{ Name = "current", Type = "number", Nilable = false },
+				{ Name = "capturePoint", Type = "number", Nilable = false },
+				{ Name = "tooltip", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ZoneControlVisualizationInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "shownState", Type = "WidgetShownState", Nilable = false },
+				{ Name = "zoneEntries", Type = "table", InnerType = "ZoneEntry", Nilable = false },
 				{ Name = "widgetSizeSetting", Type = "number", Nilable = false },
 				{ Name = "textureKitID", Type = "number", Nilable = false },
 				{ Name = "frameTextureKitID", Type = "number", Nilable = false },

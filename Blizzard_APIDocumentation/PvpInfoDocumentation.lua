@@ -7,6 +7,24 @@ local PvpInfo =
 	Functions =
 	{
 		{
+			Name = "CanDisplayDeaths",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canDisplay", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CanDisplayHonorableKills",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canDisplay", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CanToggleWarMode",
 			Type = "Function",
 
@@ -27,6 +45,15 @@ local PvpInfo =
 			Returns =
 			{
 				{ Name = "canTogglePvPInArea", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "DoesMatchOutcomeAffectRating",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "doesAffect", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -173,6 +200,29 @@ local PvpInfo =
 			Returns =
 			{
 				{ Name = "info", Type = "HonorRewardInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMatchPVPStatColumn",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "pvpStatID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "MatchPVPStatColumn", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMatchPVPStatIDs",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "pvpStatIDs", Type = "table", InnerType = "number", Nilable = false },
 			},
 		},
 		{
@@ -471,6 +521,24 @@ local PvpInfo =
 			Returns =
 			{
 				{ Name = "isInBrawl", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsMatchConsideredArena",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "asArena", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsMatchFactional",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isFactional", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -876,6 +944,18 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "MatchPVPStatColumn",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "pvpStatID", Type = "number", Nilable = false },
+				{ Name = "columnHeaderID", Type = "number", Nilable = false },
+				{ Name = "orderIndex", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "tooltip", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "PVPPersonalRatedInfo",
 			Type = "Structure",
 			Fields =
@@ -942,15 +1022,15 @@ local PvpInfo =
 			},
 		},
 		{
-			Name = "PVPScoreStatInfo",
+			Name = "PVPStatInfo",
 			Type = "Structure",
 			Fields =
 			{
+				{ Name = "pvpStatID", Type = "number", Nilable = false },
+				{ Name = "pvpStatValue", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "icon", Type = "string", Nilable = false },
 				{ Name = "tooltip", Type = "string", Nilable = false },
-				{ Name = "id", Type = "number", Nilable = false },
-				{ Name = "value", Type = "number", Nilable = false },
+				{ Name = "iconName", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -976,7 +1056,7 @@ local PvpInfo =
 				{ Name = "mmrChange", Type = "number", Nilable = false },
 				{ Name = "talentSpec", Type = "string", Nilable = false },
 				{ Name = "honorLevel", Type = "number", Nilable = false },
-				{ Name = "stats", Type = "table", InnerType = "PVPScoreStatInfo", Nilable = false },
+				{ Name = "stats", Type = "table", InnerType = "PVPStatInfo", Nilable = false },
 			},
 		},
 		{

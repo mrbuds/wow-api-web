@@ -137,6 +137,15 @@ local QuestTaskInfo =
 			},
 		},
 		{
+			Name = "GetThreatQuests",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "quests", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "IsActive",
 			Type = "Function",
 
@@ -178,6 +187,9 @@ local QuestTaskInfo =
 				{ Name = "inProgress", Type = "bool", Nilable = false },
 				{ Name = "numObjectives", Type = "number", Nilable = false },
 				{ Name = "mapID", Type = "number", Nilable = false },
+				{ Name = "isQuestStart", Type = "bool", Nilable = false },
+				{ Name = "isDaily", Type = "bool", Nilable = false },
+				{ Name = "isCombatAllyQuest", Type = "bool", Nilable = false },
 				{ Name = "childDepth", Type = "number", Nilable = true },
 			},
 		},

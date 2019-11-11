@@ -120,6 +120,20 @@ local UIModelInfo =
 	Tables =
 	{
 		{
+			Name = "ItemTryOnReason",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Success", Type = "ItemTryOnReason", EnumValue = 0 },
+				{ Name = "WrongRace", Type = "ItemTryOnReason", EnumValue = 1 },
+				{ Name = "NotEquippable", Type = "ItemTryOnReason", EnumValue = 2 },
+				{ Name = "DataPending", Type = "ItemTryOnReason", EnumValue = 3 },
+			},
+		},
+		{
 			Name = "ModelSceneSetting",
 			Type = "Enumeration",
 			NumValues = 1,
@@ -127,15 +141,15 @@ local UIModelInfo =
 			MaxValue = 1,
 			Fields =
 			{
-				{ Name = "AlignLightToOrbitDelta", Type = "ModelSceneSetting", EnumValue = 0 },
+				{ Name = "AlignLightToOrbitDelta", Type = "ModelSceneSetting", EnumValue = 1 },
 			},
 		},
 		{
 			Name = "ModelSceneType",
 			Type = "Enumeration",
-			NumValues = 17,
+			NumValues = 18,
 			MinValue = 0,
-			MaxValue = 16,
+			MaxValue = 17,
 			Fields =
 			{
 				{ Name = "MountJournal", Type = "ModelSceneType", EnumValue = 0 },
@@ -155,20 +169,7 @@ local UIModelInfo =
 				{ Name = "AzeritePowers", Type = "ModelSceneType", EnumValue = 14 },
 				{ Name = "AzeriteRewardGlow", Type = "ModelSceneType", EnumValue = 15 },
 				{ Name = "HeartOfAzeroth", Type = "ModelSceneType", EnumValue = 16 },
-			},
-		},
-		{
-			Name = "ItemTryOnReason",
-			Type = "Enumeration",
-			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 3,
-			Fields =
-			{
-				{ Name = "Success", Type = "ItemTryOnReason", EnumValue = 0 },
-				{ Name = "WrongRace", Type = "ItemTryOnReason", EnumValue = 1 },
-				{ Name = "NotEquippable", Type = "ItemTryOnReason", EnumValue = 2 },
-				{ Name = "DataPending", Type = "ItemTryOnReason", EnumValue = 3 },
+				{ Name = "WorldMapThreat", Type = "ModelSceneType", EnumValue = 17 },
 			},
 		},
 		{

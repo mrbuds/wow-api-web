@@ -7,6 +7,15 @@ local QuestLog =
 	Functions =
 	{
 		{
+			Name = "GetActiveThreatMaps",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "uiMapIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetMapForQuestPOIs",
 			Type = "Function",
 
@@ -96,6 +105,20 @@ local QuestLog =
 			},
 		},
 		{
+			Name = "GetQuestDifficultyLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "level", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetQuestInfo",
 			Type = "Function",
 
@@ -153,6 +176,15 @@ local QuestLog =
 			},
 		},
 		{
+			Name = "HasActiveThreats",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasActiveThreats", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsLegendaryQuest",
 			Type = "Function",
 
@@ -181,6 +213,104 @@ local QuestLog =
 			},
 		},
 		{
+			Name = "IsQuestDisabledForSession",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isDisabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsQuestFlaggedCompleted",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCompleted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsQuestReplayable",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isReplayable", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsQuestReplayedRecently",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "recentlyReplayed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsQuestTrivial",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isTrivial", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsThreatQuest",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isThreat", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "QuestHasQuestSessionBonus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasBonus", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "QuestHasWarModeBonus",
 			Type = "Function",
 
@@ -192,6 +322,15 @@ local QuestLog =
 			Returns =
 			{
 				{ Name = "hasBonus", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestLoadQuestByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -246,6 +385,16 @@ local QuestLog =
 			LiteralName = "QUEST_COMPLETE",
 		},
 		{
+			Name = "QuestDataLoadResult",
+			Type = "Event",
+			LiteralName = "QUEST_DATA_LOAD_RESULT",
+			Payload =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "QuestDetail",
 			Type = "Event",
 			LiteralName = "QUEST_DETAIL",
@@ -284,6 +433,7 @@ local QuestLog =
 			Payload =
 			{
 				{ Name = "questID", Type = "number", Nilable = false },
+				{ Name = "wasReplayQuest", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -329,10 +479,6 @@ local QuestLog =
 			Name = "SuperTrackedQuestChanged",
 			Type = "Event",
 			LiteralName = "SUPER_TRACKED_QUEST_CHANGED",
-			Payload =
-			{
-				{ Name = "superTrackedQuestID", Type = "number", Nilable = false },
-			},
 		},
 		{
 			Name = "TaskProgressUpdate",
@@ -365,9 +511,9 @@ local QuestLog =
 		{
 			Name = "QuestTag",
 			Type = "Enumeration",
-			NumValues = 10,
-			MinValue = 0,
-			MaxValue = 102,
+			NumValues = 11,
+			MinValue = 1,
+			MaxValue = 266,
 			Fields =
 			{
 				{ Name = "Group", Type = "QuestTag", EnumValue = 1 },
@@ -380,6 +526,7 @@ local QuestLog =
 				{ Name = "Raid25", Type = "QuestTag", EnumValue = 89 },
 				{ Name = "Scenario", Type = "QuestTag", EnumValue = 98 },
 				{ Name = "Account", Type = "QuestTag", EnumValue = 102 },
+				{ Name = "CombatAlly", Type = "QuestTag", EnumValue = 266 },
 			},
 		},
 		{

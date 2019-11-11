@@ -50,6 +50,29 @@ local ClubFinder =
 			Type = "Function",
 		},
 		{
+			Name = "DoesPlayerBelongToClubFromClubGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "belongsToClub", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetClubFinderDisableReason",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "disableReason", Type = "ClubFinderDisableReason", Nilable = true },
+			},
+		},
+		{
 			Name = "GetClubRecruitmentSettings",
 			Type = "Function",
 
@@ -59,12 +82,212 @@ local ClubFinder =
 			},
 		},
 		{
+			Name = "GetClubTypeFromFinderGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "clubType", Type = "ClubFinderRequestType", Nilable = false },
+			},
+		},
+		{
+			Name = "GetFocusIndexFromFlag",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "flags", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetPlayerApplicantSettings",
 			Type = "Function",
 
 			Returns =
 			{
 				{ Name = "settings", Type = "ClubSettingsInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPlayerClubApplicationStatus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "clubStatus", Type = "PlayerClubRequestStatus", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPlayerSettingsFocusFlagsSelectedCount",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "focusCount", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPostingIDFromClubFinderGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "postingID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetRecruitingClubInfoFromClubID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "clubInfo", Type = "RecruitingClubInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetRecruitingClubInfoFromFinderGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "clubInfo", Type = "RecruitingClubInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetStatusOfPostingFromClubId",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "postingID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "postingFlags", Type = "table", InnerType = "ClubFinderClubPostingStatusFlags", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTotalMatchingCommunityListSize",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "totalSize", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTotalMatchingGuildListSize",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "totalSize", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "HasAlreadyAppliedToLinkedPosting",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasAlreadyApplied", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasPostingBeenDelisted",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "postingID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "postingDelisted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isEnabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsListingEnabledFromFlags",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "flags", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isListed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsPostingBanned",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "postingID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "postingBanned", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "LookupClubPostingFromClubFinderGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+				{ Name = "isLinkedPosting", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -110,14 +333,28 @@ local ClubFinder =
 			Arguments =
 			{
 				{ Name = "clubId", Type = "string", Nilable = false },
-				{ Name = "enableListing", Type = "bool", Nilable = false },
-				{ Name = "autoAcceptApplicants", Type = "bool", Nilable = false },
-				{ Name = "minimumLevel", Type = "number", Nilable = false },
 				{ Name = "itemLevelRequirement", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "description", Type = "string", Nilable = false },
 				{ Name = "specs", Type = "table", InnerType = "number", Nilable = false },
 				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "succesful", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ReportPosting",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "reportType", Type = "ClubFinderPostingReportType", Nilable = false },
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+				{ Name = "playerGUID", Type = "string", Nilable = false },
+				{ Name = "complaintNote", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -152,19 +389,27 @@ local ClubFinder =
 			},
 		},
 		{
-			Name = "RespondToApplicant",
+			Name = "RequestNextCommunityPage",
 			Type = "Function",
 
 			Arguments =
 			{
-				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
-				{ Name = "playerGUID", Type = "string", Nilable = false },
-				{ Name = "shouldAccept", Type = "bool", Nilable = false },
-				{ Name = "requestType", Type = "ClubFinderRequestType", Nilable = false },
+				{ Name = "startingIndex", Type = "number", Nilable = false },
+				{ Name = "pageSize", Type = "number", Nilable = false },
 			},
 		},
 		{
-			Name = "ReturnCommunityApplicantList",
+			Name = "RequestNextGuildPage",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "startingIndex", Type = "number", Nilable = false },
+				{ Name = "pageSize", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestPostingInformationFromClubId",
 			Type = "Function",
 
 			Arguments =
@@ -174,12 +419,39 @@ local ClubFinder =
 
 			Returns =
 			{
-				{ Name = "info", Type = "table", InnerType = "ClubFinderApplicantInfo", Nilable = false },
+				{ Name = "success", Type = "bool", Nilable = false },
 			},
 		},
 		{
-			Name = "ReturnGuildApplicantList",
+			Name = "RequestSubscribedClubPostingIDs",
 			Type = "Function",
+		},
+		{
+			Name = "ResetClubPostingMapCache",
+			Type = "Function",
+		},
+		{
+			Name = "RespondToApplicant",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+				{ Name = "playerGUID", Type = "string", Nilable = false },
+				{ Name = "shouldAccept", Type = "bool", Nilable = false },
+				{ Name = "requestType", Type = "ClubFinderRequestType", Nilable = false },
+				{ Name = "playerName", Type = "string", Nilable = false },
+				{ Name = "forceAccept", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ReturnClubApplicantList",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+			},
 
 			Returns =
 			{
@@ -205,7 +477,7 @@ local ClubFinder =
 			},
 		},
 		{
-			Name = "ReturnPendingCommunityApplicantList",
+			Name = "ReturnPendingClubApplicantList",
 			Type = "Function",
 
 			Arguments =
@@ -219,12 +491,12 @@ local ClubFinder =
 			},
 		},
 		{
-			Name = "ReturnPendingGuildApplicantList",
+			Name = "SetAllRecruitmentSettings",
 			Type = "Function",
 
-			Returns =
+			Arguments =
 			{
-				{ Name = "info", Type = "table", InnerType = "ClubFinderApplicantInfo", Nilable = false },
+				{ Name = "value", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -261,6 +533,25 @@ local ClubFinder =
 	Events =
 	{
 		{
+			Name = "ClubFinderApplicantInviteRecieved",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_APPLICANT_INVITE_RECIEVED",
+			Payload =
+			{
+				{ Name = "clubFinderGUIDs", Type = "table", InnerType = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubFinderApplicationsUpdated",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_APPLICATIONS_UPDATED",
+			Payload =
+			{
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+				{ Name = "clubFinderGUIDs", Type = "table", InnerType = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "ClubFinderClubListReturned",
 			Type = "Event",
 			LiteralName = "CLUB_FINDER_CLUB_LIST_RETURNED",
@@ -268,6 +559,43 @@ local ClubFinder =
 			Payload =
 			{
 				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubFinderClubReported",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_CLUB_REPORTED",
+			Documentation = { "Sends an update to the UI about a reported guild or community." },
+			Payload =
+			{
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubFinderCommunityOfflineJoin",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_COMMUNITY_OFFLINE_JOIN",
+			Documentation = { "Signals to the UI that you (the player) have joined a community offline." },
+			Payload =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubFinderEnabledOrDisabled",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_ENABLED_OR_DISABLED",
+			Documentation = { "Sends an update to the UI that the club finder feature has been enabled or disabled." },
+		},
+		{
+			Name = "ClubFinderLinkedClubReturned",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_LINKED_CLUB_RETURNED",
+			Documentation = { "When a player clicks a club link, this returns that information back about the club they clicked on" },
+			Payload =
+			{
+				{ Name = "clubInfo", Type = "RecruitingClubInfo", Nilable = false },
 			},
 		},
 		{
@@ -288,11 +616,25 @@ local ClubFinder =
 			Name = "ClubFinderPostUpdated",
 			Type = "Event",
 			LiteralName = "CLUB_FINDER_POST_UPDATED",
+			Payload =
+			{
+				{ Name = "clubFinderGUIDs", Type = "table", InnerType = "string", Nilable = false },
+			},
 		},
 		{
 			Name = "ClubFinderRecruitListChanged",
 			Type = "Event",
 			LiteralName = "CLUB_FINDER_RECRUIT_LIST_CHANGED",
+		},
+		{
+			Name = "ClubFinderRecruitmentPostReturned",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_RECRUITMENT_POST_RETURNED",
+			Documentation = { "Signals when our recruitment post we just requested is returned back to us" },
+			Payload =
+			{
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+			},
 		},
 		{
 			Name = "ClubFinderRecruitsUpdated",
@@ -309,24 +651,6 @@ local ClubFinder =
 	Tables =
 	{
 		{
-			Name = "PlayerClubRequestStatus",
-			Type = "Enumeration",
-			NumValues = 8,
-			MinValue = 0,
-			MaxValue = 7,
-			Fields =
-			{
-				{ Name = "None", Type = "PlayerClubRequestStatus", EnumValue = 0 },
-				{ Name = "Pending", Type = "PlayerClubRequestStatus", EnumValue = 1 },
-				{ Name = "AutoApproved", Type = "PlayerClubRequestStatus", EnumValue = 2 },
-				{ Name = "Declined", Type = "PlayerClubRequestStatus", EnumValue = 3 },
-				{ Name = "Approved", Type = "PlayerClubRequestStatus", EnumValue = 4 },
-				{ Name = "Joined", Type = "PlayerClubRequestStatus", EnumValue = 5 },
-				{ Name = "JoinedAnother", Type = "PlayerClubRequestStatus", EnumValue = 6 },
-				{ Name = "Canceled", Type = "PlayerClubRequestStatus", EnumValue = 7 },
-			},
-		},
-		{
 			Name = "ClubFinderApplicationUpdateType",
 			Type = "Enumeration",
 			NumValues = 4,
@@ -338,6 +662,52 @@ local ClubFinder =
 				{ Name = "AcceptInvite", Type = "ClubFinderApplicationUpdateType", EnumValue = 1 },
 				{ Name = "DeclineInvite", Type = "ClubFinderApplicationUpdateType", EnumValue = 2 },
 				{ Name = "Cancel", Type = "ClubFinderApplicationUpdateType", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "ClubFinderClubPostingStatusFlags",
+			Type = "Enumeration",
+			NumValues = 9,
+			MinValue = 0,
+			MaxValue = 8,
+			Fields =
+			{
+				{ Name = "None", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 0 },
+				{ Name = "NeedsCacheUpdate", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 1 },
+				{ Name = "ForceDescriptionChange", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 2 },
+				{ Name = "ForceNameChange", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 3 },
+				{ Name = "UnderReview", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 4 },
+				{ Name = "Banned", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 5 },
+				{ Name = "FakePost", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 6 },
+				{ Name = "PendingDelete", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 7 },
+				{ Name = "PostDelisted", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 8 },
+			},
+		},
+		{
+			Name = "ClubFinderDisableReason",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Muted", Type = "ClubFinderDisableReason", EnumValue = 0 },
+				{ Name = "Silenced", Type = "ClubFinderDisableReason", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "ClubFinderPostingReportType",
+			Type = "Enumeration",
+			NumValues = 5,
+			MinValue = 0,
+			MaxValue = 4,
+			Fields =
+			{
+				{ Name = "PostersName", Type = "ClubFinderPostingReportType", EnumValue = 0 },
+				{ Name = "ClubName", Type = "ClubFinderPostingReportType", EnumValue = 1 },
+				{ Name = "PostingDescription", Type = "ClubFinderPostingReportType", EnumValue = 2 },
+				{ Name = "ApplicantsName", Type = "ClubFinderPostingReportType", EnumValue = 3 },
+				{ Name = "JoinNote", Type = "ClubFinderPostingReportType", EnumValue = 4 },
 			},
 		},
 		{
@@ -355,24 +725,11 @@ local ClubFinder =
 			},
 		},
 		{
-			Name = "ClubFinderReportType",
-			Type = "Enumeration",
-			NumValues = 3,
-			MinValue = 0,
-			MaxValue = 2,
-			Fields =
-			{
-				{ Name = "Any", Type = "ClubFinderReportType", EnumValue = 0 },
-				{ Name = "InapropriateName", Type = "ClubFinderReportType", EnumValue = 1 },
-				{ Name = "InapropriateComment", Type = "ClubFinderReportType", EnumValue = 2 },
-			},
-		},
-		{
 			Name = "ClubFinderSettingFlags",
 			Type = "Enumeration",
-			NumValues = 18,
+			NumValues = 21,
 			MinValue = 0,
-			MaxValue = 17,
+			MaxValue = 20,
 			Fields =
 			{
 				{ Name = "None", Type = "ClubFinderSettingFlags", EnumValue = 0 },
@@ -393,6 +750,27 @@ local ClubFinder =
 				{ Name = "FactionHorde", Type = "ClubFinderSettingFlags", EnumValue = 15 },
 				{ Name = "FactionAlliance", Type = "ClubFinderSettingFlags", EnumValue = 16 },
 				{ Name = "FactionNeutral", Type = "ClubFinderSettingFlags", EnumValue = 17 },
+				{ Name = "SortRelevance", Type = "ClubFinderSettingFlags", EnumValue = 18 },
+				{ Name = "SortMemberCount", Type = "ClubFinderSettingFlags", EnumValue = 19 },
+				{ Name = "SortNewest", Type = "ClubFinderSettingFlags", EnumValue = 20 },
+			},
+		},
+		{
+			Name = "PlayerClubRequestStatus",
+			Type = "Enumeration",
+			NumValues = 8,
+			MinValue = 0,
+			MaxValue = 7,
+			Fields =
+			{
+				{ Name = "None", Type = "PlayerClubRequestStatus", EnumValue = 0 },
+				{ Name = "Pending", Type = "PlayerClubRequestStatus", EnumValue = 1 },
+				{ Name = "AutoApproved", Type = "PlayerClubRequestStatus", EnumValue = 2 },
+				{ Name = "Declined", Type = "PlayerClubRequestStatus", EnumValue = 3 },
+				{ Name = "Approved", Type = "PlayerClubRequestStatus", EnumValue = 4 },
+				{ Name = "Joined", Type = "PlayerClubRequestStatus", EnumValue = 5 },
+				{ Name = "JoinedAnother", Type = "PlayerClubRequestStatus", EnumValue = 6 },
+				{ Name = "Canceled", Type = "PlayerClubRequestStatus", EnumValue = 7 },
 			},
 		},
 		{
@@ -402,6 +780,7 @@ local ClubFinder =
 			{
 				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
 				{ Name = "playerGUID", Type = "string", Nilable = false },
+				{ Name = "closed", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "message", Type = "string", Nilable = false },
 				{ Name = "level", Type = "number", Nilable = false },
@@ -409,17 +788,8 @@ local ClubFinder =
 				{ Name = "ilvl", Type = "number", Nilable = false },
 				{ Name = "specIds", Type = "table", InnerType = "number", Nilable = false },
 				{ Name = "requestStatus", Type = "PlayerClubRequestStatus", Nilable = false },
-			},
-		},
-		{
-			Name = "ClubFinderGuildTabardInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "backgroundColor", Type = "table", Mixin = "ColorMixin", Nilable = false },
-				{ Name = "borderColor", Type = "table", Mixin = "ColorMixin", Nilable = false },
-				{ Name = "emblemColor", Type = "table", Mixin = "ColorMixin", Nilable = false },
-				{ Name = "emblemFileID", Type = "number", Nilable = false },
+				{ Name = "lookupSuccess", Type = "bool", Nilable = false },
+				{ Name = "lastUpdatedTime", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -438,6 +808,12 @@ local ClubFinder =
 				{ Name = "sizeSmall", Type = "bool", Nilable = false },
 				{ Name = "sizeMedium", Type = "bool", Nilable = false },
 				{ Name = "sizeLarge", Type = "bool", Nilable = false },
+				{ Name = "maxLevelOnly", Type = "bool", Nilable = false },
+				{ Name = "enableListing", Type = "bool", Nilable = false },
+				{ Name = "sortRelevance", Type = "bool", Nilable = false },
+				{ Name = "sortMembers", Type = "bool", Nilable = false },
+				{ Name = "sortNewest", Type = "bool", Nilable = false },
+				{ Name = "autoAccept", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -452,11 +828,16 @@ local ClubFinder =
 				{ Name = "guildLeader", Type = "string", Nilable = false },
 				{ Name = "isGuild", Type = "bool", Nilable = false },
 				{ Name = "emblemInfo", Type = "number", Nilable = false },
-				{ Name = "tabardInfo", Type = "ClubFinderGuildTabardInfo", Nilable = true },
-				{ Name = "clubStatus", Type = "PlayerClubRequestStatus", Nilable = true },
+				{ Name = "tabardInfo", Type = "GuildTabardInfo", Nilable = true },
 				{ Name = "recruitingSpecIds", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "recruitmentFlags", Type = "number", Nilable = false },
+				{ Name = "minILvl", Type = "number", Nilable = false },
 				{ Name = "cached", Type = "number", Nilable = false },
 				{ Name = "cacheRequested", Type = "number", Nilable = false },
+				{ Name = "lastPosterGUID", Type = "string", Nilable = false },
+				{ Name = "clubId", Type = "string", Nilable = false },
+				{ Name = "lastUpdatedTime", Type = "number", Nilable = false },
+				{ Name = "clubForceRemoved", Type = "bool", Nilable = false },
 			},
 		},
 	},

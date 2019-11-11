@@ -231,6 +231,20 @@ local Item =
 			},
 		},
 		{
+			Name = "GetStackCount",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "stackCount", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "IsBound",
 			Type = "Function",
 
@@ -242,6 +256,48 @@ local Item =
 			Returns =
 			{
 				{ Name = "isBound", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsItemCorrupted",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLoc", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCorrupted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsItemCorruptionRelated",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLoc", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCorruptionRelated", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsItemCorruptionResistant",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLoc", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCorruptionResistant", Type = "bool", Nilable = false },
 			},
 		},
 		{

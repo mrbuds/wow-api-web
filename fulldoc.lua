@@ -1732,14 +1732,854 @@ APIDocumentation:AddDocumentationTable(ArtifactUI);local AuctionHouse =
 
 	Functions =
 	{
+		{
+			Name = "CalculateCommodityDeposit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "depositCost", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "CalculateItemDeposit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "item", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "depositCost", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "CanCancelAuction",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ownedAuctionID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "canCancelAuction", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CancelAuction",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ownedAuctionID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CancelCommoditiesPurchase",
+			Type = "Function",
+		},
+		{
+			Name = "ConfirmCommoditiesPurchase",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAvailablePostCount",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "item", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "listCount", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetBidInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "bidIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "bid", Type = "BidInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetBidType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "bidTypeIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "typeItemKey", Type = "ItemKey", Nilable = true },
+			},
+		},
+		{
+			Name = "GetBrowseResults",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "browseResults", Type = "table", InnerType = "BrowseResultInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCancelCost",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ownedAuctionID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "cancelCost", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCommoditySearchResultInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "commoditySearchResultIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "CommoditySearchResultInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCommoditySearchResultsQuantity",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "totalQuantity", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetExtraBrowseInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "extraInfo", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetFilterGroups",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "filterGroups", Type = "table", InnerType = "AuctionHouseFilterGroup", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemCommodityStatus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "item", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCommodity", Type = "ItemCommodityStatus", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemKeyFromItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "item", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemKeyInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "restrictQualityToFilter", Type = "bool", Nilable = false, Default = false },
+			},
+
+			Returns =
+			{
+				{ Name = "itemKeyInfo", Type = "ItemKeyInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetItemSearchResultInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "itemSearchResultIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "ItemSearchResultInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetItemSearchResultsQuantity",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "totalQuantity", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMaxBidItemBid",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "maxBid", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMaxBidItemBuyout",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "maxBuyout", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMaxCommoditySearchResultPrice",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "maxUnitPrice", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMaxItemSearchResultBid",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "maxBid", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMaxItemSearchResultBuyout",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "maxBuyout", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMaxOwnedAuctionBid",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "maxBid", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMaxOwnedAuctionBuyout",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "maxBuyout", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetNumBidTypes",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "numBidTypes", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetNumBids",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "numBids", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetNumCommoditySearchResults",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "numSearchResults", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetNumItemSearchResults",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "numItemSearchResults", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetNumOwnedAuctionTypes",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "numOwnedAuctionTypes", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetNumOwnedAuctions",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "numOwnedAuctions", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetNumReplicateItems",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "numReplicateItems", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetOwnedAuctionInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ownedAuctionIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "ownedAuction", Type = "OwnedAuctionInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetOwnedAuctionType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ownedAuctionTypeIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "typeItemKey", Type = "ItemKey", Nilable = true },
+			},
+		},
+		{
+			Name = "GetQuoteDurationRemaining",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "quoteDurationSeconds", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetReplicateItemBattlePetInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "creatureID", Type = "number", Nilable = false },
+				{ Name = "displayID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetReplicateItemInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "name", Type = "string", Nilable = true },
+				{ Name = "texture", Type = "number", Nilable = true },
+				{ Name = "count", Type = "number", Nilable = false },
+				{ Name = "qualityID", Type = "number", Nilable = false },
+				{ Name = "usable", Type = "bool", Nilable = true },
+				{ Name = "level", Type = "number", Nilable = false },
+				{ Name = "levelType", Type = "string", Nilable = true },
+				{ Name = "minBid", Type = "number", Nilable = false },
+				{ Name = "minIncrement", Type = "number", Nilable = false },
+				{ Name = "buyoutPrice", Type = "number", Nilable = false },
+				{ Name = "bidAmount", Type = "number", Nilable = false },
+				{ Name = "highBidder", Type = "string", Nilable = true },
+				{ Name = "bidderFullName", Type = "string", Nilable = true },
+				{ Name = "owner", Type = "string", Nilable = true },
+				{ Name = "ownerFullName", Type = "string", Nilable = true },
+				{ Name = "saleStatus", Type = "number", Nilable = false },
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "hasAllInfo", Type = "bool", Nilable = true },
+			},
+		},
+		{
+			Name = "GetReplicateItemLink",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "itemLink", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "GetReplicateItemTimeLeft",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "timeLeft", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "HasFavorites",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasFavorites", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasFullBidResults",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasFullBidResults", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasFullBrowseResults",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasFullBrowseResults", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasFullCommoditySearchResults",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasFullResults", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasFullItemSearchResults",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasFullResults", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasFullOwnedAuctionResults",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasFullOwnedAuctionResults", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasSearchResults",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasSearchResults", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsFavoriteItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isFavorite", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSellItemValid",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "item", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "displayError", Type = "bool", Nilable = false, Default = true },
+			},
+
+			Returns =
+			{
+				{ Name = "valid", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "MakeItemKey",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "itemLevel", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "itemSuffix", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "battlePetSpeciesID", Type = "number", Nilable = false, Default = 0 },
+			},
+
+			Returns =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+		},
+		{
+			Name = "PlaceBid",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "auctionID", Type = "number", Nilable = false },
+				{ Name = "bidAmount", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "PostCommodity",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "item", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+				{ Name = "unitPrice", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "PostItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "item", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+				{ Name = "bid", Type = "number", Nilable = true },
+				{ Name = "buyout", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "QueryBids",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "sorts", Type = "table", InnerType = "AuctionHouseSortType", Nilable = false },
+				{ Name = "auctionIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "QueryOwnedAuctions",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "sorts", Type = "table", InnerType = "AuctionHouseSortType", Nilable = false },
+			},
+		},
+		{
+			Name = "RefreshCommoditySearchResults",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RefreshItemSearchResults",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+		},
+		{
+			Name = "ReplicateItems",
+			Type = "Function",
+		},
+		{
+			Name = "RequestMoreBrowseResults",
+			Type = "Function",
+		},
+		{
+			Name = "RequestMoreCommoditySearchResults",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasFullResults", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestMoreItemSearchResults",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasFullResults", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SearchForFavorites",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "sorts", Type = "table", InnerType = "AuctionHouseSortType", Nilable = false },
+			},
+		},
+		{
+			Name = "SearchForItemKeys",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKeys", Type = "table", InnerType = "ItemKey", Nilable = false },
+				{ Name = "sorts", Type = "table", InnerType = "AuctionHouseSortType", Nilable = false },
+			},
+		},
+		{
+			Name = "SendBrowseQuery",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "query", Type = "AuctionHouseBrowseQuery", Nilable = false },
+			},
+		},
+		{
+			Name = "SendSearchQuery",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "sorts", Type = "table", InnerType = "AuctionHouseSortType", Nilable = false },
+				{ Name = "separateOwnerItems", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SendSellSearchQuery",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "sorts", Type = "table", InnerType = "AuctionHouseSortType", Nilable = false },
+				{ Name = "separateOwnerItems", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetFavoriteItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "setFavorite", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "StartCommoditiesPurchase",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+		},
 	},
 
 	Events =
 	{
 		{
-			Name = "AuctionBidderListUpdate",
+			Name = "AuctionCanceled",
 			Type = "Event",
-			LiteralName = "AUCTION_BIDDER_LIST_UPDATE",
+			LiteralName = "AUCTION_CANCELED",
+			Payload =
+			{
+				{ Name = "auctionID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "AuctionHouseBrowseResultsAdded",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_BROWSE_RESULTS_ADDED",
+			Payload =
+			{
+				{ Name = "addedBrowseResults", Type = "table", InnerType = "BrowseResultInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "AuctionHouseBrowseResultsUpdated",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_BROWSE_RESULTS_UPDATED",
 		},
 		{
 			Name = "AuctionHouseClosed",
@@ -1752,6 +2592,11 @@ APIDocumentation:AddDocumentationTable(ArtifactUI);local AuctionHouse =
 			LiteralName = "AUCTION_HOUSE_DISABLED",
 		},
 		{
+			Name = "AuctionHouseFavoritesUpdated",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_FAVORITES_UPDATED",
+		},
+		{
 			Name = "AuctionHouseScriptDeprecated",
 			Type = "Event",
 			LiteralName = "AUCTION_HOUSE_SCRIPT_DEPRECATED",
@@ -1760,11 +2605,6 @@ APIDocumentation:AddDocumentationTable(ArtifactUI);local AuctionHouse =
 			Name = "AuctionHouseShow",
 			Type = "Event",
 			LiteralName = "AUCTION_HOUSE_SHOW",
-		},
-		{
-			Name = "AuctionItemListUpdate",
-			Type = "Event",
-			LiteralName = "AUCTION_ITEM_LIST_UPDATE",
 		},
 		{
 			Name = "AuctionMultisellFailure",
@@ -1791,19 +2631,315 @@ APIDocumentation:AddDocumentationTable(ArtifactUI);local AuctionHouse =
 			},
 		},
 		{
-			Name = "AuctionOwnedListUpdate",
+			Name = "BidAdded",
 			Type = "Event",
-			LiteralName = "AUCTION_OWNED_LIST_UPDATE",
+			LiteralName = "BID_ADDED",
+			Payload =
+			{
+				{ Name = "bidID", Type = "number", Nilable = false },
+			},
 		},
 		{
-			Name = "NewAuctionUpdate",
+			Name = "BidsUpdated",
 			Type = "Event",
-			LiteralName = "NEW_AUCTION_UPDATE",
+			LiteralName = "BIDS_UPDATED",
+		},
+		{
+			Name = "CommodityPriceUnavailable",
+			Type = "Event",
+			LiteralName = "COMMODITY_PRICE_UNAVAILABLE",
+		},
+		{
+			Name = "CommodityPriceUpdated",
+			Type = "Event",
+			LiteralName = "COMMODITY_PRICE_UPDATED",
+			Payload =
+			{
+				{ Name = "updatedUnitPrice", Type = "number", Nilable = false },
+				{ Name = "updatedTotalPrice", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CommodityPurchaseFailed",
+			Type = "Event",
+			LiteralName = "COMMODITY_PURCHASE_FAILED",
+		},
+		{
+			Name = "CommodityPurchaseSucceeded",
+			Type = "Event",
+			LiteralName = "COMMODITY_PURCHASE_SUCCEEDED",
+		},
+		{
+			Name = "CommodityPurchased",
+			Type = "Event",
+			LiteralName = "COMMODITY_PURCHASED",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CommoditySearchResultsAdded",
+			Type = "Event",
+			LiteralName = "COMMODITY_SEARCH_RESULTS_ADDED",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CommoditySearchResultsUpdated",
+			Type = "Event",
+			LiteralName = "COMMODITY_SEARCH_RESULTS_UPDATED",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "ExtraBrowseInfoReceived",
+			Type = "Event",
+			LiteralName = "EXTRA_BROWSE_INFO_RECEIVED",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "ItemKeyItemInfoReceived",
+			Type = "Event",
+			LiteralName = "ITEM_KEY_ITEM_INFO_RECEIVED",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "ItemPurchased",
+			Type = "Event",
+			LiteralName = "ITEM_PURCHASED",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "ItemSearchResultsAdded",
+			Type = "Event",
+			LiteralName = "ITEM_SEARCH_RESULTS_ADDED",
+			Payload =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+			},
+		},
+		{
+			Name = "ItemSearchResultsUpdated",
+			Type = "Event",
+			LiteralName = "ITEM_SEARCH_RESULTS_UPDATED",
+			Payload =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "newAuctionID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "OwnedAuctionsUpdated",
+			Type = "Event",
+			LiteralName = "OWNED_AUCTIONS_UPDATED",
+		},
+		{
+			Name = "ReplicateItemListUpdate",
+			Type = "Event",
+			LiteralName = "REPLICATE_ITEM_LIST_UPDATE",
 		},
 	},
 
 	Tables =
 	{
+		{
+			Name = "AuctionHouseFilterCategory",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Uncategorized", Type = "AuctionHouseFilterCategory", EnumValue = 0 },
+				{ Name = "Equipment", Type = "AuctionHouseFilterCategory", EnumValue = 1 },
+				{ Name = "Rarity", Type = "AuctionHouseFilterCategory", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "AuctionStatus",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Active", Type = "AuctionStatus", EnumValue = 0 },
+				{ Name = "Sold", Type = "AuctionStatus", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "ItemCommodityStatus",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Unknown", Type = "ItemCommodityStatus", EnumValue = 0 },
+				{ Name = "Item", Type = "ItemCommodityStatus", EnumValue = 1 },
+				{ Name = "Commodity", Type = "ItemCommodityStatus", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "AuctionHouseBrowseQuery",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "searchString", Type = "string", Nilable = false },
+				{ Name = "sorts", Type = "table", InnerType = "AuctionHouseSortType", Nilable = false },
+				{ Name = "minLevel", Type = "number", Nilable = true },
+				{ Name = "maxLevel", Type = "number", Nilable = true },
+				{ Name = "filters", Type = "table", InnerType = "AuctionHouseFilter", Nilable = true },
+				{ Name = "itemClassFilters", Type = "table", InnerType = "AuctionHouseItemClassFilter", Nilable = true },
+			},
+		},
+		{
+			Name = "AuctionHouseFilterGroup",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "category", Type = "AuctionHouseFilterCategory", Nilable = false },
+				{ Name = "filters", Type = "table", InnerType = "AuctionHouseFilter", Nilable = false },
+			},
+		},
+		{
+			Name = "AuctionHouseItemClassFilter",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "classID", Type = "number", Nilable = false },
+				{ Name = "subClassID", Type = "number", Nilable = true },
+				{ Name = "inventoryType", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "AuctionHouseSortType",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "sortOrder", Type = "AuctionHouseSortOrder", Nilable = false },
+				{ Name = "reverseSort", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "BidInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "auctionID", Type = "number", Nilable = false },
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "itemLink", Type = "string", Nilable = true },
+				{ Name = "timeLeft", Type = "AuctionHouseTimeLeftBand", Nilable = false },
+				{ Name = "bidAmount", Type = "number", Nilable = true },
+				{ Name = "buyoutAmount", Type = "number", Nilable = true },
+				{ Name = "bidder", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "BrowseResultInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "appearanceLink", Type = "string", Nilable = true },
+				{ Name = "totalQuantity", Type = "number", Nilable = false },
+				{ Name = "minPrice", Type = "number", Nilable = false },
+				{ Name = "containsOwnerItem", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CommoditySearchResultInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+				{ Name = "unitPrice", Type = "number", Nilable = false },
+				{ Name = "auctionID", Type = "number", Nilable = false },
+				{ Name = "owners", Type = "table", InnerType = "string", Nilable = false },
+				{ Name = "timeLeftSeconds", Type = "number", Nilable = true },
+				{ Name = "numOwnerItems", Type = "number", Nilable = false },
+				{ Name = "containsOwnerItem", Type = "bool", Nilable = false },
+				{ Name = "containsAccountItem", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ItemKey",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "itemLevel", Type = "number", Nilable = false },
+				{ Name = "itemSuffix", Type = "number", Nilable = false },
+				{ Name = "battlePetSpeciesID", Type = "number", Nilable = false, Default = 0 },
+			},
+		},
+		{
+			Name = "ItemKeyInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "itemName", Type = "string", Nilable = false },
+				{ Name = "battlePetLink", Type = "string", Nilable = true },
+				{ Name = "quality", Type = "number", Nilable = false },
+				{ Name = "iconFileID", Type = "number", Nilable = false },
+				{ Name = "isPet", Type = "bool", Nilable = false },
+				{ Name = "isCommodity", Type = "bool", Nilable = false },
+				{ Name = "isEquipment", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ItemSearchResultInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "owners", Type = "table", InnerType = "string", Nilable = false },
+				{ Name = "timeLeft", Type = "AuctionHouseTimeLeftBand", Nilable = false },
+				{ Name = "auctionID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+				{ Name = "itemLink", Type = "string", Nilable = true },
+				{ Name = "containsOwnerItem", Type = "bool", Nilable = false },
+				{ Name = "containsAccountItem", Type = "bool", Nilable = false },
+				{ Name = "containsSocketedItem", Type = "bool", Nilable = false },
+				{ Name = "bidder", Type = "string", Nilable = true },
+				{ Name = "minBid", Type = "number", Nilable = true },
+				{ Name = "bidAmount", Type = "number", Nilable = true },
+				{ Name = "buyoutAmount", Type = "number", Nilable = true },
+				{ Name = "timeLeftSeconds", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "OwnedAuctionInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "auctionID", Type = "number", Nilable = false },
+				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
+				{ Name = "itemLink", Type = "string", Nilable = true },
+				{ Name = "status", Type = "AuctionStatus", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+				{ Name = "timeLeftSeconds", Type = "number", Nilable = false },
+				{ Name = "bidAmount", Type = "number", Nilable = true },
+				{ Name = "buyoutAmount", Type = "number", Nilable = true },
+				{ Name = "bidder", Type = "string", Nilable = true },
+			},
+		},
 	},
 };
 
@@ -2181,6 +3317,20 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 			},
 		},
 		{
+			Name = "CanDeactivateEssence",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "milestoneID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "canDeactivate", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CanOpenUI",
 			Type = "Function",
 
@@ -2423,14 +3573,15 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 		{
 			Name = "AzeriteEssence",
 			Type = "Enumeration",
-			NumValues = 3,
+			NumValues = 4,
 			MinValue = 0,
-			MaxValue = 2,
+			MaxValue = 3,
 			Fields =
 			{
 				{ Name = "MainSlot", Type = "AzeriteEssence", EnumValue = 0 },
 				{ Name = "PassiveOneSlot", Type = "AzeriteEssence", EnumValue = 1 },
 				{ Name = "PassiveTwoSlot", Type = "AzeriteEssence", EnumValue = 2 },
+				{ Name = "PassiveThreeSlot", Type = "AzeriteEssence", EnumValue = 3 },
 			},
 		},
 		{
@@ -2455,6 +3606,7 @@ APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);local AzeriteEssenc
 				{ Name = "requiredLevel", Type = "number", Nilable = false },
 				{ Name = "canUnlock", Type = "bool", Nilable = false },
 				{ Name = "unlocked", Type = "bool", Nilable = false },
+				{ Name = "rank", Type = "number", Nilable = true },
 				{ Name = "slot", Type = "AzeriteEssence", Nilable = true },
 			},
 		},
@@ -2495,6 +3647,20 @@ APIDocumentation:AddDocumentationTable(AzeriteEssence);local AzeriteItem =
 		},
 		{
 			Name = "GetPowerLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "azeriteItemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "powerLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnlimitedPowerLevel",
 			Type = "Function",
 
 			Arguments =
@@ -2719,6 +3885,107 @@ APIDocumentation:AddDocumentationTable(BarberShop);local BattleNet =
 
 	Functions =
 	{
+		{
+			Name = "GetAccountInfoByGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "guid", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "accountInfo", Type = "BNetAccountInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetAccountInfoByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "wowAccountGUID", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "accountInfo", Type = "BNetAccountInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetFriendAccountInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "friendIndex", Type = "number", Nilable = false },
+				{ Name = "wowAccountGUID", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "accountInfo", Type = "BNetAccountInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetFriendGameAccountInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "friendIndex", Type = "number", Nilable = false },
+				{ Name = "accountIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "gameAccountInfo", Type = "BNetGameAccountInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetFriendNumGameAccounts",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "friendIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "numGameAccounts", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetGameAccountInfoByGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "guid", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "gameAccountInfo", Type = "BNetGameAccountInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetGameAccountInfoByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "gameAccountInfo", Type = "BNetGameAccountInfo", Nilable = true },
+			},
+		},
 	},
 
 	Events =
@@ -2727,6 +3994,55 @@ APIDocumentation:AddDocumentationTable(BarberShop);local BattleNet =
 
 	Tables =
 	{
+		{
+			Name = "BNetAccountInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "bnetAccountID", Type = "number", Nilable = false },
+				{ Name = "accountName", Type = "string", Nilable = false },
+				{ Name = "battleTag", Type = "string", Nilable = false },
+				{ Name = "isFriend", Type = "bool", Nilable = false },
+				{ Name = "isBattleTagFriend", Type = "bool", Nilable = false },
+				{ Name = "lastOnlineTime", Type = "number", Nilable = false },
+				{ Name = "isAFK", Type = "bool", Nilable = false },
+				{ Name = "isDND", Type = "bool", Nilable = false },
+				{ Name = "isFavorite", Type = "bool", Nilable = false },
+				{ Name = "appearOffline", Type = "bool", Nilable = false },
+				{ Name = "customMessage", Type = "string", Nilable = false },
+				{ Name = "customMessageTime", Type = "number", Nilable = false },
+				{ Name = "note", Type = "string", Nilable = false },
+				{ Name = "rafLinkType", Type = "RafLinkType", Nilable = false },
+				{ Name = "gameAccountInfo", Type = "BNetGameAccountInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "BNetGameAccountInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "gameAccountID", Type = "number", Nilable = true },
+				{ Name = "clientProgram", Type = "string", Nilable = false },
+				{ Name = "isOnline", Type = "bool", Nilable = false },
+				{ Name = "isGameBusy", Type = "bool", Nilable = false },
+				{ Name = "isGameAFK", Type = "bool", Nilable = false },
+				{ Name = "wowProjectID", Type = "number", Nilable = true },
+				{ Name = "characterName", Type = "string", Nilable = true },
+				{ Name = "realmName", Type = "string", Nilable = true },
+				{ Name = "realmDisplayName", Type = "string", Nilable = true },
+				{ Name = "realmID", Type = "number", Nilable = true },
+				{ Name = "factionName", Type = "string", Nilable = true },
+				{ Name = "raceName", Type = "string", Nilable = true },
+				{ Name = "className", Type = "string", Nilable = true },
+				{ Name = "areaName", Type = "string", Nilable = true },
+				{ Name = "characterLevel", Type = "number", Nilable = true },
+				{ Name = "richPresence", Type = "string", Nilable = true },
+				{ Name = "playerGuid", Type = "string", Nilable = true },
+				{ Name = "isWowMobile", Type = "bool", Nilable = false },
+				{ Name = "canSummon", Type = "bool", Nilable = false },
+				{ Name = "hasFocus", Type = "bool", Nilable = false },
+			},
+		},
 	},
 };
 
@@ -3561,6 +4877,15 @@ APIDocumentation:AddDocumentationTable(CVar);local Calendar =
 			},
 		},
 		{
+			Name = "EventRemoveInviteByGuid",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "guid", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "EventSelectInvite",
 			Type = "Function",
 
@@ -4111,22 +5436,6 @@ APIDocumentation:AddDocumentationTable(CVar);local Calendar =
 	Tables =
 	{
 		{
-			Name = "CalendarEventType",
-			Type = "Enumeration",
-			NumValues = 6,
-			MinValue = 0,
-			MaxValue = 5,
-			Fields =
-			{
-				{ Name = "Raid", Type = "CalendarEventType", EnumValue = 0 },
-				{ Name = "Dungeon", Type = "CalendarEventType", EnumValue = 1 },
-				{ Name = "Pvp", Type = "CalendarEventType", EnumValue = 2 },
-				{ Name = "Meeting", Type = "CalendarEventType", EnumValue = 3 },
-				{ Name = "Other", Type = "CalendarEventType", EnumValue = 4 },
-				{ Name = "HeroicDeprecated", Type = "CalendarEventType", EnumValue = 5 },
-			},
-		},
-		{
 			Name = "CalendarDayEvent",
 			Type = "Structure",
 			Fields =
@@ -4138,7 +5447,7 @@ APIDocumentation:AddDocumentationTable(CVar);local Calendar =
 				{ Name = "endTime", Type = "CalendarTime", Nilable = false },
 				{ Name = "calendarType", Type = "string", Nilable = false },
 				{ Name = "sequenceType", Type = "string", Nilable = false },
-				{ Name = "eventType", Type = "number", Nilable = false },
+				{ Name = "eventType", Type = "CalendarEventType", Nilable = false },
 				{ Name = "iconTexture", Type = "number", Nilable = true },
 				{ Name = "modStatus", Type = "string", Nilable = false },
 				{ Name = "inviteStatus", Type = "number", Nilable = false },
@@ -4201,6 +5510,8 @@ APIDocumentation:AddDocumentationTable(CVar);local Calendar =
 				{ Name = "inviteIsMine", Type = "bool", Nilable = false },
 				{ Name = "type", Type = "number", Nilable = false },
 				{ Name = "notes", Type = "string", Nilable = false },
+				{ Name = "classID", Type = "number", Nilable = true },
+				{ Name = "guid", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -4366,6 +5677,7 @@ APIDocumentation:AddDocumentationTable(Calendar);local ChallengeModeInfo =
 				{ Name = "time", Type = "number", Nilable = false },
 				{ Name = "onTime", Type = "bool", Nilable = false },
 				{ Name = "keystoneUpgradeLevels", Type = "number", Nilable = false },
+				{ Name = "practiceRun", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -4644,6 +5956,20 @@ APIDocumentation:AddDocumentationTable(ChatBubbles);local ChatInfo =
 				{ Name = "owner", Type = "bool", Nilable = false },
 				{ Name = "moderator", Type = "bool", Nilable = false },
 				{ Name = "guid", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetClubStreamIDs",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "ids", Type = "table", InnerType = "string", Nilable = false },
 			},
 		},
 		{
@@ -6996,6 +8322,15 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 			},
 		},
 		{
+			Name = "GetClubCapacity",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "capacity", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetClubInfo",
 			Type = "Function",
 
@@ -7943,34 +9278,6 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 	Tables =
 	{
 		{
-			Name = "ClubRoleIdentifier",
-			Type = "Enumeration",
-			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 4,
-			Fields =
-			{
-				{ Name = "Owner", Type = "ClubRoleIdentifier", EnumValue = 1 },
-				{ Name = "Leader", Type = "ClubRoleIdentifier", EnumValue = 2 },
-				{ Name = "Moderator", Type = "ClubRoleIdentifier", EnumValue = 3 },
-				{ Name = "Member", Type = "ClubRoleIdentifier", EnumValue = 4 },
-			},
-		},
-		{
-			Name = "ClubType",
-			Type = "Enumeration",
-			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 3,
-			Fields =
-			{
-				{ Name = "BattleNet", Type = "ClubType", EnumValue = 0 },
-				{ Name = "Character", Type = "ClubType", EnumValue = 1 },
-				{ Name = "Guild", Type = "ClubType", EnumValue = 2 },
-				{ Name = "Other", Type = "ClubType", EnumValue = 3 },
-			},
-		},
-		{
 			Name = "ClubActionType",
 			Type = "Enumeration",
 			NumValues = 27,
@@ -8075,6 +9382,19 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 			},
 		},
 		{
+			Name = "ClubInvitationCandidateStatus",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Available", Type = "ClubInvitationCandidateStatus", EnumValue = 0 },
+				{ Name = "InvitePending", Type = "ClubInvitationCandidateStatus", EnumValue = 1 },
+				{ Name = "AlreadyMember", Type = "ClubInvitationCandidateStatus", EnumValue = 2 },
+			},
+		},
+		{
 			Name = "ClubMemberPresence",
 			Type = "Enumeration",
 			NumValues = 6,
@@ -8088,19 +9408,6 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 				{ Name = "Offline", Type = "ClubMemberPresence", EnumValue = 3 },
 				{ Name = "Away", Type = "ClubMemberPresence", EnumValue = 4 },
 				{ Name = "Busy", Type = "ClubMemberPresence", EnumValue = 5 },
-			},
-		},
-		{
-			Name = "ClubInvitationCandidateStatus",
-			Type = "Enumeration",
-			NumValues = 3,
-			MinValue = 0,
-			MaxValue = 2,
-			Fields =
-			{
-				{ Name = "Available", Type = "ClubInvitationCandidateStatus", EnumValue = 0 },
-				{ Name = "InvitePending", Type = "ClubInvitationCandidateStatus", EnumValue = 1 },
-				{ Name = "AlreadyMember", Type = "ClubInvitationCandidateStatus", EnumValue = 2 },
 			},
 		},
 		{
@@ -8130,17 +9437,17 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 			},
 		},
 		{
-			Name = "ClubStreamType",
+			Name = "ClubRoleIdentifier",
 			Type = "Enumeration",
 			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 3,
+			MinValue = 1,
+			MaxValue = 4,
 			Fields =
 			{
-				{ Name = "General", Type = "ClubStreamType", EnumValue = 0 },
-				{ Name = "Guild", Type = "ClubStreamType", EnumValue = 1 },
-				{ Name = "Officer", Type = "ClubStreamType", EnumValue = 2 },
-				{ Name = "Other", Type = "ClubStreamType", EnumValue = 3 },
+				{ Name = "Owner", Type = "ClubRoleIdentifier", EnumValue = 1 },
+				{ Name = "Leader", Type = "ClubRoleIdentifier", EnumValue = 2 },
+				{ Name = "Moderator", Type = "ClubRoleIdentifier", EnumValue = 3 },
+				{ Name = "Member", Type = "ClubRoleIdentifier", EnumValue = 4 },
 			},
 		},
 		{
@@ -8157,11 +9464,39 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 			},
 		},
 		{
+			Name = "ClubStreamType",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "General", Type = "ClubStreamType", EnumValue = 0 },
+				{ Name = "Guild", Type = "ClubStreamType", EnumValue = 1 },
+				{ Name = "Officer", Type = "ClubStreamType", EnumValue = 2 },
+				{ Name = "Other", Type = "ClubStreamType", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "ClubType",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "BattleNet", Type = "ClubType", EnumValue = 0 },
+				{ Name = "Character", Type = "ClubType", EnumValue = 1 },
+				{ Name = "Guild", Type = "ClubType", EnumValue = 2 },
+				{ Name = "Other", Type = "ClubType", EnumValue = 3 },
+			},
+		},
+		{
 			Name = "ValidateNameResult",
 			Type = "Enumeration",
-			NumValues = 17,
+			NumValues = 18,
 			MinValue = 0,
-			MaxValue = 16,
+			MaxValue = 17,
 			Fields =
 			{
 				{ Name = "NameSuccess", Type = "ValidateNameResult", EnumValue = 0 },
@@ -8181,6 +9516,7 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 				{ Name = "NameRussianConsecutiveSilentCharacters", Type = "ValidateNameResult", EnumValue = 14 },
 				{ Name = "NameRussianSilentCharacterAtBeginningOrEnd", Type = "ValidateNameResult", EnumValue = 15 },
 				{ Name = "NameDeclensionDoesntMatchBaseName", Type = "ValidateNameResult", EnumValue = 16 },
+				{ Name = "NameSpacesDisallowed", Type = "ValidateNameResult", EnumValue = 17 },
 			},
 		},
 		{
@@ -8199,6 +9535,35 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 				{ Name = "favoriteTimeStamp", Type = "number", Nilable = true },
 				{ Name = "joinTime", Type = "number", Nilable = true },
 				{ Name = "socialQueueingEnabled", Type = "bool", Nilable = true },
+			},
+		},
+		{
+			Name = "ClubInvitationCandidateInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "memberId", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "priority", Type = "number", Nilable = false },
+				{ Name = "status", Type = "ClubInvitationCandidateStatus", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubInvitationInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "invitationId", Type = "string", Nilable = false },
+				{ Name = "isMyInvitation", Type = "bool", Nilable = false },
+				{ Name = "invitee", Type = "ClubMemberInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubLimits",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "maximumNumberOfStreams", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -8237,61 +9602,12 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 			},
 		},
 		{
-			Name = "ClubSelfInvitationInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "invitationId", Type = "string", Nilable = false },
-				{ Name = "club", Type = "ClubInfo", Nilable = false },
-				{ Name = "inviter", Type = "ClubMemberInfo", Nilable = false },
-				{ Name = "leaders", Type = "table", InnerType = "ClubMemberInfo", Nilable = false },
-			},
-		},
-		{
-			Name = "ClubInvitationCandidateInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "memberId", Type = "number", Nilable = false },
-				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "priority", Type = "number", Nilable = false },
-				{ Name = "status", Type = "ClubInvitationCandidateStatus", Nilable = false },
-			},
-		},
-		{
-			Name = "ClubInvitationInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "invitationId", Type = "string", Nilable = false },
-				{ Name = "isMyInvitation", Type = "bool", Nilable = false },
-				{ Name = "invitee", Type = "ClubMemberInfo", Nilable = false },
-			},
-		},
-		{
-			Name = "ClubLimits",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "maximumNumberOfStreams", Type = "number", Nilable = false },
-			},
-		},
-		{
 			Name = "ClubMessageIdentifier",
 			Type = "Structure",
 			Fields =
 			{
 				{ Name = "epoch", Type = "number", Nilable = false, Documentation = { "number of microseconds since the UNIX epoch." } },
 				{ Name = "position", Type = "number", Nilable = false, Documentation = { "sort order for messages at the same time" } },
-			},
-		},
-		{
-			Name = "ClubMessageRange",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "oldestMessageId", Type = "ClubMessageIdentifier", Nilable = false },
-				{ Name = "newestMessageId", Type = "ClubMessageIdentifier", Nilable = false },
 			},
 		},
 		{
@@ -8305,6 +9621,15 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 				{ Name = "destroyer", Type = "ClubMemberInfo", Nilable = true, Documentation = { "May be nil even if the message has been destroyed" } },
 				{ Name = "destroyed", Type = "bool", Nilable = false },
 				{ Name = "edited", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubMessageRange",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "oldestMessageId", Type = "ClubMessageIdentifier", Nilable = false },
+				{ Name = "newestMessageId", Type = "ClubMessageIdentifier", Nilable = false },
 			},
 		},
 		{
@@ -8354,6 +9679,17 @@ APIDocumentation:AddDocumentationTable(ClassTrial);local Club =
 				{ Name = "canEditOwnMessage", Type = "bool", Nilable = false },
 				{ Name = "canPinMessage", Type = "bool", Nilable = false },
 				{ Name = "kickableRoleIds", Type = "table", InnerType = "number", Nilable = false, Documentation = { "Roles that can be kicked and banned" } },
+			},
+		},
+		{
+			Name = "ClubSelfInvitationInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "invitationId", Type = "string", Nilable = false },
+				{ Name = "club", Type = "ClubInfo", Nilable = false },
+				{ Name = "inviter", Type = "ClubMemberInfo", Nilable = false },
+				{ Name = "leaders", Type = "table", InnerType = "ClubMemberInfo", Nilable = false },
 			},
 		},
 		{
@@ -8447,6 +9783,29 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			Type = "Function",
 		},
 		{
+			Name = "DoesPlayerBelongToClubFromClubGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "belongsToClub", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetClubFinderDisableReason",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "disableReason", Type = "ClubFinderDisableReason", Nilable = true },
+			},
+		},
+		{
 			Name = "GetClubRecruitmentSettings",
 			Type = "Function",
 
@@ -8456,12 +9815,212 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			},
 		},
 		{
+			Name = "GetClubTypeFromFinderGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "clubType", Type = "ClubFinderRequestType", Nilable = false },
+			},
+		},
+		{
+			Name = "GetFocusIndexFromFlag",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "flags", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetPlayerApplicantSettings",
 			Type = "Function",
 
 			Returns =
 			{
 				{ Name = "settings", Type = "ClubSettingsInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPlayerClubApplicationStatus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "clubStatus", Type = "PlayerClubRequestStatus", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPlayerSettingsFocusFlagsSelectedCount",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "focusCount", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPostingIDFromClubFinderGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "postingID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetRecruitingClubInfoFromClubID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "clubInfo", Type = "RecruitingClubInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetRecruitingClubInfoFromFinderGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "clubInfo", Type = "RecruitingClubInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetStatusOfPostingFromClubId",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "postingID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "postingFlags", Type = "table", InnerType = "ClubFinderClubPostingStatusFlags", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTotalMatchingCommunityListSize",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "totalSize", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTotalMatchingGuildListSize",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "totalSize", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "HasAlreadyAppliedToLinkedPosting",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasAlreadyApplied", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasPostingBeenDelisted",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "postingID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "postingDelisted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isEnabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsListingEnabledFromFlags",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "flags", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isListed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsPostingBanned",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "postingID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "postingBanned", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "LookupClubPostingFromClubFinderGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+				{ Name = "isLinkedPosting", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -8507,14 +10066,28 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			Arguments =
 			{
 				{ Name = "clubId", Type = "string", Nilable = false },
-				{ Name = "enableListing", Type = "bool", Nilable = false },
-				{ Name = "autoAcceptApplicants", Type = "bool", Nilable = false },
-				{ Name = "minimumLevel", Type = "number", Nilable = false },
 				{ Name = "itemLevelRequirement", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "description", Type = "string", Nilable = false },
 				{ Name = "specs", Type = "table", InnerType = "number", Nilable = false },
 				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "succesful", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ReportPosting",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "reportType", Type = "ClubFinderPostingReportType", Nilable = false },
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+				{ Name = "playerGUID", Type = "string", Nilable = false },
+				{ Name = "complaintNote", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -8549,19 +10122,27 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			},
 		},
 		{
-			Name = "RespondToApplicant",
+			Name = "RequestNextCommunityPage",
 			Type = "Function",
 
 			Arguments =
 			{
-				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
-				{ Name = "playerGUID", Type = "string", Nilable = false },
-				{ Name = "shouldAccept", Type = "bool", Nilable = false },
-				{ Name = "requestType", Type = "ClubFinderRequestType", Nilable = false },
+				{ Name = "startingIndex", Type = "number", Nilable = false },
+				{ Name = "pageSize", Type = "number", Nilable = false },
 			},
 		},
 		{
-			Name = "ReturnCommunityApplicantList",
+			Name = "RequestNextGuildPage",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "startingIndex", Type = "number", Nilable = false },
+				{ Name = "pageSize", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestPostingInformationFromClubId",
 			Type = "Function",
 
 			Arguments =
@@ -8571,12 +10152,39 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 
 			Returns =
 			{
-				{ Name = "info", Type = "table", InnerType = "ClubFinderApplicantInfo", Nilable = false },
+				{ Name = "success", Type = "bool", Nilable = false },
 			},
 		},
 		{
-			Name = "ReturnGuildApplicantList",
+			Name = "RequestSubscribedClubPostingIDs",
 			Type = "Function",
+		},
+		{
+			Name = "ResetClubPostingMapCache",
+			Type = "Function",
+		},
+		{
+			Name = "RespondToApplicant",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+				{ Name = "playerGUID", Type = "string", Nilable = false },
+				{ Name = "shouldAccept", Type = "bool", Nilable = false },
+				{ Name = "requestType", Type = "ClubFinderRequestType", Nilable = false },
+				{ Name = "playerName", Type = "string", Nilable = false },
+				{ Name = "forceAccept", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ReturnClubApplicantList",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+			},
 
 			Returns =
 			{
@@ -8602,7 +10210,7 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			},
 		},
 		{
-			Name = "ReturnPendingCommunityApplicantList",
+			Name = "ReturnPendingClubApplicantList",
 			Type = "Function",
 
 			Arguments =
@@ -8616,12 +10224,12 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			},
 		},
 		{
-			Name = "ReturnPendingGuildApplicantList",
+			Name = "SetAllRecruitmentSettings",
 			Type = "Function",
 
-			Returns =
+			Arguments =
 			{
-				{ Name = "info", Type = "table", InnerType = "ClubFinderApplicantInfo", Nilable = false },
+				{ Name = "value", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -8658,6 +10266,25 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 	Events =
 	{
 		{
+			Name = "ClubFinderApplicantInviteRecieved",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_APPLICANT_INVITE_RECIEVED",
+			Payload =
+			{
+				{ Name = "clubFinderGUIDs", Type = "table", InnerType = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubFinderApplicationsUpdated",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_APPLICATIONS_UPDATED",
+			Payload =
+			{
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+				{ Name = "clubFinderGUIDs", Type = "table", InnerType = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "ClubFinderClubListReturned",
 			Type = "Event",
 			LiteralName = "CLUB_FINDER_CLUB_LIST_RETURNED",
@@ -8665,6 +10292,43 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			Payload =
 			{
 				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubFinderClubReported",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_CLUB_REPORTED",
+			Documentation = { "Sends an update to the UI about a reported guild or community." },
+			Payload =
+			{
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubFinderCommunityOfflineJoin",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_COMMUNITY_OFFLINE_JOIN",
+			Documentation = { "Signals to the UI that you (the player) have joined a community offline." },
+			Payload =
+			{
+				{ Name = "clubId", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ClubFinderEnabledOrDisabled",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_ENABLED_OR_DISABLED",
+			Documentation = { "Sends an update to the UI that the club finder feature has been enabled or disabled." },
+		},
+		{
+			Name = "ClubFinderLinkedClubReturned",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_LINKED_CLUB_RETURNED",
+			Documentation = { "When a player clicks a club link, this returns that information back about the club they clicked on" },
+			Payload =
+			{
+				{ Name = "clubInfo", Type = "RecruitingClubInfo", Nilable = false },
 			},
 		},
 		{
@@ -8685,11 +10349,25 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			Name = "ClubFinderPostUpdated",
 			Type = "Event",
 			LiteralName = "CLUB_FINDER_POST_UPDATED",
+			Payload =
+			{
+				{ Name = "clubFinderGUIDs", Type = "table", InnerType = "string", Nilable = false },
+			},
 		},
 		{
 			Name = "ClubFinderRecruitListChanged",
 			Type = "Event",
 			LiteralName = "CLUB_FINDER_RECRUIT_LIST_CHANGED",
+		},
+		{
+			Name = "ClubFinderRecruitmentPostReturned",
+			Type = "Event",
+			LiteralName = "CLUB_FINDER_RECRUITMENT_POST_RETURNED",
+			Documentation = { "Signals when our recruitment post we just requested is returned back to us" },
+			Payload =
+			{
+				{ Name = "type", Type = "ClubFinderRequestType", Nilable = false },
+			},
 		},
 		{
 			Name = "ClubFinderRecruitsUpdated",
@@ -8706,24 +10384,6 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 	Tables =
 	{
 		{
-			Name = "PlayerClubRequestStatus",
-			Type = "Enumeration",
-			NumValues = 8,
-			MinValue = 0,
-			MaxValue = 7,
-			Fields =
-			{
-				{ Name = "None", Type = "PlayerClubRequestStatus", EnumValue = 0 },
-				{ Name = "Pending", Type = "PlayerClubRequestStatus", EnumValue = 1 },
-				{ Name = "AutoApproved", Type = "PlayerClubRequestStatus", EnumValue = 2 },
-				{ Name = "Declined", Type = "PlayerClubRequestStatus", EnumValue = 3 },
-				{ Name = "Approved", Type = "PlayerClubRequestStatus", EnumValue = 4 },
-				{ Name = "Joined", Type = "PlayerClubRequestStatus", EnumValue = 5 },
-				{ Name = "JoinedAnother", Type = "PlayerClubRequestStatus", EnumValue = 6 },
-				{ Name = "Canceled", Type = "PlayerClubRequestStatus", EnumValue = 7 },
-			},
-		},
-		{
 			Name = "ClubFinderApplicationUpdateType",
 			Type = "Enumeration",
 			NumValues = 4,
@@ -8735,6 +10395,52 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 				{ Name = "AcceptInvite", Type = "ClubFinderApplicationUpdateType", EnumValue = 1 },
 				{ Name = "DeclineInvite", Type = "ClubFinderApplicationUpdateType", EnumValue = 2 },
 				{ Name = "Cancel", Type = "ClubFinderApplicationUpdateType", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "ClubFinderClubPostingStatusFlags",
+			Type = "Enumeration",
+			NumValues = 9,
+			MinValue = 0,
+			MaxValue = 8,
+			Fields =
+			{
+				{ Name = "None", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 0 },
+				{ Name = "NeedsCacheUpdate", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 1 },
+				{ Name = "ForceDescriptionChange", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 2 },
+				{ Name = "ForceNameChange", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 3 },
+				{ Name = "UnderReview", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 4 },
+				{ Name = "Banned", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 5 },
+				{ Name = "FakePost", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 6 },
+				{ Name = "PendingDelete", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 7 },
+				{ Name = "PostDelisted", Type = "ClubFinderClubPostingStatusFlags", EnumValue = 8 },
+			},
+		},
+		{
+			Name = "ClubFinderDisableReason",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Muted", Type = "ClubFinderDisableReason", EnumValue = 0 },
+				{ Name = "Silenced", Type = "ClubFinderDisableReason", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "ClubFinderPostingReportType",
+			Type = "Enumeration",
+			NumValues = 5,
+			MinValue = 0,
+			MaxValue = 4,
+			Fields =
+			{
+				{ Name = "PostersName", Type = "ClubFinderPostingReportType", EnumValue = 0 },
+				{ Name = "ClubName", Type = "ClubFinderPostingReportType", EnumValue = 1 },
+				{ Name = "PostingDescription", Type = "ClubFinderPostingReportType", EnumValue = 2 },
+				{ Name = "ApplicantsName", Type = "ClubFinderPostingReportType", EnumValue = 3 },
+				{ Name = "JoinNote", Type = "ClubFinderPostingReportType", EnumValue = 4 },
 			},
 		},
 		{
@@ -8752,24 +10458,11 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			},
 		},
 		{
-			Name = "ClubFinderReportType",
-			Type = "Enumeration",
-			NumValues = 3,
-			MinValue = 0,
-			MaxValue = 2,
-			Fields =
-			{
-				{ Name = "Any", Type = "ClubFinderReportType", EnumValue = 0 },
-				{ Name = "InapropriateName", Type = "ClubFinderReportType", EnumValue = 1 },
-				{ Name = "InapropriateComment", Type = "ClubFinderReportType", EnumValue = 2 },
-			},
-		},
-		{
 			Name = "ClubFinderSettingFlags",
 			Type = "Enumeration",
-			NumValues = 18,
+			NumValues = 21,
 			MinValue = 0,
-			MaxValue = 17,
+			MaxValue = 20,
 			Fields =
 			{
 				{ Name = "None", Type = "ClubFinderSettingFlags", EnumValue = 0 },
@@ -8790,6 +10483,27 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 				{ Name = "FactionHorde", Type = "ClubFinderSettingFlags", EnumValue = 15 },
 				{ Name = "FactionAlliance", Type = "ClubFinderSettingFlags", EnumValue = 16 },
 				{ Name = "FactionNeutral", Type = "ClubFinderSettingFlags", EnumValue = 17 },
+				{ Name = "SortRelevance", Type = "ClubFinderSettingFlags", EnumValue = 18 },
+				{ Name = "SortMemberCount", Type = "ClubFinderSettingFlags", EnumValue = 19 },
+				{ Name = "SortNewest", Type = "ClubFinderSettingFlags", EnumValue = 20 },
+			},
+		},
+		{
+			Name = "PlayerClubRequestStatus",
+			Type = "Enumeration",
+			NumValues = 8,
+			MinValue = 0,
+			MaxValue = 7,
+			Fields =
+			{
+				{ Name = "None", Type = "PlayerClubRequestStatus", EnumValue = 0 },
+				{ Name = "Pending", Type = "PlayerClubRequestStatus", EnumValue = 1 },
+				{ Name = "AutoApproved", Type = "PlayerClubRequestStatus", EnumValue = 2 },
+				{ Name = "Declined", Type = "PlayerClubRequestStatus", EnumValue = 3 },
+				{ Name = "Approved", Type = "PlayerClubRequestStatus", EnumValue = 4 },
+				{ Name = "Joined", Type = "PlayerClubRequestStatus", EnumValue = 5 },
+				{ Name = "JoinedAnother", Type = "PlayerClubRequestStatus", EnumValue = 6 },
+				{ Name = "Canceled", Type = "PlayerClubRequestStatus", EnumValue = 7 },
 			},
 		},
 		{
@@ -8799,6 +10513,7 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 			{
 				{ Name = "clubFinderGUID", Type = "string", Nilable = false },
 				{ Name = "playerGUID", Type = "string", Nilable = false },
+				{ Name = "closed", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "message", Type = "string", Nilable = false },
 				{ Name = "level", Type = "number", Nilable = false },
@@ -8806,17 +10521,8 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 				{ Name = "ilvl", Type = "number", Nilable = false },
 				{ Name = "specIds", Type = "table", InnerType = "number", Nilable = false },
 				{ Name = "requestStatus", Type = "PlayerClubRequestStatus", Nilable = false },
-			},
-		},
-		{
-			Name = "ClubFinderGuildTabardInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "backgroundColor", Type = "table", Mixin = "ColorMixin", Nilable = false },
-				{ Name = "borderColor", Type = "table", Mixin = "ColorMixin", Nilable = false },
-				{ Name = "emblemColor", Type = "table", Mixin = "ColorMixin", Nilable = false },
-				{ Name = "emblemFileID", Type = "number", Nilable = false },
+				{ Name = "lookupSuccess", Type = "bool", Nilable = false },
+				{ Name = "lastUpdatedTime", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -8835,6 +10541,12 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 				{ Name = "sizeSmall", Type = "bool", Nilable = false },
 				{ Name = "sizeMedium", Type = "bool", Nilable = false },
 				{ Name = "sizeLarge", Type = "bool", Nilable = false },
+				{ Name = "maxLevelOnly", Type = "bool", Nilable = false },
+				{ Name = "enableListing", Type = "bool", Nilable = false },
+				{ Name = "sortRelevance", Type = "bool", Nilable = false },
+				{ Name = "sortMembers", Type = "bool", Nilable = false },
+				{ Name = "sortNewest", Type = "bool", Nilable = false },
+				{ Name = "autoAccept", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -8849,11 +10561,16 @@ APIDocumentation:AddDocumentationTable(Club);local ClubFinder =
 				{ Name = "guildLeader", Type = "string", Nilable = false },
 				{ Name = "isGuild", Type = "bool", Nilable = false },
 				{ Name = "emblemInfo", Type = "number", Nilable = false },
-				{ Name = "tabardInfo", Type = "ClubFinderGuildTabardInfo", Nilable = true },
-				{ Name = "clubStatus", Type = "PlayerClubRequestStatus", Nilable = true },
+				{ Name = "tabardInfo", Type = "GuildTabardInfo", Nilable = true },
 				{ Name = "recruitingSpecIds", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "recruitmentFlags", Type = "number", Nilable = false },
+				{ Name = "minILvl", Type = "number", Nilable = false },
 				{ Name = "cached", Type = "number", Nilable = false },
 				{ Name = "cacheRequested", Type = "number", Nilable = false },
+				{ Name = "lastPosterGUID", Type = "string", Nilable = false },
+				{ Name = "clubId", Type = "string", Nilable = false },
+				{ Name = "lastUpdatedTime", Type = "number", Nilable = false },
+				{ Name = "clubForceRemoved", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -9104,15 +10821,6 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 			},
 		},
 		{
-			Name = "GetElapsedMs",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "timeLeft", Type = "number", Nilable = false },
-			},
-		},
-		{
 			Name = "GetExcludeDistance",
 			Type = "Function",
 
@@ -9137,6 +10845,20 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 			Returns =
 			{
 				{ Name = "angle", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetIndirectSpellID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "trackedSpellID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "indirectSpellID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -9182,6 +10904,15 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 				{ Name = "minLevel", Type = "number", Nilable = false },
 				{ Name = "maxLevel", Type = "number", Nilable = false },
 				{ Name = "numInstances", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMatchDuration",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "seconds", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -9268,6 +10999,24 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 			Returns =
 			{
 				{ Name = "numPlayers", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPlayerAuraInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "teamIndex", Type = "number", Nilable = false },
+				{ Name = "playerIndex", Type = "number", Nilable = false },
+				{ Name = "spellID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "startTime", Type = "number", Nilable = false },
+				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "enable", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -9470,33 +11219,33 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 			},
 		},
 		{
-			Name = "GetTrackedDefensiveCooldowns",
+			Name = "GetTrackedSpellID",
 			Type = "Function",
 
 			Arguments =
 			{
-				{ Name = "teamIndex", Type = "number", Nilable = false },
-				{ Name = "playerIndex", Type = "number", Nilable = false },
+				{ Name = "indirectSpellID", Type = "number", Nilable = false },
 			},
 
 			Returns =
 			{
-				{ Name = "trackedDefensiveCooldowns", Type = "table", InnerType = "number", Nilable = true },
+				{ Name = "trackedSpellID", Type = "number", Nilable = false },
 			},
 		},
 		{
-			Name = "GetTrackedOffensiveCooldowns",
+			Name = "GetTrackedSpells",
 			Type = "Function",
 
 			Arguments =
 			{
 				{ Name = "teamIndex", Type = "number", Nilable = false },
 				{ Name = "playerIndex", Type = "number", Nilable = false },
+				{ Name = "category", Type = "TrackedSpellCategory", Nilable = false },
 			},
 
 			Returns =
 			{
-				{ Name = "trackedCooldowns", Type = "table", InnerType = "number", Nilable = true },
+				{ Name = "spells", Type = "table", InnerType = "number", Nilable = true },
 			},
 		},
 		{
@@ -9564,22 +11313,6 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 			},
 		},
 		{
-			Name = "IsTrackedDefensiveCooldown",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "teamIndex", Type = "number", Nilable = false },
-				{ Name = "playerIndex", Type = "number", Nilable = false },
-				{ Name = "spellID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "isTrackedCooldown", Type = "bool", Nilable = false },
-			},
-		},
-		{
 			Name = "IsTrackedOffensiveAura",
 			Type = "Function",
 
@@ -9594,7 +11327,7 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 			},
 		},
 		{
-			Name = "IsTrackedOffensiveCooldown",
+			Name = "IsTrackedSpell",
 			Type = "Function",
 
 			Arguments =
@@ -9602,11 +11335,12 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 				{ Name = "teamIndex", Type = "number", Nilable = false },
 				{ Name = "playerIndex", Type = "number", Nilable = false },
 				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "category", Type = "TrackedSpellCategory", Nilable = false },
 			},
 
 			Returns =
 			{
-				{ Name = "isTrackedCooldown", Type = "bool", Nilable = false },
+				{ Name = "isTracked", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -9882,6 +11616,16 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 			},
 		},
 		{
+			Name = "SetRequestedDebuffCooldowns",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "specID", Type = "number", Nilable = false },
+				{ Name = "spellIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "SetRequestedDefensiveCooldowns",
 			Type = "Function",
 
@@ -10034,6 +11778,20 @@ APIDocumentation:AddDocumentationTable(CombatLog);local CommentatorFrame =
 
 	Tables =
 	{
+		{
+			Name = "TrackedSpellCategory",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Offensive", Type = "TrackedSpellCategory", EnumValue = 0 },
+				{ Name = "Defensive", Type = "TrackedSpellCategory", EnumValue = 1 },
+				{ Name = "Debuff", Type = "TrackedSpellCategory", EnumValue = 2 },
+				{ Name = "Count", Type = "TrackedSpellCategory", EnumValue = 3 },
+			},
+		},
 		{
 			Name = "NameOverrideEntry",
 			Type = "Structure",
@@ -10289,21 +12047,22 @@ APIDocumentation:AddDocumentationTable(ConfigurationWarnings);local Console =
 		{
 			Name = "ConsoleCategory",
 			Type = "Enumeration",
-			NumValues = 10,
+			NumValues = 11,
 			MinValue = 0,
-			MaxValue = 9,
+			MaxValue = 10,
 			Fields =
 			{
-				{ Name = "CategoryDebug", Type = "ConsoleCategory", EnumValue = 0 },
-				{ Name = "CategoryGraphics", Type = "ConsoleCategory", EnumValue = 1 },
-				{ Name = "CategoryConsole", Type = "ConsoleCategory", EnumValue = 2 },
-				{ Name = "CategoryCombat", Type = "ConsoleCategory", EnumValue = 3 },
-				{ Name = "CategoryGame", Type = "ConsoleCategory", EnumValue = 4 },
-				{ Name = "CategoryDefault", Type = "ConsoleCategory", EnumValue = 5 },
-				{ Name = "CategoryNet", Type = "ConsoleCategory", EnumValue = 6 },
-				{ Name = "CategorySound", Type = "ConsoleCategory", EnumValue = 7 },
-				{ Name = "CategoryGm", Type = "ConsoleCategory", EnumValue = 8 },
-				{ Name = "CategoryNone", Type = "ConsoleCategory", EnumValue = 9 },
+				{ Name = "Debug", Type = "ConsoleCategory", EnumValue = 0 },
+				{ Name = "Graphics", Type = "ConsoleCategory", EnumValue = 1 },
+				{ Name = "Console", Type = "ConsoleCategory", EnumValue = 2 },
+				{ Name = "Combat", Type = "ConsoleCategory", EnumValue = 3 },
+				{ Name = "Game", Type = "ConsoleCategory", EnumValue = 4 },
+				{ Name = "Default", Type = "ConsoleCategory", EnumValue = 5 },
+				{ Name = "Net", Type = "ConsoleCategory", EnumValue = 6 },
+				{ Name = "Sound", Type = "ConsoleCategory", EnumValue = 7 },
+				{ Name = "Gm", Type = "ConsoleCategory", EnumValue = 8 },
+				{ Name = "Reveal", Type = "ConsoleCategory", EnumValue = 9 },
+				{ Name = "None", Type = "ConsoleCategory", EnumValue = 10 },
 			},
 		},
 		{
@@ -10777,21 +12536,6 @@ APIDocumentation:AddDocumentationTable(Container);local ContributionCollector =
 	Tables =
 	{
 		{
-			Name = "ContributionState",
-			Type = "Enumeration",
-			NumValues = 5,
-			MinValue = 0,
-			MaxValue = 4,
-			Fields =
-			{
-				{ Name = "None", Type = "ContributionState", EnumValue = 0 },
-				{ Name = "Building", Type = "ContributionState", EnumValue = 1 },
-				{ Name = "Active", Type = "ContributionState", EnumValue = 2 },
-				{ Name = "UnderAttack", Type = "ContributionState", EnumValue = 3 },
-				{ Name = "Destroyed", Type = "ContributionState", EnumValue = 4 },
-			},
-		},
-		{
 			Name = "ContributionAppearanceFlags",
 			Type = "Enumeration",
 			NumValues = 1,
@@ -10818,6 +12562,21 @@ APIDocumentation:AddDocumentationTable(Container);local ContributionCollector =
 				{ Name = "FailedConditionCheck", Type = "ContributionResult", EnumValue = 5 },
 				{ Name = "UnableToCompleteTurnIn", Type = "ContributionResult", EnumValue = 6 },
 				{ Name = "InternalError", Type = "ContributionResult", EnumValue = 7 },
+			},
+		},
+		{
+			Name = "ContributionState",
+			Type = "Enumeration",
+			NumValues = 5,
+			MinValue = 0,
+			MaxValue = 4,
+			Fields =
+			{
+				{ Name = "None", Type = "ContributionState", EnumValue = 0 },
+				{ Name = "Building", Type = "ContributionState", EnumValue = 1 },
+				{ Name = "Active", Type = "ContributionState", EnumValue = 2 },
+				{ Name = "UnderAttack", Type = "ContributionState", EnumValue = 3 },
+				{ Name = "Destroyed", Type = "ContributionState", EnumValue = 4 },
 			},
 		},
 		{
@@ -10959,6 +12718,7 @@ APIDocumentation:AddDocumentationTable(CreatureInfo);local CurrencyInfo =
 			Returns =
 			{
 				{ Name = "warModeApplies", Type = "bool", Nilable = true },
+				{ Name = "limitOncePerTooltip", Type = "bool", Nilable = true },
 			},
 		},
 		{
@@ -12153,6 +13913,21 @@ APIDocumentation:AddDocumentationTable(EquipmentManager);local Expansion =
 			},
 		},
 		{
+			Name = "GetExpansionForLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "playerLevel", Type = "number", Nilable = false },
+				{ Name = "useLegacy", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "expansionLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetExpansionLevel",
 			Type = "Function",
 
@@ -12174,10 +13949,12 @@ APIDocumentation:AddDocumentationTable(EquipmentManager);local Expansion =
 		{
 			Name = "GetMaxLevelForExpansionLevel",
 			Type = "Function",
+			Documentation = { "Maps an expansion level to a maximum character level for that expansion, optionally takes a useModernLevelMapping instead of legacy level mapping. Legacy treats the maxes as the original caps for those expansions." },
 
 			Arguments =
 			{
 				{ Name = "expansionLevel", Type = "number", Nilable = false },
+				{ Name = "useModernLevelMapping", Type = "bool", Nilable = false, Default = false },
 			},
 
 			Returns =
@@ -12258,15 +14035,6 @@ APIDocumentation:AddDocumentationTable(EquipmentManager);local Expansion =
 	Tables =
 	{
 		{
-			Name = "ExpansionDisplayInfoFeature",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "icon", Type = "number", Nilable = false },
-				{ Name = "text", Type = "string", Nilable = false },
-			},
-		},
-		{
 			Name = "ExpansionDisplayInfo",
 			Type = "Structure",
 			Fields =
@@ -12274,6 +14042,15 @@ APIDocumentation:AddDocumentationTable(EquipmentManager);local Expansion =
 				{ Name = "logo", Type = "number", Nilable = false },
 				{ Name = "banner", Type = "string", Nilable = false },
 				{ Name = "features", Type = "table", InnerType = "ExpansionDisplayInfoFeature", Nilable = false },
+			},
+		},
+		{
+			Name = "ExpansionDisplayInfoFeature",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "icon", Type = "number", Nilable = false },
+				{ Name = "text", Type = "string", Nilable = false },
 			},
 		},
 	},
@@ -12844,7 +14621,7 @@ APIDocumentation:AddDocumentationTable(FogOfWar);local FriendList =
 				{ Name = "level", Type = "number", Nilable = false },
 				{ Name = "dnd", Type = "bool", Nilable = false },
 				{ Name = "afk", Type = "bool", Nilable = false },
-				{ Name = "referAFriend", Type = "bool", Nilable = false },
+				{ Name = "rafLinkType", Type = "RafLinkType", Nilable = false },
 				{ Name = "mobile", Type = "bool", Nilable = false },
 			},
 		},
@@ -12984,6 +14761,48 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 			},
 		},
 		{
+			Name = "GetGarrisonTalentTreeCurrencyTypes",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "garrTalentTreeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "garrTalentTreeCurrencyType", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetGarrisonTalentTreeType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "garrTalentTreeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "garrTalentTreeType", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTalentPointsSpentInTalentTree",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "garrTalentTreeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "talentPoints", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetTalentTreeIDsByClassID",
 			Type = "Function",
 
@@ -12996,6 +14815,25 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 			Returns =
 			{
 				{ Name = "treeIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTalentTreeTalentPointResearchInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "garrTalentTreeID", Type = "number", Nilable = false },
+				{ Name = "talentPointIndex", Type = "number", Nilable = false },
+				{ Name = "isRespec", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "goldCost", Type = "number", Nilable = false },
+				{ Name = "currencyType", Type = "number", Nilable = false },
+				{ Name = "currencyCost", Type = "number", Nilable = false },
+				{ Name = "durationSecs", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -13422,6 +15260,7 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 			Payload =
 			{
 				{ Name = "garrisonTypeID", Type = "number", Nilable = false },
+				{ Name = "garrisonTalentTreeID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -13808,6 +15647,20 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 			},
 		},
 		{
+			Name = "GetGuildTabardInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "tabardInfo", Type = "GuildTabardInfo", Nilable = true },
+			},
+		},
+		{
 			Name = "GuildControlGetRankFlags",
 			Type = "Function",
 
@@ -13824,6 +15677,15 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 		{
 			Name = "GuildRoster",
 			Type = "Function",
+		},
+		{
+			Name = "IsGuildOfficer",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isOfficer", Type = "bool", Nilable = false },
+			},
 		},
 		{
 			Name = "IsGuildRankAssignmentAllowed",
@@ -13937,17 +15799,7 @@ APIDocumentation:AddDocumentationTable(GuildBank);local GuildInfo =
 				{ Name = "guildAchievementPoints", Type = "number", Nilable = false },
 				{ Name = "oldGuildName", Type = "string", Nilable = false },
 				{ Name = "isNewGuild", Type = "bool", Nilable = true },
-				{ Name = "bkgColorR", Type = "number", Nilable = true },
-				{ Name = "bkgColorG", Type = "number", Nilable = true },
-				{ Name = "bkgColorB", Type = "number", Nilable = true },
-				{ Name = "borderColorR", Type = "number", Nilable = true },
-				{ Name = "borderColorG", Type = "number", Nilable = true },
-				{ Name = "borderColorB", Type = "number", Nilable = true },
-				{ Name = "emblemColorR", Type = "number", Nilable = true },
-				{ Name = "emblemColorG", Type = "number", Nilable = true },
-				{ Name = "emblemColorB", Type = "number", Nilable = true },
-				{ Name = "emblemFileID", Type = "number", Nilable = true },
-				{ Name = "emblemIndex", Type = "number", Nilable = true },
+				{ Name = "tabardInfo", Type = "GuildTabardInfo", Nilable = true },
 			},
 		},
 		{
@@ -14682,6 +16534,20 @@ APIDocumentation:AddDocumentationTable(IslandsQueueUI);local Item =
 			},
 		},
 		{
+			Name = "GetStackCount",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "stackCount", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "IsBound",
 			Type = "Function",
 
@@ -14693,6 +16559,48 @@ APIDocumentation:AddDocumentationTable(IslandsQueueUI);local Item =
 			Returns =
 			{
 				{ Name = "isBound", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsItemCorrupted",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLoc", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCorrupted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsItemCorruptionRelated",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLoc", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCorruptionRelated", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsItemCorruptionResistant",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLoc", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCorruptionResistant", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -14946,7 +16854,125 @@ APIDocumentation:AddDocumentationTable(IslandsQueueUI);local Item =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(Item);local ItemSocketInfo =
+APIDocumentation:AddDocumentationTable(Item);local ItemInteractionUI =
+{
+	Name = "ItemInteractionUI",
+	Type = "System",
+	Namespace = "C_ItemInteraction",
+
+	Functions =
+	{
+		{
+			Name = "ClearPendingItem",
+			Type = "Function",
+		},
+		{
+			Name = "GetItemInteractionInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "info", Type = "ItemInteractionFrameInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetItemInteractionSpellId",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "spellId", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "InitializeFrame",
+			Type = "Function",
+		},
+		{
+			Name = "PerformItemInteraction",
+			Type = "Function",
+		},
+		{
+			Name = "Reset",
+			Type = "Function",
+		},
+		{
+			Name = "SetCorruptionReforgerItemTooltip",
+			Type = "Function",
+		},
+		{
+			Name = "SetPendingItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "item", Type = "table", Mixin = "ItemLocationMixin", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+		{
+			Name = "ItemInteractionClose",
+			Type = "Event",
+			LiteralName = "ITEM_INTERACTION_CLOSE",
+		},
+		{
+			Name = "ItemInteractionItemSelectionUpdated",
+			Type = "Event",
+			LiteralName = "ITEM_INTERACTION_ITEM_SELECTION_UPDATED",
+			Payload =
+			{
+				{ Name = "itemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = true },
+			},
+		},
+		{
+			Name = "ItemInteractionOpen",
+			Type = "Event",
+			LiteralName = "ITEM_INTERACTION_OPEN",
+		},
+	},
+
+	Tables =
+	{
+		{
+			Name = "ItemInteractionFrameType",
+			Type = "Enumeration",
+			NumValues = 1,
+			MinValue = 0,
+			MaxValue = 0,
+			Fields =
+			{
+				{ Name = "CleanseCorruption", Type = "ItemInteractionFrameType", EnumValue = 0 },
+			},
+		},
+		{
+			Name = "ItemInteractionFrameInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "textureKitID", Type = "number", Nilable = false },
+				{ Name = "openSoundKitID", Type = "number", Nilable = false },
+				{ Name = "closeSoundKitID", Type = "number", Nilable = false },
+				{ Name = "titleText", Type = "string", Nilable = false },
+				{ Name = "tutorialText", Type = "string", Nilable = false },
+				{ Name = "buttonText", Type = "string", Nilable = false },
+				{ Name = "frameType", Type = "ItemInteractionFrameType", Nilable = false },
+				{ Name = "description", Type = "string", Nilable = true },
+				{ Name = "cost", Type = "number", Nilable = true },
+				{ Name = "currencyTypeId", Type = "number", Nilable = true },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(ItemInteractionUI);local ItemSocketInfo =
 {
 	Name = "ItemSocketInfo",
 	Type = "System",
@@ -15050,6 +17076,15 @@ APIDocumentation:AddDocumentationTable(ItemText);local ItemUpgrade =
 
 	Functions =
 	{
+		{
+			Name = "GetItemHyperlink",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "link", Type = "string", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -15219,6 +17254,16 @@ APIDocumentation:AddDocumentationTable(KnowledgeBase);local LFGInfo =
 			Returns =
 			{
 				{ Name = "lfgDungeonIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRoleCheckDifficultyDetails",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "maxLevel", Type = "number", Nilable = true },
+				{ Name = "isLevelReduced", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -15679,6 +17724,20 @@ APIDocumentation:AddDocumentationTable(LFGInfo);local LFGListInfo =
 	Tables =
 	{
 		{
+			Name = "LfgApplicantData",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "applicantID", Type = "number", Nilable = false },
+				{ Name = "applicationStatus", Type = "string", Nilable = false },
+				{ Name = "pendingApplicationStatus", Type = "string", Nilable = true },
+				{ Name = "numMembers", Type = "number", Nilable = false },
+				{ Name = "isNew", Type = "bool", Nilable = false },
+				{ Name = "comment", Type = "string", Nilable = false },
+				{ Name = "displayOrderID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "LfgEntryData",
 			Type = "Structure",
 			Fields =
@@ -15693,20 +17752,6 @@ APIDocumentation:AddDocumentationTable(LFGInfo);local LFGListInfo =
 				{ Name = "autoAccept", Type = "bool", Nilable = false },
 				{ Name = "privateGroup", Type = "bool", Nilable = false },
 				{ Name = "questID", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "LfgApplicantData",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "applicantID", Type = "number", Nilable = false },
-				{ Name = "applicationStatus", Type = "string", Nilable = false },
-				{ Name = "pendingApplicationStatus", Type = "string", Nilable = true },
-				{ Name = "numMembers", Type = "number", Nilable = false },
-				{ Name = "isNew", Type = "bool", Nilable = false },
-				{ Name = "comment", Type = "string", Nilable = false },
-				{ Name = "displayOrderID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -15761,6 +17806,20 @@ APIDocumentation:AddDocumentationTable(LFGListInfo);local LFGuildInfo =
 
 	Functions =
 	{
+		{
+			Name = "GetRecruitingGuildTabardInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "tabardInfo", Type = "GuildTabardInfo", Nilable = true },
+			},
+		},
 	},
 
 	Events =
@@ -15806,7 +17865,54 @@ APIDocumentation:AddDocumentationTable(LFGListInfo);local LFGuildInfo =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(LFGuildInfo);local LoadingScreen =
+APIDocumentation:AddDocumentationTable(LFGuildInfo);local LevelLink =
+{
+	Name = "LevelLink",
+	Type = "System",
+	Namespace = "C_LevelLink",
+
+	Functions =
+	{
+		{
+			Name = "IsActionLocked",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "actionID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isLocked", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSpellLocked",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "spellID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isLocked", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(LevelLink);local LoadingScreen =
 {
 	Name = "LoadingScreen",
 	Type = "System",
@@ -16314,6 +18420,16 @@ APIDocumentation:AddDocumentationTable(LossOfControl);local MailInfo =
 
 	Functions =
 	{
+		{
+			Name = "CanCheckInbox",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canCheckInbox", Type = "bool", Nilable = false },
+				{ Name = "secondsUntilAllowed", Type = "number", Nilable = false },
+			},
+		},
 		{
 			Name = "HasInboxMoney",
 			Type = "Function",
@@ -16851,6 +18967,19 @@ APIDocumentation:AddDocumentationTable(MailInfo);local Map =
 			},
 		},
 		{
+			Name = "UIMapSystem",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "World", Type = "UIMapSystem", EnumValue = 0 },
+				{ Name = "Taxi", Type = "UIMapSystem", EnumValue = 1 },
+				{ Name = "Adventure", Type = "UIMapSystem", EnumValue = 2 },
+			},
+		},
+		{
 			Name = "UIMapType",
 			Type = "Enumeration",
 			NumValues = 7,
@@ -16868,33 +18997,6 @@ APIDocumentation:AddDocumentationTable(MailInfo);local Map =
 			},
 		},
 		{
-			Name = "UIMapSystem",
-			Type = "Enumeration",
-			NumValues = 3,
-			MinValue = 0,
-			MaxValue = 2,
-			Fields =
-			{
-				{ Name = "World", Type = "UIMapSystem", EnumValue = 0 },
-				{ Name = "Taxi", Type = "UIMapSystem", EnumValue = 1 },
-				{ Name = "Adventure", Type = "UIMapSystem", EnumValue = 2 },
-			},
-		},
-		{
-			Name = "UiMapLayerInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "layerWidth", Type = "number", Nilable = false },
-				{ Name = "layerHeight", Type = "number", Nilable = false },
-				{ Name = "tileWidth", Type = "number", Nilable = false },
-				{ Name = "tileHeight", Type = "number", Nilable = false },
-				{ Name = "minScale", Type = "number", Nilable = false },
-				{ Name = "maxScale", Type = "number", Nilable = false },
-				{ Name = "additionalZoomSteps", Type = "number", Nilable = false },
-			},
-		},
-		{
 			Name = "MapBannerInfo",
 			Type = "Structure",
 			Fields =
@@ -16903,6 +19005,18 @@ APIDocumentation:AddDocumentationTable(MailInfo);local Map =
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "atlasName", Type = "string", Nilable = false },
 				{ Name = "uiTextureKit", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "MapLinkInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "areaPoiID", Type = "number", Nilable = false },
+				{ Name = "position", Type = "table", Mixin = "Vector2DMixin", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "atlasName", Type = "string", Nilable = false },
+				{ Name = "linkedUiMapID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -16927,15 +19041,17 @@ APIDocumentation:AddDocumentationTable(MailInfo);local Map =
 			},
 		},
 		{
-			Name = "MapLinkInfo",
+			Name = "UiMapLayerInfo",
 			Type = "Structure",
 			Fields =
 			{
-				{ Name = "areaPoiID", Type = "number", Nilable = false },
-				{ Name = "position", Type = "table", Mixin = "Vector2DMixin", Nilable = false },
-				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "atlasName", Type = "string", Nilable = false },
-				{ Name = "linkedUiMapID", Type = "number", Nilable = false },
+				{ Name = "layerWidth", Type = "number", Nilable = false },
+				{ Name = "layerHeight", Type = "number", Nilable = false },
+				{ Name = "tileWidth", Type = "number", Nilable = false },
+				{ Name = "tileHeight", Type = "number", Nilable = false },
+				{ Name = "minScale", Type = "number", Nilable = false },
+				{ Name = "maxScale", Type = "number", Nilable = false },
+				{ Name = "additionalZoomSteps", Type = "number", Nilable = false },
 			},
 		},
 	},
@@ -17257,6 +19373,9 @@ APIDocumentation:AddDocumentationTable(Minimap);local MountJournal =
 				{ Name = "isSelfMount", Type = "bool", Nilable = false },
 				{ Name = "mountTypeID", Type = "number", Nilable = false },
 				{ Name = "uiModelSceneID", Type = "number", Nilable = false },
+				{ Name = "animID", Type = "number", Nilable = false },
+				{ Name = "spellVisualKitID", Type = "number", Nilable = false },
+				{ Name = "disablePlayerMountPreview", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -17376,6 +19495,9 @@ APIDocumentation:AddDocumentationTable(Minimap);local MountJournal =
 				{ Name = "isSelfMount", Type = "bool", Nilable = false },
 				{ Name = "mountTypeID", Type = "number", Nilable = false },
 				{ Name = "uiModelSceneID", Type = "number", Nilable = false },
+				{ Name = "animID", Type = "number", Nilable = false },
+				{ Name = "spellVisualKitID", Type = "number", Nilable = false },
+				{ Name = "disablePlayerMountPreview", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -17804,12 +19926,15 @@ APIDocumentation:AddDocumentationTable(MountJournal);local MythicPlusInfo =
 	Tables =
 	{
 		{
-			Name = "MythicPlusKeystoneAffix",
+			Name = "MapSeasonBestInfo",
 			Type = "Structure",
 			Fields =
 			{
-				{ Name = "id", Type = "number", Nilable = false },
-				{ Name = "seasonID", Type = "number", Nilable = false },
+				{ Name = "durationSec", Type = "number", Nilable = false },
+				{ Name = "level", Type = "number", Nilable = false },
+				{ Name = "completionDate", Type = "MythicPlusDate", Nilable = false },
+				{ Name = "affixIDs", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "members", Type = "table", InnerType = "MythicPlusMember", Nilable = false },
 			},
 		},
 		{
@@ -17825,6 +19950,15 @@ APIDocumentation:AddDocumentationTable(MountJournal);local MythicPlusInfo =
 			},
 		},
 		{
+			Name = "MythicPlusKeystoneAffix",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "seasonID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "MythicPlusMember",
 			Type = "Structure",
 			Fields =
@@ -17832,18 +19966,6 @@ APIDocumentation:AddDocumentationTable(MountJournal);local MythicPlusInfo =
 				{ Name = "name", Type = "string", Nilable = true },
 				{ Name = "specID", Type = "number", Nilable = false },
 				{ Name = "classID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "MapSeasonBestInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "durationSec", Type = "number", Nilable = false },
-				{ Name = "level", Type = "number", Nilable = false },
-				{ Name = "completionDate", Type = "MythicPlusDate", Nilable = false },
-				{ Name = "affixIDs", Type = "table", InnerType = "number", Nilable = false },
-				{ Name = "members", Type = "table", InnerType = "MythicPlusMember", Nilable = false },
 			},
 		},
 	},
@@ -17972,6 +20094,20 @@ APIDocumentation:AddDocumentationTable(NamePlateManager);local PaperDollInfo =
 			Returns =
 			{
 				{ Name = "azeritePowerIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetInspectItemLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "equippedItemLevel", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -18162,6 +20298,86 @@ APIDocumentation:AddDocumentationTable(PaperDollInfo);local PartyInfo =
 	Functions =
 	{
 		{
+			Name = "AllowedToDoPartyConversion",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "toRaid", Type = "bool", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "allowed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CanInvite",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "allowedToInvite", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ConfirmConvertToRaid",
+			Type = "Function",
+			Documentation = { "Immediately convert to raid with no regard for potentially destructive actions." },
+		},
+		{
+			Name = "ConfirmInviteTravelPass",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "targetName", Type = "string", Nilable = false },
+				{ Name = "targetGUID", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ConfirmInviteUnit",
+			Type = "Function",
+			Documentation = { "Immediately invites the named unit to a party, with no regard for potentially destructive actions." },
+
+			Arguments =
+			{
+				{ Name = "targetName", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "ConfirmLeaveParty",
+			Type = "Function",
+			Documentation = { "Immediately leave the party with no regard for potentially destructive actions" },
+
+			Arguments =
+			{
+				{ Name = "category", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "ConfirmRequestInviteFromUnit",
+			Type = "Function",
+			Documentation = { "Immediately request an invite into the target party, this is the confirmation function to call after RequestInviteFromUnit, or if you would like to skip the confirmation process." },
+
+			Arguments =
+			{
+				{ Name = "targetName", Type = "string", Nilable = false },
+				{ Name = "tank", Type = "bool", Nilable = true },
+				{ Name = "healer", Type = "bool", Nilable = true },
+				{ Name = "dps", Type = "bool", Nilable = true },
+			},
+		},
+		{
+			Name = "ConvertToParty",
+			Type = "Function",
+		},
+		{
+			Name = "ConvertToRaid",
+			Type = "Function",
+			Documentation = { "Usually this will convert to raid immediately. In some cases (e.g. PartySync) the user will be prompted to confirm converting to raid, because it's potentially destructive." },
+		},
+		{
 			Name = "GetActiveCategories",
 			Type = "Function",
 
@@ -18202,10 +20418,89 @@ APIDocumentation:AddDocumentationTable(PaperDollInfo);local PartyInfo =
 				{ Name = "outClubId", Type = "string", Nilable = false },
 			},
 		},
+		{
+			Name = "GetMinLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "category", Type = "number", Nilable = true, Documentation = { "If not provided, the active party is used" } },
+			},
+
+			Returns =
+			{
+				{ Name = "minLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "InviteUnit",
+			Type = "Function",
+			Documentation = { "Attempt to invite the named unit to a party, requires confirmation in some cases (e.g. the party will convert to a raid, or if there is a party sync in progress)." },
+
+			Arguments =
+			{
+				{ Name = "targetName", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "IsPartyFull",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "category", Type = "number", Nilable = true, Documentation = { "If not provided, the active party is used" } },
+			},
+
+			Returns =
+			{
+				{ Name = "isFull", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "LeaveParty",
+			Type = "Function",
+			Documentation = { "Usually this will leave the party immediately. In some cases (e.g. PartySync) the user will be prompted to confirm leaving the party, because it's potentially destructive" },
+
+			Arguments =
+			{
+				{ Name = "category", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "RequestInviteFromUnit",
+			Type = "Function",
+			Documentation = { "Attempt to request an invite into the target party, requires confirmation in some cases (e.g. there is a party sync in progress)." },
+
+			Arguments =
+			{
+				{ Name = "targetName", Type = "string", Nilable = false },
+				{ Name = "tank", Type = "bool", Nilable = true },
+				{ Name = "healer", Type = "bool", Nilable = true },
+				{ Name = "dps", Type = "bool", Nilable = true },
+			},
+		},
 	},
 
 	Events =
 	{
+		{
+			Name = "BnetRequestInviteConfirmation",
+			Type = "Event",
+			LiteralName = "BNET_REQUEST_INVITE_CONFIRMATION",
+			Payload =
+			{
+				{ Name = "gameAccountID", Type = "number", Nilable = false },
+				{ Name = "questSessionActive", Type = "bool", Nilable = false },
+				{ Name = "tank", Type = "bool", Nilable = false },
+				{ Name = "healer", Type = "bool", Nilable = false },
+				{ Name = "dps", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ConvertToRaidConfirmation",
+			Type = "Event",
+			LiteralName = "CONVERT_TO_RAID_CONFIRMATION",
+		},
 		{
 			Name = "EnteredDifferentInstanceFromParty",
 			Type = "Event",
@@ -18267,6 +20562,34 @@ APIDocumentation:AddDocumentationTable(PaperDollInfo);local PartyInfo =
 			LiteralName = "INSTANCE_GROUP_SIZE_CHANGED",
 		},
 		{
+			Name = "InviteToPartyConfirmation",
+			Type = "Event",
+			LiteralName = "INVITE_TO_PARTY_CONFIRMATION",
+			Payload =
+			{
+				{ Name = "targetName", Type = "string", Nilable = false },
+				{ Name = "willConvertToRaid", Type = "bool", Nilable = false },
+				{ Name = "questSessionActive", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "InviteTravelPassConfirmation",
+			Type = "Event",
+			LiteralName = "INVITE_TRAVEL_PASS_CONFIRMATION",
+			Payload =
+			{
+				{ Name = "targetName", Type = "string", Nilable = false },
+				{ Name = "targetGUID", Type = "string", Nilable = false },
+				{ Name = "willConvertToRaid", Type = "bool", Nilable = false },
+				{ Name = "questSessionActive", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "LeavePartyConfirmation",
+			Type = "Event",
+			LiteralName = "LEAVE_PARTY_CONFIRMATION",
+		},
+		{
 			Name = "PartyInviteCancel",
 			Type = "Event",
 			LiteralName = "PARTY_INVITE_CANCEL",
@@ -18284,6 +20607,7 @@ APIDocumentation:AddDocumentationTable(PaperDollInfo);local PartyInfo =
 				{ Name = "isNativeRealm", Type = "bool", Nilable = false },
 				{ Name = "allowMultipleRoles", Type = "bool", Nilable = false },
 				{ Name = "inviterGUID", Type = "string", Nilable = false },
+				{ Name = "questSessionActive", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -18361,6 +20685,20 @@ APIDocumentation:AddDocumentationTable(PaperDollInfo);local PartyInfo =
 			Payload =
 			{
 				{ Name = "preempted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestInviteConfirmation",
+			Type = "Event",
+			LiteralName = "REQUEST_INVITE_CONFIRMATION",
+			Payload =
+			{
+				{ Name = "targetName", Type = "string", Nilable = false },
+				{ Name = "partyLevelLink", Type = "number", Nilable = false },
+				{ Name = "questSessionActive", Type = "bool", Nilable = false },
+				{ Name = "tank", Type = "bool", Nilable = true },
+				{ Name = "healer", Type = "bool", Nilable = true },
+				{ Name = "dps", Type = "bool", Nilable = true },
 			},
 		},
 		{
@@ -19009,7 +21347,7 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 
 			Returns =
 			{
-				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "seconds", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -19146,12 +21484,12 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
-			Name = "GetMatchPVPStatIDs",
+			Name = "GetMatchPVPStatColumns",
 			Type = "Function",
 
 			Returns =
 			{
-				{ Name = "pvpStatIDs", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "columns", Type = "table", InnerType = "MatchPVPStatColumn", Nilable = false },
 			},
 		},
 		{
@@ -19342,6 +21680,24 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			Returns =
 			{
 				{ Name = "battlemasterListInfo", Type = "BattlemasterListInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSpecialEventDetails",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "info", Type = "SpecialEventDetails", Nilable = true },
+			},
+		},
+		{
+			Name = "GetSpecialEventInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "info", Type = "RandomBGInfo", Nilable = false },
 			},
 		},
 		{
@@ -19702,6 +22058,11 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			LiteralName = "PVP_ROLE_UPDATE",
 		},
 		{
+			Name = "PvpSpecialEventInfoUpdated",
+			Type = "Event",
+			LiteralName = "PVP_SPECIAL_EVENT_INFO_UPDATED",
+		},
+		{
 			Name = "PvpTypesEnabled",
 			Type = "Event",
 			LiteralName = "PVP_TYPES_ENABLED",
@@ -19838,6 +22199,28 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
+			Name = "HonorRewardInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "honorLevelName", Type = "string", Nilable = false },
+				{ Name = "badgeFileDataID", Type = "number", Nilable = false },
+				{ Name = "achievementRewardedID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "MatchPVPStatColumn",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "pvpStatID", Type = "number", Nilable = false },
+				{ Name = "columnHeaderID", Type = "number", Nilable = false },
+				{ Name = "orderIndex", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "tooltip", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "PvpBrawlInfo",
 			Type = "Structure",
 			Fields =
@@ -19863,25 +22246,17 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
-			Name = "HonorRewardInfo",
+			Name = "PvpTierInfo",
 			Type = "Structure",
 			Fields =
 			{
-				{ Name = "honorLevelName", Type = "string", Nilable = false },
-				{ Name = "badgeFileDataID", Type = "number", Nilable = false },
-				{ Name = "achievementRewardedID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "MatchPVPStatColumn",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "pvpStatID", Type = "number", Nilable = false },
-				{ Name = "columnHeaderID", Type = "number", Nilable = false },
-				{ Name = "orderIndex", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "tooltip", Type = "string", Nilable = false },
+				{ Name = "descendRating", Type = "number", Nilable = false },
+				{ Name = "ascendRating", Type = "number", Nilable = false },
+				{ Name = "descendTier", Type = "number", Nilable = false },
+				{ Name = "ascendTier", Type = "number", Nilable = false },
+				{ Name = "pvpTierEnum", Type = "number", Nilable = false },
+				{ Name = "tierIconID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -19925,44 +22300,6 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
-			Name = "PvpTierInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "descendRating", Type = "number", Nilable = false },
-				{ Name = "ascendRating", Type = "number", Nilable = false },
-				{ Name = "descendTier", Type = "number", Nilable = false },
-				{ Name = "ascendTier", Type = "number", Nilable = false },
-				{ Name = "pvpTierEnum", Type = "number", Nilable = false },
-				{ Name = "tierIconID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "RandomBGInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "canQueue", Type = "bool", Nilable = false },
-				{ Name = "bgID", Type = "number", Nilable = false },
-				{ Name = "hasRandomWinToday", Type = "bool", Nilable = false },
-				{ Name = "minLevel", Type = "number", Nilable = false },
-				{ Name = "maxLevel", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "PVPStatInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "pvpStatID", Type = "number", Nilable = false },
-				{ Name = "pvpStatValue", Type = "number", Nilable = false },
-				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "tooltip", Type = "string", Nilable = false },
-				{ Name = "iconName", Type = "string", Nilable = false },
-			},
-		},
-		{
 			Name = "PVPScoreInfo",
 			Type = "Structure",
 			Fields =
@@ -19989,6 +22326,19 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 			},
 		},
 		{
+			Name = "PVPStatInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "pvpStatID", Type = "number", Nilable = false },
+				{ Name = "pvpStatValue", Type = "number", Nilable = false },
+				{ Name = "orderIndex", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "tooltip", Type = "string", Nilable = false },
+				{ Name = "iconName", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "PVPTeamInfo",
 			Type = "Structure",
 			Fields =
@@ -19998,6 +22348,30 @@ APIDocumentation:AddDocumentationTable(PlayerLocation);local PvpInfo =
 				{ Name = "rating", Type = "number", Nilable = false },
 				{ Name = "ratingNew", Type = "number", Nilable = false },
 				{ Name = "ratingMMR", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RandomBGInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "canQueue", Type = "bool", Nilable = false },
+				{ Name = "bgID", Type = "number", Nilable = false },
+				{ Name = "hasRandomWinToday", Type = "bool", Nilable = false },
+				{ Name = "minLevel", Type = "number", Nilable = false },
+				{ Name = "maxLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SpecialEventDetails",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "shortDescription", Type = "string", Nilable = false },
+				{ Name = "longDescription", Type = "string", Nilable = false },
+				{ Name = "achievementID", Type = "number", Nilable = false },
+				{ Name = "isActive", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -20201,6 +22575,15 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 	Functions =
 	{
 		{
+			Name = "GetActiveThreatMaps",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "uiMapIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetMapForQuestPOIs",
 			Type = "Function",
 
@@ -20290,6 +22673,20 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			},
 		},
 		{
+			Name = "GetQuestDifficultyLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "level", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetQuestInfo",
 			Type = "Function",
 
@@ -20347,6 +22744,15 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			},
 		},
 		{
+			Name = "HasActiveThreats",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasActiveThreats", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsLegendaryQuest",
 			Type = "Function",
 
@@ -20375,6 +22781,104 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			},
 		},
 		{
+			Name = "IsQuestDisabledForSession",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isDisabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsQuestFlaggedCompleted",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCompleted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsQuestReplayable",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isReplayable", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsQuestReplayedRecently",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "recentlyReplayed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsQuestTrivial",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isTrivial", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsThreatQuest",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isThreat", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "QuestHasQuestSessionBonus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasBonus", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "QuestHasWarModeBonus",
 			Type = "Function",
 
@@ -20386,6 +22890,15 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			Returns =
 			{
 				{ Name = "hasBonus", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestLoadQuestByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -20440,6 +22953,16 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			LiteralName = "QUEST_COMPLETE",
 		},
 		{
+			Name = "QuestDataLoadResult",
+			Type = "Event",
+			LiteralName = "QUEST_DATA_LOAD_RESULT",
+			Payload =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "QuestDetail",
 			Type = "Event",
 			LiteralName = "QUEST_DETAIL",
@@ -20478,6 +23001,7 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			Payload =
 			{
 				{ Name = "questID", Type = "number", Nilable = false },
+				{ Name = "wasReplayQuest", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -20523,10 +23047,6 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			Name = "SuperTrackedQuestChanged",
 			Type = "Event",
 			LiteralName = "SUPER_TRACKED_QUEST_CHANGED",
-			Payload =
-			{
-				{ Name = "superTrackedQuestID", Type = "number", Nilable = false },
-			},
 		},
 		{
 			Name = "TaskProgressUpdate",
@@ -20559,9 +23079,9 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 		{
 			Name = "QuestTag",
 			Type = "Enumeration",
-			NumValues = 10,
-			MinValue = 0,
-			MaxValue = 102,
+			NumValues = 11,
+			MinValue = 1,
+			MaxValue = 266,
 			Fields =
 			{
 				{ Name = "Group", Type = "QuestTag", EnumValue = 1 },
@@ -20574,6 +23094,7 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 				{ Name = "Raid25", Type = "QuestTag", EnumValue = 89 },
 				{ Name = "Scenario", Type = "QuestTag", EnumValue = 98 },
 				{ Name = "Account", Type = "QuestTag", EnumValue = 102 },
+				{ Name = "CombatAlly", Type = "QuestTag", EnumValue = 266 },
 			},
 		},
 		{
@@ -20652,7 +23173,197 @@ APIDocumentation:AddDocumentationTable(QuestLog);local QuestOffer =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(QuestOffer);local QuestTaskInfo =
+APIDocumentation:AddDocumentationTable(QuestOffer);local QuestSession =
+{
+	Name = "QuestSession",
+	Type = "System",
+	Namespace = "C_QuestSession",
+
+	Functions =
+	{
+		{
+			Name = "CanStart",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "allowed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CanStop",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "allowed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "Exists",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "exists", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAvailableSessionCommand",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "command", Type = "QuestSessionCommand", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPendingCommand",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "command", Type = "QuestSessionCommand", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSessionBeginDetails",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "details", Type = "QuestSessionPlayerDetails", Nilable = true },
+			},
+		},
+		{
+			Name = "GetSuperTrackedQuest",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "questID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "HasJoined",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasJoined", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasPendingCommand",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasPendingCommand", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestSessionStart",
+			Type = "Function",
+		},
+		{
+			Name = "RequestSessionStop",
+			Type = "Function",
+		},
+		{
+			Name = "SendSessionBeginResponse",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "beginSession", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetQuestIsSuperTracked",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+				{ Name = "superTrack", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+		{
+			Name = "QuestSessionCreated",
+			Type = "Event",
+			LiteralName = "QUEST_SESSION_CREATED",
+		},
+		{
+			Name = "QuestSessionDestroyed",
+			Type = "Event",
+			LiteralName = "QUEST_SESSION_DESTROYED",
+		},
+		{
+			Name = "QuestSessionEnabledStateChanged",
+			Type = "Event",
+			LiteralName = "QUEST_SESSION_ENABLED_STATE_CHANGED",
+			Payload =
+			{
+				{ Name = "enabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "QuestSessionJoined",
+			Type = "Event",
+			LiteralName = "QUEST_SESSION_JOINED",
+		},
+		{
+			Name = "QuestSessionLeft",
+			Type = "Event",
+			LiteralName = "QUEST_SESSION_LEFT",
+		},
+		{
+			Name = "QuestSessionMemberConfirm",
+			Type = "Event",
+			LiteralName = "QUEST_SESSION_MEMBER_CONFIRM",
+		},
+		{
+			Name = "QuestSessionMemberStartResponse",
+			Type = "Event",
+			LiteralName = "QUEST_SESSION_MEMBER_START_RESPONSE",
+			Payload =
+			{
+				{ Name = "guid", Type = "string", Nilable = false },
+				{ Name = "response", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "QuestSessionNotification",
+			Type = "Event",
+			LiteralName = "QUEST_SESSION_NOTIFICATION",
+			Payload =
+			{
+				{ Name = "result", Type = "QuestSessionResult", Nilable = false },
+				{ Name = "guid", Type = "string", Nilable = false },
+			},
+		},
+	},
+
+	Tables =
+	{
+		{
+			Name = "QuestSessionPlayerDetails",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "guid", Type = "string", Nilable = false },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(QuestSession);local QuestTaskInfo =
 {
 	Name = "QuestTaskInfo",
 	Type = "System",
@@ -20791,6 +23502,15 @@ APIDocumentation:AddDocumentationTable(QuestOffer);local QuestTaskInfo =
 			},
 		},
 		{
+			Name = "GetThreatQuests",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "quests", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "IsActive",
 			Type = "Function",
 
@@ -20832,6 +23552,9 @@ APIDocumentation:AddDocumentationTable(QuestOffer);local QuestTaskInfo =
 				{ Name = "inProgress", Type = "bool", Nilable = false },
 				{ Name = "numObjectives", Type = "number", Nilable = false },
 				{ Name = "mapID", Type = "number", Nilable = false },
+				{ Name = "isQuestStart", Type = "bool", Nilable = false },
+				{ Name = "isDaily", Type = "bool", Nilable = false },
+				{ Name = "isCombatAllyQuest", Type = "bool", Nilable = false },
 				{ Name = "childDepth", Type = "number", Nilable = true },
 			},
 		},
@@ -20881,79 +23604,355 @@ APIDocumentation:AddDocumentationTable(RaidLocks);local RecruitAFriend =
 
 	Functions =
 	{
+		{
+			Name = "ClaimActivityReward",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "activityID", Type = "number", Nilable = false },
+				{ Name = "acceptanceID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ClaimNextReward",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GenerateRecruitmentLink",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRAFInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "info", Type = "RafInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRAFSystemInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "systemInfo", Type = "RafSystemInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecruitActivityRequirementsText",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "activityID", Type = "number", Nilable = false },
+				{ Name = "acceptanceID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "requirementsText", Type = "table", InnerType = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecruitInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "active", Type = "bool", Nilable = false },
+				{ Name = "faction", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "IsEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "enabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsRecruitingEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "enabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RemoveRAFRecruit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "wowAccountGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestUpdatedRecruitmentInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
 	},
 
 	Events =
 	{
 		{
-			Name = "LevelGrantProposed",
+			Name = "RafInfoUpdated",
 			Type = "Event",
-			LiteralName = "LEVEL_GRANT_PROPOSED",
+			LiteralName = "RAF_INFO_UPDATED",
 			Payload =
 			{
-				{ Name = "senderName", Type = "string", Nilable = false },
+				{ Name = "info", Type = "RafInfo", Nilable = false },
 			},
 		},
 		{
-			Name = "PartyReferAFriendUpdated",
+			Name = "RafRecruitingEnabledStatus",
 			Type = "Event",
-			LiteralName = "PARTY_REFER_A_FRIEND_UPDATED",
+			LiteralName = "RAF_RECRUITING_ENABLED_STATUS",
 			Payload =
 			{
-				{ Name = "unitTarget", Type = "string", Nilable = false },
+				{ Name = "enabled", Type = "bool", Nilable = false },
 			},
 		},
 		{
-			Name = "RecruitAFriendCanEmail",
+			Name = "RafSystemEnabledStatus",
 			Type = "Event",
-			LiteralName = "RECRUIT_A_FRIEND_CAN_EMAIL",
+			LiteralName = "RAF_SYSTEM_ENABLED_STATUS",
 			Payload =
 			{
-				{ Name = "resultCode", Type = "number", Nilable = false },
+				{ Name = "enabled", Type = "bool", Nilable = false },
 			},
 		},
 		{
-			Name = "RecruitAFriendInvitationFailed",
+			Name = "RafSystemInfoUpdated",
 			Type = "Event",
-			LiteralName = "RECRUIT_A_FRIEND_INVITATION_FAILED",
+			LiteralName = "RAF_SYSTEM_INFO_UPDATED",
 			Payload =
 			{
-				{ Name = "failureReason", Type = "string", Nilable = false },
+				{ Name = "systemInfo", Type = "RafSystemInfo", Nilable = false },
 			},
-		},
-		{
-			Name = "RecruitAFriendInviterFriendAdded",
-			Type = "Event",
-			LiteralName = "RECRUIT_A_FRIEND_INVITER_FRIEND_ADDED",
-			Payload =
-			{
-				{ Name = "name", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "RecruitAFriendSystemStatus",
-			Type = "Event",
-			LiteralName = "RECRUIT_A_FRIEND_SYSTEM_STATUS",
-		},
-		{
-			Name = "SorByTextUpdated",
-			Type = "Event",
-			LiteralName = "SOR_BY_TEXT_UPDATED",
-		},
-		{
-			Name = "SorCountsUpdated",
-			Type = "Event",
-			LiteralName = "SOR_COUNTS_UPDATED",
-		},
-		{
-			Name = "SorStartExperienceIncomplete",
-			Type = "Event",
-			LiteralName = "SOR_START_EXPERIENCE_INCOMPLETE",
 		},
 	},
 
 	Tables =
 	{
+		{
+			Name = "RafRecruitActivityState",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Incomplete", Type = "RafRecruitActivityState", EnumValue = 0 },
+				{ Name = "Complete", Type = "RafRecruitActivityState", EnumValue = 1 },
+				{ Name = "RewardClaimed", Type = "RafRecruitActivityState", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "RafRecruitSubStatus",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Trial", Type = "RafRecruitSubStatus", EnumValue = 0 },
+				{ Name = "Active", Type = "RafRecruitSubStatus", EnumValue = 1 },
+				{ Name = "Inactive", Type = "RafRecruitSubStatus", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "RafRewardType",
+			Type = "Enumeration",
+			NumValues = 8,
+			MinValue = 0,
+			MaxValue = 7,
+			Fields =
+			{
+				{ Name = "Pet", Type = "RafRewardType", EnumValue = 0 },
+				{ Name = "Mount", Type = "RafRewardType", EnumValue = 1 },
+				{ Name = "Appearance", Type = "RafRewardType", EnumValue = 2 },
+				{ Name = "Title", Type = "RafRewardType", EnumValue = 3 },
+				{ Name = "GameTime", Type = "RafRewardType", EnumValue = 4 },
+				{ Name = "AppearanceSet", Type = "RafRewardType", EnumValue = 5 },
+				{ Name = "Illusion", Type = "RafRewardType", EnumValue = 6 },
+				{ Name = "Invalid", Type = "RafRewardType", EnumValue = 7 },
+			},
+		},
+		{
+			Name = "RafAppearanceInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "appearanceID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RafAppearanceSetInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "setID", Type = "number", Nilable = false },
+				{ Name = "setName", Type = "string", Nilable = false },
+				{ Name = "appearanceIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RafIllusionInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "spellItemEnchantmentID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RafInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "lifetimeMonths", Type = "number", Nilable = false },
+				{ Name = "spentMonths", Type = "number", Nilable = false },
+				{ Name = "availableMonths", Type = "number", Nilable = false },
+				{ Name = "claimInProgress", Type = "bool", Nilable = false },
+				{ Name = "rewards", Type = "table", InnerType = "RafReward", Nilable = false },
+				{ Name = "nextReward", Type = "RafReward", Nilable = true },
+				{ Name = "recruitmentInfo", Type = "RafRecruitmentinfo", Nilable = true },
+				{ Name = "recruits", Type = "table", InnerType = "RafRecruit", Nilable = false },
+			},
+		},
+		{
+			Name = "RafMountInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "mountID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RafPetInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "creatureID", Type = "number", Nilable = false },
+				{ Name = "speciesID", Type = "number", Nilable = false },
+				{ Name = "displayID", Type = "number", Nilable = false },
+				{ Name = "speciesName", Type = "string", Nilable = false },
+				{ Name = "description", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "RafRecruit",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "bnetAccountID", Type = "number", Nilable = false },
+				{ Name = "wowAccountGUID", Type = "string", Nilable = false },
+				{ Name = "battleTag", Type = "string", Nilable = false },
+				{ Name = "monthsRemaining", Type = "number", Nilable = false },
+				{ Name = "subStatus", Type = "RafRecruitSubStatus", Nilable = false },
+				{ Name = "acceptanceID", Type = "string", Nilable = false },
+				{ Name = "activities", Type = "table", InnerType = "RafRecruitActivity", Nilable = false },
+			},
+		},
+		{
+			Name = "RafRecruitActivity",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "activityID", Type = "number", Nilable = false },
+				{ Name = "rewardQuestID", Type = "number", Nilable = false },
+				{ Name = "state", Type = "RafRecruitActivityState", Nilable = false },
+			},
+		},
+		{
+			Name = "RafRecruitmentinfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "recruitmentCode", Type = "string", Nilable = false },
+				{ Name = "recruitmentURL", Type = "string", Nilable = false },
+				{ Name = "expireTime", Type = "number", Nilable = false },
+				{ Name = "remainingTimeSeconds", Type = "number", Nilable = false },
+				{ Name = "totalUses", Type = "number", Nilable = false },
+				{ Name = "remainingUses", Type = "number", Nilable = false },
+				{ Name = "sourceRealm", Type = "string", Nilable = false },
+				{ Name = "sourceFaction", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "RafReward",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "rewardID", Type = "number", Nilable = false },
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "rewardType", Type = "RafRewardType", Nilable = false },
+				{ Name = "petInfo", Type = "RafPetInfo", Nilable = true },
+				{ Name = "mountInfo", Type = "RafMountInfo", Nilable = true },
+				{ Name = "appearanceInfo", Type = "RafAppearanceInfo", Nilable = true },
+				{ Name = "titleInfo", Type = "RafTitleInfo", Nilable = true },
+				{ Name = "appearanceSetInfo", Type = "RafAppearanceSetInfo", Nilable = true },
+				{ Name = "illusionInfo", Type = "RafIllusionInfo", Nilable = true },
+				{ Name = "canClaim", Type = "bool", Nilable = false },
+				{ Name = "claimed", Type = "bool", Nilable = false },
+				{ Name = "repeatable", Type = "bool", Nilable = false },
+				{ Name = "repeatableClaimCount", Type = "number", Nilable = false },
+				{ Name = "monthsRequired", Type = "number", Nilable = false },
+				{ Name = "monthCost", Type = "number", Nilable = false },
+				{ Name = "availableInMonths", Type = "number", Nilable = false },
+				{ Name = "iconID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RafSystemInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "maxRecruits", Type = "number", Nilable = false },
+				{ Name = "maxRecruitMonths", Type = "number", Nilable = false },
+				{ Name = "maxRecruitmentUses", Type = "number", Nilable = false },
+				{ Name = "daysInCycle", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RafTitleInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "titleID", Type = "number", Nilable = false },
+			},
+		},
 	},
 };
 
@@ -21861,6 +24860,7 @@ APIDocumentation:AddDocumentationTable(SocialInfo);local SocialQueue =
 				{ Name = "needHealer", Type = "bool", Nilable = false },
 				{ Name = "needDamage", Type = "bool", Nilable = false },
 				{ Name = "isSoloQueueParty", Type = "bool", Nilable = false },
+				{ Name = "questSessionActive", Type = "bool", Nilable = false },
 				{ Name = "leaderGUID", Type = "string", Nilable = false },
 			},
 		},
@@ -21973,15 +24973,6 @@ APIDocumentation:AddDocumentationTable(SocialInfo);local SocialQueue =
 			},
 		},
 		{
-			Name = "SocialQueuePlayerInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "guid", Type = "string", Nilable = false },
-				{ Name = "clubId", Type = "string", Nilable = true },
-			},
-		},
-		{
 			Name = "SocialQueueGroupQueueInfo",
 			Type = "Structure",
 			Fields =
@@ -21995,10 +24986,65 @@ APIDocumentation:AddDocumentationTable(SocialInfo);local SocialQueue =
 				{ Name = "queueData", Type = "QueueSpecificInfo", Nilable = false },
 			},
 		},
+		{
+			Name = "SocialQueuePlayerInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "guid", Type = "string", Nilable = false },
+				{ Name = "clubId", Type = "string", Nilable = true },
+			},
+		},
 	},
 };
 
-APIDocumentation:AddDocumentationTable(SocialQueue);local Sound =
+APIDocumentation:AddDocumentationTable(SocialQueue);local SocialRestrictions =
+{
+	Name = "SocialRestrictions",
+	Type = "System",
+	Namespace = "C_SocialRestrictions",
+
+	Functions =
+	{
+		{
+			Name = "IsMuted",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isMuted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSilenced",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isSilenced", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSquelched",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isSquelched", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(SocialRestrictions);local Sound =
 {
 	Name = "Sound",
 	Type = "System",
@@ -22239,6 +25285,7 @@ APIDocumentation:AddDocumentationTable(Sound);local SpecializationInfo =
 			Fields =
 			{
 				{ Name = "enabled", Type = "bool", Nilable = false },
+				{ Name = "level", Type = "number", Nilable = false },
 				{ Name = "selectedTalentID", Type = "number", Nilable = true },
 				{ Name = "availableTalentIDs", Type = "table", InnerType = "number", Nilable = false },
 			},
@@ -22388,6 +25435,20 @@ APIDocumentation:AddDocumentationTable(SpellActivationOverlay);local SpellBook =
 			Returns =
 			{
 				{ Name = "contains", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSpellDisabled",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "spellID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "disabled", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -22741,6 +25802,24 @@ APIDocumentation:AddDocumentationTable(SummonInfo);local System =
 			},
 		},
 		{
+			Name = "GlobalMouseDown",
+			Type = "Event",
+			LiteralName = "GLOBAL_MOUSE_DOWN",
+			Payload =
+			{
+				{ Name = "button", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GlobalMouseUp",
+			Type = "Event",
+			LiteralName = "GLOBAL_MOUSE_UP",
+			Payload =
+			{
+				{ Name = "button", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "InitialHotfixesApplied",
 			Type = "Event",
 			LiteralName = "INITIAL_HOTFIXES_APPLIED",
@@ -22997,19 +26076,6 @@ APIDocumentation:AddDocumentationTable(TalkingHead);local TaxiMap =
 			},
 		},
 		{
-			Name = "TaxiNodeInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "nodeID", Type = "number", Nilable = false },
-				{ Name = "position", Type = "table", Mixin = "Vector2DMixin", Nilable = false },
-				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "state", Type = "FlightPathState", Nilable = false },
-				{ Name = "slotIndex", Type = "number", Nilable = false },
-				{ Name = "textureKitPrefix", Type = "string", Nilable = true },
-			},
-		},
-		{
 			Name = "MapTaxiNodeInfo",
 			Type = "Structure",
 			Fields =
@@ -23019,6 +26085,19 @@ APIDocumentation:AddDocumentationTable(TalkingHead);local TaxiMap =
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "atlasName", Type = "string", Nilable = false },
 				{ Name = "faction", Type = "FlightPathFaction", Nilable = false },
+				{ Name = "textureKitPrefix", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "TaxiNodeInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+				{ Name = "position", Type = "table", Mixin = "Vector2DMixin", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "state", Type = "FlightPathState", Nilable = false },
+				{ Name = "slotIndex", Type = "number", Nilable = false },
 				{ Name = "textureKitPrefix", Type = "string", Nilable = true },
 			},
 		},
@@ -24210,6 +27289,20 @@ APIDocumentation:AddDocumentationTable(UIManager);local UIModelInfo =
 	Tables =
 	{
 		{
+			Name = "ItemTryOnReason",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Success", Type = "ItemTryOnReason", EnumValue = 0 },
+				{ Name = "WrongRace", Type = "ItemTryOnReason", EnumValue = 1 },
+				{ Name = "NotEquippable", Type = "ItemTryOnReason", EnumValue = 2 },
+				{ Name = "DataPending", Type = "ItemTryOnReason", EnumValue = 3 },
+			},
+		},
+		{
 			Name = "ModelSceneSetting",
 			Type = "Enumeration",
 			NumValues = 1,
@@ -24217,15 +27310,15 @@ APIDocumentation:AddDocumentationTable(UIManager);local UIModelInfo =
 			MaxValue = 1,
 			Fields =
 			{
-				{ Name = "AlignLightToOrbitDelta", Type = "ModelSceneSetting", EnumValue = 0 },
+				{ Name = "AlignLightToOrbitDelta", Type = "ModelSceneSetting", EnumValue = 1 },
 			},
 		},
 		{
 			Name = "ModelSceneType",
 			Type = "Enumeration",
-			NumValues = 17,
+			NumValues = 18,
 			MinValue = 0,
-			MaxValue = 16,
+			MaxValue = 17,
 			Fields =
 			{
 				{ Name = "MountJournal", Type = "ModelSceneType", EnumValue = 0 },
@@ -24245,20 +27338,7 @@ APIDocumentation:AddDocumentationTable(UIManager);local UIModelInfo =
 				{ Name = "AzeritePowers", Type = "ModelSceneType", EnumValue = 14 },
 				{ Name = "AzeriteRewardGlow", Type = "ModelSceneType", EnumValue = 15 },
 				{ Name = "HeartOfAzeroth", Type = "ModelSceneType", EnumValue = 16 },
-			},
-		},
-		{
-			Name = "ItemTryOnReason",
-			Type = "Enumeration",
-			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 3,
-			Fields =
-			{
-				{ Name = "Success", Type = "ItemTryOnReason", EnumValue = 0 },
-				{ Name = "WrongRace", Type = "ItemTryOnReason", EnumValue = 1 },
-				{ Name = "NotEquippable", Type = "ItemTryOnReason", EnumValue = 2 },
-				{ Name = "DataPending", Type = "ItemTryOnReason", EnumValue = 3 },
+				{ Name = "WorldMapThreat", Type = "ModelSceneType", EnumValue = 17 },
 			},
 		},
 		{
@@ -24378,6 +27458,20 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
+			Name = "GetCaptureZoneVisualizationInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "widgetID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "widgetInfo", Type = "CaptureZoneVisualizationInfo", Nilable = true },
+			},
+		},
+		{
 			Name = "GetDoubleIconAndTextWidgetVisualizationInfo",
 			Type = "Function",
 
@@ -24477,6 +27571,15 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 		},
 		{
 			Name = "GetObjectiveTrackerWidgetSetID",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "setID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPowerBarWidgetSetID",
 			Type = "Function",
 
 			Returns =
@@ -24628,41 +27731,15 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 	Tables =
 	{
 		{
-			Name = "WidgetShownState",
+			Name = "CaptureBarWidgetFillDirectionType",
 			Type = "Enumeration",
 			NumValues = 2,
 			MinValue = 0,
 			MaxValue = 1,
 			Fields =
 			{
-				{ Name = "Hidden", Type = "WidgetShownState", EnumValue = 0 },
-				{ Name = "Shown", Type = "WidgetShownState", EnumValue = 1 },
-			},
-		},
-		{
-			Name = "WidgetEnabledState",
-			Type = "Enumeration",
-			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 3,
-			Fields =
-			{
-				{ Name = "Disabled", Type = "WidgetEnabledState", EnumValue = 0 },
-				{ Name = "Enabled", Type = "WidgetEnabledState", EnumValue = 1 },
-				{ Name = "Red", Type = "WidgetEnabledState", EnumValue = 2 },
-				{ Name = "Highlight", Type = "WidgetEnabledState", EnumValue = 3 },
-			},
-		},
-		{
-			Name = "WidgetAnimationType",
-			Type = "Enumeration",
-			NumValues = 2,
-			MinValue = 0,
-			MaxValue = 1,
-			Fields =
-			{
-				{ Name = "None", Type = "WidgetAnimationType", EnumValue = 0 },
-				{ Name = "Fade", Type = "WidgetAnimationType", EnumValue = 1 },
+				{ Name = "RightToLeft", Type = "CaptureBarWidgetFillDirectionType", EnumValue = 0 },
+				{ Name = "LeftToRight", Type = "CaptureBarWidgetFillDirectionType", EnumValue = 1 },
 			},
 		},
 		{
@@ -24678,6 +27755,20 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
+			Name = "IconAndTextWidgetState",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Hidden", Type = "IconAndTextWidgetState", EnumValue = 0 },
+				{ Name = "Shown", Type = "IconAndTextWidgetState", EnumValue = 1 },
+				{ Name = "ShownWithDynamicIconFlashing", Type = "IconAndTextWidgetState", EnumValue = 2 },
+				{ Name = "ShownWithDynamicIconNotFlashing", Type = "IconAndTextWidgetState", EnumValue = 3 },
+			},
+		},
+		{
 			Name = "IconState",
 			Type = "Enumeration",
 			NumValues = 3,
@@ -24688,6 +27779,45 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "Hidden", Type = "IconState", EnumValue = 0 },
 				{ Name = "ShowState1", Type = "IconState", EnumValue = 1 },
 				{ Name = "ShowState2", Type = "IconState", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "SpellDisplayIconDisplayType",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Buff", Type = "SpellDisplayIconDisplayType", EnumValue = 0 },
+				{ Name = "Debuff", Type = "SpellDisplayIconDisplayType", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "SpellDisplayIconSizeType",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Small", Type = "SpellDisplayIconSizeType", EnumValue = 0 },
+				{ Name = "Medium", Type = "SpellDisplayIconSizeType", EnumValue = 1 },
+				{ Name = "Large", Type = "SpellDisplayIconSizeType", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "StatusBarOverrideBarTextShownType",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Never", Type = "StatusBarOverrideBarTextShownType", EnumValue = 0 },
+				{ Name = "Always", Type = "StatusBarOverrideBarTextShownType", EnumValue = 1 },
+				{ Name = "OnlyOnMouseover", Type = "StatusBarOverrideBarTextShownType", EnumValue = 2 },
+				{ Name = "OnlyNotOnMouseover", Type = "StatusBarOverrideBarTextShownType", EnumValue = 3 },
 			},
 		},
 		{
@@ -24708,11 +27838,25 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
+			Name = "UIWidgetTextSizeType",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Small", Type = "UIWidgetTextSizeType", EnumValue = 0 },
+				{ Name = "Medium", Type = "UIWidgetTextSizeType", EnumValue = 1 },
+				{ Name = "Large", Type = "UIWidgetTextSizeType", EnumValue = 2 },
+				{ Name = "Huge", Type = "UIWidgetTextSizeType", EnumValue = 3 },
+			},
+		},
+		{
 			Name = "UIWidgetVisualizationType",
 			Type = "Enumeration",
-			NumValues = 17,
+			NumValues = 18,
 			MinValue = 0,
-			MaxValue = 16,
+			MaxValue = 17,
 			Fields =
 			{
 				{ Name = "IconAndText", Type = "UIWidgetVisualizationType", EnumValue = 0 },
@@ -24732,99 +27876,80 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "DoubleStateIconRow", Type = "UIWidgetVisualizationType", EnumValue = 14 },
 				{ Name = "TextureAndTextRow", Type = "UIWidgetVisualizationType", EnumValue = 15 },
 				{ Name = "ZoneControl", Type = "UIWidgetVisualizationType", EnumValue = 16 },
+				{ Name = "CaptureZone", Type = "UIWidgetVisualizationType", EnumValue = 17 },
 			},
 		},
 		{
-			Name = "IconAndTextWidgetState",
+			Name = "UiwIdgetFlag",
 			Type = "Enumeration",
-			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 3,
+			NumValues = 1,
+			MinValue = 1,
+			MaxValue = 1,
 			Fields =
 			{
-				{ Name = "Hidden", Type = "IconAndTextWidgetState", EnumValue = 0 },
-				{ Name = "Shown", Type = "IconAndTextWidgetState", EnumValue = 1 },
-				{ Name = "ShownWithDynamicIconFlashing", Type = "IconAndTextWidgetState", EnumValue = 2 },
-				{ Name = "ShownWithDynamicIconNotFlashing", Type = "IconAndTextWidgetState", EnumValue = 3 },
+				{ Name = "UniversalWidget", Type = "UiwIdgetFlag", EnumValue = 1 },
 			},
 		},
 		{
-			Name = "SpellDisplayIconSizeType",
-			Type = "Enumeration",
-			NumValues = 3,
-			MinValue = 0,
-			MaxValue = 2,
-			Fields =
-			{
-				{ Name = "Small", Type = "SpellDisplayIconSizeType", EnumValue = 0 },
-				{ Name = "Medium", Type = "SpellDisplayIconSizeType", EnumValue = 1 },
-				{ Name = "Large", Type = "SpellDisplayIconSizeType", EnumValue = 2 },
-			},
-		},
-		{
-			Name = "SpellDisplayIconDisplayType",
+			Name = "WidgetAnimationType",
 			Type = "Enumeration",
 			NumValues = 2,
 			MinValue = 0,
 			MaxValue = 1,
 			Fields =
 			{
-				{ Name = "Buff", Type = "SpellDisplayIconDisplayType", EnumValue = 0 },
-				{ Name = "Debuff", Type = "SpellDisplayIconDisplayType", EnumValue = 1 },
+				{ Name = "None", Type = "WidgetAnimationType", EnumValue = 0 },
+				{ Name = "Fade", Type = "WidgetAnimationType", EnumValue = 1 },
 			},
 		},
 		{
-			Name = "StatusBarOverrideBarTextShownType",
-			Type = "Enumeration",
-			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 3,
-			Fields =
-			{
-				{ Name = "Never", Type = "StatusBarOverrideBarTextShownType", EnumValue = 0 },
-				{ Name = "Always", Type = "StatusBarOverrideBarTextShownType", EnumValue = 1 },
-				{ Name = "OnlyOnMouseover", Type = "StatusBarOverrideBarTextShownType", EnumValue = 2 },
-				{ Name = "OnlyNotOnMouseover", Type = "StatusBarOverrideBarTextShownType", EnumValue = 3 },
-			},
-		},
-		{
-			Name = "UIWidgetTextSizeType",
-			Type = "Enumeration",
-			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 3,
-			Fields =
-			{
-				{ Name = "Small", Type = "UIWidgetTextSizeType", EnumValue = 0 },
-				{ Name = "Medium", Type = "UIWidgetTextSizeType", EnumValue = 1 },
-				{ Name = "Large", Type = "UIWidgetTextSizeType", EnumValue = 2 },
-				{ Name = "Huge", Type = "UIWidgetTextSizeType", EnumValue = 3 },
-			},
-		},
-		{
-			Name = "ZoneControlMode",
-			Type = "Enumeration",
-			NumValues = 4,
-			MinValue = 0,
-			MaxValue = 3,
-			Fields =
-			{
-				{ Name = "BothStatesAreGood", Type = "ZoneControlMode", EnumValue = 0 },
-				{ Name = "State1IsGood", Type = "ZoneControlMode", EnumValue = 1 },
-				{ Name = "State2IsGood", Type = "ZoneControlMode", EnumValue = 2 },
-				{ Name = "NeitherStateIsGood", Type = "ZoneControlMode", EnumValue = 3 },
-			},
-		},
-		{
-			Name = "ZoneControlLeadingEdgeType",
+			Name = "WidgetCurrencyClass",
 			Type = "Enumeration",
 			NumValues = 2,
 			MinValue = 0,
 			MaxValue = 1,
 			Fields =
 			{
-				{ Name = "NoLeadingEdge", Type = "ZoneControlLeadingEdgeType", EnumValue = 0 },
-				{ Name = "UseLeadingEdge", Type = "ZoneControlLeadingEdgeType", EnumValue = 1 },
+				{ Name = "Currency", Type = "WidgetCurrencyClass", EnumValue = 0 },
+				{ Name = "Item", Type = "WidgetCurrencyClass", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "WidgetEnabledState",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Disabled", Type = "WidgetEnabledState", EnumValue = 0 },
+				{ Name = "Enabled", Type = "WidgetEnabledState", EnumValue = 1 },
+				{ Name = "Red", Type = "WidgetEnabledState", EnumValue = 2 },
+				{ Name = "Highlight", Type = "WidgetEnabledState", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "WidgetShownState",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Hidden", Type = "WidgetShownState", EnumValue = 0 },
+				{ Name = "Shown", Type = "WidgetShownState", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "ZoneControlActiveState",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Inactive", Type = "ZoneControlActiveState", EnumValue = 0 },
+				{ Name = "Active", Type = "ZoneControlActiveState", EnumValue = 1 },
 			},
 		},
 		{
@@ -24842,30 +27967,6 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
-			Name = "ZoneControlState",
-			Type = "Enumeration",
-			NumValues = 2,
-			MinValue = 0,
-			MaxValue = 1,
-			Fields =
-			{
-				{ Name = "State1", Type = "ZoneControlState", EnumValue = 0 },
-				{ Name = "State2", Type = "ZoneControlState", EnumValue = 1 },
-			},
-		},
-		{
-			Name = "ZoneControlActiveState",
-			Type = "Enumeration",
-			NumValues = 2,
-			MinValue = 0,
-			MaxValue = 1,
-			Fields =
-			{
-				{ Name = "Inactive", Type = "ZoneControlActiveState", EnumValue = 0 },
-				{ Name = "Active", Type = "ZoneControlActiveState", EnumValue = 1 },
-			},
-		},
-		{
 			Name = "ZoneControlFillType",
 			Type = "Enumeration",
 			NumValues = 4,
@@ -24880,15 +27981,41 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
-			Name = "WidgetCurrencyClass",
+			Name = "ZoneControlLeadingEdgeType",
 			Type = "Enumeration",
 			NumValues = 2,
 			MinValue = 0,
 			MaxValue = 1,
 			Fields =
 			{
-				{ Name = "Currency", Type = "WidgetCurrencyClass", EnumValue = 0 },
-				{ Name = "Item", Type = "WidgetCurrencyClass", EnumValue = 1 },
+				{ Name = "NoLeadingEdge", Type = "ZoneControlLeadingEdgeType", EnumValue = 0 },
+				{ Name = "UseLeadingEdge", Type = "ZoneControlLeadingEdgeType", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "ZoneControlMode",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "BothStatesAreGood", Type = "ZoneControlMode", EnumValue = 0 },
+				{ Name = "State1IsGood", Type = "ZoneControlMode", EnumValue = 1 },
+				{ Name = "State2IsGood", Type = "ZoneControlMode", EnumValue = 2 },
+				{ Name = "NeitherStateIsGood", Type = "ZoneControlMode", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "ZoneControlState",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "State1", Type = "ZoneControlState", EnumValue = 0 },
+				{ Name = "State2", Type = "ZoneControlState", EnumValue = 1 },
 			},
 		},
 		{
@@ -24922,6 +28049,27 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "neutralZoneCenter", Type = "number", Nilable = false },
 				{ Name = "tooltip", Type = "string", Nilable = false },
 				{ Name = "glowAnimType", Type = "CaptureBarWidgetGlowAnimType", Nilable = false },
+				{ Name = "fillDirectionType", Type = "CaptureBarWidgetFillDirectionType", Nilable = false },
+				{ Name = "widgetSizeSetting", Type = "number", Nilable = false },
+				{ Name = "textureKitID", Type = "number", Nilable = false },
+				{ Name = "frameTextureKitID", Type = "number", Nilable = false },
+				{ Name = "hasTimer", Type = "bool", Nilable = false },
+				{ Name = "orderIndex", Type = "number", Nilable = false },
+				{ Name = "widgetTag", Type = "string", Nilable = false },
+				{ Name = "inAnimType", Type = "WidgetAnimationType", Nilable = false },
+				{ Name = "outAnimType", Type = "WidgetAnimationType", Nilable = false },
+			},
+		},
+		{
+			Name = "CaptureZoneVisualizationInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "shownState", Type = "WidgetShownState", Nilable = false },
+				{ Name = "mode", Type = "ZoneControlMode", Nilable = false },
+				{ Name = "leadingEdgeType", Type = "ZoneControlLeadingEdgeType", Nilable = false },
+				{ Name = "dangerFlashType", Type = "ZoneControlDangerFlashType", Nilable = false },
+				{ Name = "zoneInfo", Type = "ZoneEntry", Nilable = false },
 				{ Name = "widgetSizeSetting", Type = "number", Nilable = false },
 				{ Name = "textureKitID", Type = "number", Nilable = false },
 				{ Name = "frameTextureKitID", Type = "number", Nilable = false },
@@ -24951,16 +28099,6 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "widgetTag", Type = "string", Nilable = false },
 				{ Name = "inAnimType", Type = "WidgetAnimationType", Nilable = false },
 				{ Name = "outAnimType", Type = "WidgetAnimationType", Nilable = false },
-			},
-		},
-		{
-			Name = "UIWidgetStateIconInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "iconState", Type = "IconState", Nilable = false },
-				{ Name = "state1Tooltip", Type = "string", Nilable = false },
-				{ Name = "state2Tooltip", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -25005,28 +28143,6 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "widgetTag", Type = "string", Nilable = false },
 				{ Name = "inAnimType", Type = "WidgetAnimationType", Nilable = false },
 				{ Name = "outAnimType", Type = "WidgetAnimationType", Nilable = false },
-			},
-		},
-		{
-			Name = "UIWidgetInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "widgetID", Type = "number", Nilable = false },
-				{ Name = "widgetSetID", Type = "number", Nilable = false },
-				{ Name = "widgetType", Type = "UIWidgetVisualizationType", Nilable = false },
-			},
-		},
-		{
-			Name = "UIWidgetCurrencyInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "iconFileID", Type = "number", Nilable = false },
-				{ Name = "leadingText", Type = "string", Nilable = false },
-				{ Name = "text", Type = "string", Nilable = false },
-				{ Name = "tooltip", Type = "string", Nilable = false },
-				{ Name = "isCurrencyMaxed", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -25122,19 +28238,6 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
-			Name = "UIWidgetSpellInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "spellID", Type = "number", Nilable = false },
-				{ Name = "tooltip", Type = "string", Nilable = false },
-				{ Name = "text", Type = "string", Nilable = false },
-				{ Name = "stackDisplay", Type = "number", Nilable = false },
-				{ Name = "iconSizeType", Type = "SpellDisplayIconSizeType", Nilable = false },
-				{ Name = "iconDisplayType", Type = "SpellDisplayIconDisplayType", Nilable = false },
-			},
-		},
-		{
 			Name = "SpellDisplayVisualizationInfo",
 			Type = "Structure",
 			Fields =
@@ -25201,6 +28304,8 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "shownState", Type = "WidgetShownState", Nilable = false },
 				{ Name = "enabledState", Type = "WidgetEnabledState", Nilable = false },
 				{ Name = "text", Type = "string", Nilable = false },
+				{ Name = "tooltip", Type = "string", Nilable = false },
+				{ Name = "textSizeType", Type = "UIWidgetTextSizeType", Nilable = false },
 				{ Name = "widgetSizeSetting", Type = "number", Nilable = false },
 				{ Name = "textureKitID", Type = "number", Nilable = false },
 				{ Name = "frameTextureKitID", Type = "number", Nilable = false },
@@ -25257,18 +28362,48 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 			},
 		},
 		{
-			Name = "ZoneEntry",
+			Name = "UIWidgetCurrencyInfo",
 			Type = "Structure",
 			Fields =
 			{
-				{ Name = "state", Type = "ZoneControlState", Nilable = false },
-				{ Name = "activeState", Type = "ZoneControlActiveState", Nilable = false },
-				{ Name = "fillType", Type = "ZoneControlFillType", Nilable = false },
-				{ Name = "min", Type = "number", Nilable = false },
-				{ Name = "max", Type = "number", Nilable = false },
-				{ Name = "current", Type = "number", Nilable = false },
-				{ Name = "capturePoint", Type = "number", Nilable = false },
+				{ Name = "iconFileID", Type = "number", Nilable = false },
+				{ Name = "leadingText", Type = "string", Nilable = false },
+				{ Name = "text", Type = "string", Nilable = false },
 				{ Name = "tooltip", Type = "string", Nilable = false },
+				{ Name = "isCurrencyMaxed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UIWidgetInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "widgetID", Type = "number", Nilable = false },
+				{ Name = "widgetSetID", Type = "number", Nilable = false },
+				{ Name = "widgetType", Type = "UIWidgetVisualizationType", Nilable = false },
+			},
+		},
+		{
+			Name = "UIWidgetSpellInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "tooltip", Type = "string", Nilable = false },
+				{ Name = "text", Type = "string", Nilable = false },
+				{ Name = "stackDisplay", Type = "number", Nilable = false },
+				{ Name = "iconSizeType", Type = "SpellDisplayIconSizeType", Nilable = false },
+				{ Name = "iconDisplayType", Type = "SpellDisplayIconDisplayType", Nilable = false },
+			},
+		},
+		{
+			Name = "UIWidgetStateIconInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "iconState", Type = "IconState", Nilable = false },
+				{ Name = "state1Tooltip", Type = "string", Nilable = false },
+				{ Name = "state2Tooltip", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -25291,6 +28426,21 @@ APIDocumentation:AddDocumentationTable(UIModelInfo);local UIWidgetManager =
 				{ Name = "outAnimType", Type = "WidgetAnimationType", Nilable = false },
 			},
 		},
+		{
+			Name = "ZoneEntry",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "state", Type = "ZoneControlState", Nilable = false },
+				{ Name = "activeState", Type = "ZoneControlActiveState", Nilable = false },
+				{ Name = "fillType", Type = "ZoneControlFillType", Nilable = false },
+				{ Name = "min", Type = "number", Nilable = false },
+				{ Name = "max", Type = "number", Nilable = false },
+				{ Name = "current", Type = "number", Nilable = false },
+				{ Name = "capturePoint", Type = "number", Nilable = false },
+				{ Name = "tooltip", Type = "string", Nilable = false },
+			},
+		},
 	},
 };
 
@@ -25301,6 +28451,105 @@ APIDocumentation:AddDocumentationTable(UIWidgetManager);local Unit =
 
 	Functions =
 	{
+		{
+			Name = "GetUnitPowerBarInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "UnitPowerBarInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitPowerBarInfoByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "barID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "UnitPowerBarInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitPowerBarStrings",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "name", Type = "string", Nilable = true },
+				{ Name = "tooltip", Type = "string", Nilable = true },
+				{ Name = "cost", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "GetUnitPowerBarStringsByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "barID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "name", Type = "string", Nilable = true },
+				{ Name = "tooltip", Type = "string", Nilable = true },
+				{ Name = "cost", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "GetUnitPowerBarTextureInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = false },
+				{ Name = "textureIndex", Type = "number", Nilable = false },
+				{ Name = "timerIndex", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "texture", Type = "number", Nilable = false },
+				{ Name = "colorR", Type = "number", Nilable = false },
+				{ Name = "colorG", Type = "number", Nilable = false },
+				{ Name = "colorB", Type = "number", Nilable = false },
+				{ Name = "colorA", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitPowerBarTextureInfoByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "barID", Type = "number", Nilable = false },
+				{ Name = "textureIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "texture", Type = "number", Nilable = false },
+				{ Name = "colorR", Type = "number", Nilable = false },
+				{ Name = "colorG", Type = "number", Nilable = false },
+				{ Name = "colorB", Type = "number", Nilable = false },
+				{ Name = "colorA", Type = "number", Nilable = false },
+			},
+		},
 		{
 			Name = "PlayerVehicleHasComboPoints",
 			Type = "Function",
@@ -25461,6 +28710,20 @@ APIDocumentation:AddDocumentationTable(UIWidgetManager);local Unit =
 			Returns =
 			{
 				{ Name = "power", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitPowerBarID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "barID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -26573,6 +29836,29 @@ APIDocumentation:AddDocumentationTable(UIWidgetManager);local Unit =
 				{ Name = "OrbCarrierPurple", Type = "PvpUnitClassification", EnumValue = 10 },
 			},
 		},
+		{
+			Name = "UnitPowerBarInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "ID", Type = "number", Nilable = false },
+				{ Name = "barType", Type = "number", Nilable = false },
+				{ Name = "minPower", Type = "number", Nilable = false },
+				{ Name = "startInset", Type = "number", Nilable = false },
+				{ Name = "endInset", Type = "number", Nilable = false },
+				{ Name = "smooth", Type = "bool", Nilable = false },
+				{ Name = "hideFromOthers", Type = "bool", Nilable = false },
+				{ Name = "showOnRaid", Type = "bool", Nilable = false },
+				{ Name = "opaqueSpark", Type = "bool", Nilable = false },
+				{ Name = "opaqueFlash", Type = "bool", Nilable = false },
+				{ Name = "anchorTop", Type = "bool", Nilable = false },
+				{ Name = "forcePercentage", Type = "bool", Nilable = false },
+				{ Name = "sparkUnderFrame", Type = "bool", Nilable = false },
+				{ Name = "flashAtMinPower", Type = "bool", Nilable = false },
+				{ Name = "fractionalCounter", Type = "bool", Nilable = false },
+				{ Name = "animateNumbers", Type = "bool", Nilable = false },
+			},
+		},
 	},
 };
 
@@ -27068,7 +30354,7 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 
 			Returns =
 			{
-				{ Name = "scale", Type = "number", Nilable = true },
+				{ Name = "scale", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -27893,9 +31179,9 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 		{
 			Name = "VoiceChatStatusCode",
 			Type = "Enumeration",
-			NumValues = 23,
+			NumValues = 25,
 			MinValue = 0,
-			MaxValue = 22,
+			MaxValue = 24,
 			Fields =
 			{
 				{ Name = "Success", Type = "VoiceChatStatusCode", EnumValue = 0 },
@@ -27921,6 +31207,8 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 				{ Name = "InvalidCommunityStream", Type = "VoiceChatStatusCode", EnumValue = 20 },
 				{ Name = "PlayerSilenced", Type = "VoiceChatStatusCode", EnumValue = 21 },
 				{ Name = "PlayerVoiceChatParentalDisabled", Type = "VoiceChatStatusCode", EnumValue = 22 },
+				{ Name = "InvalidInputDevice", Type = "VoiceChatStatusCode", EnumValue = 23 },
+				{ Name = "InvalidOutputDevice", Type = "VoiceChatStatusCode", EnumValue = 24 },
 			},
 		},
 		{
@@ -27933,19 +31221,6 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 				{ Name = "power", Type = "number", Nilable = false },
 				{ Name = "isActive", Type = "bool", Nilable = false },
 				{ Name = "isSystemDefault", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "VoiceChatMember",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "energy", Type = "number", Nilable = false },
-				{ Name = "memberID", Type = "number", Nilable = false },
-				{ Name = "isActive", Type = "bool", Nilable = false },
-				{ Name = "isSpeaking", Type = "bool", Nilable = false },
-				{ Name = "isMutedForAll", Type = "bool", Nilable = false },
-				{ Name = "isSilenced", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -27964,6 +31239,19 @@ APIDocumentation:AddDocumentationTable(VignetteInfo);local VoiceChat =
 				{ Name = "isTransmitting", Type = "bool", Nilable = false },
 				{ Name = "isLocalProcess", Type = "bool", Nilable = false },
 				{ Name = "members", Type = "table", InnerType = "VoiceChatMember", Nilable = false },
+			},
+		},
+		{
+			Name = "VoiceChatMember",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "energy", Type = "number", Nilable = false },
+				{ Name = "memberID", Type = "number", Nilable = false },
+				{ Name = "isActive", Type = "bool", Nilable = false },
+				{ Name = "isSpeaking", Type = "bool", Nilable = false },
+				{ Name = "isMutedForAll", Type = "bool", Nilable = false },
+				{ Name = "isSilenced", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -28197,7 +31485,72 @@ APIDocumentation:AddDocumentationTable(WarCampaign);local WorldStateInfo =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(WorldStateInfo);local WowTokenUI =
+APIDocumentation:AddDocumentationTable(WorldStateInfo);local WowEntitlementInfo =
+{
+	Name = "WowEntitlementInfo",
+	Type = "System",
+	Namespace = "C_WowEntitlementInfo",
+
+	Functions =
+	{
+	},
+
+	Events =
+	{
+		{
+			Name = "EntitlementDelivered",
+			Type = "Event",
+			LiteralName = "ENTITLEMENT_DELIVERED",
+			Payload =
+			{
+				{ Name = "entitlementType", Type = "WoWEntitlementType", Nilable = false },
+				{ Name = "textureID", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "payloadID", Type = "number", Nilable = true },
+				{ Name = "showFancyToast", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RafEntitlementDelivered",
+			Type = "Event",
+			LiteralName = "RAF_ENTITLEMENT_DELIVERED",
+			Payload =
+			{
+				{ Name = "entitlementType", Type = "WoWEntitlementType", Nilable = false },
+				{ Name = "textureID", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "payloadID", Type = "number", Nilable = true },
+				{ Name = "showFancyToast", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Tables =
+	{
+		{
+			Name = "WoWEntitlementType",
+			Type = "Enumeration",
+			NumValues = 10,
+			MinValue = 0,
+			MaxValue = 9,
+			Fields =
+			{
+				{ Name = "Item", Type = "WoWEntitlementType", EnumValue = 0 },
+				{ Name = "Mount", Type = "WoWEntitlementType", EnumValue = 1 },
+				{ Name = "Battlepet", Type = "WoWEntitlementType", EnumValue = 2 },
+				{ Name = "Toy", Type = "WoWEntitlementType", EnumValue = 3 },
+				{ Name = "Appearance", Type = "WoWEntitlementType", EnumValue = 4 },
+				{ Name = "AppearanceSet", Type = "WoWEntitlementType", EnumValue = 5 },
+				{ Name = "GameTime", Type = "WoWEntitlementType", EnumValue = 6 },
+				{ Name = "Title", Type = "WoWEntitlementType", EnumValue = 7 },
+				{ Name = "Illusion", Type = "WoWEntitlementType", EnumValue = 8 },
+				{ Name = "Invalid", Type = "WoWEntitlementType", EnumValue = 9 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(WowEntitlementInfo);local WowTokenUI =
 {
 	Name = "WowTokenUI",
 	Type = "System",
@@ -28205,6 +31558,15 @@ APIDocumentation:AddDocumentationTable(WorldStateInfo);local WowTokenUI =
 
 	Functions =
 	{
+		{
+			Name = "StartTokenSell",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "tokenGUID", Type = "string", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -28333,18 +31695,649 @@ APIDocumentation:AddDocumentationTable(WowTokenUI);local ZoneAbility =
 		{
 			Name = "ZoneAbilityType",
 			Type = "Enumeration",
-			NumValues = 4,
+			NumValues = 5,
 			MinValue = 0,
-			MaxValue = 3,
+			MaxValue = 4,
 			Fields =
 			{
 				{ Name = "Garrison", Type = "ZoneAbilityType", EnumValue = 0 },
 				{ Name = "OrderHall", Type = "ZoneAbilityType", EnumValue = 1 },
 				{ Name = "Argus", Type = "ZoneAbilityType", EnumValue = 2 },
 				{ Name = "WarEffort", Type = "ZoneAbilityType", EnumValue = 3 },
+				{ Name = "Visions", Type = "ZoneAbilityType", EnumValue = 4 },
 			},
 		},
 	},
 };
 
-APIDocumentation:AddDocumentationTable(ZoneAbility);
+APIDocumentation:AddDocumentationTable(ZoneAbility);local Action =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Action);local AppearanceSource =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(AppearanceSource);local AuctionHouseEnums =
+{
+	Tables =
+	{
+		{
+			Name = "AuctionHouseCommoditySortOrder",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "UnitPrice", Type = "AuctionHouseCommoditySortOrder", EnumValue = 0 },
+				{ Name = "Quantity", Type = "AuctionHouseCommoditySortOrder", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "AuctionHouseFilter",
+			Type = "Enumeration",
+			NumValues = 11,
+			MinValue = 0,
+			MaxValue = 10,
+			Fields =
+			{
+				{ Name = "UncollectedOnly", Type = "AuctionHouseFilter", EnumValue = 0 },
+				{ Name = "UsableOnly", Type = "AuctionHouseFilter", EnumValue = 1 },
+				{ Name = "UpgradesOnly", Type = "AuctionHouseFilter", EnumValue = 2 },
+				{ Name = "ExactMatch", Type = "AuctionHouseFilter", EnumValue = 3 },
+				{ Name = "PoorQuality", Type = "AuctionHouseFilter", EnumValue = 4 },
+				{ Name = "CommonQuality", Type = "AuctionHouseFilter", EnumValue = 5 },
+				{ Name = "UncommonQuality", Type = "AuctionHouseFilter", EnumValue = 6 },
+				{ Name = "RareQuality", Type = "AuctionHouseFilter", EnumValue = 7 },
+				{ Name = "EpicQuality", Type = "AuctionHouseFilter", EnumValue = 8 },
+				{ Name = "LegendaryQuality", Type = "AuctionHouseFilter", EnumValue = 9 },
+				{ Name = "ArtifactQuality", Type = "AuctionHouseFilter", EnumValue = 10 },
+			},
+		},
+		{
+			Name = "AuctionHouseItemSortOrder",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Bid", Type = "AuctionHouseItemSortOrder", EnumValue = 0 },
+				{ Name = "Buyout", Type = "AuctionHouseItemSortOrder", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "AuctionHouseSortOrder",
+			Type = "Enumeration",
+			NumValues = 5,
+			MinValue = 0,
+			MaxValue = 4,
+			Fields =
+			{
+				{ Name = "Price", Type = "AuctionHouseSortOrder", EnumValue = 0 },
+				{ Name = "Name", Type = "AuctionHouseSortOrder", EnumValue = 1 },
+				{ Name = "Level", Type = "AuctionHouseSortOrder", EnumValue = 2 },
+				{ Name = "Bid", Type = "AuctionHouseSortOrder", EnumValue = 3 },
+				{ Name = "Buyout", Type = "AuctionHouseSortOrder", EnumValue = 4 },
+			},
+		},
+		{
+			Name = "AuctionHouseTimeLeftBand",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Short", Type = "AuctionHouseTimeLeftBand", EnumValue = 0 },
+				{ Name = "Medium", Type = "AuctionHouseTimeLeftBand", EnumValue = 1 },
+				{ Name = "Long", Type = "AuctionHouseTimeLeftBand", EnumValue = 2 },
+				{ Name = "VeryLong", Type = "AuctionHouseTimeLeftBand", EnumValue = 3 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(AuctionHouseEnums);local Base =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Base);local CalendarConstants =
+{
+	Tables =
+	{
+		{
+			Name = "CalendarCommandType",
+			Type = "Enumeration",
+			NumValues = 12,
+			MinValue = 0,
+			MaxValue = 11,
+			Fields =
+			{
+				{ Name = "CalendarCommandCreate", Type = "CalendarCommandType", EnumValue = 0 },
+				{ Name = "CalendarCommandInvite", Type = "CalendarCommandType", EnumValue = 1 },
+				{ Name = "CalendarCommandRsvp", Type = "CalendarCommandType", EnumValue = 2 },
+				{ Name = "CalendarCommandRemoveInvite", Type = "CalendarCommandType", EnumValue = 3 },
+				{ Name = "CalendarCommandRemoveEvent", Type = "CalendarCommandType", EnumValue = 4 },
+				{ Name = "CalendarCommandStatus", Type = "CalendarCommandType", EnumValue = 5 },
+				{ Name = "CalendarCommandModeratorStatus", Type = "CalendarCommandType", EnumValue = 6 },
+				{ Name = "CalendarCommandGetCalendar", Type = "CalendarCommandType", EnumValue = 7 },
+				{ Name = "CalendarCommandGetEvent", Type = "CalendarCommandType", EnumValue = 8 },
+				{ Name = "CalendarCommandUpdateEvent", Type = "CalendarCommandType", EnumValue = 9 },
+				{ Name = "CalendarCommandComplain", Type = "CalendarCommandType", EnumValue = 10 },
+				{ Name = "CalendarCommandNotes", Type = "CalendarCommandType", EnumValue = 11 },
+			},
+		},
+		{
+			Name = "CalendarErrorType",
+			Type = "Enumeration",
+			NumValues = 47,
+			MinValue = 0,
+			MaxValue = 46,
+			Fields =
+			{
+				{ Name = "CalendarErrorSuccess", Type = "CalendarErrorType", EnumValue = 0 },
+				{ Name = "CalendarErrorCommunityEventsExceeded", Type = "CalendarErrorType", EnumValue = 1 },
+				{ Name = "CalendarErrorEventsExceeded", Type = "CalendarErrorType", EnumValue = 2 },
+				{ Name = "CalendarErrorSelfInvitesExceeded", Type = "CalendarErrorType", EnumValue = 3 },
+				{ Name = "CalendarErrorOtherInvitesExceeded", Type = "CalendarErrorType", EnumValue = 4 },
+				{ Name = "CalendarErrorNoPermission", Type = "CalendarErrorType", EnumValue = 5 },
+				{ Name = "CalendarErrorEventInvalid", Type = "CalendarErrorType", EnumValue = 6 },
+				{ Name = "CalendarErrorNotInvited", Type = "CalendarErrorType", EnumValue = 7 },
+				{ Name = "CalendarErrorUnknownError", Type = "CalendarErrorType", EnumValue = 8 },
+				{ Name = "CalendarErrorNotInGuild", Type = "CalendarErrorType", EnumValue = 9 },
+				{ Name = "CalendarErrorNotInCommunity", Type = "CalendarErrorType", EnumValue = 10 },
+				{ Name = "CalendarErrorTargetAlreadyInvited", Type = "CalendarErrorType", EnumValue = 11 },
+				{ Name = "CalendarErrorNameNotFound", Type = "CalendarErrorType", EnumValue = 12 },
+				{ Name = "CalendarErrorWrongFaction", Type = "CalendarErrorType", EnumValue = 13 },
+				{ Name = "CalendarErrorIgnored", Type = "CalendarErrorType", EnumValue = 14 },
+				{ Name = "CalendarErrorInvitesExceeded", Type = "CalendarErrorType", EnumValue = 15 },
+				{ Name = "CalendarErrorInvalidMaxSize", Type = "CalendarErrorType", EnumValue = 16 },
+				{ Name = "CalendarErrorInvalidDate", Type = "CalendarErrorType", EnumValue = 17 },
+				{ Name = "CalendarErrorInvalidTime", Type = "CalendarErrorType", EnumValue = 18 },
+				{ Name = "CalendarErrorNoInvites", Type = "CalendarErrorType", EnumValue = 19 },
+				{ Name = "CalendarErrorNeedsTitle", Type = "CalendarErrorType", EnumValue = 20 },
+				{ Name = "CalendarErrorEventPassed", Type = "CalendarErrorType", EnumValue = 21 },
+				{ Name = "CalendarErrorEventLocked", Type = "CalendarErrorType", EnumValue = 22 },
+				{ Name = "CalendarErrorDeleteCreatorFailed", Type = "CalendarErrorType", EnumValue = 23 },
+				{ Name = "CalendarErrorDataAlreadySet", Type = "CalendarErrorType", EnumValue = 24 },
+				{ Name = "CalendarErrorCalendarDisabled", Type = "CalendarErrorType", EnumValue = 25 },
+				{ Name = "CalendarErrorRestrictedAccount", Type = "CalendarErrorType", EnumValue = 26 },
+				{ Name = "CalendarErrorArenaEventsExceeded", Type = "CalendarErrorType", EnumValue = 27 },
+				{ Name = "CalendarErrorRestrictedLevel", Type = "CalendarErrorType", EnumValue = 28 },
+				{ Name = "CalendarErrorSquelched", Type = "CalendarErrorType", EnumValue = 29 },
+				{ Name = "CalendarErrorNoInvite", Type = "CalendarErrorType", EnumValue = 30 },
+				{ Name = "CalendarErrorComplaintDisabled", Type = "CalendarErrorType", EnumValue = 31 },
+				{ Name = "CalendarErrorComplaintSelf", Type = "CalendarErrorType", EnumValue = 32 },
+				{ Name = "CalendarErrorComplaintSameGuild", Type = "CalendarErrorType", EnumValue = 33 },
+				{ Name = "CalendarErrorComplaintGm", Type = "CalendarErrorType", EnumValue = 34 },
+				{ Name = "CalendarErrorComplaintLimit", Type = "CalendarErrorType", EnumValue = 35 },
+				{ Name = "CalendarErrorComplaintNotFound", Type = "CalendarErrorType", EnumValue = 36 },
+				{ Name = "CalendarErrorEventWrongServer", Type = "CalendarErrorType", EnumValue = 37 },
+				{ Name = "CalendarErrorNoCommunityInvites", Type = "CalendarErrorType", EnumValue = 38 },
+				{ Name = "CalendarErrorInvalidSignup", Type = "CalendarErrorType", EnumValue = 39 },
+				{ Name = "CalendarErrorNoModerator", Type = "CalendarErrorType", EnumValue = 40 },
+				{ Name = "CalendarErrorModeratorRestricted", Type = "CalendarErrorType", EnumValue = 41 },
+				{ Name = "CalendarErrorInvalidNotes", Type = "CalendarErrorType", EnumValue = 42 },
+				{ Name = "CalendarErrorInvalidTitle", Type = "CalendarErrorType", EnumValue = 43 },
+				{ Name = "CalendarErrorInvalidDescription", Type = "CalendarErrorType", EnumValue = 44 },
+				{ Name = "CalendarErrorInvalidClub", Type = "CalendarErrorType", EnumValue = 45 },
+				{ Name = "CalendarErrorCreatorNotFound", Type = "CalendarErrorType", EnumValue = 46 },
+			},
+		},
+		{
+			Name = "CalendarEventBits",
+			Type = "Enumeration",
+			NumValues = 15,
+			MinValue = 1,
+			MaxValue = 3788,
+			Fields =
+			{
+				{ Name = "CalendarEventBitPlayer", Type = "CalendarEventBits", EnumValue = 1 },
+				{ Name = "CalendarEventBitGuildDeprecated", Type = "CalendarEventBits", EnumValue = 2 },
+				{ Name = "CalendarEventBitSystem", Type = "CalendarEventBits", EnumValue = 4 },
+				{ Name = "CalendarEventBitHoliday", Type = "CalendarEventBits", EnumValue = 8 },
+				{ Name = "CalendarEventBitLocked", Type = "CalendarEventBits", EnumValue = 16 },
+				{ Name = "CalendarEventBitAutoApprove", Type = "CalendarEventBits", EnumValue = 32 },
+				{ Name = "CalendarEventBitCommunityAnnouncement", Type = "CalendarEventBits", EnumValue = 64 },
+				{ Name = "CalendarEventBitRaidLockout", Type = "CalendarEventBits", EnumValue = 128 },
+				{ Name = "CalendarEventBitArenaDeprecated", Type = "CalendarEventBits", EnumValue = 256 },
+				{ Name = "CalendarEventBitRaidResetDeprecated", Type = "CalendarEventBits", EnumValue = 512 },
+				{ Name = "CalendarEventBitCommunitySignup", Type = "CalendarEventBits", EnumValue = 1024 },
+				{ Name = "CalendarEventBitGuildSignup", Type = "CalendarEventBits", EnumValue = 2048 },
+				{ Name = "CommunityWide", Type = "CalendarEventBits", EnumValue = 3136 },
+				{ Name = "PlayerCreated", Type = "CalendarEventBits", EnumValue = 3395 },
+				{ Name = "CantComplain", Type = "CalendarEventBits", EnumValue = 3788 },
+			},
+		},
+		{
+			Name = "CalendarEventRepeatOptions",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "CalendarRepeatNever", Type = "CalendarEventRepeatOptions", EnumValue = 0 },
+				{ Name = "CalendarRepeatWeekly", Type = "CalendarEventRepeatOptions", EnumValue = 1 },
+				{ Name = "CalendarRepeatBiweekly", Type = "CalendarEventRepeatOptions", EnumValue = 2 },
+				{ Name = "CalendarRepeatMonthly", Type = "CalendarEventRepeatOptions", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "CalendarEventType",
+			Type = "Enumeration",
+			NumValues = 6,
+			MinValue = 0,
+			MaxValue = 5,
+			Fields =
+			{
+				{ Name = "Raid", Type = "CalendarEventType", EnumValue = 0 },
+				{ Name = "Dungeon", Type = "CalendarEventType", EnumValue = 1 },
+				{ Name = "Pvp", Type = "CalendarEventType", EnumValue = 2 },
+				{ Name = "Meeting", Type = "CalendarEventType", EnumValue = 3 },
+				{ Name = "Other", Type = "CalendarEventType", EnumValue = 4 },
+				{ Name = "HeroicDeprecated", Type = "CalendarEventType", EnumValue = 5 },
+			},
+		},
+		{
+			Name = "CalendarFilterFlags",
+			Type = "Enumeration",
+			NumValues = 5,
+			MinValue = 1,
+			MaxValue = 16,
+			Fields =
+			{
+				{ Name = "WeeklyHoliday", Type = "CalendarFilterFlags", EnumValue = 1 },
+				{ Name = "Darkmoon", Type = "CalendarFilterFlags", EnumValue = 2 },
+				{ Name = "Battleground", Type = "CalendarFilterFlags", EnumValue = 4 },
+				{ Name = "RaidLockout", Type = "CalendarFilterFlags", EnumValue = 8 },
+				{ Name = "RaidReset", Type = "CalendarFilterFlags", EnumValue = 16 },
+			},
+		},
+		{
+			Name = "CalendarGetEventType",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Get", Type = "CalendarGetEventType", EnumValue = 0 },
+				{ Name = "Add", Type = "CalendarGetEventType", EnumValue = 1 },
+				{ Name = "Copy", Type = "CalendarGetEventType", EnumValue = 2 },
+				{ Name = "DefaultCalendarGetEventType", Type = "CalendarGetEventType", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "CalendarInviteBits",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 1,
+			MaxValue = 8,
+			Fields =
+			{
+				{ Name = "CalendarInviteBitPendingInvite", Type = "CalendarInviteBits", EnumValue = 1 },
+				{ Name = "CalendarInviteBitModerator", Type = "CalendarInviteBits", EnumValue = 2 },
+				{ Name = "CalendarInviteBitCreator", Type = "CalendarInviteBits", EnumValue = 4 },
+				{ Name = "CalendarInviteBitSignup", Type = "CalendarInviteBits", EnumValue = 8 },
+			},
+		},
+		{
+			Name = "CalendarInviteSortType",
+			Type = "Enumeration",
+			NumValues = 6,
+			MinValue = 0,
+			MaxValue = 5,
+			Fields =
+			{
+				{ Name = "CalendarInviteSortName", Type = "CalendarInviteSortType", EnumValue = 0 },
+				{ Name = "CalendarInviteSortLevel", Type = "CalendarInviteSortType", EnumValue = 1 },
+				{ Name = "CalendarInviteSortClass", Type = "CalendarInviteSortType", EnumValue = 2 },
+				{ Name = "CalendarInviteSortStatus", Type = "CalendarInviteSortType", EnumValue = 3 },
+				{ Name = "CalendarInviteSortParty", Type = "CalendarInviteSortType", EnumValue = 4 },
+				{ Name = "CalendarInviteSortNotes", Type = "CalendarInviteSortType", EnumValue = 5 },
+			},
+		},
+		{
+			Name = "CalendarInviteType",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Normal", Type = "CalendarInviteType", EnumValue = 0 },
+				{ Name = "Signup", Type = "CalendarInviteType", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "CalendarModeratorStatus",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "CalendarModeratorNone", Type = "CalendarModeratorStatus", EnumValue = 0 },
+				{ Name = "CalendarModeratorModerator", Type = "CalendarModeratorStatus", EnumValue = 1 },
+				{ Name = "CalendarModeratorCreator", Type = "CalendarModeratorStatus", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "CalendarStatus",
+			Type = "Enumeration",
+			NumValues = 9,
+			MinValue = 0,
+			MaxValue = 8,
+			Fields =
+			{
+				{ Name = "Invited", Type = "CalendarStatus", EnumValue = 0 },
+				{ Name = "Available", Type = "CalendarStatus", EnumValue = 1 },
+				{ Name = "Declined", Type = "CalendarStatus", EnumValue = 2 },
+				{ Name = "Confirmed", Type = "CalendarStatus", EnumValue = 3 },
+				{ Name = "Out", Type = "CalendarStatus", EnumValue = 4 },
+				{ Name = "Standby", Type = "CalendarStatus", EnumValue = 5 },
+				{ Name = "Signedup", Type = "CalendarStatus", EnumValue = 6 },
+				{ Name = "NotSignedup", Type = "CalendarStatus", EnumValue = 7 },
+				{ Name = "Tentative", Type = "CalendarStatus", EnumValue = 8 },
+			},
+		},
+		{
+			Name = "CalendarType",
+			Type = "Enumeration",
+			NumValues = 8,
+			MinValue = 0,
+			MaxValue = 7,
+			Fields =
+			{
+				{ Name = "Player", Type = "CalendarType", EnumValue = 0 },
+				{ Name = "Community", Type = "CalendarType", EnumValue = 1 },
+				{ Name = "RaidLockout", Type = "CalendarType", EnumValue = 2 },
+				{ Name = "RaidResetDeprecated", Type = "CalendarType", EnumValue = 3 },
+				{ Name = "Holiday", Type = "CalendarType", EnumValue = 4 },
+				{ Name = "HolidayWeekly", Type = "CalendarType", EnumValue = 5 },
+				{ Name = "HolidayDarkmoon", Type = "CalendarType", EnumValue = 6 },
+				{ Name = "HolidayBattleground", Type = "CalendarType", EnumValue = 7 },
+			},
+		},
+		{
+			Name = "CalendarWebActionType",
+			Type = "Enumeration",
+			NumValues = 7,
+			MinValue = 0,
+			MaxValue = 6,
+			Fields =
+			{
+				{ Name = "Accept", Type = "CalendarWebActionType", EnumValue = 0 },
+				{ Name = "Decline", Type = "CalendarWebActionType", EnumValue = 1 },
+				{ Name = "Remove", Type = "CalendarWebActionType", EnumValue = 2 },
+				{ Name = "ReportSpam", Type = "CalendarWebActionType", EnumValue = 3 },
+				{ Name = "Signup", Type = "CalendarWebActionType", EnumValue = 4 },
+				{ Name = "Tentative", Type = "CalendarWebActionType", EnumValue = 5 },
+				{ Name = "TentativeSignup", Type = "CalendarWebActionType", EnumValue = 6 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(CalendarConstants);local Chat =
+{
+	Tables =
+	{
+		{
+			Name = "ChatChannelType",
+			Type = "Enumeration",
+			NumValues = 6,
+			MinValue = 0,
+			MaxValue = 5,
+			Fields =
+			{
+				{ Name = "None", Type = "ChatChannelType", EnumValue = 0 },
+				{ Name = "Custom", Type = "ChatChannelType", EnumValue = 1 },
+				{ Name = "PrivateParty", Type = "ChatChannelType", EnumValue = 2 },
+				{ Name = "PublicParty", Type = "ChatChannelType", EnumValue = 3 },
+				{ Name = "Communities", Type = "ChatChannelType", EnumValue = 4 },
+				{ Name = "Count", Type = "ChatChannelType", EnumValue = 5 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Chat);local ClubShared =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(ClubShared);local Color =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Color);local GarrisonConstants =
+{
+	Tables =
+	{
+		{
+			Name = "GarrTalentResearchCostSource",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Talent", Type = "GarrTalentResearchCostSource", EnumValue = 0 },
+				{ Name = "Tree", Type = "GarrTalentResearchCostSource", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "GarrTalentTreeType",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Tiers", Type = "GarrTalentTreeType", EnumValue = 0 },
+				{ Name = "Classic", Type = "GarrTalentTreeType", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "GarrTalentType",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Standard", Type = "GarrTalentType", EnumValue = 0 },
+				{ Name = "Minor", Type = "GarrTalentType", EnumValue = 1 },
+				{ Name = "Major", Type = "GarrTalentType", EnumValue = 2 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(GarrisonConstants);local GarrisonShared =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(GarrisonShared);local GuildInfoShared =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(GuildInfoShared);local ItemLocationShared =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(ItemLocationShared);local ItemShared =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(ItemShared);local ModelScene =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(ModelScene);local NamePlate =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(NamePlate);local Player =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Player);local QuestSessionConstants =
+{
+	Tables =
+	{
+		{
+			Name = "QuestSessionCommand",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "None", Type = "QuestSessionCommand", EnumValue = 0 },
+				{ Name = "Start", Type = "QuestSessionCommand", EnumValue = 1 },
+				{ Name = "Stop", Type = "QuestSessionCommand", EnumValue = 2 },
+				{ Name = "SessionActiveNoCommand", Type = "QuestSessionCommand", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "QuestSessionResult",
+			Type = "Enumeration",
+			NumValues = 32,
+			MinValue = 0,
+			MaxValue = 31,
+			Fields =
+			{
+				{ Name = "Ok", Type = "QuestSessionResult", EnumValue = 0 },
+				{ Name = "NotInParty", Type = "QuestSessionResult", EnumValue = 1 },
+				{ Name = "InvalidOwner", Type = "QuestSessionResult", EnumValue = 2 },
+				{ Name = "AlreadyActive", Type = "QuestSessionResult", EnumValue = 3 },
+				{ Name = "NotActive", Type = "QuestSessionResult", EnumValue = 4 },
+				{ Name = "InRaid", Type = "QuestSessionResult", EnumValue = 5 },
+				{ Name = "OwnerRefused", Type = "QuestSessionResult", EnumValue = 6 },
+				{ Name = "Timeout", Type = "QuestSessionResult", EnumValue = 7 },
+				{ Name = "Disabled", Type = "QuestSessionResult", EnumValue = 8 },
+				{ Name = "Started", Type = "QuestSessionResult", EnumValue = 9 },
+				{ Name = "Stopped", Type = "QuestSessionResult", EnumValue = 10 },
+				{ Name = "Joined", Type = "QuestSessionResult", EnumValue = 11 },
+				{ Name = "Left", Type = "QuestSessionResult", EnumValue = 12 },
+				{ Name = "OwnerLeft", Type = "QuestSessionResult", EnumValue = 13 },
+				{ Name = "ReadyCheckFailed", Type = "QuestSessionResult", EnumValue = 14 },
+				{ Name = "PartyDestroyed", Type = "QuestSessionResult", EnumValue = 15 },
+				{ Name = "MemberTimeout", Type = "QuestSessionResult", EnumValue = 16 },
+				{ Name = "AlreadyMember", Type = "QuestSessionResult", EnumValue = 17 },
+				{ Name = "NotOwner", Type = "QuestSessionResult", EnumValue = 18 },
+				{ Name = "AlreadyOwner", Type = "QuestSessionResult", EnumValue = 19 },
+				{ Name = "AlreadyJoined", Type = "QuestSessionResult", EnumValue = 20 },
+				{ Name = "NotMember", Type = "QuestSessionResult", EnumValue = 21 },
+				{ Name = "Busy", Type = "QuestSessionResult", EnumValue = 22 },
+				{ Name = "JoinRejected", Type = "QuestSessionResult", EnumValue = 23 },
+				{ Name = "Logout", Type = "QuestSessionResult", EnumValue = 24 },
+				{ Name = "Empty", Type = "QuestSessionResult", EnumValue = 25 },
+				{ Name = "QuestNotCompleted", Type = "QuestSessionResult", EnumValue = 26 },
+				{ Name = "Resync", Type = "QuestSessionResult", EnumValue = 27 },
+				{ Name = "Restricted", Type = "QuestSessionResult", EnumValue = 28 },
+				{ Name = "InPetBattle", Type = "QuestSessionResult", EnumValue = 29 },
+				{ Name = "InvalidPublicParty", Type = "QuestSessionResult", EnumValue = 30 },
+				{ Name = "Unknown", Type = "QuestSessionResult", EnumValue = 31 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(QuestSessionConstants);local QueueSpecific =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(QueueSpecific);local RecruitAFriendShared =
+{
+	Tables =
+	{
+		{
+			Name = "RafLinkType",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "None", Type = "RafLinkType", EnumValue = 0 },
+				{ Name = "Recruit", Type = "RafLinkType", EnumValue = 1 },
+				{ Name = "Friend", Type = "RafLinkType", EnumValue = 2 },
+				{ Name = "Both", Type = "RafLinkType", EnumValue = 3 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(RecruitAFriendShared);local TextureShared =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(TextureShared);local Time =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Time);local UnitShared =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(UnitShared);local VectorShared =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(VectorShared);

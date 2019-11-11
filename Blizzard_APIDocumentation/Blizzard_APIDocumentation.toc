@@ -72,6 +72,7 @@ InvasionInfoDocumentation.lua
 IslandsInfoDocumentation.lua
 IslandsQueueUIDocumentation.lua
 ItemDocumentation.lua
+ItemInteractionUIDocumentation.lua
 ItemSocketInfoDocumentation.lua
 ItemTextDocumentation.lua
 ItemUpgradeDocumentation.lua
@@ -80,6 +81,7 @@ KnowledgeBaseDocumentation.lua
 LFGInfoDocumentation.lua
 LFGListInfoDocumentation.lua
 LFGuildInfoDocumentation.lua
+LevelLinkDocumentation.lua
 LoadingScreenDocumentation.lua
 LootDocumentation.lua
 LootJournalDocumentation.lua
@@ -103,6 +105,7 @@ QuestChoiceDocumentation.lua
 QuestLineInfoDocumentation.lua
 QuestLogDocumentation.lua
 QuestOfferDocumentation.lua
+QuestSessionDocumentation.lua
 QuestTaskInfoDocumentation.lua
 RaidLocksDocumentation.lua
 RecruitAFriendDocumentation.lua
@@ -117,6 +120,7 @@ SecureTransferDocumentation.lua
 SkillInfoDocumentation.lua
 SocialInfoDocumentation.lua
 SocialQueueDocumentation.lua
+SocialRestrictionsDocumentation.lua
 SoundDocumentation.lua
 SpecializationInfoDocumentation.lua
 SpellDocumentation.lua
@@ -150,6 +154,30 @@ VoiceChatDocumentation.lua
 VoidStorageInfoDocumentation.lua
 WarCampaignDocumentation.lua
 WorldStateInfoDocumentation.lua
+WowEntitlementInfoDocumentation.lua
 WowTokenUIDocumentation.lua
 ZoneAbilityDocumentation.lua
+ActionDocumentation.lua
+AppearanceSourceDocumentation.lua
+AuctionHouseEnumsDocumentation.lua
+BaseDocumentation.lua
+CalendarConstantsDocumentation.lua
+ChatDocumentation.lua
+ClubSharedDocumentation.lua
+ColorDocumentation.lua
+GarrisonConstantsDocumentation.lua
+GarrisonSharedDocumentation.lua
+GuildInfoSharedDocumentation.lua
+ItemLocationSharedDocumentation.lua
+ItemSharedDocumentation.lua
+ModelSceneDocumentation.lua
+NamePlateDocumentation.lua
+PlayerDocumentation.lua
+QuestSessionConstantsDocumentation.lua
+QueueSpecificDocumentation.lua
+RecruitAFriendSharedDocumentation.lua
+TextureSharedDocumentation.lua
+TimeDocumentation.lua
+UnitSharedDocumentation.lua
+VectorSharedDocumentation.lua
 # End documentation files here

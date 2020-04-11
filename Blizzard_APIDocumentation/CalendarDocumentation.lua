@@ -424,7 +424,7 @@ local Calendar =
 			Arguments =
 			{
 				{ Name = "eventIndex", Type = "number", Nilable = false },
-				{ Name = "status", Type = "number", Nilable = false },
+				{ Name = "status", Type = "CalendarStatus", Nilable = false },
 			},
 		},
 		{
@@ -738,6 +738,15 @@ local Calendar =
 			},
 		},
 		{
+			Name = "IsEventOpen",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isOpen", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "MassInviteCommunity",
 			Type = "Function",
 
@@ -1009,7 +1018,7 @@ local Calendar =
 			Type = "Structure",
 			Fields =
 			{
-				{ Name = "optionIndex", Type = "number", Nilable = false },
+				{ Name = "status", Type = "CalendarStatus", Nilable = false },
 				{ Name = "statusString", Type = "string", Nilable = false },
 			},
 		},

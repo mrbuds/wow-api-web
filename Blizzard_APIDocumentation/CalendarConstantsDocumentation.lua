@@ -27,9 +27,9 @@ local CalendarConstants =
 		{
 			Name = "CalendarErrorType",
 			Type = "Enumeration",
-			NumValues = 47,
+			NumValues = 51,
 			MinValue = 0,
-			MaxValue = 46,
+			MaxValue = 50,
 			Fields =
 			{
 				{ Name = "CalendarErrorSuccess", Type = "CalendarErrorType", EnumValue = 0 },
@@ -79,6 +79,10 @@ local CalendarConstants =
 				{ Name = "CalendarErrorInvalidDescription", Type = "CalendarErrorType", EnumValue = 44 },
 				{ Name = "CalendarErrorInvalidClub", Type = "CalendarErrorType", EnumValue = 45 },
 				{ Name = "CalendarErrorCreatorNotFound", Type = "CalendarErrorType", EnumValue = 46 },
+				{ Name = "CalendarErrorEventThrottled", Type = "CalendarErrorType", EnumValue = 47 },
+				{ Name = "CalendarErrorInviteThrottled", Type = "CalendarErrorType", EnumValue = 48 },
+				{ Name = "CalendarErrorInternal", Type = "CalendarErrorType", EnumValue = 49 },
+				{ Name = "CalendarErrorComplaintAdded", Type = "CalendarErrorType", EnumValue = 50 },
 			},
 		},
 		{
@@ -156,13 +160,26 @@ local CalendarConstants =
 			Type = "Enumeration",
 			NumValues = 4,
 			MinValue = 0,
-			MaxValue = 3,
+			MaxValue = 2,
 			Fields =
 			{
 				{ Name = "Get", Type = "CalendarGetEventType", EnumValue = 0 },
 				{ Name = "Add", Type = "CalendarGetEventType", EnumValue = 1 },
 				{ Name = "Copy", Type = "CalendarGetEventType", EnumValue = 2 },
-				{ Name = "DefaultCalendarGetEventType", Type = "CalendarGetEventType", EnumValue = 3 },
+				{ Name = "DefaultCalendarGetEventType", Type = "CalendarGetEventType", EnumValue = 0 },
+			},
+		},
+		{
+			Name = "CalendarHolidayFilterType",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Weekly", Type = "CalendarHolidayFilterType", EnumValue = 0 },
+				{ Name = "Darkmoon", Type = "CalendarHolidayFilterType", EnumValue = 1 },
+				{ Name = "Battleground", Type = "CalendarHolidayFilterType", EnumValue = 2 },
 			},
 		},
 		{
@@ -272,6 +289,32 @@ local CalendarConstants =
 				{ Name = "Signup", Type = "CalendarWebActionType", EnumValue = 4 },
 				{ Name = "Tentative", Type = "CalendarWebActionType", EnumValue = 5 },
 				{ Name = "TentativeSignup", Type = "CalendarWebActionType", EnumValue = 6 },
+			},
+		},
+		{
+			Name = "HolidayCalendarFlags",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 1,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Alliance", Type = "HolidayCalendarFlags", EnumValue = 1 },
+				{ Name = "Horde", Type = "HolidayCalendarFlags", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "HolidayFlags",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 1,
+			MaxValue = 8,
+			Fields =
+			{
+				{ Name = "IsRegionwide", Type = "HolidayFlags", EnumValue = 1 },
+				{ Name = "DontShowInCalendar", Type = "HolidayFlags", EnumValue = 2 },
+				{ Name = "DontDisplayEnd", Type = "HolidayFlags", EnumValue = 4 },
+				{ Name = "DontDisplayBanner", Type = "HolidayFlags", EnumValue = 8 },
 			},
 		},
 	},

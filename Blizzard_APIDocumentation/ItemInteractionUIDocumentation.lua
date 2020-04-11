@@ -11,6 +11,10 @@ local ItemInteractionUI =
 			Type = "Function",
 		},
 		{
+			Name = "CloseUI",
+			Type = "Function",
+		},
+		{
 			Name = "GetItemInteractionInfo",
 			Type = "Function",
 
@@ -101,7 +105,7 @@ local ItemInteractionUI =
 			Type = "Structure",
 			Fields =
 			{
-				{ Name = "textureKitID", Type = "number", Nilable = false },
+				{ Name = "textureKit", Type = "string", Nilable = false },
 				{ Name = "openSoundKitID", Type = "number", Nilable = false },
 				{ Name = "closeSoundKitID", Type = "number", Nilable = false },
 				{ Name = "titleText", Type = "string", Nilable = false },
@@ -111,6 +115,7 @@ local ItemInteractionUI =
 				{ Name = "description", Type = "string", Nilable = true },
 				{ Name = "cost", Type = "number", Nilable = true },
 				{ Name = "currencyTypeId", Type = "number", Nilable = true },
+				{ Name = "dropInSlotSoundKitId", Type = "number", Nilable = true },
 			},
 		},
 	},

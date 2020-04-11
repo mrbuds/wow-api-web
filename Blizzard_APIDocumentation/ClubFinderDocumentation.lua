@@ -110,6 +110,15 @@ local ClubFinder =
 			},
 		},
 		{
+			Name = "GetPlayerApplicantLocaleFlags",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "localeFlags", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetPlayerApplicantSettings",
 			Type = "Function",
 
@@ -442,6 +451,7 @@ local ClubFinder =
 				{ Name = "requestType", Type = "ClubFinderRequestType", Nilable = false },
 				{ Name = "playerName", Type = "string", Nilable = false },
 				{ Name = "forceAccept", Type = "bool", Nilable = false },
+				{ Name = "reported", Type = "bool", Nilable = true },
 			},
 		},
 		{
@@ -500,6 +510,15 @@ local ClubFinder =
 			},
 		},
 		{
+			Name = "SetPlayerApplicantLocaleFlags",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "localeFlags", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "SetPlayerApplicantSettings",
 			Type = "Function",
 
@@ -507,6 +526,15 @@ local ClubFinder =
 			{
 				{ Name = "index", Type = "number", Nilable = false },
 				{ Name = "checked", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetRecruitmentLocale",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "locale", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -686,13 +714,14 @@ local ClubFinder =
 		{
 			Name = "ClubFinderDisableReason",
 			Type = "Enumeration",
-			NumValues = 2,
+			NumValues = 3,
 			MinValue = 0,
-			MaxValue = 1,
+			MaxValue = 2,
 			Fields =
 			{
 				{ Name = "Muted", Type = "ClubFinderDisableReason", EnumValue = 0 },
 				{ Name = "Silenced", Type = "ClubFinderDisableReason", EnumValue = 1 },
+				{ Name = "VeteranTrial", Type = "ClubFinderDisableReason", EnumValue = 2 },
 			},
 		},
 		{
@@ -727,9 +756,9 @@ local ClubFinder =
 		{
 			Name = "ClubFinderSettingFlags",
 			Type = "Enumeration",
-			NumValues = 21,
+			NumValues = 26,
 			MinValue = 0,
-			MaxValue = 20,
+			MaxValue = 25,
 			Fields =
 			{
 				{ Name = "None", Type = "ClubFinderSettingFlags", EnumValue = 0 },
@@ -753,6 +782,11 @@ local ClubFinder =
 				{ Name = "SortRelevance", Type = "ClubFinderSettingFlags", EnumValue = 18 },
 				{ Name = "SortMemberCount", Type = "ClubFinderSettingFlags", EnumValue = 19 },
 				{ Name = "SortNewest", Type = "ClubFinderSettingFlags", EnumValue = 20 },
+				{ Name = "LanguageReserved1", Type = "ClubFinderSettingFlags", EnumValue = 21 },
+				{ Name = "LanguageReserved2", Type = "ClubFinderSettingFlags", EnumValue = 22 },
+				{ Name = "LanguageReserved3", Type = "ClubFinderSettingFlags", EnumValue = 23 },
+				{ Name = "LanguageReserved4", Type = "ClubFinderSettingFlags", EnumValue = 24 },
+				{ Name = "LanguageReserved5", Type = "ClubFinderSettingFlags", EnumValue = 25 },
 			},
 		},
 		{
@@ -831,13 +865,14 @@ local ClubFinder =
 				{ Name = "tabardInfo", Type = "GuildTabardInfo", Nilable = true },
 				{ Name = "recruitingSpecIds", Type = "table", InnerType = "number", Nilable = false },
 				{ Name = "recruitmentFlags", Type = "number", Nilable = false },
+				{ Name = "localeSet", Type = "bool", Nilable = false },
+				{ Name = "recruitmentLocale", Type = "number", Nilable = false },
 				{ Name = "minILvl", Type = "number", Nilable = false },
 				{ Name = "cached", Type = "number", Nilable = false },
 				{ Name = "cacheRequested", Type = "number", Nilable = false },
 				{ Name = "lastPosterGUID", Type = "string", Nilable = false },
 				{ Name = "clubId", Type = "string", Nilable = false },
 				{ Name = "lastUpdatedTime", Type = "number", Nilable = false },
-				{ Name = "clubForceRemoved", Type = "bool", Nilable = false },
 			},
 		},
 	},

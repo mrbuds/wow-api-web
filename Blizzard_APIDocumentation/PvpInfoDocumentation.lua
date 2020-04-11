@@ -25,6 +25,16 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "CanPlayerUseRatedPVPUI",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canUse", Type = "bool", Nilable = false },
+				{ Name = "failureReason", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "CanToggleWarMode",
 			Type = "Function",
 
@@ -157,6 +167,21 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "GetBattlefieldVehicleInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "vehicleIndex", Type = "number", Nilable = false },
+				{ Name = "uiMapID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "BattlefieldVehicleInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "GetBrawlRewards",
 			Type = "Function",
 
@@ -200,6 +225,20 @@ local PvpInfo =
 			Returns =
 			{
 				{ Name = "info", Type = "HonorRewardInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetLevelUpBattlegrounds",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "level", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "battlefields", Type = "table", InnerType = "LevelUpBattlegroundInfo", Nilable = false },
 			},
 		},
 		{
@@ -745,10 +784,6 @@ local PvpInfo =
 			Name = "PostMatchItemRewardUpdate",
 			Type = "Event",
 			LiteralName = "POST_MATCH_ITEM_REWARD_UPDATE",
-			Payload =
-			{
-				{ Name = "reward", Type = "PVPPostMatchItemReward", Nilable = false },
-			},
 		},
 		{
 			Name = "PvpBrawlInfoUpdated",
@@ -918,6 +953,24 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "BattlefieldVehicleInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "x", Type = "number", Nilable = false },
+				{ Name = "y", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "isOccupied", Type = "bool", Nilable = false },
+				{ Name = "atlas", Type = "string", Nilable = false },
+				{ Name = "textureWidth", Type = "number", Nilable = false },
+				{ Name = "textureHeight", Type = "number", Nilable = false },
+				{ Name = "facing", Type = "number", Nilable = false },
+				{ Name = "isPlayer", Type = "bool", Nilable = false },
+				{ Name = "isAlive", Type = "bool", Nilable = false },
+				{ Name = "shouldDrawBelowPlayerBlips", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "BattlemasterListInfo",
 			Type = "Structure",
 			Fields =
@@ -939,6 +992,17 @@ local PvpInfo =
 				{ Name = "honorLevelName", Type = "string", Nilable = false },
 				{ Name = "badgeFileDataID", Type = "number", Nilable = false },
 				{ Name = "achievementRewardedID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "LevelUpBattlegroundInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "icon", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "isEpic", Type = "bool", Nilable = false },
 			},
 		},
 		{

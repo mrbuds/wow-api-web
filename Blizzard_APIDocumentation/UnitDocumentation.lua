@@ -6,6 +6,15 @@ local Unit =
 	Functions =
 	{
 		{
+			Name = "GetNegativeCorruptionEffectInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "corruptionEffects", Type = "table", InnerType = "CorruptionEffectInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "GetUnitPowerBarInfo",
 			Type = "Function",
 
@@ -102,6 +111,20 @@ local Unit =
 				{ Name = "colorG", Type = "number", Nilable = false },
 				{ Name = "colorB", Type = "number", Nilable = false },
 				{ Name = "colorA", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "IsUnitModelReadyForUI",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isReady", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -251,6 +274,20 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitNameplateShowsWidgetsOnly",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "nameplateShowsWidgetsOnly", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitPower",
 			Type = "Function",
 
@@ -322,6 +359,34 @@ local Unit =
 			Returns =
 			{
 				{ Name = "classification", Type = "PvpUnitClassification", Nilable = true },
+			},
+		},
+		{
+			Name = "UnitQuestTrivialLevelRange",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "levelRange", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitQuestTrivialLevelRangeScaling",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "levelRange", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -926,15 +991,6 @@ local Unit =
 			},
 		},
 		{
-			Name = "UnitHealthFrequent",
-			Type = "Event",
-			LiteralName = "UNIT_HEALTH_FREQUENT",
-			Payload =
-			{
-				{ Name = "unitTarget", Type = "string", Nilable = false },
-			},
-		},
-		{
 			Name = "UnitInventoryChanged",
 			Type = "Event",
 			LiteralName = "UNIT_INVENTORY_CHANGED",
@@ -1388,6 +1444,16 @@ local Unit =
 				{ Name = "OrbCarrierGreen", Type = "PvpUnitClassification", EnumValue = 8 },
 				{ Name = "OrbCarrierOrange", Type = "PvpUnitClassification", EnumValue = 9 },
 				{ Name = "OrbCarrierPurple", Type = "PvpUnitClassification", EnumValue = 10 },
+			},
+		},
+		{
+			Name = "CorruptionEffectInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "description", Type = "string", Nilable = false },
+				{ Name = "minCorruption", Type = "number", Nilable = false },
 			},
 		},
 		{

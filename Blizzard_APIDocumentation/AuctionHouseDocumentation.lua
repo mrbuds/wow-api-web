@@ -66,6 +66,14 @@ local AuctionHouse =
 			Type = "Function",
 		},
 		{
+			Name = "CancelSell",
+			Type = "Function",
+		},
+		{
+			Name = "CloseAuctionHouse",
+			Type = "Function",
+		},
+		{
 			Name = "ConfirmCommoditiesPurchase",
 			Type = "Function",
 
@@ -73,6 +81,29 @@ local AuctionHouse =
 			{
 				{ Name = "itemID", Type = "number", Nilable = false },
 				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "FavoritesAreAvailable",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "favoritesAreAvailable", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAuctionItemSubClasses",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "classID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "subClasses", Type = "table", InnerType = "number", Nilable = false },
 			},
 		},
 		{
@@ -527,6 +558,21 @@ local AuctionHouse =
 			},
 		},
 		{
+			Name = "GetTimeLeftBandInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "timeLeftBand", Type = "AuctionHouseTimeLeftBand", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "timeLeftMinSeconds", Type = "number", Nilable = false },
+				{ Name = "timeLeftMaxSeconds", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "HasFavorites",
 			Type = "Function",
 
@@ -591,6 +637,15 @@ local AuctionHouse =
 			},
 		},
 		{
+			Name = "HasMaxFavorites",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasMaxFavorites", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "HasSearchResults",
 			Type = "Function",
 
@@ -631,6 +686,21 @@ local AuctionHouse =
 			Returns =
 			{
 				{ Name = "valid", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsThrottledMessageSystemReady",
+			Type = "Function",
+			Documentation = { "This function is not used in the base UI but is included for AddOn ease-of-use." },
+
+			Arguments =
+			{
+				{ Name = "specificSearch", Type = "bool", Nilable = false, Default = false },
+			},
+
+			Returns =
+			{
+				{ Name = "canSendThrottledMessage", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -725,6 +795,7 @@ local AuctionHouse =
 		{
 			Name = "ReplicateItems",
 			Type = "Function",
+			Documentation = { "This function should be used in place of an 'allItem' QueryAuctionItems call to query the entire auction house." },
 		},
 		{
 			Name = "RequestMoreBrowseResults",
@@ -789,6 +860,7 @@ local AuctionHouse =
 		{
 			Name = "SendSearchQuery",
 			Type = "Function",
+			Documentation = { "Search queries are restricted to 100 calls per minute. These should not be used to query the entire auction house. See ReplicateItems" },
 
 			Arguments =
 			{
@@ -800,6 +872,7 @@ local AuctionHouse =
 		{
 			Name = "SendSellSearchQuery",
 			Type = "Function",
+			Documentation = { "Search queries are restricted to 100 calls per minute. These should not be used to query the entire auction house. See ReplicateItems" },
 
 			Arguments =
 			{
@@ -842,6 +915,21 @@ local AuctionHouse =
 			},
 		},
 		{
+			Name = "AuctionHouseAuctionCreated",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_AUCTION_CREATED",
+			Documentation = { "This signal is not used in the base UI but is included for AddOn ease-of-use." },
+			Payload =
+			{
+				{ Name = "auctionID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "AuctionHouseBrowseFailure",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_BROWSE_FAILURE",
+		},
+		{
 			Name = "AuctionHouseBrowseResultsAdded",
 			Type = "Event",
 			LiteralName = "AUCTION_HOUSE_BROWSE_RESULTS_ADDED",
@@ -871,6 +959,25 @@ local AuctionHouse =
 			LiteralName = "AUCTION_HOUSE_FAVORITES_UPDATED",
 		},
 		{
+			Name = "AuctionHouseNewBidReceived",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_NEW_BID_RECEIVED",
+			Payload =
+			{
+				{ Name = "auctionID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "AuctionHouseNewResultsReceived",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_NEW_RESULTS_RECEIVED",
+			Documentation = { "This signal is not used in the base UI but is included for AddOn ease-of-use. Payload is nil for browse queries." },
+			Payload =
+			{
+				{ Name = "itemKey", Type = "ItemKey", Nilable = true },
+			},
+		},
+		{
 			Name = "AuctionHouseScriptDeprecated",
 			Type = "Event",
 			LiteralName = "AUCTION_HOUSE_SCRIPT_DEPRECATED",
@@ -879,6 +986,42 @@ local AuctionHouse =
 			Name = "AuctionHouseShow",
 			Type = "Event",
 			LiteralName = "AUCTION_HOUSE_SHOW",
+		},
+		{
+			Name = "AuctionHouseThrottledMessageDropped",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_THROTTLED_MESSAGE_DROPPED",
+			Documentation = { "This signal is not used in the base UI but is included for AddOn ease-of-use." },
+		},
+		{
+			Name = "AuctionHouseThrottledMessageQueued",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_THROTTLED_MESSAGE_QUEUED",
+			Documentation = { "This signal is not used in the base UI but is included for AddOn ease-of-use." },
+		},
+		{
+			Name = "AuctionHouseThrottledMessageResponseReceived",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_THROTTLED_MESSAGE_RESPONSE_RECEIVED",
+			Documentation = { "This signal is not used in the base UI but is included for AddOn ease-of-use." },
+		},
+		{
+			Name = "AuctionHouseThrottledMessageSent",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_THROTTLED_MESSAGE_SENT",
+			Documentation = { "This signal is not used in the base UI but is included for AddOn ease-of-use." },
+		},
+		{
+			Name = "AuctionHouseThrottledSpecificSearchReady",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_THROTTLED_SPECIFIC_SEARCH_READY",
+			Documentation = { "This signal is not used in the base UI but is included for AddOn ease-of-use." },
+		},
+		{
+			Name = "AuctionHouseThrottledSystemReady",
+			Type = "Event",
+			LiteralName = "AUCTION_HOUSE_THROTTLED_SYSTEM_READY",
+			Documentation = { "This signal is not used in the base UI but is included for AddOn ease-of-use." },
 		},
 		{
 			Name = "AuctionMultisellFailure",
@@ -1158,8 +1301,8 @@ local AuctionHouse =
 			Fields =
 			{
 				{ Name = "itemID", Type = "number", Nilable = false },
-				{ Name = "itemLevel", Type = "number", Nilable = false },
-				{ Name = "itemSuffix", Type = "number", Nilable = false },
+				{ Name = "itemLevel", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "itemSuffix", Type = "number", Nilable = false, Default = 0 },
 				{ Name = "battlePetSpeciesID", Type = "number", Nilable = false, Default = 0 },
 			},
 		},
@@ -1170,6 +1313,7 @@ local AuctionHouse =
 			{
 				{ Name = "itemName", Type = "string", Nilable = false },
 				{ Name = "battlePetLink", Type = "string", Nilable = true },
+				{ Name = "appearanceLink", Type = "string", Nilable = true },
 				{ Name = "quality", Type = "number", Nilable = false },
 				{ Name = "iconFileID", Type = "number", Nilable = false },
 				{ Name = "isPet", Type = "bool", Nilable = false },
@@ -1208,7 +1352,8 @@ local AuctionHouse =
 				{ Name = "itemLink", Type = "string", Nilable = true },
 				{ Name = "status", Type = "AuctionStatus", Nilable = false },
 				{ Name = "quantity", Type = "number", Nilable = false },
-				{ Name = "timeLeftSeconds", Type = "number", Nilable = false },
+				{ Name = "timeLeftSeconds", Type = "number", Nilable = true },
+				{ Name = "timeLeft", Type = "AuctionHouseTimeLeftBand", Nilable = true },
 				{ Name = "bidAmount", Type = "number", Nilable = true },
 				{ Name = "buyoutAmount", Type = "number", Nilable = true },
 				{ Name = "bidder", Type = "string", Nilable = true },

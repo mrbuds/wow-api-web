@@ -777,6 +777,33 @@ APIDocumentation:AddDocumentationTable(AlliedRacesFrame);local AnimaDiversionUI 
 			},
 		},
 		{
+			Name = "GetPlayerCovenantAnimaCurrencyID",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "currencyID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetReinforceProgress",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "progress", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTextureKit",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "textureKit", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "OpenAnimaDiversionUI",
 			Type = "Function",
 		},
@@ -787,6 +814,7 @@ APIDocumentation:AddDocumentationTable(AlliedRacesFrame);local AnimaDiversionUI 
 			Arguments =
 			{
 				{ Name = "talentID", Type = "number", Nilable = false },
+				{ Name = "temporary", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -807,6 +835,11 @@ APIDocumentation:AddDocumentationTable(AlliedRacesFrame);local AnimaDiversionUI 
 				{ Name = "info", Type = "AnimaDiversionFrameInfo", Nilable = false },
 			},
 		},
+		{
+			Name = "AnimaDiversionTalentUpdated",
+			Type = "Event",
+			LiteralName = "ANIMA_DIVERSION_TALENT_UPDATED",
+		},
 	},
 
 	Tables =
@@ -814,14 +847,24 @@ APIDocumentation:AddDocumentationTable(AlliedRacesFrame);local AnimaDiversionUI 
 		{
 			Name = "AnimaDiversionNodeState",
 			Type = "Enumeration",
-			NumValues = 3,
+			NumValues = 4,
 			MinValue = 0,
-			MaxValue = 2,
+			MaxValue = 3,
 			Fields =
 			{
-				{ Name = "Available", Type = "AnimaDiversionNodeState", EnumValue = 0 },
-				{ Name = "SelectedTemporary", Type = "AnimaDiversionNodeState", EnumValue = 1 },
-				{ Name = "SelectedPermanent", Type = "AnimaDiversionNodeState", EnumValue = 2 },
+				{ Name = "Unavailable", Type = "AnimaDiversionNodeState", EnumValue = 0 },
+				{ Name = "Available", Type = "AnimaDiversionNodeState", EnumValue = 1 },
+				{ Name = "SelectedTemporary", Type = "AnimaDiversionNodeState", EnumValue = 2 },
+				{ Name = "SelectedPermanent", Type = "AnimaDiversionNodeState", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "AnimaDiversionCostInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "currencyID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -842,7 +885,7 @@ APIDocumentation:AddDocumentationTable(AlliedRacesFrame);local AnimaDiversionUI 
 				{ Name = "talentID", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "description", Type = "string", Nilable = false },
-				{ Name = "cost", Type = "number", Nilable = false },
+				{ Name = "costs", Type = "table", InnerType = "AnimaDiversionCostInfo", Nilable = false },
 				{ Name = "currencyID", Type = "number", Nilable = false },
 				{ Name = "icon", Type = "number", Nilable = false },
 				{ Name = "normalizedPosition", Type = "table", Mixin = "Vector2DMixin", Nilable = false },
@@ -12973,7 +13016,39 @@ APIDocumentation:AddDocumentationTable(Container);local ContributionCollector =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(ContributionCollector);local CovenantPreview =
+APIDocumentation:AddDocumentationTable(ContributionCollector);local CovenantCallings =
+{
+	Name = "CovenantCallings",
+	Type = "System",
+	Namespace = "C_CovenantCallings",
+
+	Functions =
+	{
+		{
+			Name = "RequestCallings",
+			Type = "Function",
+		},
+	},
+
+	Events =
+	{
+		{
+			Name = "CovenantCallingsUpdated",
+			Type = "Event",
+			LiteralName = "COVENANT_CALLINGS_UPDATED",
+			Payload =
+			{
+				{ Name = "callings", Type = "table", InnerType = "BountyInfo", Nilable = false },
+			},
+		},
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(CovenantCallings);local CovenantPreview =
 {
 	Name = "CovenantPreview",
 	Type = "System",
@@ -13121,7 +13196,69 @@ APIDocumentation:AddDocumentationTable(CovenantPreview);local CovenantSanctum =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(CovenantSanctum);local CreatureInfo =
+APIDocumentation:AddDocumentationTable(CovenantSanctum);local Covenants =
+{
+	Name = "Covenant",
+	Type = "System",
+	Namespace = "C_Covenants",
+
+	Functions =
+	{
+		{
+			Name = "GetActiveCovenantID",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "covenantID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCovenantData",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "covenantID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "CovenantData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCovenantIDs",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "covenantID", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+		{
+			Name = "CovenantData",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "ID", Type = "number", Nilable = false },
+				{ Name = "textureKit", Type = "string", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "soulbindIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Covenants);local CreatureInfo =
 {
 	Name = "CreatureInfo",
 	Type = "System",
@@ -15439,6 +15576,20 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 			},
 		},
 		{
+			Name = "GetAutoCombatSpellInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "autoCombatSpellID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "spellInfo", Type = "AutoCombatSpellInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "GetCurrentGarrTalentTreeFriendshipFactionID",
 			Type = "Function",
 
@@ -15468,6 +15619,20 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 			Returns =
 			{
 				{ Name = "spellInfo", Type = "table", InnerType = "AutoCombatSpellInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetFollowerAutoCombatStats",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "garrFollowerID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "autoCombatInfo", Type = "FollowerAutoCombatStatsInfo", Nilable = true },
 			},
 		},
 		{
@@ -15665,6 +15830,15 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 			{
 				{ Name = "isMet", Type = "bool", Nilable = false },
 				{ Name = "failureString", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "RushHealFollower",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "garrFollowerID", Type = "string", Nilable = false },
 			},
 		},
 	},
@@ -16152,6 +16326,19 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 	Tables =
 	{
 		{
+			Name = "AutoCombatantRole",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Damager", Type = "AutoCombatantRole", EnumValue = 0 },
+				{ Name = "Healer", Type = "AutoCombatantRole", EnumValue = 1 },
+				{ Name = "Tank", Type = "AutoCombatantRole", EnumValue = 2 },
+			},
+		},
+		{
 			Name = "AutoCombatResult",
 			Type = "Structure",
 			Fields =
@@ -16207,6 +16394,17 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 			},
 		},
 		{
+			Name = "FollowerAutoCombatStatsInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "currentHealth", Type = "number", Nilable = false },
+				{ Name = "maxHealth", Type = "number", Nilable = false },
+				{ Name = "attack", Type = "number", Nilable = false },
+				{ Name = "healingTimestamp", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "FollowerDisplayID",
 			Type = "Structure",
 			Fields =
@@ -16243,6 +16441,9 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 				{ Name = "textureKit", Type = "string", Nilable = false },
 				{ Name = "isTroop", Type = "bool", Nilable = false },
 				{ Name = "boardIndex", Type = "number", Nilable = false },
+				{ Name = "health", Type = "number", Nilable = false },
+				{ Name = "maxHealth", Type = "number", Nilable = false },
+				{ Name = "role", Type = "AutoCombatantRole", Nilable = false },
 			},
 		},
 		{
@@ -16287,6 +16488,9 @@ APIDocumentation:AddDocumentationTable(GMTicketInfo);local GarrisonInfo =
 				{ Name = "height", Type = "number", Nilable = false },
 				{ Name = "mechanics", Type = "table", InnerType = "GarrisonMechanicInfo", Nilable = false },
 				{ Name = "autoCombatSpells", Type = "table", InnerType = "AutoCombatSpellInfo", Nilable = false },
+				{ Name = "role", Type = "AutoCombatantRole", Nilable = false },
+				{ Name = "health", Type = "number", Nilable = false },
+				{ Name = "maxHealth", Type = "number", Nilable = false },
 				{ Name = "boardIndex", Type = "number", Nilable = false },
 			},
 		},
@@ -18367,11 +18571,6 @@ APIDocumentation:AddDocumentationTable(KnowledgeBase);local LFGInfo =
 			},
 		},
 		{
-			Name = "LfgBonusFactionIdUpdated",
-			Type = "Event",
-			LiteralName = "LFG_BONUS_FACTION_ID_UPDATED",
-		},
-		{
 			Name = "LfgBootProposalUpdate",
 			Type = "Event",
 			LiteralName = "LFG_BOOT_PROPOSAL_UPDATE",
@@ -18961,6 +19160,10 @@ APIDocumentation:AddDocumentationTable(LFGuildInfo);local LegendaryCrafting =
 			},
 		},
 		{
+			Name = "CloseRuneforgeInteraction",
+			Type = "Function",
+		},
+		{
 			Name = "CraftRuneforgeLegendary",
 			Type = "Function",
 
@@ -19088,6 +19291,16 @@ APIDocumentation:AddDocumentationTable(LFGuildInfo);local LegendaryCrafting =
 
 	Events =
 	{
+		{
+			Name = "RuneforgeLegendaryCraftingClosed",
+			Type = "Event",
+			LiteralName = "RUNEFORGE_LEGENDARY_CRAFTING_CLOSED",
+		},
+		{
+			Name = "RuneforgeLegendaryCraftingOpened",
+			Type = "Event",
+			LiteralName = "RUNEFORGE_LEGENDARY_CRAFTING_OPENED",
+		},
 		{
 			Name = "RuneforgePowerInfoUpdated",
 			Type = "Event",
@@ -22587,6 +22800,7 @@ APIDocumentation:AddDocumentationTable(PetJournalInfo);local PlayerChoice =
 			Type = "Structure",
 			Fields =
 			{
+				{ Name = "id", Type = "number", Nilable = false },
 				{ Name = "responseIdentifier", Type = "number", Nilable = false },
 				{ Name = "buttonText", Type = "string", Nilable = false },
 				{ Name = "description", Type = "string", Nilable = false },
@@ -22605,6 +22819,7 @@ APIDocumentation:AddDocumentationTable(PetJournalInfo);local PlayerChoice =
 				{ Name = "hasRewards", Type = "bool", Nilable = false },
 				{ Name = "rarity", Type = "PlayerChoiceRarity", Nilable = false },
 				{ Name = "typeArtID", Type = "number", Nilable = true },
+				{ Name = "uiTextureKit", Type = "string", Nilable = true },
 			},
 		},
 		{
@@ -24215,7 +24430,7 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 
 			Returns =
 			{
-				{ Name = "bounties", Type = "table", InnerType = "MapBountyInfo", Nilable = true },
+				{ Name = "bounties", Type = "table", InnerType = "BountyInfo", Nilable = true },
 			},
 		},
 		{
@@ -24743,6 +24958,20 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 			},
 		},
 		{
+			Name = "IsQuestCalling",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isCalling", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsQuestCriteriaForBounty",
 			Type = "Function",
 
@@ -25266,18 +25495,6 @@ APIDocumentation:AddDocumentationTable(QuestLineInfo);local QuestLog =
 				{ Name = "Common", Type = "WorldQuestQuality", EnumValue = 0 },
 				{ Name = "Rare", Type = "WorldQuestQuality", EnumValue = 1 },
 				{ Name = "Epic", Type = "WorldQuestQuality", EnumValue = 2 },
-			},
-		},
-		{
-			Name = "MapBountyInfo",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "questID", Type = "number", Nilable = false },
-				{ Name = "factionID", Type = "number", Nilable = false },
-				{ Name = "icon", Type = "number", Nilable = false },
-				{ Name = "numObjectives", Type = "number", Nilable = false },
-				{ Name = "turninRequirementText", Type = "string", Nilable = true },
 			},
 		},
 		{
@@ -26793,7 +27010,83 @@ APIDocumentation:AddDocumentationTable(ScrappingMachineUI);local ScriptWarnings 
 	},
 };
 
-APIDocumentation:AddDocumentationTable(ScriptWarnings);local SecureTransfer =
+APIDocumentation:AddDocumentationTable(ScriptWarnings);local ScriptedAnimations =
+{
+	Name = "ScriptedAnimations",
+	Type = "System",
+	Namespace = "C_ScriptedAnimations",
+
+	Functions =
+	{
+		{
+			Name = "GetAllScriptedAnimationEffects",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "scriptedAnimationEffects", Type = "table", InnerType = "ScriptedAnimationEffect", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+		{
+			Name = "ScriptedAnimationBehavior",
+			Type = "Enumeration",
+			NumValues = 5,
+			MinValue = 0,
+			MaxValue = 4,
+			Fields =
+			{
+				{ Name = "None", Type = "ScriptedAnimationBehavior", EnumValue = 0 },
+				{ Name = "TargetShake", Type = "ScriptedAnimationBehavior", EnumValue = 1 },
+				{ Name = "TargetKnockBack", Type = "ScriptedAnimationBehavior", EnumValue = 2 },
+				{ Name = "SourceRecoil", Type = "ScriptedAnimationBehavior", EnumValue = 3 },
+				{ Name = "SourceCollideWithTarget", Type = "ScriptedAnimationBehavior", EnumValue = 4 },
+			},
+		},
+		{
+			Name = "ScriptedAnimationTrajectory",
+			Type = "Enumeration",
+			NumValues = 6,
+			MinValue = 0,
+			MaxValue = 5,
+			Fields =
+			{
+				{ Name = "AtSource", Type = "ScriptedAnimationTrajectory", EnumValue = 0 },
+				{ Name = "AtTarget", Type = "ScriptedAnimationTrajectory", EnumValue = 1 },
+				{ Name = "Straight", Type = "ScriptedAnimationTrajectory", EnumValue = 2 },
+				{ Name = "CurveLeft", Type = "ScriptedAnimationTrajectory", EnumValue = 3 },
+				{ Name = "CurveRight", Type = "ScriptedAnimationTrajectory", EnumValue = 4 },
+				{ Name = "CurveRandom", Type = "ScriptedAnimationTrajectory", EnumValue = 5 },
+			},
+		},
+		{
+			Name = "ScriptedAnimationEffect",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "visual", Type = "number", Nilable = false },
+				{ Name = "visualScale", Type = "number", Nilable = false },
+				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "trajectory", Type = "ScriptedAnimationTrajectory", Nilable = false },
+				{ Name = "startBehavior", Type = "ScriptedAnimationBehavior", Nilable = true },
+				{ Name = "startSoundKitID", Type = "number", Nilable = true },
+				{ Name = "finishEffectID", Type = "number", Nilable = true },
+				{ Name = "finishBehavior", Type = "ScriptedAnimationBehavior", Nilable = true },
+				{ Name = "finishSoundKitID", Type = "number", Nilable = true },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(ScriptedAnimations);local SecureTransfer =
 {
 	Name = "SecureTransfer",
 	Type = "System",
@@ -27270,7 +27563,300 @@ APIDocumentation:AddDocumentationTable(SocialQueue);local SocialRestrictions =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(SocialRestrictions);local Sound =
+APIDocumentation:AddDocumentationTable(SocialRestrictions);local Soulbinds =
+{
+	Name = "Soulbinds",
+	Type = "System",
+	Namespace = "C_Soulbinds",
+
+	Functions =
+	{
+		{
+			Name = "ActivateSoulbind",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CloseSoulbindForge",
+			Type = "Function",
+		},
+		{
+			Name = "EndInteraction",
+			Type = "Function",
+		},
+		{
+			Name = "GetActiveSoulbindID",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemConduitType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "type", Type = "SoulbindConduitType", Nilable = true },
+			},
+		},
+		{
+			Name = "GetSoulbindData",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "SoulbindData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSoulbindIDs",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "covenantID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "soulbindID", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTree",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "treeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "tree", Type = "SoulbindTree", Nilable = false },
+			},
+		},
+		{
+			Name = "HasInstalledConduit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "InstallConduitInSlot",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+				{ Name = "itemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsAtSoulbindForge",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsItemConduit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isConduit", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "LearnNode",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "ResetSoulbind",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UninstallConduitInSlot",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UninstallConduits",
+			Type = "Function",
+		},
+	},
+
+	Events =
+	{
+		{
+			Name = "SoulbindActivated",
+			Type = "Event",
+			LiteralName = "SOULBIND_ACTIVATED",
+			Payload =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SoulbindConduitInstalled",
+			Type = "Event",
+			LiteralName = "SOULBIND_CONDUIT_INSTALLED",
+			Payload =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SoulbindConduitUninstalled",
+			Type = "Event",
+			LiteralName = "SOULBIND_CONDUIT_UNINSTALLED",
+			Payload =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SoulbindForgeInteractionEnded",
+			Type = "Event",
+			LiteralName = "SOULBIND_FORGE_INTERACTION_ENDED",
+		},
+		{
+			Name = "SoulbindForgeInteractionStarted",
+			Type = "Event",
+			LiteralName = "SOULBIND_FORGE_INTERACTION_STARTED",
+		},
+		{
+			Name = "SoulbindNodeLearned",
+			Type = "Event",
+			LiteralName = "SOULBIND_NODE_LEARNED",
+			Payload =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SoulbindNodeUnlearned",
+			Type = "Event",
+			LiteralName = "SOULBIND_NODE_UNLEARNED",
+			Payload =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+		},
+	},
+
+	Tables =
+	{
+		{
+			Name = "SoulbindData",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "ID", Type = "number", Nilable = false },
+				{ Name = "covenantID", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "description", Type = "string", Nilable = false },
+				{ Name = "portrait", Type = "string", Nilable = false },
+				{ Name = "tree", Type = "SoulbindTree", Nilable = false },
+				{ Name = "modelSceneData", Type = "SoulbindModelSceneData", Nilable = false },
+			},
+		},
+		{
+			Name = "SoulbindModelSceneData",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "creatureDisplayInfoID", Type = "number", Nilable = false },
+				{ Name = "modelSceneActorID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SoulbindNode",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "ID", Type = "number", Nilable = false },
+				{ Name = "row", Type = "number", Nilable = false },
+				{ Name = "column", Type = "number", Nilable = false },
+				{ Name = "icon", Type = "number", Nilable = false },
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "conduitID", Type = "number", Nilable = false },
+				{ Name = "state", Type = "SoulbindNodeState", Nilable = false },
+				{ Name = "conduitType", Type = "SoulbindConduitType", Nilable = true },
+				{ Name = "parentNodeIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SoulbindTree",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "editable", Type = "bool", Nilable = false },
+				{ Name = "nodes", Type = "table", InnerType = "SoulbindNode", Nilable = false },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Soulbinds);local Sound =
 {
 	Name = "Sound",
 	Type = "System",
@@ -28217,6 +28803,15 @@ APIDocumentation:AddDocumentationTable(SuperTrackManager);local System =
 
 	Functions =
 	{
+		{
+			Name = "GetFrameStack",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "objects", Type = "table", InnerType = "table", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -32509,6 +33104,7 @@ APIDocumentation:AddDocumentationTable(Unit);local UserFeedback =
 			Arguments =
 			{
 				{ Name = "bugInfo", Type = "string", Nilable = false },
+				{ Name = "suppressNotification", Type = "bool", Nilable = false, Default = false },
 			},
 
 			Returns =
@@ -34895,7 +35491,61 @@ APIDocumentation:AddDocumentationTable(Base);local CalendarConstants =
 	},
 };
 
-APIDocumentation:AddDocumentationTable(CalendarConstants);local Chat =
+APIDocumentation:AddDocumentationTable(CalendarConstants);local CharacterCustomizationShared =
+{
+	Tables =
+	{
+		{
+			Name = "ChrCustomizationCategoryFlag",
+			Type = "Enumeration",
+			NumValues = 1,
+			MinValue = 1,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "UndressModel", Type = "ChrCustomizationCategoryFlag", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "ChrCustomizationOptionType",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "SelectionPopout", Type = "ChrCustomizationOptionType", EnumValue = 0 },
+				{ Name = "Checkbox", Type = "ChrCustomizationOptionType", EnumValue = 1 },
+				{ Name = "Slider", Type = "ChrCustomizationOptionType", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "CharCustomizationChoice",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "swatchColor", Type = "table", Mixin = "ColorMixin", Nilable = true },
+			},
+		},
+		{
+			Name = "CharCustomizationOption",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "orderIndex", Type = "number", Nilable = false },
+				{ Name = "optionType", Type = "ChrCustomizationOptionType", Nilable = false },
+				{ Name = "choices", Type = "table", InnerType = "CharCustomizationChoice", Nilable = false },
+				{ Name = "currentChoiceIndex", Type = "number", Nilable = false },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(CharacterCustomizationShared);local Chat =
 {
 	Tables =
 	{
@@ -35002,20 +35652,21 @@ APIDocumentation:AddDocumentationTable(Color);local GarrisonConstants =
 		{
 			Name = "GarrAutoMissionEventType",
 			Type = "Enumeration",
-			NumValues = 9,
+			NumValues = 10,
 			MinValue = 0,
-			MaxValue = 8,
+			MaxValue = 9,
 			Fields =
 			{
 				{ Name = "MeleeDamage", Type = "GarrAutoMissionEventType", EnumValue = 0 },
 				{ Name = "RangeDamage", Type = "GarrAutoMissionEventType", EnumValue = 1 },
-				{ Name = "SpellDamage", Type = "GarrAutoMissionEventType", EnumValue = 2 },
-				{ Name = "Heal", Type = "GarrAutoMissionEventType", EnumValue = 3 },
-				{ Name = "PeriodicDamage", Type = "GarrAutoMissionEventType", EnumValue = 4 },
-				{ Name = "PeriodicHeal", Type = "GarrAutoMissionEventType", EnumValue = 5 },
-				{ Name = "ApplyAura", Type = "GarrAutoMissionEventType", EnumValue = 6 },
-				{ Name = "RemoveAura", Type = "GarrAutoMissionEventType", EnumValue = 7 },
-				{ Name = "Died", Type = "GarrAutoMissionEventType", EnumValue = 8 },
+				{ Name = "SpellMeleeDamage", Type = "GarrAutoMissionEventType", EnumValue = 2 },
+				{ Name = "SpellRangeDamage", Type = "GarrAutoMissionEventType", EnumValue = 3 },
+				{ Name = "Heal", Type = "GarrAutoMissionEventType", EnumValue = 4 },
+				{ Name = "PeriodicDamage", Type = "GarrAutoMissionEventType", EnumValue = 5 },
+				{ Name = "PeriodicHeal", Type = "GarrAutoMissionEventType", EnumValue = 6 },
+				{ Name = "ApplyAura", Type = "GarrAutoMissionEventType", EnumValue = 7 },
+				{ Name = "RemoveAura", Type = "GarrAutoMissionEventType", EnumValue = 8 },
+				{ Name = "Died", Type = "GarrAutoMissionEventType", EnumValue = 9 },
 			},
 		},
 		{
@@ -35133,14 +35784,15 @@ APIDocumentation:AddDocumentationTable(Color);local GarrisonConstants =
 		{
 			Name = "GarrTalentUI",
 			Type = "Enumeration",
-			NumValues = 3,
+			NumValues = 4,
 			MinValue = 0,
-			MaxValue = 2,
+			MaxValue = 3,
 			Fields =
 			{
 				{ Name = "Generic", Type = "GarrTalentUI", EnumValue = 0 },
 				{ Name = "CovenantSanctum", Type = "GarrTalentUI", EnumValue = 1 },
 				{ Name = "SoulBinds", Type = "GarrTalentUI", EnumValue = 2 },
+				{ Name = "AnimaDiversion", Type = "GarrTalentUI", EnumValue = 3 },
 			},
 		},
 		{
@@ -35189,6 +35841,14 @@ APIDocumentation:AddDocumentationTable(Color);local GarrisonConstants =
 				{ Name = "Type_7_0", Type = "GarrisonType", EnumValue = 3 },
 				{ Name = "Type_8_0", Type = "GarrisonType", EnumValue = 9 },
 				{ Name = "Type_9_0", Type = "GarrisonType", EnumValue = 111 },
+			},
+		},
+		{
+			Name = "GarrisonConstsExposed",
+			Type = "Constants",
+			Values =
+			{
+				{ Name = "GARRISON_AUTO_COMBATANT_FULL_HEAL_COST", Type = "number", Value = 100 },
 			},
 		},
 	},
@@ -35422,9 +36082,9 @@ APIDocumentation:AddDocumentationTable(Player);local QuestConstants =
 		{
 			Name = "QuestTagType",
 			Type = "Enumeration",
-			NumValues = 15,
+			NumValues = 16,
 			MinValue = 0,
-			MaxValue = 14,
+			MaxValue = 15,
 			Fields =
 			{
 				{ Name = "Tag", Type = "QuestTagType", EnumValue = 0 },
@@ -35442,6 +36102,7 @@ APIDocumentation:AddDocumentationTable(Player);local QuestConstants =
 				{ Name = "FactionAssault", Type = "QuestTagType", EnumValue = 12 },
 				{ Name = "Islands", Type = "QuestTagType", EnumValue = 13 },
 				{ Name = "Threat", Type = "QuestTagType", EnumValue = 14 },
+				{ Name = "CovenantCalling", Type = "QuestTagType", EnumValue = 15 },
 			},
 		},
 		{

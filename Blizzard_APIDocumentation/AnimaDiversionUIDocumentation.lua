@@ -7,6 +7,10 @@ local AnimaDiversionUI =
 	Functions =
 	{
 		{
+			Name = "CloseUI",
+			Type = "Function",
+		},
+		{
 			Name = "GetAnimaDiversionNodes",
 			Type = "Function",
 
@@ -16,12 +20,12 @@ local AnimaDiversionUI =
 			},
 		},
 		{
-			Name = "GetPlayerCovenantAnimaCurrencyID",
+			Name = "GetOriginPosition",
 			Type = "Function",
 
 			Returns =
 			{
-				{ Name = "currencyID", Type = "number", Nilable = false },
+				{ Name = "normalizedPosition", Type = "table", Mixin = "Vector2DMixin", Nilable = true },
 			},
 		},
 		{

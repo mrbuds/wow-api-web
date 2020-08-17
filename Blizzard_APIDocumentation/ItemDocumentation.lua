@@ -63,6 +63,20 @@ local Item =
 			},
 		},
 		{
+			Name = "DoesItemMatchBonusTreeReplacement",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLoc", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "matchesBonusTree", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "GetCurrentItemLevel",
 			Type = "Function",
 
@@ -453,6 +467,16 @@ local Item =
 			{
 				{ Name = "itemID", Type = "number", Nilable = false },
 				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ItemChanged",
+			Type = "Event",
+			LiteralName = "ITEM_CHANGED",
+			Payload =
+			{
+				{ Name = "previousHyperlink", Type = "string", Nilable = false },
+				{ Name = "newHyperlink", Type = "string", Nilable = false },
 			},
 		},
 		{

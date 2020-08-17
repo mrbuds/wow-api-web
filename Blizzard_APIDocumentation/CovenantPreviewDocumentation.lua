@@ -55,7 +55,7 @@ local CovenantPreview =
 			Fields =
 			{
 				{ Name = "Class", Type = "CovenantAbilityType", EnumValue = 0 },
-				{ Name = "Racial", Type = "CovenantAbilityType", EnumValue = 1 },
+				{ Name = "Signature", Type = "CovenantAbilityType", EnumValue = 1 },
 			},
 		},
 		{
@@ -80,6 +80,7 @@ local CovenantPreview =
 				{ Name = "description", Type = "string", Nilable = false },
 				{ Name = "covenantCrest", Type = "string", Nilable = false },
 				{ Name = "covenantAbilities", Type = "table", InnerType = "CovenantAbilityInfo", Nilable = false },
+				{ Name = "fromPlayerChoice", Type = "bool", Nilable = false },
 			},
 		},
 	},

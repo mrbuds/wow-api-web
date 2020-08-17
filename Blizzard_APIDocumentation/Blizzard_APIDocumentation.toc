@@ -66,6 +66,7 @@ ExpansionDocumentation.lua
 FogOfWarDocumentation.lua
 FriendListDocumentation.lua
 GMTicketInfoDocumentation.lua
+GamePadDocumentation.lua
 GarrisonInfoDocumentation.lua
 GlyphInfoDocumentation.lua
 GossipInfoDocumentation.lua
@@ -90,6 +91,7 @@ LFGListInfoDocumentation.lua
 LFGuildInfoDocumentation.lua
 LegendaryCraftingDocumentation.lua
 LevelLinkDocumentation.lua
+LevelSquishDocumentation.lua
 LoadingScreenDocumentation.lua
 LootDocumentation.lua
 LoreTextDocumentation.lua
@@ -110,6 +112,7 @@ PetJournalInfoDocumentation.lua
 PlayerChoiceDocumentation.lua
 PlayerInfoDocumentation.lua
 PlayerLocationDocumentation.lua
+PlayerMentorshipDocumentation.lua
 PvpInfoDocumentation.lua
 QuestLineInfoDocumentation.lua
 QuestLogDocumentation.lua
@@ -167,6 +170,7 @@ VignetteInfoDocumentation.lua
 VoiceChatDocumentation.lua
 VoidStorageInfoDocumentation.lua
 WarCampaignDocumentation.lua
+WeeklyRewardsDocumentation.lua
 WorldStateInfoDocumentation.lua
 WowEntitlementInfoDocumentation.lua
 WowTokenUIDocumentation.lua
@@ -178,10 +182,12 @@ BaseDocumentation.lua
 BountySharedDocumentation.lua
 CalendarConstantsDocumentation.lua
 CharacterCustomizationSharedDocumentation.lua
-ChatDocumentation.lua
+ChatConstantsDocumentation.lua
 ClubSharedDocumentation.lua
 ColorDocumentation.lua
+CovenantCallingsConstantsDocumentation.lua
 CovenantsConstantsDocumentation.lua
+DamageConstantsDocumentation.lua
 GarrisonConstantsDocumentation.lua
 GarrisonSharedDocumentation.lua
 GuildInfoSharedDocumentation.lua
@@ -189,14 +195,18 @@ ItemConstantsDocumentation.lua
 ItemLocationSharedDocumentation.lua
 ItemSharedDocumentation.lua
 LegendaryCraftingTypesDocumentation.lua
+LevelConstantsDocumentation.lua
 ModelSceneDocumentation.lua
 NamePlateDocumentation.lua
+PetScalingConstantsDocumentation.lua
 PlayerDocumentation.lua
+PlayerMentorshipConstantsDocumentation.lua
 QuestConstantsDocumentation.lua
 QuestSessionConstantsDocumentation.lua
 QueueSpecificDocumentation.lua
 RecruitAFriendSharedDocumentation.lua
 ScriptRegionSharedDocumentation.lua
+SuperTrackManagerSharedDocumentation.lua
 TextureSharedDocumentation.lua
 TimeDocumentation.lua
 TradeSkillUITypesDocumentation.lua

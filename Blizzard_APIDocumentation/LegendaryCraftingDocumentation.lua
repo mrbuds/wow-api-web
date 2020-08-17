@@ -7,21 +7,6 @@ local LegendaryCrafting =
 	Functions =
 	{
 		{
-			Name = "CanCraftRuneforgeLegendary",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "description", Type = "RuneforgeLegendaryCraftDescription", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "canCraft", Type = "bool", Nilable = false },
-				{ Name = "error", Type = "RuneforgeLegendaryError", Nilable = true },
-			},
-		},
-		{
 			Name = "CloseRuneforgeInteraction",
 			Type = "Function",
 		},
@@ -35,7 +20,21 @@ local LegendaryCrafting =
 			},
 		},
 		{
-			Name = "GetItemLevelTiers",
+			Name = "GetRuneforgeLegendaryComponentInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "runeforgeLegendary", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "componentInfo", Type = "RuneforgeLegendaryComponentInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRuneforgeLegendaryCost",
 			Type = "Function",
 
 			Arguments =
@@ -45,7 +44,7 @@ local LegendaryCrafting =
 
 			Returns =
 			{
-				{ Name = "tiers", Type = "table", InnerType = "ItemLevelTier", Nilable = false },
+				{ Name = "cost", Type = "table", InnerType = "CurrencyCost", Nilable = false },
 			},
 		},
 		{
@@ -58,6 +57,30 @@ local LegendaryCrafting =
 			},
 		},
 		{
+			Name = "GetRuneforgeLegendaryCurrencies",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "currencies", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRuneforgeLegendaryUpgradeCost",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "runeforgeLegendary", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "upgradeItem", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "cost", Type = "table", InnerType = "CurrencyCost", Nilable = false },
+			},
+		},
+		{
 			Name = "GetRuneforgeModifierInfo",
 			Type = "Function",
 
@@ -65,7 +88,6 @@ local LegendaryCrafting =
 			{
 				{ Name = "baseItem", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
 				{ Name = "powerID", Type = "number", Nilable = true },
-				{ Name = "itemLevelTierIndex", Type = "number", Nilable = true },
 				{ Name = "addedModifierIndex", Type = "number", Nilable = false },
 				{ Name = "modifiers", Type = "table", InnerType = "number", Nilable = false },
 			},
@@ -79,11 +101,6 @@ local LegendaryCrafting =
 		{
 			Name = "GetRuneforgeModifiers",
 			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "baseItem", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
-			},
 
 			Returns =
 			{
@@ -119,6 +136,35 @@ local LegendaryCrafting =
 			},
 		},
 		{
+			Name = "IsRuneforgeLegendary",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "item", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isRuneforgeLegendary", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsUpgradeItemValidForRuneforgeLegendary",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "runeforgeLegendary", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "upgradeItem", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isValid", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsValidRuneforgeBaseItem",
 			Type = "Function",
 
@@ -140,13 +186,22 @@ local LegendaryCrafting =
 			{
 				{ Name = "baseItem", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
 				{ Name = "runeforgePowerID", Type = "number", Nilable = false },
-				{ Name = "itemLevelTierIndex", Type = "number", Nilable = false },
 				{ Name = "modifiers", Type = "table", InnerType = "number", Nilable = false },
 			},
 
 			Returns =
 			{
 				{ Name = "description", Type = "RuneforgeLegendaryCraftDescription", Nilable = false },
+			},
+		},
+		{
+			Name = "UpgradeRuneforgeLegendary",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "runeforgeLegendary", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "upgradeItem", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
 			},
 		},
 	},
@@ -162,6 +217,10 @@ local LegendaryCrafting =
 			Name = "RuneforgeLegendaryCraftingOpened",
 			Type = "Event",
 			LiteralName = "RUNEFORGE_LEGENDARY_CRAFTING_OPENED",
+			Payload =
+			{
+				{ Name = "isUpgrade", Type = "bool", Nilable = false },
+			},
 		},
 		{
 			Name = "RuneforgePowerInfoUpdated",

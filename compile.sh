@@ -9,7 +9,7 @@
 #      or beta branch : https://github.com/Gethe/wow-ui-source/tree/beta/AddOns/Blizzard_APIDocumentation
 
 BLIZZDOC='Blizzard_APIDocumentation'
-UPDATEDDOCPATH="../wow-ui-source/Interface/AddOns/${BLIZZDOC}"
+UPDATEDDOCPATH="../wow-ui-source/AddOns/${BLIZZDOC}"
 TOCFILE="${BLIZZDOC}/${BLIZZDOC}.toc"
 CONCATFILE="fulldoc.lua"
 
@@ -19,9 +19,10 @@ CONCATFILE="fulldoc.lua"
 if [ -e ${CONCATFILE} ]; then
   echo ". delete old files"
   rm ${CONCATFILE} *.luac api.lua.json ${BLIZZDOC}/*.lua ${BLIZZDOC}/*.luac ${BLIZZDOC}/*.json
-  echo ". copy data from ${UPDATEDDOCPATH}"
-  cp ${UPDATEDDOCPATH}/* ${BLIZZDOC}/
 fi
+
+echo ". copy data from ${UPDATEDDOCPATH}"
+cp ${UPDATEDDOCPATH}/* ${BLIZZDOC}/
 
 # concatenate documentation
 echo ". make ${CONCATFILE}"
@@ -46,6 +47,6 @@ done
 
 echo ". compile Lua files to javascript"
 
-moonshine distil api.lua fulldoc.lua
+moonshine distil api.lua # fulldoc.lua
 cd "${BLIZZDOC}"
 moonshine distil *.lua

@@ -27,13 +27,27 @@ local CharacterCustomizationShared =
 			},
 		},
 		{
+			Name = "Unitsex",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Male", Type = "Unitsex", EnumValue = 0 },
+				{ Name = "Female", Type = "Unitsex", EnumValue = 1 },
+				{ Name = "None", Type = "Unitsex", EnumValue = 2 },
+			},
+		},
+		{
 			Name = "CharCustomizationChoice",
 			Type = "Structure",
 			Fields =
 			{
 				{ Name = "id", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "swatchColor", Type = "table", Mixin = "ColorMixin", Nilable = true },
+				{ Name = "swatchColor1", Type = "table", Mixin = "ColorMixin", Nilable = true },
+				{ Name = "swatchColor2", Type = "table", Mixin = "ColorMixin", Nilable = true },
 			},
 		},
 		{

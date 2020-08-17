@@ -113,6 +113,7 @@ local PlayerChoice =
 				{ Name = "widgetSetID", Type = "number", Nilable = true },
 				{ Name = "disabledButton", Type = "bool", Nilable = false },
 				{ Name = "desaturatedArt", Type = "bool", Nilable = false },
+				{ Name = "disabledOption", Type = "bool", Nilable = false },
 				{ Name = "groupID", Type = "number", Nilable = true },
 				{ Name = "headerIconAtlasElement", Type = "string", Nilable = true },
 				{ Name = "subHeader", Type = "string", Nilable = true },
@@ -123,6 +124,8 @@ local PlayerChoice =
 				{ Name = "rarity", Type = "PlayerChoiceRarity", Nilable = false },
 				{ Name = "typeArtID", Type = "number", Nilable = true },
 				{ Name = "uiTextureKit", Type = "string", Nilable = true },
+				{ Name = "spellID", Type = "number", Nilable = true },
+				{ Name = "maxStacks", Type = "number", Nilable = false },
 			},
 		},
 		{

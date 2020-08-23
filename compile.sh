@@ -47,6 +47,7 @@ done
 
 echo ". compile Lua files to javascript"
 
-moonshine distil api.lua # fulldoc.lua
+moonshine distil api.lua
+moonshine distil fulldoc.lua
 cd "${BLIZZDOC}"
 moonshine distil *.lua

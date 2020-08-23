@@ -283,78 +283,80 @@ VectorSharedDocumentation.lua
 VehicleConstantsDocumentation.lua]]
 
 for _,line in pairs(("\n"):split2(stringtocfile)) do
-    local char1 = line:sub(1,1)
-    if char1 ~= "" and char1 ~= "#" then
-        require("Blizzard_APIDocumentation." .. line:sub(1,-5))
-        -- replace some mixin functions to remove links & color codes after they are loaded
-        -- i don't like how i do it but can't find a proper way
-        if removelinks then
-            if line == "BaseAPIMixin.lua" then
-                function BaseAPIMixin:GenerateAPILink()
-                --  return ("|cff%s|Hapi:%s:%s:%s|h%s|h|r"):format(self:GetLinkHexColor(), self:GetType(), self:GetName(), self:GetParentName(), self:GetFullName());
-                --  return self:GetFullName()
-                    return ("<a class='api' style='color: #%s' href='?search=api:%s:%s:%s'>%s</a>"):format(self:GetLinkHexColor(), self:GetType(), self:GetName(), self:GetParentName(), self:GetFullName());
+    if line then
+        local char1 = line:sub(1,1)
+        if char1 ~= "" and char1 ~= "#" then
+            require("Blizzard_APIDocumentation." .. line:sub(1,-5))
+            -- replace some mixin functions to remove links & color codes after they are loaded
+            -- i don't like how i do it but can't find a proper way
+            if removelinks then
+                if line == "BaseAPIMixin.lua" then
+                    function BaseAPIMixin:GenerateAPILink()
+                    --  return ("|cff%s|Hapi:%s:%s:%s|h%s|h|r"):format(self:GetLinkHexColor(), self:GetType(), self:GetName(), self:GetParentName(), self:GetFullName());
+                    --  return self:GetFullName()
+                        return ("<a class='api' style='color: #%s' href='?search=api:%s:%s:%s'>%s</a>"):format(self:GetLinkHexColor(), self:GetType(), self:GetName(), self:GetParentName(), self:GetFullName());
+                    end
                 end
-            end
 
-            if line == "FieldsAPIMixin.lua" then
-                function FieldsAPIMixin:GetArgumentString(decorateOptionals, includeColorCodes)
-                    --local includeColorCodes = false
-                    local prefix = decorateOptionals ~= false and self:IsOptional() and "optional " or "";
-                    if includeColorCodes ~= false then
-                        return ("<span style='color: #%s'>%s%s</span>"):format(self:GetLinkHexColor(), prefix, self:GetName());
+                if line == "FieldsAPIMixin.lua" then
+                    function FieldsAPIMixin:GetArgumentString(decorateOptionals, includeColorCodes)
+                        --local includeColorCodes = false
+                        local prefix = decorateOptionals ~= false and self:IsOptional() and "optional " or "";
+                        if includeColorCodes ~= false then
+                            return ("<span style='color: #%s'>%s%s</span>"):format(self:GetLinkHexColor(), prefix, self:GetName());
+                        end
+                        return ("%s%s"):format(prefix, self:GetName());
                     end
-                    return ("%s%s"):format(prefix, self:GetName());
                 end
-            end
 
-            if line == "EventsAPIMixin.lua" then
-                function EventsAPIMixin:GetPayloadString(decorateOptionals, includeColorCodes) -- override
-                    --local includeColorCodes = false
-                    if self.Payload then
-                        local values = {};
-                        for _, payloadInfo in ipairs(self.Payload) do
-                            if includeColorCodes ~= false then
-                                table.insert(values, ("%s<span style='color: #%s'/>"):format(payloadInfo:GetPayloadString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
-                            else
-                                table.insert(values, payloadInfo:GetPayloadString(decorateOptionals, includeColorCodes));
+                if line == "EventsAPIMixin.lua" then
+                    function EventsAPIMixin:GetPayloadString(decorateOptionals, includeColorCodes) -- override
+                        --local includeColorCodes = false
+                        if self.Payload then
+                            local values = {};
+                            for _, payloadInfo in ipairs(self.Payload) do
+                                if includeColorCodes ~= false then
+                                    table.insert(values, ("%s<span style='color: #%s'/>"):format(payloadInfo:GetPayloadString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
+                                else
+                                    table.insert(values, payloadInfo:GetPayloadString(decorateOptionals, includeColorCodes));
+                                end
                             end
+                            return table.concat(values, ", ");
                         end
-                        return table.concat(values, ", ");
+                        return "";
                     end
-                    return "";
                 end
-            end
-            if line == "FunctionsAPIMixin.lua" then
-                function FunctionsAPIMixin:GetArgumentString(decorateOptionals)
-                    local includeColorCodes = false
-                    if self.Arguments then
-                        local values = {};
-                        for _, argumentInfo in ipairs(self.Arguments) do
-                            if includeColorCodes ~= false then
-                                table.insert(values, ("%s|cff%s"):format(argumentInfo:GetArgumentString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
-                            else
-                                table.insert(values, argumentInfo:GetArgumentString(decorateOptionals, includeColorCodes));
+                if line == "FunctionsAPIMixin.lua" then
+                    function FunctionsAPIMixin:GetArgumentString(decorateOptionals)
+                        local includeColorCodes = false
+                        if self.Arguments then
+                            local values = {};
+                            for _, argumentInfo in ipairs(self.Arguments) do
+                                if includeColorCodes ~= false then
+                                    table.insert(values, ("%s|cff%s"):format(argumentInfo:GetArgumentString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
+                                else
+                                    table.insert(values, argumentInfo:GetArgumentString(decorateOptionals, includeColorCodes));
+                                end
                             end
+                            return table.concat(values, ", ");
                         end
-                        return table.concat(values, ", ");
+                        return "";
                     end
-                    return "";
-                end
-                function FunctionsAPIMixin:GetReturnString(decorateOptionals)
-                    local includeColorCodes = false
-                    if self.Returns then
-                        local values = {};
-                        for i, returnInfo in ipairs(self.Returns) do
-                            if includeColorCodes ~= false then
-                                table.insert(values, ("%s|cff%s"):format(returnInfo:GetReturnString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
-                            else
-                                table.insert(values, returnInfo:GetReturnString(decorateOptionals, includeColorCodes));
+                    function FunctionsAPIMixin:GetReturnString(decorateOptionals)
+                        local includeColorCodes = false
+                        if self.Returns then
+                            local values = {};
+                            for i, returnInfo in ipairs(self.Returns) do
+                                if includeColorCodes ~= false then
+                                    table.insert(values, ("%s|cff%s"):format(returnInfo:GetReturnString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
+                                else
+                                    table.insert(values, returnInfo:GetReturnString(decorateOptionals, includeColorCodes));
+                                end
                             end
+                            return table.concat(values, ", ");
                         end
-                        return table.concat(values, ", ");
+                        return "";
                     end
-                    return "";
                 end
             end
         end

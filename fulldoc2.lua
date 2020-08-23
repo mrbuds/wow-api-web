@@ -1,5 +1,5 @@
 
-local AccountInfo =
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AccountInfo",
 	Type = "System",
@@ -58,10 +58,8 @@ local AccountInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AccountInfo);
-local AchievementInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AchievementInfo",
 	Type = "System",
@@ -222,10 +220,8 @@ local AchievementInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AchievementInfo);
-local ActionBarFrame =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ActionBar",
 	Type = "System",
@@ -536,10 +532,8 @@ local ActionBarFrame =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ActionBarFrame);
-local AddOns =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AddOns",
 	Type = "System",
@@ -583,10 +577,8 @@ local AddOns =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AddOns);
-local AdventureJournal =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AdventureJournal",
 	Type = "System",
@@ -679,10 +671,8 @@ local AdventureJournal =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AdventureJournal);
-local AdventureMap =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AdventureMap",
 	Type = "System",
@@ -732,10 +722,8 @@ local AdventureMap =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AdventureMap);
-local AlliedRacesFrame =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AlliedRaces",
 	Type = "System",
@@ -826,10 +814,8 @@ local AlliedRacesFrame =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AlliedRacesFrame);
-local AnimaDiversionUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AnimaDiversionInfo",
 	Type = "System",
@@ -967,10 +953,8 @@ local AnimaDiversionUI =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AnimaDiversionUI);
-local AreaPoiInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AreaPoiInfo",
 	Type = "System",
@@ -1065,10 +1049,8 @@ local AreaPoiInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AreaPoiInfo);
-local ArtifactUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ArtifactUI",
 	Type = "System",
@@ -1934,10 +1916,8 @@ local ArtifactUI =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ArtifactUI);
-local AuctionHouse =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AuctionHouse",
 	Type = "System",
@@ -3321,10 +3301,8 @@ local AuctionHouse =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AuctionHouse);
-local AzeriteEmpoweredItem =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AzeriteEmpoweredItem",
 	Type = "System",
@@ -3662,10 +3640,8 @@ local AzeriteEmpoweredItem =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AzeriteEmpoweredItem);
-local AzeriteEssence =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AzeriteEssence",
 	Type = "System",
@@ -4002,10 +3978,8 @@ local AzeriteEssence =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AzeriteEssence);
-local AzeriteItem =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "AzeriteItem",
 	Type = "System",
@@ -4175,10 +4149,8 @@ local AzeriteItem =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AzeriteItem);
-local Bank =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Bank",
 	Type = "System",
@@ -4247,10 +4219,8 @@ local Bank =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Bank);
-local BarberShop =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "BarberShop",
 	Type = "System",
@@ -4487,10 +4457,8 @@ local BarberShop =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(BarberShop);
-local BattleNet =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "BattleNet",
 	Type = "System",
@@ -4657,10 +4625,8 @@ local BattleNet =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(BattleNet);
-local BattlePet =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "BattlePet",
 	Type = "System",
@@ -4890,10 +4856,8 @@ local BattlePet =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(BattlePet);
-local BlackMarketInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "BlackMarketInfo",
 	Type = "System",
@@ -4960,10 +4924,8 @@ local BlackMarketInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(BlackMarketInfo);
-local Browser =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Browser",
 	Type = "System",
@@ -4999,10 +4961,8 @@ local Browser =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Browser);
-local CVar =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "CVarScripts",
 	Type = "System",
@@ -5123,10 +5083,8 @@ local CVar =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CVar);
-local Calendar =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Calendar",
 	Type = "System",
@@ -6239,10 +6197,8 @@ local Calendar =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Calendar);
-local ChallengeModeInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ChallengeModeInfo",
 	Type = "System",
@@ -6525,10 +6481,8 @@ local ChallengeModeInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ChallengeModeInfo);
-local ChatBubbles =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ChatBubbles",
 	Type = "System",
@@ -6559,10 +6513,8 @@ local ChatBubbles =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ChatBubbles);
-local ChatInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ChatInfo",
 	Type = "System",
@@ -8612,10 +8564,8 @@ local ChatInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ChatInfo);
-local ChromieTimeUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ChromieTimeInfo",
 	Type = "System",
@@ -8690,10 +8640,8 @@ local ChromieTimeUI =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ChromieTimeUI);
-local Cinematic =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Cinematic",
 	Type = "System",
@@ -8738,10 +8686,8 @@ local Cinematic =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Cinematic);
-local ClassColor =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ClassColor",
 	Type = "System",
@@ -8772,10 +8718,8 @@ local ClassColor =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ClassColor);
-local ClassTrial =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ClassTrial",
 	Type = "System",
@@ -8802,10 +8746,8 @@ local ClassTrial =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ClassTrial);
-local Club =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Club",
 	Type = "System",
@@ -10483,10 +10425,8 @@ local Club =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Club);
-local ClubFinder =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ClubFinderInfo",
 	Type = "System",
@@ -11364,10 +11304,8 @@ local ClubFinder =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ClubFinder);
-local CombatLog =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "CombatLog",
 	Type = "System",
@@ -11403,10 +11341,8 @@ local CombatLog =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CombatLog);
-local CommentatorFrame =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "CommentatorFrame",
 	Type = "System",
@@ -12972,10 +12908,8 @@ local CommentatorFrame =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CommentatorFrame);
-local CompactUnitFrames =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "CompactUnitFrames",
 	Type = "System",
@@ -12997,10 +12931,8 @@ local CompactUnitFrames =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CompactUnitFrames);
-local ConfigurationWarnings =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ConfigurationWarnings",
 	Type = "System",
@@ -13086,10 +13018,8 @@ local ConfigurationWarnings =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ConfigurationWarnings);
-local Console =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Console",
 	Type = "System",
@@ -13286,10 +13216,8 @@ local Console =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Console);
-local Container =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Container",
 	Type = "System",
@@ -13415,10 +13343,8 @@ local Container =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Container);
-local ContributionCollector =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ContributionCollector",
 	Type = "System",
@@ -13790,10 +13716,8 @@ local ContributionCollector =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ContributionCollector);
-local CovenantCallings =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "CovenantCallings",
 	Type = "System",
@@ -13832,10 +13756,8 @@ local CovenantCallings =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CovenantCallings);
-local CovenantPreview =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "CovenantPreview",
 	Type = "System",
@@ -13921,10 +13843,8 @@ local CovenantPreview =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CovenantPreview);
-local CovenantSanctum =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "CovenantSanctumUI",
 	Type = "System",
@@ -14067,10 +13987,8 @@ local CovenantSanctum =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CovenantSanctum);
-local Covenants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Covenant",
 	Type = "System",
@@ -14139,10 +14057,8 @@ local Covenants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Covenants);
-local CreatureInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "CreatureInfo",
 	Type = "System",
@@ -14230,10 +14146,8 @@ local CreatureInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CreatureInfo);
-local CurrencyInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "CurrencySystem",
 	Type = "System",
@@ -14553,10 +14467,8 @@ local CurrencyInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CurrencyInfo);
-local Cursor =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Cursor",
 	Type = "System",
@@ -14668,10 +14580,8 @@ local Cursor =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Cursor);
-local DateAndTime =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "DateAndTime",
 	Type = "System",
@@ -14774,10 +14684,8 @@ local DateAndTime =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(DateAndTime);
-local DeathInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "DeathInfo",
 	Type = "System",
@@ -14975,10 +14883,8 @@ local DeathInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(DeathInfo);
-local DuelInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "DuelInfo",
 	Type = "System",
@@ -15019,10 +14925,8 @@ local DuelInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(DuelInfo);
-local EncounterInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "EncounterInfo",
 	Type = "System",
@@ -15109,10 +15013,8 @@ local EncounterInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(EncounterInfo);
-local EncounterJournal =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "EncounterJournal",
 	Type = "System",
@@ -15387,10 +15289,8 @@ local EncounterJournal =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(EncounterJournal);
-local EquipmentManager =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "EquipmentSet",
 	Type = "System",
@@ -15706,10 +15606,8 @@ local EquipmentManager =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(EquipmentManager);
-local Expansion =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Expansion",
 	Type = "System",
@@ -15955,10 +15853,8 @@ local Expansion =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Expansion);
-local FogOfWar =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "FogOfWar",
 	Type = "System",
@@ -16019,10 +15915,8 @@ local FogOfWar =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(FogOfWar);
-local FriendList =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "FriendList",
 	Type = "System",
@@ -16544,10 +16438,8 @@ local FriendList =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(FriendList);
-local GMTicketInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "GMTicketInfo",
 	Type = "System",
@@ -16622,10 +16514,8 @@ local GMTicketInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GMTicketInfo);
-local GamePad =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "GamePad",
 	Type = "System",
@@ -16946,10 +16836,8 @@ local GamePad =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GamePad);
-local GarrisonInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "GarrisonInfo",
 	Type = "System",
@@ -18031,10 +17919,8 @@ local GarrisonInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GarrisonInfo);
-local GlyphInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "GlyphInfo",
 	Type = "System",
@@ -18074,10 +17960,8 @@ local GlyphInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GlyphInfo);
-local GossipInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "GossipInfo",
 	Type = "System",
@@ -18346,10 +18230,8 @@ local GossipInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GossipInfo);
-local GuildBank =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "GuildBank",
 	Type = "System",
@@ -18424,10 +18306,8 @@ local GuildBank =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GuildBank);
-local GuildInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "GuildInfo",
 	Type = "System",
@@ -18779,10 +18659,8 @@ local GuildInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GuildInfo);
-local HeirloomInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "HeirloomInfo",
 	Type = "System",
@@ -18819,10 +18697,8 @@ local HeirloomInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(HeirloomInfo);
-local InGameNavigation =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "InGameNavigation",
 	Type = "System",
@@ -18911,10 +18787,8 @@ local InGameNavigation =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(InGameNavigation);
-local IncomingSummon =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "IncomingSummon",
 	Type = "System",
@@ -18973,10 +18847,8 @@ local IncomingSummon =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(IncomingSummon);
-local InstanceEncounter =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "InstanceEncounter",
 	Type = "System",
@@ -19036,10 +18908,8 @@ local InstanceEncounter =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(InstanceEncounter);
-local InvasionInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "InvasionInfo",
 	Type = "System",
@@ -19120,10 +18990,8 @@ local InvasionInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(InvasionInfo);
-local IslandsInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "IslandsInfo",
 	Type = "System",
@@ -19153,10 +19021,8 @@ local IslandsInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(IslandsInfo);
-local IslandsQueueUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "IslandsQueue",
 	Type = "System",
@@ -19241,10 +19107,8 @@ local IslandsQueueUI =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(IslandsQueueUI);
-local Item =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Item",
 	Type = "System",
@@ -19779,10 +19643,8 @@ local Item =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Item);
-local ItemInteractionUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ItemInteractionUI",
 	Type = "System",
@@ -19903,10 +19765,8 @@ local ItemInteractionUI =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ItemInteractionUI);
-local ItemSocketInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ItemSocketInfo",
 	Type = "System",
@@ -19962,10 +19822,8 @@ local ItemSocketInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ItemSocketInfo);
-local ItemText =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ItemText",
 	Type = "System",
@@ -20006,10 +19864,8 @@ local ItemText =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ItemText);
-local ItemUpgrade =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ItemUpgrade",
 	Type = "System",
@@ -20055,10 +19911,8 @@ local ItemUpgrade =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ItemUpgrade);
-local KeyBindings =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "KeyBindings",
 	Type = "System",
@@ -20115,10 +19969,8 @@ local KeyBindings =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(KeyBindings);
-local KnowledgeBase =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "KnowledgeBase",
 	Type = "System",
@@ -20175,10 +20027,8 @@ local KnowledgeBase =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(KnowledgeBase);
-local LFGInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "LFGInfo",
 	Type = "System",
@@ -20482,10 +20332,8 @@ local LFGInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LFGInfo);
-local LFGListInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "LFGList",
 	Type = "System",
@@ -20806,10 +20654,8 @@ local LFGListInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LFGListInfo);
-local LFGuildInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "LFGuildInfo",
 	Type = "System",
@@ -20874,10 +20720,8 @@ local LFGuildInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LFGuildInfo);
-local LegendaryCrafting =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "LegendaryCrafting",
 	Type = "System",
@@ -21129,10 +20973,8 @@ local LegendaryCrafting =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LegendaryCrafting);
-local LevelLink =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "LevelLink",
 	Type = "System",
@@ -21177,10 +21019,8 @@ local LevelLink =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LevelLink);
-local LevelSquish =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "LevelSquish",
 	Type = "System",
@@ -21226,10 +21066,8 @@ local LevelSquish =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LevelSquish);
-local LoadingScreen =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "LoadingScreen",
 	Type = "System",
@@ -21256,10 +21094,8 @@ local LoadingScreen =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LoadingScreen);
-local Loot =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Loot",
 	Type = "System",
@@ -21644,10 +21480,8 @@ local Loot =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Loot);
-local LoreText =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "LoreText",
 	Type = "System",
@@ -21692,10 +21526,8 @@ local LoreText =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LoreText);
-local LossOfControl =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "LossOfControl",
 	Type = "System",
@@ -21824,10 +21656,8 @@ local LossOfControl =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LossOfControl);
-local MailInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "MailInfo",
 	Type = "System",
@@ -21959,10 +21789,8 @@ local MailInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(MailInfo);
-local Map =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "MapUI",
 	Type = "System",
@@ -22578,10 +22406,8 @@ local Map =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Map);
-local MapExploration =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "MapExplorationInfo",
 	Type = "System",
@@ -22657,10 +22483,8 @@ local MapExploration =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(MapExploration);
-local MerchantFrame =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "MerchantFrame",
 	Type = "System",
@@ -22729,10 +22553,8 @@ local MerchantFrame =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(MerchantFrame);
-local Minimap =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Minimap",
 	Type = "System",
@@ -22833,10 +22655,8 @@ local Minimap =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Minimap);
-local MountJournal =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "MountJournal",
 	Type = "System",
@@ -23311,10 +23131,8 @@ local MountJournal =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(MountJournal);
-local MythicPlusInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "MythicPlusInfo",
 	Type = "System",
@@ -23577,10 +23395,8 @@ local MythicPlusInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(MythicPlusInfo);
-local NamePlateManager =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "NamePlateManager",
 	Type = "System",
@@ -23651,10 +23467,8 @@ local NamePlateManager =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(NamePlateManager);
-local PaperDollInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PaperDollInfo",
 	Type = "System",
@@ -23897,10 +23711,8 @@ local PaperDollInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PaperDollInfo);
-local PartyInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PartyInfo",
 	Type = "System",
@@ -24372,10 +24184,8 @@ local PartyInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PartyInfo);
-local PartyPoseUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PartyPose",
 	Type = "System",
@@ -24420,10 +24230,8 @@ local PartyPoseUI =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PartyPoseUI);
-local PetInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PetInfo",
 	Type = "System",
@@ -24534,10 +24342,8 @@ local PetInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PetInfo);
-local PetJournalInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PetJournalInfo",
 	Type = "System",
@@ -24768,10 +24574,8 @@ local PetJournalInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PetJournalInfo);
-local PlayerChoice =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PlayerChoice",
 	Type = "System",
@@ -24947,10 +24751,8 @@ local PlayerChoice =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PlayerChoice);
-local PlayerInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PlayerInfo",
 	Type = "System",
@@ -25061,10 +24863,8 @@ local PlayerInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PlayerInfo);
-local PlayerLocation =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PlayerLocationInfo",
 	Type = "System",
@@ -25181,10 +24981,8 @@ local PlayerLocation =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PlayerLocation);
-local PlayerMentorship =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PlayerMentorship",
 	Type = "System",
@@ -25220,10 +25018,8 @@ local PlayerMentorship =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PlayerMentorship);
-local PvpInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "PvpInfo",
 	Type = "System",
@@ -26412,10 +26208,8 @@ local PvpInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PvpInfo);
-local QuestLineInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "QuestLineUI",
 	Type = "System",
@@ -26529,10 +26323,8 @@ local QuestLineInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(QuestLineInfo);
-local QuestLog =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "QuestLog",
 	Type = "System",
@@ -27779,10 +27571,8 @@ local QuestLog =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(QuestLog);
-local QuestOffer =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "QuestOffer",
 	Type = "System",
@@ -27829,10 +27619,8 @@ local QuestOffer =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(QuestOffer);
-local QuestSession =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "QuestSession",
 	Type = "System",
@@ -28029,10 +27817,8 @@ local QuestSession =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(QuestSession);
-local QuestTaskInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "QuestTaskInfo",
 	Type = "System",
@@ -28215,10 +28001,8 @@ local QuestTaskInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(QuestTaskInfo);
-local RaidLocks =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "RaidLocks",
 	Type = "System",
@@ -28251,10 +28035,8 @@ local RaidLocks =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(RaidLocks);
-local RecruitAFriend =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "RecruitAFriend",
 	Type = "System",
@@ -28612,10 +28394,8 @@ local RecruitAFriend =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(RecruitAFriend);
-local ReportSystem =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ReportSystem",
 	Type = "System",
@@ -28755,10 +28535,8 @@ local ReportSystem =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ReportSystem);
-local ReputationInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ReputationInfo",
 	Type = "System",
@@ -28816,10 +28594,8 @@ local ReputationInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ReputationInfo);
-local ResearchInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ResearchInfo",
 	Type = "System",
@@ -28927,10 +28703,8 @@ local ResearchInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ResearchInfo);
-local RestrictedActions =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "RestrictedActions",
 	Type = "System",
@@ -28985,10 +28759,8 @@ local RestrictedActions =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(RestrictedActions);
-local ScenarioInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ScenarioInfo",
 	Type = "System",
@@ -29067,10 +28839,8 @@ local ScenarioInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ScenarioInfo);
-local ScrappingMachineUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ScrappingMachineUI",
 	Type = "System",
@@ -29204,10 +28974,8 @@ local ScrappingMachineUI =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ScrappingMachineUI);
-local ScriptWarnings =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ScriptWarnings",
 	Type = "System",
@@ -29234,10 +29002,8 @@ local ScriptWarnings =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ScriptWarnings);
-local ScriptedAnimations =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ScriptedAnimations",
 	Type = "System",
@@ -29320,10 +29086,8 @@ local ScriptedAnimations =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ScriptedAnimations);
-local SecureTransfer =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SecureTransfer",
 	Type = "System",
@@ -29355,10 +29119,8 @@ local SecureTransfer =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SecureTransfer);
-local SkillInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SkillInfo",
 	Type = "System",
@@ -29380,10 +29142,8 @@ local SkillInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SkillInfo);
-local SocialInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SocialInfo",
 	Type = "System",
@@ -29552,10 +29312,8 @@ local SocialInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SocialInfo);
-local SocialQueue =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SocialQueue",
 	Type = "System",
@@ -29755,10 +29513,8 @@ local SocialQueue =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SocialQueue);
-local SocialRestrictions =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SocialRestrictions",
 	Type = "System",
@@ -29802,10 +29558,8 @@ local SocialRestrictions =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SocialRestrictions);
-local Soulbinds =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Soulbinds",
 	Type = "System",
@@ -30342,10 +30096,8 @@ local Soulbinds =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Soulbinds);
-local Sound =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Sound",
 	Type = "System",
@@ -30376,10 +30128,8 @@ local Sound =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Sound);
-local SpecializationInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SpecializationInfo",
 	Type = "System",
@@ -30623,10 +30373,8 @@ local SpecializationInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SpecializationInfo);
-local Spell =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Spell",
 	Type = "System",
@@ -30690,10 +30438,8 @@ local Spell =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Spell);
-local SpellActivationOverlay =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SpellActivationOverlay",
 	Type = "System",
@@ -30752,10 +30498,8 @@ local SpellActivationOverlay =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SpellActivationOverlay);
-local SpellBook =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SpellBook",
 	Type = "System",
@@ -30945,10 +30689,8 @@ local SpellBook =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SpellBook);
-local SplashScreen =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SplashScreen",
 	Type = "System",
@@ -31025,10 +30767,8 @@ local SplashScreen =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SplashScreen);
-local StableInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "StableInfo",
 	Type = "System",
@@ -31065,10 +30805,8 @@ local StableInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(StableInfo);
-local StorePublicUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "StorePublic",
 	Type = "System",
@@ -31117,10 +30855,8 @@ local StorePublicUI =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(StorePublicUI);
-local SummonInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SummonInfo",
 	Type = "System",
@@ -31190,10 +30926,8 @@ local SummonInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SummonInfo);
-local SuperTrackManager =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SuperTrackManager",
 	Type = "System",
@@ -31287,10 +31021,8 @@ local SuperTrackManager =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SuperTrackManager);
-local System =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "SystemInfo",
 	Type = "System",
@@ -31483,10 +31215,8 @@ local System =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(System);
-local TalkingHead =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "TalkingHead",
 	Type = "System",
@@ -31513,10 +31243,8 @@ local TalkingHead =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TalkingHead);
-local TaxiMap =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "TaxiMap",
 	Type = "System",
@@ -31643,10 +31371,8 @@ local TaxiMap =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TaxiMap);
-local TextureUtils =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "TextureUtils",
 	Type = "System",
@@ -31694,10 +31420,8 @@ local TextureUtils =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TextureUtils);
-local TooltipConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Tooltip",
 	Type = "System",
@@ -31757,10 +31481,8 @@ local TooltipConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TooltipConstants);
-local ToyBoxInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ToyBoxInfo",
 	Type = "System",
@@ -31820,10 +31542,8 @@ local ToyBoxInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ToyBoxInfo);
-local TradeInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "TradeInfo",
 	Type = "System",
@@ -31936,10 +31656,8 @@ local TradeInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TradeInfo);
-local TradeSkillUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "TradeSkillUI",
 	Type = "System",
@@ -32231,10 +31949,8 @@ local TradeSkillUI =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TradeSkillUI);
-local Trainer =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Trainer",
 	Type = "System",
@@ -32276,10 +31992,8 @@ local Trainer =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Trainer);
-local Transmog =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Transmogrify",
 	Type = "System",
@@ -32577,10 +32291,8 @@ local Transmog =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Transmog);
-local TransmogItems =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Transmogrify",
 	Type = "System",
@@ -32656,10 +32368,8 @@ local TransmogItems =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TransmogItems);
-local TransmogSets =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Transmogrify",
 	Type = "System",
@@ -32915,10 +32625,8 @@ local TransmogSets =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TransmogSets);
-local Tutorial =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Tutorial",
 	Type = "System",
@@ -32965,10 +32673,8 @@ local Tutorial =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Tutorial);
-local UIMacros =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "UIMacros",
 	Type = "System",
@@ -32999,10 +32705,8 @@ local UIMacros =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(UIMacros);
-local UIManager =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "UI",
 	Type = "System",
@@ -33028,10 +32732,8 @@ local UIManager =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(UIManager);
-local UIModelInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ModelInfo",
 	Type = "System",
@@ -33262,10 +32964,8 @@ local UIModelInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(UIModelInfo);
-local UIWidgetManager =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "UIWidgetManager",
 	Type = "System",
@@ -34502,10 +34202,8 @@ local UIWidgetManager =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(UIWidgetManager);
-local Unit =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Unit",
 	Type = "System",
@@ -36024,10 +35722,8 @@ local Unit =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Unit);
-local UserFeedback =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "UserFeedback",
 	Type = "System",
@@ -36073,10 +35769,8 @@ local UserFeedback =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(UserFeedback);
-local Vehicle =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Vehicle",
 	Type = "System",
@@ -36188,10 +35882,8 @@ local Vehicle =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Vehicle);
-local Video =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Video",
 	Type = "System",
@@ -36257,10 +35949,8 @@ local Video =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Video);
-local VignetteInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "Vignette",
 	Type = "System",
@@ -36377,10 +36067,8 @@ local VignetteInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(VignetteInfo);
-local VoiceChat =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "VoiceChat",
 	Type = "System",
@@ -37487,10 +37175,8 @@ local VoiceChat =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(VoiceChat);
-local VoidStorageInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "VoidStorageInfo",
 	Type = "System",
@@ -37556,10 +37242,8 @@ local VoidStorageInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(VoidStorageInfo);
-local WarCampaign =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "WarCampaign",
 	Type = "System",
@@ -37743,10 +37427,8 @@ local WarCampaign =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(WarCampaign);
-local WeeklyRewards =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "WeeklyRewards",
 	Type = "System",
@@ -37925,10 +37607,8 @@ local WeeklyRewards =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(WeeklyRewards);
-local WorldStateInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "WorldStateInfo",
 	Type = "System",
@@ -37974,10 +37654,8 @@ local WorldStateInfo =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(WorldStateInfo);
-local WowEntitlementInfo =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "WowEntitlementInfo",
 	Type = "System",
@@ -38040,10 +37718,8 @@ local WowEntitlementInfo =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(WowEntitlementInfo);
-local WowTokenUI =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "WowTokenUI",
 	Type = "System",
@@ -38173,10 +37849,8 @@ local WowTokenUI =
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(WowTokenUI);
-local ZoneAbility =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Name = "ZoneAbility",
 	Type = "System",
@@ -38214,26 +37888,20 @@ local ZoneAbility =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ZoneAbility);
-local Action =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Action);
-local AppearanceSource =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AppearanceSource);
-local AuctionHouseEnums =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -38313,26 +37981,20 @@ local AuctionHouseEnums =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(AuctionHouseEnums);
-local Base =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Base);
-local BountyShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(BountyShared);
-local CalendarConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -38652,10 +38314,8 @@ local CalendarConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CalendarConstants);
-local CharacterCustomizationShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -38721,10 +38381,8 @@ local CharacterCustomizationShared =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CharacterCustomizationShared);
-local ChatConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -38756,26 +38414,20 @@ local ChatConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ChatConstants);
-local ClubShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ClubShared);
-local Color =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Color);
-local CovenantCallingsConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -38801,18 +38453,14 @@ local CovenantCallingsConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CovenantCallingsConstants);
-local CovenantsConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(CovenantsConstants);
-local DamageConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -38911,10 +38559,8 @@ local DamageConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(DamageConstants);
-local GarrisonConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39246,10 +38892,8 @@ local GarrisonConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GarrisonConstants);
-local GarrisonShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39333,18 +38977,14 @@ local GarrisonShared =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GarrisonShared);
-local GuildInfoShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(GuildInfoShared);
-local ItemConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39407,26 +39047,20 @@ local ItemConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ItemConstants);
-local ItemLocationShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ItemLocationShared);
-local ItemShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ItemShared);
-local LegendaryCraftingTypes =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39444,10 +39078,8 @@ local LegendaryCraftingTypes =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LegendaryCraftingTypes);
-local LevelConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39460,42 +39092,32 @@ local LevelConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(LevelConstants);
-local ModelScene =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ModelScene);
-local NamePlate =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(NamePlate);
-local PetScalingConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PetScalingConstants);
-local Player =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Player);
-local PlayerMentorshipConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39526,10 +39148,8 @@ local PlayerMentorshipConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(PlayerMentorshipConstants);
-local QuestConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39585,10 +39205,8 @@ local QuestConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(QuestConstants);
-local QuestSessionConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39649,18 +39267,14 @@ local QuestSessionConstants =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(QuestSessionConstants);
-local QueueSpecific =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(QueueSpecific);
-local RecruitAFriendShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39679,18 +39293,14 @@ local RecruitAFriendShared =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(RecruitAFriendShared);
-local ScriptRegionShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(ScriptRegionShared);
-local SuperTrackManagerShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39709,34 +39319,26 @@ local SuperTrackManagerShared =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(SuperTrackManagerShared);
-local TextureShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TextureShared);
-local Time =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(Time);
-local TradeSkillUITypes =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(TradeSkillUITypes);
-local UIWidgetManagerShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
@@ -39815,30 +39417,22 @@ local UIWidgetManagerShared =
 			},
 		},
 	},
-};
-
-APIDocumentation:AddDocumentationTable(UIWidgetManagerShared);
-local UnitShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(UnitShared);
-local VectorShared =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(VectorShared);
-local VehicleConstants =
+});
+APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
 	},
-};
-
-APIDocumentation:AddDocumentationTable(VehicleConstants);
+});

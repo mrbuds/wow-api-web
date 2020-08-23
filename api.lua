@@ -189,7 +189,7 @@ function APIDocumentation:OutputUsage()
 	self:WriteLine("All searches support Lua patterns.");
 end
 
-require("fulldoc")
+require("fulldoc2")
 
 if args and args:sub(1,4) == "api:" then
     APIDocumentation:HandleAPILink(args, nil)

@@ -66,6 +66,8 @@ DEFAULT_CHAT_FRAME = {} -- configure output here
 function DEFAULT_CHAT_FRAME:AddMessage(message)
     print(message)
 end
+function DEFAULT_CHAT_FRAME:SetMaxLines() end
+
 local removelinks = true
 
 -- with .js we can't read Blizzard_APIDocumentation.toc

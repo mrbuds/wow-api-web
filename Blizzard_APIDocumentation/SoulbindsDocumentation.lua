@@ -74,8 +74,13 @@ local Soulbinds =
 			Type = "Function",
 		},
 		{
-			Name = "CommitPendingConduits",
+			Name = "CommitPendingConduitsInSoulbind",
 			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+			},
 		},
 		{
 			Name = "GetActiveSoulbindID",
@@ -136,6 +141,50 @@ local Soulbinds =
 			Returns =
 			{
 				{ Name = "link", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetConduitItemLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "conduitID", Type = "number", Nilable = false },
+				{ Name = "rank", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "itemLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetConduitQuality",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "conduitID", Type = "number", Nilable = false },
+				{ Name = "rank", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "quality", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetConduitRankFromCollection",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "conduitID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "conduitRank", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -255,6 +304,20 @@ local Soulbinds =
 			{
 				{ Name = "soulbindID", Type = "number", Nilable = false },
 				{ Name = "conduitID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasPendingConduitsInSoulbind",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
 			},
 
 			Returns =
@@ -403,6 +466,11 @@ local Soulbinds =
 			},
 		},
 		{
+			Name = "SoulbindConduitsReset",
+			Type = "Event",
+			LiteralName = "SOULBIND_CONDUITS_RESET",
+		},
+		{
 			Name = "SoulbindForgeInteractionEnded",
 			Type = "Event",
 			LiteralName = "SOULBIND_FORGE_INTERACTION_ENDED",
@@ -466,8 +534,10 @@ local Soulbinds =
 			{
 				{ Name = "conduitID", Type = "number", Nilable = false },
 				{ Name = "conduitRank", Type = "number", Nilable = false },
+				{ Name = "conduitItemLevel", Type = "number", Nilable = false },
 				{ Name = "conduitType", Type = "SoulbindConduitType", Nilable = false },
-				{ Name = "conduitSpecID", Type = "number", Nilable = false },
+				{ Name = "conduitSpecSetID", Type = "number", Nilable = false },
+				{ Name = "conduitSpecIDs", Type = "table", InnerType = "number", Nilable = false },
 				{ Name = "conduitSpecName", Type = "string", Nilable = true },
 				{ Name = "covenantID", Type = "number", Nilable = true },
 				{ Name = "conduitItemID", Type = "number", Nilable = false },
@@ -496,6 +566,7 @@ local Soulbinds =
 				{ Name = "cvarIndex", Type = "number", Nilable = false },
 				{ Name = "tree", Type = "SoulbindTree", Nilable = false },
 				{ Name = "modelSceneData", Type = "SoulbindModelSceneData", Nilable = false },
+				{ Name = "activationSoundKitID", Type = "number", Nilable = false },
 			},
 		},
 		{

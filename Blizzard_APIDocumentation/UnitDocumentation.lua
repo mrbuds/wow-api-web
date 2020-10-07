@@ -668,6 +668,7 @@ local Unit =
 			{
 				{ Name = "oldLevel", Type = "number", Nilable = false },
 				{ Name = "newLevel", Type = "number", Nilable = false },
+				{ Name = "real", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -930,6 +931,15 @@ local Unit =
 			{
 				{ Name = "unitTarget", Type = "string", Nilable = false },
 				{ Name = "isConnected", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitCtrOptions",
+			Type = "Event",
+			LiteralName = "UNIT_CTR_OPTIONS",
+			Payload =
+			{
+				{ Name = "unitTarget", Type = "string", Nilable = false },
 			},
 		},
 		{

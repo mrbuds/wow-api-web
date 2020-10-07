@@ -20,6 +20,22 @@ local LegendaryCrafting =
 			},
 		},
 		{
+			Name = "GetRuneforgeItemPreviewInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "baseItem", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "runeforgePowerID", Type = "number", Nilable = true },
+				{ Name = "modifiers", Type = "table", InnerType = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "RuneforgeItemPreviewInfo", Nilable = true },
+			},
+		},
+		{
 			Name = "GetRuneforgeLegendaryComponentInfo",
 			Type = "Function",
 
@@ -150,6 +166,21 @@ local LegendaryCrafting =
 			},
 		},
 		{
+			Name = "GetRuneforgePowersByClassAndSpec",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "classID", Type = "number", Nilable = true },
+				{ Name = "specID", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "runeforgePowerIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "IsRuneforgeLegendary",
 			Type = "Function",
 
@@ -161,6 +192,20 @@ local LegendaryCrafting =
 			Returns =
 			{
 				{ Name = "isRuneforgeLegendary", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsRuneforgeLegendaryMaxLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "runeforgeLegendary", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isMaxLevel", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -222,6 +267,15 @@ local LegendaryCrafting =
 
 	Events =
 	{
+		{
+			Name = "NewRuneforgePowerAdded",
+			Type = "Event",
+			LiteralName = "NEW_RUNEFORGE_POWER_ADDED",
+			Payload =
+			{
+				{ Name = "powerID", Type = "number", Nilable = false },
+			},
+		},
 		{
 			Name = "RuneforgeLegendaryCraftingClosed",
 			Type = "Event",

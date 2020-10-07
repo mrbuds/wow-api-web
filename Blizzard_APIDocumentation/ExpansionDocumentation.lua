@@ -42,6 +42,15 @@ local Expansion =
 			},
 		},
 		{
+			Name = "GetCurrentRegionName",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "regionName", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "GetExpansionDisplayInfo",
 			Type = "Function",
 
@@ -184,6 +193,15 @@ local Expansion =
 				{ Name = "isVeteranTrialAccount", Type = "bool", Nilable = false },
 			},
 		},
+		{
+			Name = "SendSubscriptionInterstitialResponse",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "response", Type = "SubscriptionInterstitialResponseType", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -211,6 +229,19 @@ local Expansion =
 
 	Tables =
 	{
+		{
+			Name = "SubscriptionInterstitialResponseType",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Clicked", Type = "SubscriptionInterstitialResponseType", EnumValue = 0 },
+				{ Name = "Closed", Type = "SubscriptionInterstitialResponseType", EnumValue = 1 },
+				{ Name = "WebRedirect", Type = "SubscriptionInterstitialResponseType", EnumValue = 2 },
+			},
+		},
 		{
 			Name = "SubscriptionInterstitialType",
 			Type = "Enumeration",

@@ -1,6 +1,6 @@
 local TransmogItems =
 {
-	Name = "Transmogrify",
+	Name = "TransmogrifyCollection",
 	Type = "System",
 	Namespace = "C_TransmogCollection",
 
@@ -13,6 +13,7 @@ local TransmogItems =
 			Arguments =
 			{
 				{ Name = "appearanceID", Type = "number", Nilable = false },
+				{ Name = "categoryID", Type = "number", Nilable = true },
 			},
 
 			Returns =

@@ -7,6 +7,24 @@ local CovenantSanctum =
 	Functions =
 	{
 		{
+			Name = "CanAccessReservoir",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canAccess", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CanDepositAnima",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canDeposit", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "DepositAnima",
 			Type = "Function",
 		},
@@ -46,6 +64,12 @@ local CovenantSanctum =
 			Name = "GetRenownMilestones",
 			Type = "Function",
 
+			Arguments =
+			{
+				{ Name = "covenantID", Type = "number", Nilable = false },
+				{ Name = "renownLevel", Type = "number", Nilable = false },
+			},
+
 			Returns =
 			{
 				{ Name = "milestones", Type = "table", InnerType = "CovenantSanctumRenownMilestoneInfo", Nilable = false },
@@ -57,7 +81,8 @@ local CovenantSanctum =
 
 			Arguments =
 			{
-				{ Name = "level", Type = "number", Nilable = false },
+				{ Name = "covenantID", Type = "number", Nilable = false },
+				{ Name = "renownLevel", Type = "number", Nilable = false },
 			},
 
 			Returns =
@@ -97,6 +122,16 @@ local CovenantSanctum =
 			Type = "Event",
 			LiteralName = "COVENANT_SANCTUM_INTERACTION_STARTED",
 		},
+		{
+			Name = "CovenantSanctumRenownLevelChanged",
+			Type = "Event",
+			LiteralName = "COVENANT_SANCTUM_RENOWN_LEVEL_CHANGED",
+			Payload =
+			{
+				{ Name = "newRenownLevel", Type = "number", Nilable = false },
+				{ Name = "oldRenownLevel", Type = "number", Nilable = false },
+			},
+		},
 	},
 
 	Tables =
@@ -132,12 +167,13 @@ local CovenantSanctum =
 				{ Name = "mountID", Type = "number", Nilable = true },
 				{ Name = "transmogID", Type = "number", Nilable = true },
 				{ Name = "transmogSetID", Type = "number", Nilable = true },
-				{ Name = "titleID", Type = "number", Nilable = true },
+				{ Name = "titleMaskID", Type = "number", Nilable = true },
 				{ Name = "garrFollowerID", Type = "number", Nilable = true },
 				{ Name = "transmogIllusionSourceID", Type = "number", Nilable = true },
 				{ Name = "icon", Type = "number", Nilable = true },
 				{ Name = "name", Type = "string", Nilable = true },
 				{ Name = "description", Type = "string", Nilable = true },
+				{ Name = "toastDescription", Type = "string", Nilable = true },
 			},
 		},
 	},

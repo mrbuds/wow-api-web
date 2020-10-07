@@ -7,15 +7,6 @@ local WeeklyRewards =
 	Functions =
 	{
 		{
-			Name = "CanClaimPVPRewards",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "canClaimRewards", Type = "bool", Nilable = false },
-			},
-		},
-		{
 			Name = "CanClaimRewards",
 			Type = "Function",
 
@@ -40,6 +31,11 @@ local WeeklyRewards =
 		{
 			Name = "GetActivities",
 			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "type", Type = "WeeklyRewardChestThresholdType", Nilable = true },
+			},
 
 			Returns =
 			{
@@ -85,17 +81,22 @@ local WeeklyRewards =
 			},
 		},
 		{
-			Name = "IsWeeklyProgressValid",
+			Name = "HasAvailableRewards",
 			Type = "Function",
 
 			Returns =
 			{
-				{ Name = "isWeeklyProgressValid", Type = "bool", Nilable = false },
+				{ Name = "hasAvailableRewards", Type = "bool", Nilable = false },
 			},
 		},
 		{
-			Name = "RequestWeeklyProgress",
+			Name = "HasGeneratedRewards",
 			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasGeneratedRewards", Type = "bool", Nilable = false },
+			},
 		},
 	},
 

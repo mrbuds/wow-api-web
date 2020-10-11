@@ -14169,6 +14169,15 @@ local CovenantSanctum =
 			},
 		},
 		{
+			Name = "GetCurrentTalentTreeID",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "currentTalentTreeID", Type = "number", Nilable = true },
+			},
+		},
+		{
 			Name = "GetFeatures",
 			Type = "Function",
 
@@ -17574,6 +17583,20 @@ local GarrisonInfo =
 			},
 		},
 		{
+			Name = "GetTalentUnlockWorldQuest",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "talentID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "worldQuestID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "IsAtGarrisonMissionNPC",
 			Type = "Function",
 
@@ -17618,6 +17641,17 @@ local GarrisonInfo =
 			Arguments =
 			{
 				{ Name = "missionID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RemoveFollowerFromMission",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "missionID", Type = "number", Nilable = false },
+				{ Name = "followerID", Type = "string", Nilable = false },
+				{ Name = "boardIndex", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -18072,6 +18106,11 @@ local GarrisonInfo =
 				{ Name = "garrisonTalentTreeID", Type = "number", Nilable = false },
 				{ Name = "garrTalentID", Type = "number", Nilable = false },
 			},
+		},
+		{
+			Name = "GarrisonTalentUnlocksResult",
+			Type = "Event",
+			LiteralName = "GARRISON_TALENT_UNLOCKS_RESULT",
 		},
 		{
 			Name = "GarrisonTalentUpdate",
@@ -30566,6 +30605,24 @@ local Soulbinds =
 			},
 		},
 		{
+			Name = "GetConduitCharges",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "charges", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetConduitChargesCapacity",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "charges", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetConduitCollection",
 			Type = "Function",
 
@@ -30883,6 +30940,15 @@ local Soulbinds =
 				{ Name = "nodeID", Type = "number", Nilable = false },
 			},
 		},
+		{
+			Name = "SetConduitCharges",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "charges", Type = "number", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -30894,6 +30960,15 @@ local Soulbinds =
 			Payload =
 			{
 				{ Name = "soulbindID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SoulbindConduitChargesUpdated",
+			Type = "Event",
+			LiteralName = "SOULBIND_CONDUIT_CHARGES_UPDATED",
+			Payload =
+			{
+				{ Name = "charges", Type = "number", Nilable = false },
 			},
 		},
 		{

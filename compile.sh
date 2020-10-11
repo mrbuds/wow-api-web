@@ -45,7 +45,7 @@ cat "${TOCFILE}" | sed $'s/\r$//' | while read -r line || [[ -n "$line" ]]; do
     fi
   fi
 done
-cat "${CONCATFILE}" | tr '\n' '\f' | sed -r 's/\};\f\fAPIDocumentation:AddDocumentationTable\(\w+\);/\}\);/g' | sed -r 's/^\};$/\}\);\/g' | sed -r 's/local (\w+) =/APIDocumentation:AddDocumentationTable\(/g' | tr '\f' '\n' > fulldoc2.lua
+cat "${CONCATFILE}"  | tr '\n' '\f' | sed -r 's/local \w+ =/APIDocumentation:AddDocumentationTable\(/g' | sed -r 's/\};/\}\);/g' | sed -r 's/\fAPIDocumentation:AddDocumentationTable\(\w+\);//g' | tr '\f' '\n' > fulldoc2.lua
 echo ". compile Lua files to javascript"
 
 moonshine distil api.lua

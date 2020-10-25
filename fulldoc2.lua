@@ -808,7 +808,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "raceID", Type = "number", Nilable = false },
 				{ Name = "maleModelID", Type = "number", Nilable = false },
 				{ Name = "femaleModelID", Type = "number", Nilable = false },
-				{ Name = "achievementID", Type = "number", Nilable = false },
+				{ Name = "achievementIds", Type = "table", InnerType = "number", Nilable = false },
 				{ Name = "maleName", Type = "string", Nilable = false },
 				{ Name = "femaleName", Type = "string", Nilable = false },
 				{ Name = "description", Type = "string", Nilable = false },
@@ -14155,18 +14155,17 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
-			Name = "GetRenownMilestones",
+			Name = "GetRenownLevels",
 			Type = "Function",
 
 			Arguments =
 			{
 				{ Name = "covenantID", Type = "number", Nilable = false },
-				{ Name = "renownLevel", Type = "number", Nilable = false },
 			},
 
 			Returns =
 			{
-				{ Name = "milestones", Type = "table", InnerType = "CovenantSanctumRenownMilestoneInfo", Nilable = false },
+				{ Name = "levels", Type = "table", InnerType = "CovenantSanctumRenownLevelInfo", Nilable = false },
 			},
 		},
 		{
@@ -14207,6 +14206,16 @@ APIDocumentation:AddDocumentationTable(
 	Events =
 	{
 		{
+			Name = "CovenantRenownInteractionEnded",
+			Type = "Event",
+			LiteralName = "COVENANT_RENOWN_INTERACTION_ENDED",
+		},
+		{
+			Name = "CovenantRenownInteractionStarted",
+			Type = "Event",
+			LiteralName = "COVENANT_RENOWN_INTERACTION_STARTED",
+		},
+		{
 			Name = "CovenantSanctumInteractionEnded",
 			Type = "Event",
 			LiteralName = "COVENANT_SANCTUM_INTERACTION_ENDED",
@@ -14241,12 +14250,13 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
-			Name = "CovenantSanctumRenownMilestoneInfo",
+			Name = "CovenantSanctumRenownLevelInfo",
 			Type = "Structure",
 			Fields =
 			{
 				{ Name = "level", Type = "number", Nilable = false },
 				{ Name = "locked", Type = "bool", Nilable = false },
+				{ Name = "isMilestone", Type = "bool", Nilable = false },
 				{ Name = "isCapstone", Type = "bool", Nilable = false },
 			},
 		},
@@ -14826,6 +14836,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "isDefault", Type = "bool", Nilable = false },
 				{ Name = "newCursorType", Type = "UICursorType", Nilable = false },
 				{ Name = "oldCursorType", Type = "UICursorType", Nilable = false },
+				{ Name = "oldCursorVirtualID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -17540,6 +17551,15 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "HasAdventures",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasAdventures", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsAtGarrisonMissionNPC",
 			Type = "Function",
 
@@ -18165,6 +18185,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "schoolMask", Type = "number", Nilable = false },
 				{ Name = "previewMask", Type = "number", Nilable = false },
 				{ Name = "icon", Type = "number", Nilable = false },
+				{ Name = "spellTutorialFlag", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -19898,6 +19919,20 @@ APIDocumentation:AddDocumentationTable(
 			Returns =
 			{
 				{ Name = "isBound", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsItemConduit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLoc", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isConduit", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -25725,6 +25760,15 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "IsActivePlayerConsideredNewcomer",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isConsideredNewcomer", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsMentorRestricted",
 			Type = "Function",
 
@@ -30405,21 +30449,6 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
-			Name = "AddPendingConduit",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "nodeID", Type = "number", Nilable = false },
-				{ Name = "conduitID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "result", Type = "bool", Nilable = false },
-			},
-		},
-		{
 			Name = "CanActivateSoulbind",
 			Type = "Function",
 
@@ -30459,6 +30488,15 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "CanSwitchActiveSoulbindTreeBranch",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CloseUI",
 			Type = "Function",
 		},
@@ -30469,6 +30507,66 @@ APIDocumentation:AddDocumentationTable(
 			Arguments =
 			{
 				{ Name = "soulbindID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "FindNodeIDActuallyInstalled",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+				{ Name = "conduitID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "FindNodeIDAppearingInstalled",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+				{ Name = "conduitID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "FindNodeIDPendingInstall",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+				{ Name = "conduitID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "FindNodeIDPendingUninstall",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+				{ Name = "conduitID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -30513,6 +30611,15 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "GetConduitCollectionCount",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "count", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetConduitCollectionData",
 			Type = "Function",
 
@@ -30536,6 +30643,34 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "GetConduitCollectionDataByVirtualID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "virtualID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "collectionData", Type = "ConduitCollectionData", Nilable = true },
+			},
+		},
+		{
+			Name = "GetConduitDisplayed",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "conduitID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetConduitHyperlink",
 			Type = "Function",
 
@@ -30548,6 +30683,20 @@ APIDocumentation:AddDocumentationTable(
 			Returns =
 			{
 				{ Name = "link", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetConduitIDPendingInstall",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "conduitID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -30610,6 +30759,20 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "GetInstalledConduitID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "conduitID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetNode",
 			Type = "Function",
 
@@ -30624,35 +30787,6 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
-			Name = "GetPendingConduitID",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "nodeID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "conduitID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetPendingNodeIDInSoulbind",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "soulbindID", Type = "number", Nilable = false },
-				{ Name = "conduitID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "nodeID", Type = "number", Nilable = false },
-			},
-		},
-		{
 			Name = "GetSoulbindData",
 			Type = "Function",
 
@@ -30664,6 +30798,29 @@ APIDocumentation:AddDocumentationTable(
 			Returns =
 			{
 				{ Name = "data", Type = "SoulbindData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTotalConduitChargesPending",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "count", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTotalConduitChargesPendingInSoulbind",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soulbindID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "count", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -30697,21 +30854,6 @@ APIDocumentation:AddDocumentationTable(
 		{
 			Name = "HasAnyPendingConduits",
 			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "result", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "HasPendingConduitInSoulbind",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "soulbindID", Type = "number", Nilable = false },
-				{ Name = "conduitID", Type = "number", Nilable = false },
-			},
 
 			Returns =
 			{
@@ -30776,6 +30918,20 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "IsNodePendingModify",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsUnselectedConduitPendingInSoulbind",
 			Type = "Function",
 
@@ -30790,21 +30946,14 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
-			Name = "RemovePendingConduit",
+			Name = "ModifyNode",
 			Type = "Function",
 
 			Arguments =
 			{
 				{ Name = "nodeID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "ResetSoulbindConduits",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "soulbindID", Type = "number", Nilable = false },
+				{ Name = "conduitID", Type = "number", Nilable = false },
+				{ Name = "type", Type = "SoulbindConduitTransactionType", Nilable = false },
 			},
 		},
 		{
@@ -30817,12 +30966,12 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
-			Name = "SetConduitCharges",
+			Name = "UnmodifyNode",
 			Type = "Function",
 
 			Arguments =
 			{
-				{ Name = "charges", Type = "number", Nilable = false },
+				{ Name = "nodeID", Type = "number", Nilable = false },
 			},
 		},
 	},
@@ -30891,11 +31040,6 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
-			Name = "SoulbindConduitsReset",
-			Type = "Event",
-			LiteralName = "SOULBIND_CONDUITS_RESET",
-		},
-		{
 			Name = "SoulbindForgeInteractionEnded",
 			Type = "Event",
 			LiteralName = "SOULBIND_FORGE_INTERACTION_ENDED",
@@ -30945,7 +31089,6 @@ APIDocumentation:AddDocumentationTable(
 			{
 				{ Name = "nodeID", Type = "number", Nilable = false },
 				{ Name = "conduitID", Type = "number", Nilable = false },
-				{ Name = "pending", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -34388,7 +34531,7 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
-			Name = "GetWidgetLayoutDirectionFromWidgetSetID",
+			Name = "GetWidgetSetInfo",
 			Type = "Function",
 
 			Arguments =
@@ -34398,7 +34541,7 @@ APIDocumentation:AddDocumentationTable(
 
 			Returns =
 			{
-				{ Name = "layoutDirection", Type = "UIWidgetLayoutDirection", Nilable = false },
+				{ Name = "widgetSetInfo", Type = "UIWidgetSetInfo", Nilable = false },
 			},
 		},
 		{
@@ -35237,6 +35380,15 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "widgetSetID", Type = "number", Nilable = false },
 				{ Name = "widgetType", Type = "UIWidgetVisualizationType", Nilable = false },
 				{ Name = "unitToken", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "UIWidgetSetInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "layoutDirection", Type = "UIWidgetSetLayoutDirection", Nilable = false },
+				{ Name = "verticalPadding", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -36160,6 +36312,15 @@ APIDocumentation:AddDocumentationTable(
 			Name = "UnitAbsorbAmountChanged",
 			Type = "Event",
 			LiteralName = "UNIT_ABSORB_AMOUNT_CHANGED",
+			Payload =
+			{
+				{ Name = "unitTarget", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitAreaChanged",
+			Type = "Event",
+			LiteralName = "UNIT_AREA_CHANGED",
 			Payload =
 			{
 				{ Name = "unitTarget", Type = "string", Nilable = false },
@@ -37176,6 +37337,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "isDead", Type = "bool", Nilable = false },
 				{ Name = "onWorldMap", Type = "bool", Nilable = false },
+				{ Name = "zoneInfiniteAOI", Type = "bool", Nilable = false },
 				{ Name = "onMinimap", Type = "bool", Nilable = false },
 				{ Name = "isUnique", Type = "bool", Nilable = false },
 				{ Name = "inFogOfWar", Type = "bool", Nilable = false },
@@ -39652,6 +39814,226 @@ APIDocumentation:AddDocumentationTable(
 	Tables =
 	{
 		{
+			Name = "CurrencyDestroyReason",
+			Type = "Enumeration",
+			NumValues = 12,
+			MinValue = 0,
+			MaxValue = 11,
+			Fields =
+			{
+				{ Name = "Cheat", Type = "CurrencyDestroyReason", EnumValue = 0 },
+				{ Name = "Spell", Type = "CurrencyDestroyReason", EnumValue = 1 },
+				{ Name = "VersionUpdate", Type = "CurrencyDestroyReason", EnumValue = 2 },
+				{ Name = "QuestTurnin", Type = "CurrencyDestroyReason", EnumValue = 3 },
+				{ Name = "Vendor", Type = "CurrencyDestroyReason", EnumValue = 4 },
+				{ Name = "Trade", Type = "CurrencyDestroyReason", EnumValue = 5 },
+				{ Name = "Capped", Type = "CurrencyDestroyReason", EnumValue = 6 },
+				{ Name = "Garrison", Type = "CurrencyDestroyReason", EnumValue = 7 },
+				{ Name = "DroppedToCorpse", Type = "CurrencyDestroyReason", EnumValue = 8 },
+				{ Name = "BonusRoll", Type = "CurrencyDestroyReason", EnumValue = 9 },
+				{ Name = "FactionConversion", Type = "CurrencyDestroyReason", EnumValue = 10 },
+				{ Name = "Last", Type = "CurrencyDestroyReason", EnumValue = 11 },
+			},
+		},
+		{
+			Name = "CurrencyFlags",
+			Type = "Enumeration",
+			NumValues = 32,
+			MinValue = -2147483648,
+			MaxValue = 1073741824,
+			Fields =
+			{
+				{ Name = "CurrencyTradable", Type = "CurrencyFlags", EnumValue = 1 },
+				{ Name = "CurrencyAppearsInLootWindow", Type = "CurrencyFlags", EnumValue = 2 },
+				{ Name = "CurrencyComputedWeeklyMaximum", Type = "CurrencyFlags", EnumValue = 4 },
+				{ Name = "Currency_100_Scaler", Type = "CurrencyFlags", EnumValue = 8 },
+				{ Name = "CurrencyNoLowLevelDrop", Type = "CurrencyFlags", EnumValue = 16 },
+				{ Name = "CurrencyIgnoreMaxQtyOnLoad", Type = "CurrencyFlags", EnumValue = 32 },
+				{ Name = "CurrencyLogOnWorldChange", Type = "CurrencyFlags", EnumValue = 64 },
+				{ Name = "CurrencyTrackQuantity", Type = "CurrencyFlags", EnumValue = 128 },
+				{ Name = "CurrencyResetTrackedQuantity", Type = "CurrencyFlags", EnumValue = 256 },
+				{ Name = "CurrencyUpdateVersionIgnoreMax", Type = "CurrencyFlags", EnumValue = 512 },
+				{ Name = "CurrencySuppressChatMessageOnVersionChange", Type = "CurrencyFlags", EnumValue = 1024 },
+				{ Name = "CurrencySingleDropInLoot", Type = "CurrencyFlags", EnumValue = 2048 },
+				{ Name = "CurrencyHasWeeklyCatchup", Type = "CurrencyFlags", EnumValue = 4096 },
+				{ Name = "CurrencyDoNotCompressChat", Type = "CurrencyFlags", EnumValue = 8192 },
+				{ Name = "CurrencyDoNotLogAcquisitionToBi", Type = "CurrencyFlags", EnumValue = 16384 },
+				{ Name = "CurrencyNoRaidDrop", Type = "CurrencyFlags", EnumValue = 32768 },
+				{ Name = "CurrencyNotPersistent", Type = "CurrencyFlags", EnumValue = 65536 },
+				{ Name = "CurrencyDeprecated", Type = "CurrencyFlags", EnumValue = 131072 },
+				{ Name = "CurrencyDynamicMaximum", Type = "CurrencyFlags", EnumValue = 262144 },
+				{ Name = "CurrencySuppressChatMessages", Type = "CurrencyFlags", EnumValue = 524288 },
+				{ Name = "CurrencyDoNotToast", Type = "CurrencyFlags", EnumValue = 1048576 },
+				{ Name = "CurrencyDestroyExtraOnLoot", Type = "CurrencyFlags", EnumValue = 2097152 },
+				{ Name = "CurrencyDontShowTotalInTooltip", Type = "CurrencyFlags", EnumValue = 4194304 },
+				{ Name = "CurrencyDontCoalesceInLootWindow", Type = "CurrencyFlags", EnumValue = 8388608 },
+				{ Name = "CurrencyAccountWide", Type = "CurrencyFlags", EnumValue = 16777216 },
+				{ Name = "CurrencyAllowOverflowMailer", Type = "CurrencyFlags", EnumValue = 33554432 },
+				{ Name = "CurrencyHideAsReward", Type = "CurrencyFlags", EnumValue = 67108864 },
+				{ Name = "CurrencyHasWarmodeBonus", Type = "CurrencyFlags", EnumValue = 134217728 },
+				{ Name = "CurrencyIsAllianceOnly", Type = "CurrencyFlags", EnumValue = 268435456 },
+				{ Name = "CurrencyIsHordeOnly", Type = "CurrencyFlags", EnumValue = 536870912 },
+				{ Name = "CurrencyLimitWarmodeBonusOncePerTooltip", Type = "CurrencyFlags", EnumValue = 1073741824 },
+				{ Name = "DeprecatedCurrencyFlag", Type = "CurrencyFlags", EnumValue = -2147483648 },
+			},
+		},
+		{
+			Name = "CurrencyFlagsB",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 1,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "CurrencyBUseTotalEarnedForMaxQty", Type = "CurrencyFlagsB", EnumValue = 1 },
+				{ Name = "CurrencyBShowQuestXpGainInTooltip", Type = "CurrencyFlagsB", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "CurrencyGainFlags",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 1,
+			MaxValue = 4,
+			Fields =
+			{
+				{ Name = "BonusAward", Type = "CurrencyGainFlags", EnumValue = 1 },
+				{ Name = "DroppedFromDeath", Type = "CurrencyGainFlags", EnumValue = 2 },
+				{ Name = "FromAccountServer", Type = "CurrencyGainFlags", EnumValue = 4 },
+			},
+		},
+		{
+			Name = "CurrencySource",
+			Type = "Enumeration",
+			NumValues = 46,
+			MinValue = 0,
+			MaxValue = 45,
+			Fields =
+			{
+				{ Name = "ConvertOldItem", Type = "CurrencySource", EnumValue = 0 },
+				{ Name = "ConvertOldPvPCurrency", Type = "CurrencySource", EnumValue = 1 },
+				{ Name = "ItemRefund", Type = "CurrencySource", EnumValue = 2 },
+				{ Name = "QuestReward", Type = "CurrencySource", EnumValue = 3 },
+				{ Name = "Cheat", Type = "CurrencySource", EnumValue = 4 },
+				{ Name = "Vendor", Type = "CurrencySource", EnumValue = 5 },
+				{ Name = "PvPKillCredit", Type = "CurrencySource", EnumValue = 6 },
+				{ Name = "PvPMetaCredit", Type = "CurrencySource", EnumValue = 7 },
+				{ Name = "PvPScriptedAward", Type = "CurrencySource", EnumValue = 8 },
+				{ Name = "Loot", Type = "CurrencySource", EnumValue = 9 },
+				{ Name = "UpdatingVersion", Type = "CurrencySource", EnumValue = 10 },
+				{ Name = "LfgReward", Type = "CurrencySource", EnumValue = 11 },
+				{ Name = "Trade", Type = "CurrencySource", EnumValue = 12 },
+				{ Name = "Spell", Type = "CurrencySource", EnumValue = 13 },
+				{ Name = "ItemDeletion", Type = "CurrencySource", EnumValue = 14 },
+				{ Name = "RatedBattleground", Type = "CurrencySource", EnumValue = 15 },
+				{ Name = "RandomBattleground", Type = "CurrencySource", EnumValue = 16 },
+				{ Name = "Arena", Type = "CurrencySource", EnumValue = 17 },
+				{ Name = "ExceededMaxQty", Type = "CurrencySource", EnumValue = 18 },
+				{ Name = "PvPCompletionBonus", Type = "CurrencySource", EnumValue = 19 },
+				{ Name = "Script", Type = "CurrencySource", EnumValue = 20 },
+				{ Name = "GuildBankWithdrawal", Type = "CurrencySource", EnumValue = 21 },
+				{ Name = "Pushloot", Type = "CurrencySource", EnumValue = 22 },
+				{ Name = "GarrisonBuilding", Type = "CurrencySource", EnumValue = 23 },
+				{ Name = "PvPDrop", Type = "CurrencySource", EnumValue = 24 },
+				{ Name = "GarrisonFollowerActivation", Type = "CurrencySource", EnumValue = 25 },
+				{ Name = "GarrisonBuildingRefund", Type = "CurrencySource", EnumValue = 26 },
+				{ Name = "GarrisonMissionReward", Type = "CurrencySource", EnumValue = 27 },
+				{ Name = "GarrisonResourceOverTime", Type = "CurrencySource", EnumValue = 28 },
+				{ Name = "QuestRewardIgnoreCaps", Type = "CurrencySource", EnumValue = 29 },
+				{ Name = "GarrisonTalent", Type = "CurrencySource", EnumValue = 30 },
+				{ Name = "GarrisonWorldQuestBonus", Type = "CurrencySource", EnumValue = 31 },
+				{ Name = "PvPHonorReward", Type = "CurrencySource", EnumValue = 32 },
+				{ Name = "BonusRoll", Type = "CurrencySource", EnumValue = 33 },
+				{ Name = "AzeriteRespec", Type = "CurrencySource", EnumValue = 34 },
+				{ Name = "WorldQuestReward", Type = "CurrencySource", EnumValue = 35 },
+				{ Name = "WorldQuestRewardIgnoreCaps", Type = "CurrencySource", EnumValue = 36 },
+				{ Name = "FactionConversion", Type = "CurrencySource", EnumValue = 37 },
+				{ Name = "DailyQuestReward", Type = "CurrencySource", EnumValue = 38 },
+				{ Name = "DailyQuestWarModeReward", Type = "CurrencySource", EnumValue = 39 },
+				{ Name = "WeeklyQuestReward", Type = "CurrencySource", EnumValue = 40 },
+				{ Name = "WeeklyQuestWarModeReward", Type = "CurrencySource", EnumValue = 41 },
+				{ Name = "AccountCopy", Type = "CurrencySource", EnumValue = 42 },
+				{ Name = "WeeklyRewardChest", Type = "CurrencySource", EnumValue = 43 },
+				{ Name = "GarrisonTalentTreeReset", Type = "CurrencySource", EnumValue = 44 },
+				{ Name = "Last", Type = "CurrencySource", EnumValue = 45 },
+			},
+		},
+		{
+			Name = "CurrencyTokenCategoryFlags",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 1,
+			MaxValue = 8,
+			Fields =
+			{
+				{ Name = "FlagSortLast", Type = "CurrencyTokenCategoryFlags", EnumValue = 1 },
+				{ Name = "FlagPlayerItemAssignment", Type = "CurrencyTokenCategoryFlags", EnumValue = 2 },
+				{ Name = "Hidden", Type = "CurrencyTokenCategoryFlags", EnumValue = 4 },
+				{ Name = "Virtual", Type = "CurrencyTokenCategoryFlags", EnumValue = 8 },
+			},
+		},
+		{
+			Name = "PlayerCurrencyFlags",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 1,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Incremented", Type = "PlayerCurrencyFlags", EnumValue = 1 },
+				{ Name = "Loading", Type = "PlayerCurrencyFlags", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "PlayerCurrencyFlagsDbFlags",
+			Type = "Enumeration",
+			NumValues = 5,
+			MinValue = 1,
+			MaxValue = 16,
+			Fields =
+			{
+				{ Name = "IgnoreMaxQtyOnload", Type = "PlayerCurrencyFlagsDbFlags", EnumValue = 1 },
+				{ Name = "Reuse1", Type = "PlayerCurrencyFlagsDbFlags", EnumValue = 2 },
+				{ Name = "InBackpack", Type = "PlayerCurrencyFlagsDbFlags", EnumValue = 4 },
+				{ Name = "UnusedInUI", Type = "PlayerCurrencyFlagsDbFlags", EnumValue = 8 },
+				{ Name = "Reuse2", Type = "PlayerCurrencyFlagsDbFlags", EnumValue = 16 },
+			},
+		},
+		{
+			Name = "CurrencyConsts",
+			Type = "Constants",
+			Values =
+			{
+				{ Name = "PLAYER_CURRENCY_CLIENT_FLAGS", Type = "number", Value = PLAYER_CURRENCY_PDB_IN_BACKPACK.PLAYER_CURRENCY_PDB_UNUSED_IN_UI },
+				{ Name = "MAX_CURRENCY_QUANTITY", Type = "number", Value = 100000000 },
+				{ Name = "CONQUEST_ARENA_AND_BG_META_CURRENCY_ID", Type = "number", Value = 483 },
+				{ Name = "CONQUEST_RATED_BG_META_CURRENCY_ID", Type = "number", Value = 484 },
+				{ Name = "CONQUEST_ASHRAN_META_CURRENCY_ID", Type = "number", Value = 692 },
+				{ Name = "ACCOUNT_WIDE_HONOR_CURRENCY_ID", Type = "number", Value = 1585 },
+				{ Name = "ACCOUNT_WIDE_HONOR_LEVEL_CURRENCY_ID", Type = "number", Value = 1586 },
+				{ Name = "CONQUEST_CURRENCY_ID", Type = "number", Value = 1602 },
+				{ Name = "HONOR_CURRENCY_ID", Type = "number", Value = 1792 },
+				{ Name = "ARTIFACT_KNOWLEDGE_CURRENCY_ID", Type = "number", Value = 1171 },
+				{ Name = "WAR_RESOURCES_CURRENCY_ID", Type = "number", Value = 1560 },
+				{ Name = "ECHOES_OF_NYALOTHA_CURRENCY_ID", Type = "number", Value = 1803 },
+				{ Name = "QUESTIONMARK_INV_ICON", Type = "number", Value = 134400 },
+				{ Name = "CURRENCY_ID_RENOWN", Type = "number", Value = 1822 },
+				{ Name = "CURRENCY_ID_RENOWN_KYRIAN", Type = "number", Value = 1829 },
+				{ Name = "CURRENCY_ID_RENOWN_VENTHYR", Type = "number", Value = 1830 },
+				{ Name = "CURRENCY_ID_RENOWN_NIGHT_FAE", Type = "number", Value = 1831 },
+				{ Name = "CURRENCY_ID_RENOWN_NECROLORD", Type = "number", Value = 1832 },
+				{ Name = "CURRENCY_ID_WILLING_SOUL", Type = "number", Value = 1810 },
+				{ Name = "CURRENCY_ID_RESERVOIR_ANIMA", Type = "number", Value = 1813 },
+			},
+		},
+	},
+});
+
+APIDocumentation:AddDocumentationTable(
+{
+	Tables =
+	{
+		{
 			Name = "Damageclass",
 			Type = "Enumeration",
 			NumValues = 44,
@@ -39817,6 +40199,42 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "GarrAutoCombatSpellTutorialFlag",
+			Type = "Enumeration",
+			NumValues = 5,
+			MinValue = 0,
+			MaxValue = 4,
+			Fields =
+			{
+				{ Name = "None", Type = "GarrAutoCombatSpellTutorialFlag", EnumValue = 0 },
+				{ Name = "Single", Type = "GarrAutoCombatSpellTutorialFlag", EnumValue = 1 },
+				{ Name = "Column", Type = "GarrAutoCombatSpellTutorialFlag", EnumValue = 2 },
+				{ Name = "Row", Type = "GarrAutoCombatSpellTutorialFlag", EnumValue = 3 },
+				{ Name = "All", Type = "GarrAutoCombatSpellTutorialFlag", EnumValue = 4 },
+			},
+		},
+		{
+			Name = "GarrAutoCombatTutorial",
+			Type = "Enumeration",
+			NumValues = 11,
+			MinValue = 1,
+			MaxValue = 1024,
+			Fields =
+			{
+				{ Name = "SelectMission", Type = "GarrAutoCombatTutorial", EnumValue = 1 },
+				{ Name = "PlaceCompanion", Type = "GarrAutoCombatTutorial", EnumValue = 2 },
+				{ Name = "HealCompanion", Type = "GarrAutoCombatTutorial", EnumValue = 4 },
+				{ Name = "LevelHeal", Type = "GarrAutoCombatTutorial", EnumValue = 8 },
+				{ Name = "BeneficialEffect", Type = "GarrAutoCombatTutorial", EnumValue = 16 },
+				{ Name = "AttackSingle", Type = "GarrAutoCombatTutorial", EnumValue = 32 },
+				{ Name = "AttackColumn", Type = "GarrAutoCombatTutorial", EnumValue = 64 },
+				{ Name = "AttackRow", Type = "GarrAutoCombatTutorial", EnumValue = 128 },
+				{ Name = "AttackAll", Type = "GarrAutoCombatTutorial", EnumValue = 256 },
+				{ Name = "TroopTutorial", Type = "GarrAutoCombatTutorial", EnumValue = 512 },
+				{ Name = "EnvironmentalEffect", Type = "GarrAutoCombatTutorial", EnumValue = 1024 },
+			},
+		},
+		{
 			Name = "GarrAutoCombatantRole",
 			Type = "Enumeration",
 			NumValues = 6,
@@ -39936,8 +40354,8 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "Generic", Type = "GarrTalentFeatureSubtype", EnumValue = 0 },
 				{ Name = "Bastion", Type = "GarrTalentFeatureSubtype", EnumValue = 1 },
 				{ Name = "Revendreth", Type = "GarrTalentFeatureSubtype", EnumValue = 2 },
-				{ Name = "Maldraxxus", Type = "GarrTalentFeatureSubtype", EnumValue = 3 },
-				{ Name = "Ardenweald", Type = "GarrTalentFeatureSubtype", EnumValue = 4 },
+				{ Name = "Ardenweald", Type = "GarrTalentFeatureSubtype", EnumValue = 3 },
+				{ Name = "Maldraxxus", Type = "GarrTalentFeatureSubtype", EnumValue = 4 },
 			},
 		},
 		{

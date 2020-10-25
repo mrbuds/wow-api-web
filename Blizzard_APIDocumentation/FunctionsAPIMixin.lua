@@ -48,7 +48,7 @@ function FunctionsAPIMixin:GetArgumentString(decorateOptionals, includeColorCode
 		local values = {};
 		for i, argumentInfo in ipairs(self.Arguments) do
 			if includeColorCodes ~= false then
-				table.insert(values, ("%s|cff%s"):format(argumentInfo:GetArgumentString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
+				table.insert(values, ("%s.cff%s"):format(argumentInfo:GetArgumentString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
 			else
 				table.insert(values, argumentInfo:GetArgumentString(decorateOptionals, includeColorCodes));
 			end
@@ -63,7 +63,7 @@ function FunctionsAPIMixin:GetReturnString(decorateOptionals, includeColorCodes)
 		local values = {};
 		for i, returnInfo in ipairs(self.Returns) do
 			if includeColorCodes ~= false then
-				table.insert(values, ("%s|cff%s"):format(returnInfo:GetReturnString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
+				table.insert(values, ("%s.cff%s"):format(returnInfo:GetReturnString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
 			else
 				table.insert(values, returnInfo:GetReturnString(decorateOptionals, includeColorCodes));
 			end

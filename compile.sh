@@ -50,5 +50,13 @@ echo ". compile Lua files to javascript"
 
 moonshine distil api.lua
 moonshine distil fulldoc2.lua
-# cd "${BLIZZDOC}"
-# moonshine distil *.lua
+
+for file in ${BLIZZDOC}/*
+do
+  mv $file ${file}.tmp
+  cat ${file}.tmp | tr '|' '.' > $file
+  rm ${file}.tmp
+done
+
+cd "${BLIZZDOC}"
+moonshine distil *.lua

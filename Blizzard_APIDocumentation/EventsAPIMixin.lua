@@ -60,7 +60,7 @@ function EventsAPIMixin:GetPayloadString(decorateOptionals, includeColorCodes) -
 		local values = {};
 		for i, payloadInfo in ipairs(self.Payload) do
 			if includeColorCodes ~= false then
-				table.insert(values, ("%s.cff%s"):format(payloadInfo:GetPayloadString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
+				table.insert(values, ("%s|cff%s"):format(payloadInfo:GetPayloadString(decorateOptionals, includeColorCodes), self:GetLinkHexColor()));
 			else
 				table.insert(values, payloadInfo:GetPayloadString(decorateOptionals, includeColorCodes));
 			end

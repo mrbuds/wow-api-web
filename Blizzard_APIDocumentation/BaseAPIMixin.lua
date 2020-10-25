@@ -43,7 +43,7 @@ function BaseAPIMixin:GetClipboardString()
 end
 
 function BaseAPIMixin:GenerateAPILink()
-	return (".cff%s.Hapi:%s:%s:%s.h%s.h.r"):format(self:GetLinkHexColor(), self:GetType(), self:GetName(), self:GetParentName(), self:GetFullName());
+	return ("|cff%s|Hapi:%s:%s:%s|h%s|h|r"):format(self:GetLinkHexColor(), self:GetType(), self:GetName(), self:GetParentName(), self:GetFullName());
 end
 
 function BaseAPIMixin:GetSingleOutputLine()

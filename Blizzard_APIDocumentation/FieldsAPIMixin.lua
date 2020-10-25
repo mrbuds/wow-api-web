@@ -71,7 +71,7 @@ end
 function FieldsAPIMixin:GetArgumentString(decorateOptionals, includeColorCodes)
 	local prefix = decorateOptionals ~= false and self:IsOptional() and "optional " or "";
 	if includeColorCodes ~= false then
-		return (".cff%s%s%s.r"):format(self:GetLinkHexColor(), prefix, self:GetName());
+		return ("|cff%s%s%s|r"):format(self:GetLinkHexColor(), prefix, self:GetName());
 	end
 	return ("%s%s"):format(prefix, self:GetName());
 end

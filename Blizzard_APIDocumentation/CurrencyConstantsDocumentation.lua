@@ -193,7 +193,7 @@ local CurrencyConstants =
 			Type = "Constants",
 			Values =
 			{
-				{ Name = "PLAYER_CURRENCY_CLIENT_FLAGS", Type = "number", Value = PLAYER_CURRENCY_PDB_IN_BACKPACK.PLAYER_CURRENCY_PDB_UNUSED_IN_UI },
+				{ Name = "PLAYER_CURRENCY_CLIENT_FLAGS", Type = "number", Value = PLAYER_CURRENCY_PDB_IN_BACKPACK_PLAYER_CURRENCY_PDB_UNUSED_IN_UI },
 				{ Name = "MAX_CURRENCY_QUANTITY", Type = "number", Value = 100000000 },
 				{ Name = "CONQUEST_ARENA_AND_BG_META_CURRENCY_ID", Type = "number", Value = 483 },
 				{ Name = "CONQUEST_RATED_BG_META_CURRENCY_ID", Type = "number", Value = 484 },

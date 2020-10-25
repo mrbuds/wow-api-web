@@ -45,7 +45,7 @@ cat "${TOCFILE}" | sed $'s/\r$//' | while read -r line || [[ -n "$line" ]]; do
     fi
   fi
 done
-cat "${CONCATFILE}"  | tr '|' '.' | tr '\n' '\f' | sed -r 's/local \w+ =/APIDocumentation:AddDocumentationTable\(/g' | sed -r 's/\};/\}\);/g' | sed -r 's/\fAPIDocumentation:AddDocumentationTable\(\w+\);//g' | tr '\f' '\n' > fulldoc2.lua
+cat "${CONCATFILE}"  | tr '\n' '\f' | sed -r 's/BACKPACK\|PLAYER/BACKPACK_PLAYER/g' | sed -r 's/local \w+ =/APIDocumentation:AddDocumentationTable\(/g' | sed -r 's/\};/\}\);/g' | sed -r 's/\fAPIDocumentation:AddDocumentationTable\(\w+\);//g' | tr '\f' '\n' > fulldoc2.lua
 echo ". compile Lua files to javascript"
 
 moonshine distil api.lua
@@ -54,7 +54,7 @@ moonshine distil fulldoc2.lua
 for file in ${BLIZZDOC}/*
 do
   mv $file ${file}.tmp
-  cat ${file}.tmp | tr '|' '.' > $file
+  cat ${file}.tmp | sed -r 's/BACKPACK\|PLAYER/BACKPACK_PLAYER/g'  > $file
   rm ${file}.tmp
 done
 

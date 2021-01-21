@@ -1,4 +1,14 @@
+-- fix missing values
 
+Enum = {
+    PlayerCurrencyFlagsDbFlags = {
+        IgnoreMaxQtyOnload = 1,
+        Reuse1 = 2,
+        InBackpack = 4,
+        UnusedInUI = 8,
+        Reuse2 = 16,
+    }
+}
 local AccountInfo =
 {
 	Name = "AccountInfo",
@@ -14118,6 +14128,7 @@ local CovenantPreview =
 				{ Name = "uiTextureKit", Type = "string", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "description", Type = "string", Nilable = false },
+				{ Name = "sortOrder", Type = "number", Nilable = false },
 			},
 		},
 	},
@@ -14395,6 +14406,10 @@ local Covenants =
 				{ Name = "animaGemsFullSoundKit", Type = "number", Nilable = false },
 				{ Name = "animaNewGemSoundKit", Type = "number", Nilable = false },
 				{ Name = "animaReinforceSelectSoundKit", Type = "number", Nilable = false },
+				{ Name = "upgradeTabSelectSoundKitID", Type = "number", Nilable = false },
+				{ Name = "reservoirFullSoundKitID", Type = "number", Nilable = false },
+				{ Name = "beginResearchSoundKitID", Type = "number", Nilable = false },
+				{ Name = "renownFanfareSoundKitID", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "soulbindIDs", Type = "table", InnerType = "number", Nilable = false },
 			},
@@ -14810,7 +14825,9 @@ local CurrencyInfo =
 				{ Name = "isTradeable", Type = "bool", Nilable = false },
 				{ Name = "quality", Type = "ItemQuality", Nilable = false },
 				{ Name = "maxWeeklyQuantity", Type = "number", Nilable = false },
+				{ Name = "totalEarned", Type = "number", Nilable = false },
 				{ Name = "discovered", Type = "bool", Nilable = false },
+				{ Name = "useTotalEarnedForMaxQty", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -17816,6 +17833,15 @@ local GarrisonInfo =
 			},
 		},
 		{
+			Name = "GarrisonFollowerHealed",
+			Type = "Event",
+			LiteralName = "GARRISON_FOLLOWER_HEALED",
+			Payload =
+			{
+				{ Name = "followerID", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "GarrisonFollowerListUpdate",
 			Type = "Event",
 			LiteralName = "GARRISON_FOLLOWER_LIST_UPDATE",
@@ -18341,6 +18367,7 @@ local GarrisonInfo =
 				{ Name = "maxHealth", Type = "number", Nilable = false },
 				{ Name = "attack", Type = "number", Nilable = false },
 				{ Name = "healingTimestamp", Type = "number", Nilable = false },
+				{ Name = "healCost", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -19977,6 +20004,20 @@ local Item =
 			},
 		},
 		{
+			Name = "IsAnimaItemByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemInfo", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isAnimaItem", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsBound",
 			Type = "Function",
 
@@ -21555,11 +21596,13 @@ local LegendaryCrafting =
 			Arguments =
 			{
 				{ Name = "baseItem", Type = "table", Mixin = "ItemLocationMixin", Nilable = true },
+				{ Name = "filter", Type = "RuneforgePowerFilter", Nilable = true },
 			},
 
 			Returns =
 			{
-				{ Name = "runeforgePowerIDs", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "specRuneforgePowerIDs", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "otherSpecRuneforgePowerIDs", Type = "table", InnerType = "number", Nilable = false },
 			},
 		},
 		{
@@ -21570,6 +21613,7 @@ local LegendaryCrafting =
 			{
 				{ Name = "classID", Type = "number", Nilable = true },
 				{ Name = "specID", Type = "number", Nilable = true },
+				{ Name = "filter", Type = "RuneforgePowerFilter", Nilable = true },
 			},
 
 			Returns =
@@ -25884,6 +25928,11 @@ local PlayerMentorship =
 	Events =
 	{
 		{
+			Name = "MentorshipStatusChanged",
+			Type = "Event",
+			LiteralName = "MENTORSHIP_STATUS_CHANGED",
+		},
+		{
 			Name = "NewcomerGraduation",
 			Type = "Event",
 			LiteralName = "NEWCOMER_GRADUATION",
@@ -28872,6 +28921,20 @@ local QuestTaskInfo =
 			},
 		},
 		{
+			Name = "GetUIWidgetSetIDFromQuestID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "UiWidgetSetID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "IsActive",
 			Type = "Function",
 
@@ -29798,9 +29861,9 @@ local ScenarioInfo =
 		{
 			Name = "JailersTowerType",
 			Type = "Enumeration",
-			NumValues = 11,
+			NumValues = 12,
 			MinValue = 0,
-			MaxValue = 10,
+			MaxValue = 11,
 			Fields =
 			{
 				{ Name = "TwistingCorridors", Type = "JailersTowerType", EnumValue = 0 },
@@ -29814,6 +29877,7 @@ local ScenarioInfo =
 				{ Name = "TormentChamberJaina", Type = "JailersTowerType", EnumValue = 8 },
 				{ Name = "TormentChamberThrall", Type = "JailersTowerType", EnumValue = 9 },
 				{ Name = "TormentChamberAnduin", Type = "JailersTowerType", EnumValue = 10 },
+				{ Name = "AdamantVaults", Type = "JailersTowerType", EnumValue = 11 },
 			},
 		},
 	},
@@ -31286,6 +31350,7 @@ local Soulbinds =
 				{ Name = "state", Type = "SoulbindNodeState", Nilable = false },
 				{ Name = "conduitType", Type = "SoulbindConduitType", Nilable = true },
 				{ Name = "parentNodeIDs", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "failureRenownRequirement", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -40082,9 +40147,9 @@ local CurrencyConstants =
 		{
 			Name = "CurrencySource",
 			Type = "Enumeration",
-			NumValues = 46,
+			NumValues = 49,
 			MinValue = 0,
-			MaxValue = 45,
+			MaxValue = 48,
 			Fields =
 			{
 				{ Name = "ConvertOldItem", Type = "CurrencySource", EnumValue = 0 },
@@ -40132,7 +40197,10 @@ local CurrencyConstants =
 				{ Name = "AccountCopy", Type = "CurrencySource", EnumValue = 42 },
 				{ Name = "WeeklyRewardChest", Type = "CurrencySource", EnumValue = 43 },
 				{ Name = "GarrisonTalentTreeReset", Type = "CurrencySource", EnumValue = 44 },
-				{ Name = "Last", Type = "CurrencySource", EnumValue = 45 },
+				{ Name = "DailyReset", Type = "CurrencySource", EnumValue = 45 },
+				{ Name = "AddConduitToCollection", Type = "CurrencySource", EnumValue = 46 },
+				{ Name = "Barbershop", Type = "CurrencySource", EnumValue = 47 },
+				{ Name = "Last", Type = "CurrencySource", EnumValue = 48 },
 			},
 		},
 		{
@@ -40181,7 +40249,7 @@ local CurrencyConstants =
 			Type = "Constants",
 			Values =
 			{
-				{ Name = "PLAYER_CURRENCY_CLIENT_FLAGS", Type = "number", Value = PLAYER_CURRENCY_PDB_IN_BACKPACK|PLAYER_CURRENCY_PDB_UNUSED_IN_UI },
+				{ Name = "PLAYER_CURRENCY_CLIENT_FLAGS", Type = "number", Value = Enum.PlayerCurrencyFlagsDbFlags.InBackpack + Enum.PlayerCurrencyFlagsDbFlags.UnusedInUI },
 				{ Name = "MAX_CURRENCY_QUANTITY", Type = "number", Value = 100000000 },
 				{ Name = "CONQUEST_ARENA_AND_BG_META_CURRENCY_ID", Type = "number", Value = 483 },
 				{ Name = "CONQUEST_RATED_BG_META_CURRENCY_ID", Type = "number", Value = 484 },
@@ -40668,14 +40736,6 @@ local GarrisonConstants =
 				{ Name = "Type_9_0", Type = "GarrisonType", EnumValue = 111 },
 			},
 		},
-		{
-			Name = "GarrisonConstsExposed",
-			Type = "Constants",
-			Values =
-			{
-				{ Name = "GARRISON_AUTO_COMBATANT_FULL_HEAL_COST", Type = "number", Value = 100 },
-			},
-		},
 	},
 };
 
@@ -40861,6 +40921,19 @@ local LegendaryCraftingTypes =
 {
 	Tables =
 	{
+		{
+			Name = "RuneforgePowerFilter",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "All", Type = "RuneforgePowerFilter", EnumValue = 0 },
+				{ Name = "Available", Type = "RuneforgePowerFilter", EnumValue = 1 },
+				{ Name = "Unavailable", Type = "RuneforgePowerFilter", EnumValue = 2 },
+			},
+		},
 		{
 			Name = "RuneforgePowerState",
 			Type = "Enumeration",

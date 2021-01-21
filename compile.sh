@@ -26,6 +26,7 @@ cp ${UPDATEDDOCPATH}/* ${BLIZZDOC}/
 
 # concatenate documentation
 echo ". make ${CONCATFILE}"
+cat "patch.lua" > "${CONCATFILE}"
 go=false
 cat "${TOCFILE}" | sed $'s/\r$//' | while read -r line || [[ -n "$line" ]]; do
   if  [ "${line:0:7}" = "# Start" ]; then

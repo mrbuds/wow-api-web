@@ -1122,6 +1122,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "widgetSetID", Type = "number", Nilable = true },
 				{ Name = "atlasName", Type = "string", Nilable = true },
 				{ Name = "uiTextureKit", Type = "string", Nilable = true },
+				{ Name = "shouldGlow", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -3308,6 +3309,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "unitPrice", Type = "number", Nilable = false },
 				{ Name = "auctionID", Type = "number", Nilable = false },
 				{ Name = "owners", Type = "table", InnerType = "string", Nilable = false },
+				{ Name = "totalNumberOfOwners", Type = "number", Nilable = false },
 				{ Name = "timeLeftSeconds", Type = "number", Nilable = true },
 				{ Name = "numOwnerItems", Type = "number", Nilable = false },
 				{ Name = "containsOwnerItem", Type = "bool", Nilable = false },
@@ -3347,6 +3349,7 @@ APIDocumentation:AddDocumentationTable(
 			{
 				{ Name = "itemKey", Type = "ItemKey", Nilable = false },
 				{ Name = "owners", Type = "table", InnerType = "string", Nilable = false },
+				{ Name = "totalNumberOfOwners", Type = "number", Nilable = false },
 				{ Name = "timeLeft", Type = "AuctionHouseTimeLeftBand", Nilable = false },
 				{ Name = "auctionID", Type = "number", Nilable = false },
 				{ Name = "quantity", Type = "number", Nilable = false },
@@ -6310,6 +6313,20 @@ APIDocumentation:AddDocumentationTable(
 
 	Functions =
 	{
+		{
+			Name = "CanUseKeystoneInCurrentMap",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "canUse", Type = "bool", Nilable = false },
+			},
+		},
 		{
 			Name = "ClearKeystone",
 			Type = "Function",
@@ -14212,10 +14229,46 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "currencyIDs", Type = "table", InnerType = "number", Nilable = false },
 			},
 		},
+		{
+			Name = "HasMaximumRenown",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasMaxRenown", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsPlayerInRenownCatchUpMode",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isInCatchUpMode", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsWeeklyRenownCapped",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isWeeklyCapped", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestCatchUpState",
+			Type = "Function",
+		},
 	},
 
 	Events =
 	{
+		{
+			Name = "CovenantRenownCatchUpStateUpdate",
+			Type = "Event",
+			LiteralName = "COVENANT_RENOWN_CATCH_UP_STATE_UPDATE",
+		},
 		{
 			Name = "CovenantRenownInteractionEnded",
 			Type = "Event",
@@ -17600,6 +17653,20 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "IsFollowerOnCompletedMission",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "followerID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "followerOnCompletedMission", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsTalentConditionMet",
 			Type = "Function",
 
@@ -17621,6 +17688,11 @@ APIDocumentation:AddDocumentationTable(
 			Arguments =
 			{
 				{ Name = "missionID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -18244,6 +18316,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "maxHealth", Type = "number", Nilable = false },
 				{ Name = "role", Type = "number", Nilable = false },
 				{ Name = "isAutoTroop", Type = "bool", Nilable = false },
+				{ Name = "isSoulbind", Type = "bool", Nilable = false },
 				{ Name = "isCollected", Type = "bool", Nilable = false },
 				{ Name = "autoCombatStats", Type = "FollowerAutoCombatStatsInfo", Nilable = false },
 				{ Name = "autoCombatSpells", Type = "table", InnerType = "AutoCombatSpellInfo", Nilable = false },
@@ -18311,6 +18384,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "attack", Type = "number", Nilable = false },
 				{ Name = "healingTimestamp", Type = "number", Nilable = false },
 				{ Name = "healCost", Type = "number", Nilable = false },
+				{ Name = "minutesHealingRemaining", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -18544,6 +18618,15 @@ APIDocumentation:AddDocumentationTable(
 			Returns =
 			{
 				{ Name = "info", Type = "table", InnerType = "GossipQuestUIInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCustomGossipDescriptionString",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "description", Type = "string", Nilable = true },
 			},
 		},
 		{
@@ -18992,6 +19075,22 @@ APIDocumentation:AddDocumentationTable(
 			{
 				{ Name = "guildMemberGUID", Type = "string", Nilable = false },
 				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "QueryGuildMembersForRecipe",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "recipeLevel", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "updatedRecipeSpellID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -20486,6 +20585,20 @@ APIDocumentation:AddDocumentationTable(
 	Functions =
 	{
 		{
+			Name = "CanUpgradeItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "baseItem", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isValid", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "GetItemHyperlink",
 			Type = "Function",
 
@@ -21038,6 +21151,16 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "GetFilteredSearchResults",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "totalResultsFound", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "filteredResults", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetSearchResultInfo",
 			Type = "Function",
 
@@ -21049,6 +21172,16 @@ APIDocumentation:AddDocumentationTable(
 			Returns =
 			{
 				{ Name = "searchResultData", Type = "LfgSearchResultData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSearchResults",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "totalResultsFound", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "results", Type = "table", InnerType = "number", Nilable = false },
 			},
 		},
 		{
@@ -23049,9 +23182,9 @@ APIDocumentation:AddDocumentationTable(
 		{
 			Name = "UIMapFlag",
 			Type = "Enumeration",
-			NumValues = 16,
+			NumValues = 17,
 			MinValue = 1,
-			MaxValue = 32768,
+			MaxValue = 65536,
 			Fields =
 			{
 				{ Name = "NoHighlight", Type = "UIMapFlag", EnumValue = 1 },
@@ -23070,6 +23203,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "FlightMapShowZoomOut", Type = "UIMapFlag", EnumValue = 8192 },
 				{ Name = "FlightMapAutoZoom", Type = "UIMapFlag", EnumValue = 16384 },
 				{ Name = "ForceOnNavbar", Type = "UIMapFlag", EnumValue = 32768 },
+				{ Name = "AlwaysAllowUserWaypoints", Type = "UIMapFlag", EnumValue = 65536 },
 			},
 		},
 		{
@@ -28113,6 +28247,20 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "ShouldDisplayTimeRemaining",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "displayTimeRemaining", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "ShouldShowQuestRewards",
 			Type = "Function",
 
@@ -30778,21 +30926,6 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
-			Name = "GetConduitItemLevel",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "conduitID", Type = "number", Nilable = false },
-				{ Name = "rank", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "itemLevel", Type = "number", Nilable = false },
-			},
-		},
-		{
 			Name = "GetConduitQuality",
 			Type = "Function",
 
@@ -31213,6 +31346,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "tree", Type = "SoulbindTree", Nilable = false },
 				{ Name = "modelSceneData", Type = "SoulbindModelSceneData", Nilable = false },
 				{ Name = "activationSoundKitID", Type = "number", Nilable = false },
+				{ Name = "playerConditionReason", Type = "string", Nilable = true },
 			},
 		},
 		{
@@ -38843,6 +38977,15 @@ APIDocumentation:AddDocumentationTable(
 	Functions =
 	{
 		{
+			Name = "AreRewardsForCurrentRewardPeriod",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isCurrentPeriod", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CanClaimRewards",
 			Type = "Function",
 
@@ -38876,6 +39019,21 @@ APIDocumentation:AddDocumentationTable(
 			Returns =
 			{
 				{ Name = "activities", Type = "table", InnerType = "WeeklyRewardActivityInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetActivityEncounterInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "type", Type = "WeeklyRewardChestThresholdType", Nilable = false },
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "table", InnerType = "WeeklyRewardActivityEncounterInfo", Nilable = false },
 			},
 		},
 		{
@@ -38917,6 +39075,22 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "GetNextMythicPlusIncrease",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "mythicPlusLevel", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasSeasonData", Type = "bool", Nilable = false },
+				{ Name = "nextMythicPlusLevel", Type = "number", Nilable = true },
+				{ Name = "itemLevel", Type = "number", Nilable = true },
+			},
+		},
+		{
 			Name = "HasAvailableRewards",
 			Type = "Function",
 
@@ -38932,6 +39106,15 @@ APIDocumentation:AddDocumentationTable(
 			Returns =
 			{
 				{ Name = "hasGeneratedRewards", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasInteraction",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isInteracting", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -38989,6 +39172,17 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "WeeklyRewardActivityEncounterInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "encounterID", Type = "number", Nilable = false },
+				{ Name = "bestDifficulty", Type = "number", Nilable = false },
+				{ Name = "uiOrder", Type = "number", Nilable = false },
+				{ Name = "instanceID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "WeeklyRewardActivityInfo",
 			Type = "Structure",
 			Fields =
@@ -38999,6 +39193,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "progress", Type = "number", Nilable = false },
 				{ Name = "id", Type = "number", Nilable = false },
 				{ Name = "level", Type = "number", Nilable = false },
+				{ Name = "claimID", Type = "number", Nilable = true },
 				{ Name = "rewards", Type = "table", InnerType = "WeeklyRewardActivityRewardInfo", Nilable = false },
 			},
 		},
@@ -39984,9 +40179,9 @@ APIDocumentation:AddDocumentationTable(
 		{
 			Name = "CurrencySource",
 			Type = "Enumeration",
-			NumValues = 49,
+			NumValues = 51,
 			MinValue = 0,
-			MaxValue = 48,
+			MaxValue = 50,
 			Fields =
 			{
 				{ Name = "ConvertOldItem", Type = "CurrencySource", EnumValue = 0 },
@@ -40037,7 +40232,9 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "DailyReset", Type = "CurrencySource", EnumValue = 45 },
 				{ Name = "AddConduitToCollection", Type = "CurrencySource", EnumValue = 46 },
 				{ Name = "Barbershop", Type = "CurrencySource", EnumValue = 47 },
-				{ Name = "Last", Type = "CurrencySource", EnumValue = 48 },
+				{ Name = "ConvertItemsToCurrencyValue", Type = "CurrencySource", EnumValue = 48 },
+				{ Name = "PvPTeamContribution", Type = "CurrencySource", EnumValue = 49 },
+				{ Name = "Last", Type = "CurrencySource", EnumValue = 50 },
 			},
 		},
 		{
@@ -40216,6 +40413,20 @@ APIDocumentation:AddDocumentationTable(
 {
 	Tables =
 	{
+		{
+			Name = "CovenantSkill",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 2730,
+			MaxValue = 2733,
+			Fields =
+			{
+				{ Name = "Kyrian", Type = "CovenantSkill", EnumValue = 2730 },
+				{ Name = "Venthyr", Type = "CovenantSkill", EnumValue = 2731 },
+				{ Name = "NightFae", Type = "CovenantSkill", EnumValue = 2732 },
+				{ Name = "Necrolord", Type = "CovenantSkill", EnumValue = 2733 },
+			},
+		},
 		{
 			Name = "CovenantType",
 			Type = "Enumeration",
@@ -40934,9 +41145,9 @@ APIDocumentation:AddDocumentationTable(
 		{
 			Name = "QuestSessionResult",
 			Type = "Enumeration",
-			NumValues = 33,
+			NumValues = 34,
 			MinValue = 0,
-			MaxValue = 32,
+			MaxValue = 33,
 			Fields =
 			{
 				{ Name = "Ok", Type = "QuestSessionResult", EnumValue = 0 },
@@ -40972,6 +41183,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "InvalidPublicParty", Type = "QuestSessionResult", EnumValue = 30 },
 				{ Name = "Unknown", Type = "QuestSessionResult", EnumValue = 31 },
 				{ Name = "InCombat", Type = "QuestSessionResult", EnumValue = 32 },
+				{ Name = "MemberInCombat", Type = "QuestSessionResult", EnumValue = 33 },
 			},
 		},
 	},

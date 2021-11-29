@@ -85,6 +85,20 @@ local Transmog =
 			Type = "Function",
 		},
 		{
+			Name = "ExtractTransmogIDList",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "input", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "transmogIDList", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetApplyCost",
 			Type = "Function",
 
@@ -329,6 +343,15 @@ local Transmog =
 				{ Name = "modID", Type = "number", Nilable = true },
 				{ Name = "itemAppearanceID", Type = "number", Nilable = true },
 				{ Name = "reason", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "TransmogCosmeticCollectionSourceAdded",
+			Type = "Event",
+			LiteralName = "TRANSMOG_COSMETIC_COLLECTION_SOURCE_ADDED",
+			Payload =
+			{
+				{ Name = "itemModifiedAppearanceID", Type = "number", Nilable = false },
 			},
 		},
 		{

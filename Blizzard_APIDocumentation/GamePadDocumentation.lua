@@ -7,6 +7,21 @@ local GamePad =
 	Functions =
 	{
 		{
+			Name = "AddSDLMapping",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "platform", Type = "ClientPlatformType", Nilable = false },
+				{ Name = "mapping", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "ApplyConfigs",
 			Type = "Function",
 		},
@@ -65,6 +80,10 @@ local GamePad =
 			{
 				{ Name = "configName", Type = "string", Nilable = true },
 			},
+		},
+		{
+			Name = "ClearLedColor",
+			Type = "Function",
 		},
 		{
 			Name = "DeleteConfig",
@@ -154,6 +173,29 @@ local GamePad =
 			},
 		},
 		{
+			Name = "GetLedColor",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "color", Type = "table", Mixin = "ColorMixin", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPowerLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "deviceID", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "powerLevel", Type = "GamePadPowerLevel", Nilable = false },
+			},
+		},
+		{
 			Name = "IsEnabled",
 			Type = "Function",
 
@@ -169,6 +211,15 @@ local GamePad =
 			Arguments =
 			{
 				{ Name = "config", Type = "GamePadConfig", Nilable = false },
+			},
+		},
+		{
+			Name = "SetLedColor",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "color", Type = "table", Mixin = "ColorMixin", Nilable = false },
 			},
 		},
 		{
@@ -204,6 +255,15 @@ local GamePad =
 	Events =
 	{
 		{
+			Name = "GamePadActiveChanged",
+			Type = "Event",
+			LiteralName = "GAME_PAD_ACTIVE_CHANGED",
+			Payload =
+			{
+				{ Name = "isActive", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "GamePadConfigsChanged",
 			Type = "Event",
 			LiteralName = "GAME_PAD_CONFIGS_CHANGED",
@@ -217,6 +277,15 @@ local GamePad =
 			Name = "GamePadDisconnected",
 			Type = "Event",
 			LiteralName = "GAME_PAD_DISCONNECTED",
+		},
+		{
+			Name = "GamePadPowerChanged",
+			Type = "Event",
+			LiteralName = "GAME_PAD_POWER_CHANGED",
+			Payload =
+			{
+				{ Name = "powerLevel", Type = "GamePadPowerLevel", Nilable = false },
+			},
 		},
 	},
 

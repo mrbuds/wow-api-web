@@ -43,6 +43,18 @@ local TransmogShared =
 			},
 		},
 		{
+			Name = "TransmogModification",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Main", Type = "TransmogModification", EnumValue = 0 },
+				{ Name = "Secondary", Type = "TransmogModification", EnumValue = 1 },
+			},
+		},
+		{
 			Name = "TransmogSearchType",
 			Type = "Enumeration",
 			NumValues = 3,
@@ -53,6 +65,38 @@ local TransmogShared =
 				{ Name = "Items", Type = "TransmogSearchType", EnumValue = 1 },
 				{ Name = "BaseSets", Type = "TransmogSearchType", EnumValue = 2 },
 				{ Name = "UsableSets", Type = "TransmogSearchType", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "TransmogSource",
+			Type = "Enumeration",
+			NumValues = 10,
+			MinValue = 0,
+			MaxValue = 9,
+			Fields =
+			{
+				{ Name = "None", Type = "TransmogSource", EnumValue = 0 },
+				{ Name = "JournalEncounter", Type = "TransmogSource", EnumValue = 1 },
+				{ Name = "Quest", Type = "TransmogSource", EnumValue = 2 },
+				{ Name = "Vendor", Type = "TransmogSource", EnumValue = 3 },
+				{ Name = "WorldDrop", Type = "TransmogSource", EnumValue = 4 },
+				{ Name = "HiddenUntilCollected", Type = "TransmogSource", EnumValue = 5 },
+				{ Name = "CantCollect", Type = "TransmogSource", EnumValue = 6 },
+				{ Name = "Achievement", Type = "TransmogSource", EnumValue = 7 },
+				{ Name = "Profession", Type = "TransmogSource", EnumValue = 8 },
+				{ Name = "NotValidForTransmog", Type = "TransmogSource", EnumValue = 9 },
+			},
+		},
+		{
+			Name = "TransmogType",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Appearance", Type = "TransmogType", EnumValue = 0 },
+				{ Name = "Illusion", Type = "TransmogType", EnumValue = 1 },
 			},
 		},
 		{

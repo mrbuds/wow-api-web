@@ -9,8 +9,10 @@
 #      or beta branch : https://github.com/Gethe/wow-ui-source/tree/beta/AddOns/Blizzard_APIDocumentation
 
 BLIZZDOC='Blizzard_APIDocumentation'
-UPDATEDDOCPATH="../wow-ui-source/Interface/AddOns/${BLIZZDOC}"
+BLIZZDOCGEN='Blizzard_APIDocumentationGenerated'
+UPDATEDDOCPATH="../BlizzardInterfaceCode/Interface/AddOns"
 TOCFILE="${BLIZZDOC}/${BLIZZDOC}.toc"
+TOCFILE2="${BLIZZDOC}/${BLIZZDOCGEN}.toc"
 CONCATFILE="fulldoc.lua"
 
 
@@ -22,27 +24,21 @@ if [ -e ${CONCATFILE} ]; then
 fi
 
 echo ". copy data from ${UPDATEDDOCPATH}"
-cp ${UPDATEDDOCPATH}/* ${BLIZZDOC}/
+cp ${UPDATEDDOCPATH}/${BLIZZDOC}/* ${BLIZZDOC}/
+cp ${UPDATEDDOCPATH}/${BLIZZDOCGEN}/* ${BLIZZDOC}/
 
 # concatenate documentation
 echo ". make ${CONCATFILE}"
 cat "patch.lua" > "${CONCATFILE}"
-go=false
-cat "${TOCFILE}" | sed $'s/\r$//' | while read -r line || [[ -n "$line" ]]; do
-  if  [ "${line:0:7}" = "# Start" ]; then
-    go=true
-    continue
-  fi
-  if [ "$go" = true ]; then
-    if [ ! "${line:0:1}" = '#' ]; then
-      file="${BLIZZDOC}/${line}"
-      if [ -e "$file" ]; then
-        echo ".. add file ${file}"
-        echo "" >> "${CONCATFILE}"
-        cat "$file" >> "${CONCATFILE}"
-      else
-        echo ".. can't find file: ${file}"
-      fi
+cat "${TOCFILE2}" | sed $'s/\r$//' | while read -r line || [[ -n "$line" ]]; do
+  if [ ! "${line:0:1}" = '#' ]; then
+    file="${BLIZZDOC}/${line}"
+    if [ -e "$file" ]; then
+      echo ".. add file ${file}"
+      echo "" >> "${CONCATFILE}"
+      cat "$file" >> "${CONCATFILE}"
+    else
+      echo ".. can't find file: ${file}"
     fi
   fi
 done

@@ -2024,6 +2024,7 @@ local AuctionHouse =
 			{
 				{ Name = "notification", Type = "AuctionHouseNotification", Nilable = false },
 				{ Name = "text", Type = "string", Nilable = false },
+				{ Name = "auctionID", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -2373,6 +2374,8 @@ local AuctionHouse =
 			Type = "Structure",
 			Fields =
 			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "battlePetSpeciesID", Type = "number", Nilable = false },
 				{ Name = "itemName", Type = "string", Nilable = false },
 				{ Name = "battlePetLink", Type = "string", Nilable = true },
 				{ Name = "appearanceLink", Type = "string", Nilable = true },
@@ -20819,6 +20822,10 @@ local SharedTraits =
 			},
 		},
 		{
+			Name = "CloseTraitSystemInteraction",
+			Type = "Function",
+		},
+		{
 			Name = "CommitConfig",
 			Type = "Function",
 
@@ -20859,6 +20866,20 @@ local SharedTraits =
 			Returns =
 			{
 				{ Name = "condInfo", Type = "TraitCondInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetConfigIDBySystemID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "systemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -21205,6 +21226,20 @@ local SharedTraits =
 			{
 				{ Name = "nodeEntryID", Type = "number", Nilable = false },
 			},
+		},
+		{
+			Name = "TraitSystemInteractionStarted",
+			Type = "Event",
+			LiteralName = "TRAIT_SYSTEM_INTERACTION_STARTED",
+			Payload =
+			{
+				{ Name = "systemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "TraitSystemNpcClosed",
+			Type = "Event",
+			LiteralName = "TRAIT_SYSTEM_NPC_CLOSED",
 		},
 		{
 			Name = "TraitTreeChanged",
@@ -22051,6 +22086,19 @@ local SimpleAnimGroupAPI =
 			},
 		},
 		{
+			Name = "GetAnimationSpeedMultiplier",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+
+			Returns =
+			{
+				{ Name = "animationSpeedMultiplier", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetAnimations",
 			Type = "Function",
 
@@ -22254,6 +22302,15 @@ local SimpleAnimGroupAPI =
 			{
 				{ Name = "reverse", Type = "bool", Nilable = false, Default = false },
 				{ Name = "offset", Type = "number", Nilable = false, Default = 0 },
+			},
+		},
+		{
+			Name = "SetAnimationSpeedMultiplier",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "animationSpeedMultiplier", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -30587,6 +30644,34 @@ local Sound =
 
 	Functions =
 	{
+		{
+			Name = "GetSoundScaledVolume",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soundHandle", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "scaledVolume", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "IsPlaying",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "soundHandle", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isPlaying", Type = "bool", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -31083,6 +31168,23 @@ local SpellBook =
 			Returns =
 			{
 				{ Name = "deadlyDebuffInfo", Type = "DeadlyDebuffInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetOverrideSpell",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "spec", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "onlyKnown", Type = "bool", Nilable = false, Default = true },
+				{ Name = "ignoreOverrideSpellID", Type = "number", Nilable = false, Default = 0 },
+			},
+
+			Returns =
+			{
+				{ Name = "overrideSpellID", Type = "number", Nilable = false, Documentation = { "Returns the spellID passed in if there is no override" } },
 			},
 		},
 		{
@@ -32458,6 +32560,7 @@ local TradeSkillUI =
 			Arguments =
 			{
 				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "reagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
 			},
 
 			Returns =
@@ -40212,6 +40315,37 @@ local CVar =
 };
 
 APIDocumentation:AddDocumentationTable(CVar);
+local Camera =
+{
+	Name = "Camera",
+	Type = "System",
+	Namespace = "C_CameraDefaults",
+
+	Functions =
+	{
+		{
+			Name = "GetCameraFOVDefaults",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "fieldOfViewDegreesDefault", Type = "number", Nilable = false },
+				{ Name = "fieldOfViewDegreesPlayerMin", Type = "number", Nilable = false },
+				{ Name = "fieldOfViewDegreesPlayerMax", Type = "number", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Camera);
 local ChallengeModeInfo =
 {
 	Name = "ChallengeModeInfo",
@@ -50360,6 +50494,15 @@ local MythicPlusInfo =
 			},
 		},
 		{
+			Name = "GetCurrentUIDisplaySeason",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "seasonID", Type = "number", Nilable = true },
+			},
+		},
+		{
 			Name = "GetLastWeeklyBestInformation",
 			Type = "Function",
 
@@ -51053,6 +51196,15 @@ local ProfessionSpecUI =
 			},
 		},
 		{
+			Name = "GetDefaultSpecSkillLine",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "defaultSpecSkillLine", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetDescriptionForPath",
 			Type = "Function",
 
@@ -51149,6 +51301,15 @@ local ProfessionSpecUI =
 			Returns =
 			{
 				{ Name = "specTabIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSpecTabInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "specTabInfo", Type = "SpecializationTabInfo", Nilable = false },
 			},
 		},
 		{
@@ -51281,17 +51442,12 @@ local ProfessionSpecUI =
 			},
 		},
 		{
-			Name = "ShouldShowSpecForSkillLine",
+			Name = "ShouldShowSpecTab",
 			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
 
 			Returns =
 			{
-				{ Name = "shouldShow", Type = "bool", Nilable = false },
+				{ Name = "showSpecTab", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -57204,6 +57360,7 @@ local CharacterCustomizationShared =
 				{ Name = "choices", Type = "table", InnerType = "CharCustomizationChoice", Nilable = false },
 				{ Name = "currentChoiceIndex", Type = "number", Nilable = false },
 				{ Name = "hasNewChoices", Type = "bool", Nilable = false },
+				{ Name = "isSound", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -57478,6 +57635,94 @@ local CurrencyConstants =
 };
 
 APIDocumentation:AddDocumentationTable(CurrencyConstants);
+local CursorConst =
+{
+	Tables =
+	{
+		{
+			Name = "CursorStyle",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "Mouse", Type = "CursorStyle", EnumValue = 0 },
+				{ Name = "Crosshair", Type = "CursorStyle", EnumValue = 1 },
+			},
+		},
+		{
+			Name = "Cursormode",
+			Type = "Enumeration",
+			NumValues = 58,
+			MinValue = 0,
+			MaxValue = 57,
+			Fields =
+			{
+				{ Name = "NoCursor", Type = "Cursormode", EnumValue = 0 },
+				{ Name = "PointCursor", Type = "Cursormode", EnumValue = 1 },
+				{ Name = "CastCursor", Type = "Cursormode", EnumValue = 2 },
+				{ Name = "BuyCursor", Type = "Cursormode", EnumValue = 3 },
+				{ Name = "AttackCursor", Type = "Cursormode", EnumValue = 4 },
+				{ Name = "InteractCursor", Type = "Cursormode", EnumValue = 5 },
+				{ Name = "SpeakCursor", Type = "Cursormode", EnumValue = 6 },
+				{ Name = "InspectCursor", Type = "Cursormode", EnumValue = 7 },
+				{ Name = "PickupCursor", Type = "Cursormode", EnumValue = 8 },
+				{ Name = "TaxiCursor", Type = "Cursormode", EnumValue = 9 },
+				{ Name = "TrainerCursor", Type = "Cursormode", EnumValue = 10 },
+				{ Name = "MineCursor", Type = "Cursormode", EnumValue = 11 },
+				{ Name = "SkinCursor", Type = "Cursormode", EnumValue = 12 },
+				{ Name = "GatherCursor", Type = "Cursormode", EnumValue = 13 },
+				{ Name = "LockCursor", Type = "Cursormode", EnumValue = 14 },
+				{ Name = "MailCursor", Type = "Cursormode", EnumValue = 15 },
+				{ Name = "LootAllCursor", Type = "Cursormode", EnumValue = 16 },
+				{ Name = "RepairCursor", Type = "Cursormode", EnumValue = 17 },
+				{ Name = "RepairnpcCursor", Type = "Cursormode", EnumValue = 18 },
+				{ Name = "ItemCursor", Type = "Cursormode", EnumValue = 19 },
+				{ Name = "SkinHordeCursor", Type = "Cursormode", EnumValue = 20 },
+				{ Name = "SkinAllianceCursor", Type = "Cursormode", EnumValue = 21 },
+				{ Name = "InnkeeperCursor", Type = "Cursormode", EnumValue = 22 },
+				{ Name = "QuestCursor", Type = "Cursormode", EnumValue = 23 },
+				{ Name = "QuestRepeatableCursor", Type = "Cursormode", EnumValue = 24 },
+				{ Name = "QuestTurninCursor", Type = "Cursormode", EnumValue = 25 },
+				{ Name = "VehicleCursor", Type = "Cursormode", EnumValue = 26 },
+				{ Name = "UIMoveCursor", Type = "Cursormode", EnumValue = 27 },
+				{ Name = "UIResizeCursor", Type = "Cursormode", EnumValue = 28 },
+				{ Name = "MapPinCursor", Type = "Cursormode", EnumValue = 29 },
+				{ Name = "PointErrorCursor", Type = "Cursormode", EnumValue = 30 },
+				{ Name = "CastErrorCursor", Type = "Cursormode", EnumValue = 31 },
+				{ Name = "BuyErrorCursor", Type = "Cursormode", EnumValue = 32 },
+				{ Name = "AttackErrorCursor", Type = "Cursormode", EnumValue = 33 },
+				{ Name = "InteractErrorCursor", Type = "Cursormode", EnumValue = 34 },
+				{ Name = "SpeakErrorCursor", Type = "Cursormode", EnumValue = 35 },
+				{ Name = "InspectErrorCursor", Type = "Cursormode", EnumValue = 36 },
+				{ Name = "PickupErrorCursor", Type = "Cursormode", EnumValue = 37 },
+				{ Name = "TaxiErrorCursor", Type = "Cursormode", EnumValue = 38 },
+				{ Name = "TrainerErrorCursor", Type = "Cursormode", EnumValue = 39 },
+				{ Name = "MineErrorCursor", Type = "Cursormode", EnumValue = 40 },
+				{ Name = "SkinErrorCursor", Type = "Cursormode", EnumValue = 41 },
+				{ Name = "GatherErrorCursor", Type = "Cursormode", EnumValue = 42 },
+				{ Name = "LockErrorCursor", Type = "Cursormode", EnumValue = 43 },
+				{ Name = "MailErrorCursor", Type = "Cursormode", EnumValue = 44 },
+				{ Name = "LootAllErrorCursor", Type = "Cursormode", EnumValue = 45 },
+				{ Name = "RepairErrorCursor", Type = "Cursormode", EnumValue = 46 },
+				{ Name = "RepairnpcErrorCursor", Type = "Cursormode", EnumValue = 47 },
+				{ Name = "ItemErrorCursor", Type = "Cursormode", EnumValue = 48 },
+				{ Name = "SkinHordeErrorCursor", Type = "Cursormode", EnumValue = 49 },
+				{ Name = "SkinAllianceErrorCursor", Type = "Cursormode", EnumValue = 50 },
+				{ Name = "InnkeeperErrorCursor", Type = "Cursormode", EnumValue = 51 },
+				{ Name = "QuestErrorCursor", Type = "Cursormode", EnumValue = 52 },
+				{ Name = "QuestRepeatableErrorCursor", Type = "Cursormode", EnumValue = 53 },
+				{ Name = "QuestTurninErrorCursor", Type = "Cursormode", EnumValue = 54 },
+				{ Name = "VehicleErrorCursor", Type = "Cursormode", EnumValue = 55 },
+				{ Name = "MapPinErrorCursor", Type = "Cursormode", EnumValue = 56 },
+				{ Name = "CustomCursor", Type = "Cursormode", EnumValue = 57 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(CursorConst);
 local DamageConstants =
 {
 	Tables =
@@ -57628,9 +57873,9 @@ local EditModeManagerShared =
 		{
 			Name = "EditModeActionBarSetting",
 			Type = "Enumeration",
-			NumValues = 9,
+			NumValues = 10,
 			MinValue = 0,
-			MaxValue = 8,
+			MaxValue = 9,
 			Fields =
 			{
 				{ Name = "Orientation", Type = "EditModeActionBarSetting", EnumValue = 0 },
@@ -57642,6 +57887,7 @@ local EditModeManagerShared =
 				{ Name = "HideBarArt", Type = "EditModeActionBarSetting", EnumValue = 6 },
 				{ Name = "SnapToSide", Type = "EditModeActionBarSetting", EnumValue = 7 },
 				{ Name = "HideBarScrolling", Type = "EditModeActionBarSetting", EnumValue = 8 },
+				{ Name = "AlwaysShowButtons", Type = "EditModeActionBarSetting", EnumValue = 9 },
 			},
 		},
 		{
@@ -58449,6 +58695,40 @@ local ItemConstants =
 				{ Name = "PunchcardBlue", Type = "ItemSocketType", EnumValue = 21 },
 				{ Name = "Domination", Type = "ItemSocketType", EnumValue = 22 },
 				{ Name = "Cypher", Type = "ItemSocketType", EnumValue = 23 },
+			},
+		},
+		{
+			Name = "ItemSubclassDisplay",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 1,
+			MaxValue = 4,
+			Fields =
+			{
+				{ Name = "HideSubclassInTooltips", Type = "ItemSubclassDisplay", EnumValue = 1 },
+				{ Name = "HideSubclassInAuction", Type = "ItemSubclassDisplay", EnumValue = 2 },
+				{ Name = "ShowItemCount", Type = "ItemSubclassDisplay", EnumValue = 4 },
+			},
+		},
+		{
+			Name = "ItemSubclassFlag",
+			Type = "Enumeration",
+			NumValues = 11,
+			MinValue = 1,
+			MaxValue = 1024,
+			Fields =
+			{
+				{ Name = "WeaponsubclassCanparry", Type = "ItemSubclassFlag", EnumValue = 1 },
+				{ Name = "WeaponsubclassSetfingerseq", Type = "ItemSubclassFlag", EnumValue = 2 },
+				{ Name = "WeaponsubclassIsunarmed", Type = "ItemSubclassFlag", EnumValue = 4 },
+				{ Name = "WeaponsubclassIsrifle", Type = "ItemSubclassFlag", EnumValue = 8 },
+				{ Name = "WeaponsubclassIsthrown", Type = "ItemSubclassFlag", EnumValue = 16 },
+				{ Name = "WeaponsubclassRighthandRanged", Type = "ItemSubclassFlag", EnumValue = 32 },
+				{ Name = "ItemsubclassQuivernotrequired", Type = "ItemSubclassFlag", EnumValue = 64 },
+				{ Name = "WeaponsubclassRanged", Type = "ItemSubclassFlag", EnumValue = 128 },
+				{ Name = "WeaponsubclassDeprecatedReuseMe", Type = "ItemSubclassFlag", EnumValue = 256 },
+				{ Name = "ItemsubclassUsesInvtype", Type = "ItemSubclassFlag", EnumValue = 512 },
+				{ Name = "ArmorsubclassLfgscalingarmor", Type = "ItemSubclassFlag", EnumValue = 1024 },
 			},
 		},
 		{
@@ -59582,6 +59862,7 @@ local TradeSkillUITypes =
 				{ Name = "bonusStatValue", Type = "number", Nilable = false },
 				{ Name = "ratingDescription", Type = "string", Nilable = false },
 				{ Name = "ratingPct", Type = "number", Nilable = false },
+				{ Name = "bonusRatingPct", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -60355,9 +60636,9 @@ local CurrencyConstants_Mainline =
 		{
 			Name = "CurrencySource",
 			Type = "Enumeration",
-			NumValues = 55,
+			NumValues = 57,
 			MinValue = 0,
-			MaxValue = 54,
+			MaxValue = 56,
 			Fields =
 			{
 				{ Name = "ConvertOldItem", Type = "CurrencySource", EnumValue = 0 },
@@ -60413,8 +60694,10 @@ local CurrencyConstants_Mainline =
 				{ Name = "Transmogrify", Type = "CurrencySource", EnumValue = 50 },
 				{ Name = "AuctionDeposit", Type = "CurrencySource", EnumValue = 51 },
 				{ Name = "PlayerTrait", Type = "CurrencySource", EnumValue = 52 },
-				{ Name = "RenownRepGain", Type = "CurrencySource", EnumValue = 53 },
-				{ Name = "Last", Type = "CurrencySource", EnumValue = 54 },
+				{ Name = "PhBuffer_53", Type = "CurrencySource", EnumValue = 53 },
+				{ Name = "PhBuffer_54", Type = "CurrencySource", EnumValue = 54 },
+				{ Name = "RenownRepGain", Type = "CurrencySource", EnumValue = 55 },
+				{ Name = "Last", Type = "CurrencySource", EnumValue = 56 },
 			},
 		},
 	},
@@ -60687,13 +60970,14 @@ local ProfessionSpecConstants =
 		{
 			Name = "ProfessionsSpecTabState",
 			Type = "Enumeration",
-			NumValues = 2,
+			NumValues = 3,
 			MinValue = 0,
-			MaxValue = 1,
+			MaxValue = 2,
 			Fields =
 			{
 				{ Name = "Locked", Type = "ProfessionsSpecTabState", EnumValue = 0 },
 				{ Name = "Unlocked", Type = "ProfessionsSpecTabState", EnumValue = 1 },
+				{ Name = "Unlockable", Type = "ProfessionsSpecTabState", EnumValue = 2 },
 			},
 		},
 	},

@@ -150,15 +150,6 @@ local TradeSkillUI =
 			},
 		},
 		{
-			Name = "GetProfessionGearShown",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "shown", Type = "bool", Nilable = false },
-			},
-		},
-		{
 			Name = "GetProfessionInfoBySkillLineID",
 			Type = "Function",
 
@@ -213,6 +204,21 @@ local TradeSkillUI =
 			Returns =
 			{
 				{ Name = "knownSpells", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetReagentDifficultyText",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "craftingReagentIndex", Type = "number", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "bonusText", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -453,15 +459,6 @@ local TradeSkillUI =
 			Arguments =
 			{
 				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "SetProfessionGearShown",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "shown", Type = "bool", Nilable = false },
 			},
 		},
 		{

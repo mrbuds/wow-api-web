@@ -479,6 +479,15 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "GetRatedSoloShuffleMinItemLevel",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "minItemLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetRewardItemLevelsByTierEnum",
 			Type = "Function",
 
@@ -806,6 +815,11 @@ local PvpInfo =
 			Name = "ArenaSeasonWorldState",
 			Type = "Event",
 			LiteralName = "ARENA_SEASON_WORLD_STATE",
+		},
+		{
+			Name = "BattlefieldAutoQueue",
+			Type = "Event",
+			LiteralName = "BATTLEFIELD_AUTO_QUEUE",
 		},
 		{
 			Name = "BattlefieldQueueTimeout",

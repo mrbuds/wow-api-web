@@ -10,6 +10,15 @@ Enum = {
     }
 }
 
+CustomOptionTattoo = 5
+CustomOptionTattooColor = 8
+Constants = {
+    CharCustomizationConstants = {
+        CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST = CustomOptionTattoo,
+        CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST = CustomOptionTattooColor
+    }
+}
+
 APIDocumentation:AddDocumentationTable(
 {
 	Name = "AccountInfo",

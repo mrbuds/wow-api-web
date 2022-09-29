@@ -18,12 +18,35 @@ local ClassTalents =
 			},
 		},
 		{
+			Name = "CanCreateNewConfig",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canCreate", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CommitConfig",
 			Type = "Function",
 
 			Arguments =
 			{
 				{ Name = "savedConfigID", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "DeleteConfig",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
 			},
 
 			Returns =
@@ -55,6 +78,91 @@ local ClassTalents =
 			},
 		},
 		{
+			Name = "GetHasStarterBuild",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasStarterBuild", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLastSelectedSavedConfigID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "specID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "configID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetNextStarterBuildPurchase",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = true },
+				{ Name = "entryID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetStarterBuildActive",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isActive", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasUnspentTalentPoints",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasUnspentPoints", Type = "bool", Nilable = false },
+				{ Name = "numClassPoints", Type = "number", Nilable = false },
+				{ Name = "numSpecPoints", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "ImportLoadout",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+				{ Name = "entries", Type = "table", InnerType = "ImportLoadoutEntryInfo", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+				{ Name = "importError", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "IsConfigReady",
+			Type = "Function",
+			Documentation = { "New configs may or may not be ready to load immediately after creation" },
+
+			Arguments =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isReady", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "LoadConfig",
 			Type = "Function",
 
@@ -66,7 +174,22 @@ local ClassTalents =
 
 			Returns =
 			{
-				{ Name = "result", Type = "bool", Nilable = false },
+				{ Name = "result", Type = "LoadConfigResult", Nilable = false },
+			},
+		},
+		{
+			Name = "RenameConfig",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -97,6 +220,40 @@ local ClassTalents =
 				{ Name = "success", Type = "bool", Nilable = false },
 			},
 		},
+		{
+			Name = "SetStarterBuildActive",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "active", Type = "bool", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "LoadConfigResult", Nilable = false },
+			},
+		},
+		{
+			Name = "SetUsesSharedActionBars",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+				{ Name = "usesShared", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UpdateLastSelectedSavedConfigID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "specID", Type = "number", Nilable = false },
+				{ Name = "configID", Type = "number", Nilable = true },
+			},
+		},
 	},
 
 	Events =
@@ -110,10 +267,44 @@ local ClassTalents =
 				{ Name = "configID", Type = "number", Nilable = false },
 			},
 		},
+		{
+			Name = "SpecializationChangeCastFailed",
+			Type = "Event",
+			LiteralName = "SPECIALIZATION_CHANGE_CAST_FAILED",
+		},
+		{
+			Name = "StarterBuildActivationFailed",
+			Type = "Event",
+			LiteralName = "STARTER_BUILD_ACTIVATION_FAILED",
+		},
 	},
 
 	Tables =
 	{
+		{
+			Name = "LoadConfigResult",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Error", Type = "LoadConfigResult", EnumValue = 0 },
+				{ Name = "NoChangesNecessary", Type = "LoadConfigResult", EnumValue = 1 },
+				{ Name = "LoadInProgress", Type = "LoadConfigResult", EnumValue = 2 },
+				{ Name = "Ready", Type = "LoadConfigResult", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "ImportLoadoutEntryInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "nodeID", Type = "number", Nilable = false },
+				{ Name = "ranksPurchased", Type = "number", Nilable = false },
+				{ Name = "selectionEntryID", Type = "number", Nilable = false },
+			},
+		},
 	},
 };
 

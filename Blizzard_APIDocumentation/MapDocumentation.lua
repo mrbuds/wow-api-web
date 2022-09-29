@@ -506,11 +506,6 @@ local Map =
 			LiteralName = "USER_WAYPOINT_UPDATED",
 		},
 		{
-			Name = "WorldMapClose",
-			Type = "Event",
-			LiteralName = "WORLD_MAP_CLOSE",
-		},
-		{
 			Name = "WorldMapOpen",
 			Type = "Event",
 			LiteralName = "WORLD_MAP_OPEN",
@@ -654,6 +649,21 @@ local Map =
 				{ Name = "mapID", Type = "number", Nilable = false },
 				{ Name = "relativeHeightIndex", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "UiMapHighlightInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "fileDataID", Type = "number", Nilable = false },
+				{ Name = "atlasID", Type = "string", Nilable = false },
+				{ Name = "texturePercentageX", Type = "number", Nilable = false },
+				{ Name = "texturePercentageY", Type = "number", Nilable = false },
+				{ Name = "textureX", Type = "number", Nilable = false },
+				{ Name = "textureY", Type = "number", Nilable = false },
+				{ Name = "scrollChildX", Type = "number", Nilable = false },
+				{ Name = "scrollChildY", Type = "number", Nilable = false },
 			},
 		},
 		{

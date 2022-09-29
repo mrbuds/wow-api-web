@@ -5,9 +5,9 @@ local CharacterCustomizationShared =
 		{
 			Name = "CharCustomizationType",
 			Type = "Enumeration",
-			NumValues = 10,
+			NumValues = 12,
 			MinValue = 0,
-			MaxValue = 9,
+			MaxValue = 11,
 			Fields =
 			{
 				{ Name = "Skin", Type = "CharCustomizationType", EnumValue = 0 },
@@ -20,6 +20,8 @@ local CharacterCustomizationShared =
 				{ Name = "CustomOptionFacewear", Type = "CharCustomizationType", EnumValue = 7 },
 				{ Name = "CustomOptionTattooColor", Type = "CharCustomizationType", EnumValue = 8 },
 				{ Name = "Outfit", Type = "CharCustomizationType", EnumValue = 9 },
+				{ Name = "Facepaint", Type = "CharCustomizationType", EnumValue = 10 },
+				{ Name = "FacepaintColor", Type = "CharCustomizationType", EnumValue = 11 },
 			},
 		},
 		{
@@ -47,6 +49,25 @@ local CharacterCustomizationShared =
 			},
 		},
 		{
+			Name = "CharCustomizationCategory",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "orderIndex", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "icon", Type = "string", Nilable = false },
+				{ Name = "selectedIcon", Type = "string", Nilable = false },
+				{ Name = "undressModel", Type = "bool", Nilable = false },
+				{ Name = "cameraZoomLevel", Type = "number", Nilable = false },
+				{ Name = "cameraDistanceOffset", Type = "number", Nilable = false },
+				{ Name = "spellShapeshiftFormID", Type = "number", Nilable = true },
+				{ Name = "chrModelID", Type = "number", Nilable = true },
+				{ Name = "options", Type = "table", InnerType = "CharCustomizationOption", Nilable = false },
+				{ Name = "hasNewChoices", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CharCustomizationChoice",
 			Type = "Structure",
 			Fields =
@@ -57,6 +78,8 @@ local CharacterCustomizationShared =
 				{ Name = "isNew", Type = "bool", Nilable = false },
 				{ Name = "swatchColor1", Type = "table", Mixin = "ColorMixin", Nilable = true },
 				{ Name = "swatchColor2", Type = "table", Mixin = "ColorMixin", Nilable = true },
+				{ Name = "showLocked", Type = "bool", Nilable = false },
+				{ Name = "lockedTooltip", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -66,7 +89,7 @@ local CharacterCustomizationShared =
 			{
 				{ Name = "CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST", Type = "CharCustomizationType", Value = CustomOptionTattoo },
 				{ Name = "CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST", Type = "CharCustomizationType", Value = CustomOptionTattooColor },
-				{ Name = "NUM_CUSTOM_DISPLAY", Type = "number", Value = CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST - CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST + 1 },
+				{ Name = "NUM_CUSTOM_DISPLAY", Type = "number", Value = Constants.CharCustomizationConstants.CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST - Constants.CharCustomizationConstants.CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST + 1 },
 			},
 		},
 		{
@@ -82,6 +105,17 @@ local CharacterCustomizationShared =
 				{ Name = "currentChoiceIndex", Type = "number", Nilable = true },
 				{ Name = "hasNewChoices", Type = "bool", Nilable = false },
 				{ Name = "isSound", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CharacterAlternateFormData",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "raceID", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "fileName", Type = "string", Nilable = false },
+				{ Name = "createScreenIconAtlas", Type = "string", Nilable = false },
 			},
 		},
 	},

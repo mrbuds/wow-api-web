@@ -10,7 +10,7 @@
 
 BLIZZDOC='Blizzard_APIDocumentation'
 BLIZZDOCGEN='Blizzard_APIDocumentationGenerated'
-UPDATEDDOCPATH="../BlizzardInterfaceCode/Interface/AddOns"
+UPDATEDDOCPATH="../wow-ui-source/Interface/AddOns"
 TOCFILE="${BLIZZDOC}/${BLIZZDOC}.toc"
 TOCFILE2="${BLIZZDOC}/${BLIZZDOCGEN}.toc"
 CONCATFILE="fulldoc.lua"

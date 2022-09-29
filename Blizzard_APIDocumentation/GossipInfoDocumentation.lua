@@ -56,6 +56,34 @@ local GossipInfo =
 			},
 		},
 		{
+			Name = "GetFriendshipReputation",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "friendshipFactionID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "reputationInfo", Type = "FriendshipReputationInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetFriendshipReputationRanks",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "friendshipFactionID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "rankInfo", Type = "FriendshipReputationRankInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "GetNumActiveQuests",
 			Type = "Function",
 
@@ -71,15 +99,6 @@ local GossipInfo =
 			Returns =
 			{
 				{ Name = "numQuests", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetNumOptions",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "numOptions", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -139,7 +158,7 @@ local GossipInfo =
 
 			Arguments =
 			{
-				{ Name = "index", Type = "number", Nilable = false },
+				{ Name = "optionID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -148,7 +167,7 @@ local GossipInfo =
 
 			Arguments =
 			{
-				{ Name = "index", Type = "number", Nilable = false },
+				{ Name = "optionID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -157,7 +176,7 @@ local GossipInfo =
 
 			Arguments =
 			{
-				{ Name = "index", Type = "number", Nilable = false },
+				{ Name = "optionID", Type = "number", Nilable = false },
 				{ Name = "text", Type = "string", Nilable = true },
 				{ Name = "confirmed", Type = "bool", Nilable = true },
 			},
@@ -182,7 +201,7 @@ local GossipInfo =
 			LiteralName = "GOSSIP_CONFIRM",
 			Payload =
 			{
-				{ Name = "gossipIndex", Type = "number", Nilable = false },
+				{ Name = "gossipID", Type = "number", Nilable = false },
 				{ Name = "text", Type = "string", Nilable = false },
 				{ Name = "cost", Type = "number", Nilable = false },
 			},
@@ -198,7 +217,7 @@ local GossipInfo =
 			LiteralName = "GOSSIP_ENTER_CODE",
 			Payload =
 			{
-				{ Name = "gossipIndex", Type = "number", Nilable = false },
+				{ Name = "gossipID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -246,6 +265,33 @@ local GossipInfo =
 			},
 		},
 		{
+			Name = "FriendshipReputationInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "friendshipFactionID", Type = "number", Nilable = false },
+				{ Name = "standing", Type = "number", Nilable = false },
+				{ Name = "maxRep", Type = "number", Nilable = false },
+				{ Name = "name", Type = "string", Nilable = true },
+				{ Name = "text", Type = "string", Nilable = false },
+				{ Name = "texture", Type = "number", Nilable = false },
+				{ Name = "reaction", Type = "string", Nilable = false },
+				{ Name = "reactionThreshold", Type = "number", Nilable = false },
+				{ Name = "nextThreshold", Type = "number", Nilable = true },
+				{ Name = "reversedColor", Type = "bool", Nilable = false },
+				{ Name = "overrideColor", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "FriendshipReputationRankInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "currentLevel", Type = "number", Nilable = false },
+				{ Name = "maxLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GossipOptionRewardInfo",
 			Type = "Structure",
 			Fields =
@@ -260,11 +306,16 @@ local GossipInfo =
 			Type = "Structure",
 			Fields =
 			{
+				{ Name = "gossipOptionID", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "type", Type = "string", Nilable = false },
+				{ Name = "icon", Type = "number", Nilable = false },
 				{ Name = "rewards", Type = "table", InnerType = "GossipOptionRewardInfo", Nilable = false },
 				{ Name = "status", Type = "GossipOptionStatus", Nilable = false },
 				{ Name = "spellID", Type = "number", Nilable = true },
+				{ Name = "flags", Type = "number", Nilable = false },
+				{ Name = "overrideIconID", Type = "number", Nilable = true },
+				{ Name = "selectOptionWhenOnlyOption", Type = "bool", Nilable = false },
+				{ Name = "orderIndex", Type = "number", Nilable = false },
 			},
 		},
 		{

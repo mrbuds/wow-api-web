@@ -85,6 +85,20 @@ local CurrencyInfo =
 			},
 		},
 		{
+			Name = "GetCurrencyDescription",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "type", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "description", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "GetCurrencyIDFromLink",
 			Type = "Function",
 
@@ -302,6 +316,7 @@ local CurrencyInfo =
 			Fields =
 			{
 				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "description", Type = "string", Nilable = false },
 				{ Name = "isHeader", Type = "bool", Nilable = false },
 				{ Name = "isHeaderExpanded", Type = "bool", Nilable = false },
 				{ Name = "isTypeUnused", Type = "bool", Nilable = false },

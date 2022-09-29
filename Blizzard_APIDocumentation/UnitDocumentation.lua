@@ -6,38 +6,6 @@ local Unit =
 	Functions =
 	{
 		{
-			Name = "GetEmpowerHoldAtMaxTime",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "holdAtMaxTime", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetEmpowerMinHoldTime",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "minHoldTime", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetEmpowerStageDuration",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "index", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "duration", Type = "number", Nilable = false },
-			},
-		},
-		{
 			Name = "GetNegativeCorruptionEffectInfo",
 			Type = "Function",
 
@@ -58,6 +26,49 @@ local Unit =
 			Returns =
 			{
 				{ Name = "pointIndices", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitEmpowerHoldAtMaxTime",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "holdAtMaxTime", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitEmpowerMinHoldTime",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "minHoldTime", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitEmpowerStageDuration",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "duration", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -204,6 +215,7 @@ local Unit =
 			{
 				{ Name = "textureObject", Type = "table", Nilable = false },
 				{ Name = "unitToken", Type = "string", Nilable = false },
+				{ Name = "disableMasking", Type = "bool", Nilable = false, Default = false },
 			},
 		},
 		{
@@ -214,6 +226,23 @@ local Unit =
 			{
 				{ Name = "textureObject", Type = "table", Nilable = false },
 				{ Name = "creatureDisplayID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SetUnitCursorTexture",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "textureObject", Type = "table", Nilable = false },
+				{ Name = "unit", Type = "string", Nilable = false },
+				{ Name = "style", Type = "CursorStyle", Nilable = true },
+				{ Name = "includeLowPriority", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "hasCursor", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -773,6 +802,26 @@ local Unit =
 			LiteralName = "PLAYER_REGEN_ENABLED",
 		},
 		{
+			Name = "PlayerSoftEnemyChanged",
+			Type = "Event",
+			LiteralName = "PLAYER_SOFT_ENEMY_CHANGED",
+		},
+		{
+			Name = "PlayerSoftFriendChanged",
+			Type = "Event",
+			LiteralName = "PLAYER_SOFT_FRIEND_CHANGED",
+		},
+		{
+			Name = "PlayerSoftInteractChanged",
+			Type = "Event",
+			LiteralName = "PLAYER_SOFT_INTERACT_CHANGED",
+			Payload =
+			{
+				{ Name = "oldTarget", Type = "string", Nilable = false },
+				{ Name = "newTarget", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "PlayerSpecializationChanged",
 			Type = "Event",
 			LiteralName = "PLAYER_SPECIALIZATION_CHANGED",
@@ -1042,6 +1091,15 @@ local Unit =
 			Name = "UnitFlags",
 			Type = "Event",
 			LiteralName = "UNIT_FLAGS",
+			Payload =
+			{
+				{ Name = "unitTarget", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitFormChanged",
+			Type = "Event",
+			LiteralName = "UNIT_FORM_CHANGED",
 			Payload =
 			{
 				{ Name = "unitTarget", Type = "string", Nilable = false },

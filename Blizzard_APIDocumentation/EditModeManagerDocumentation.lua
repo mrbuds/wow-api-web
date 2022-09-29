@@ -7,20 +7,6 @@ local EditModeManager =
 	Functions =
 	{
 		{
-			Name = "ConvertLayoutInfoToHyperlink",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "layoutInfo", Type = "EditModeLayoutInfo", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "hyperlink", Type = "string", Nilable = false },
-			},
-		},
-		{
 			Name = "ConvertLayoutInfoToString",
 			Type = "Function",
 
@@ -65,6 +51,10 @@ local EditModeManager =
 			{
 				{ Name = "layoutInfo", Type = "EditModeLayouts", Nilable = false },
 			},
+		},
+		{
+			Name = "OnEditModeExit",
+			Type = "Function",
 		},
 		{
 			Name = "OnLayoutAdded",
@@ -178,7 +168,9 @@ local EditModeManager =
 				{ Name = "system", Type = "EditModeSystem", Nilable = false },
 				{ Name = "systemIndex", Type = "number", Nilable = true },
 				{ Name = "anchorInfo", Type = "EditModeAnchorInfo", Nilable = false },
+				{ Name = "anchorInfo2", Type = "EditModeAnchorInfo", Nilable = true },
 				{ Name = "settings", Type = "table", InnerType = "EditModeSettingInfo", Nilable = false },
+				{ Name = "isInDefaultPosition", Type = "bool", Nilable = false },
 			},
 		},
 	},

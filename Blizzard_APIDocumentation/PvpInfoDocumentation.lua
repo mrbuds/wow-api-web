@@ -378,6 +378,15 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "GetPersonalRatedSoloShuffleSpecStats",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "specStats", Type = "RatedSoloShuffleSpecStats", Nilable = true },
+			},
+		},
+		{
 			Name = "GetPostMatchCurrencyRewards",
 			Type = "Function",
 
@@ -485,6 +494,18 @@ local PvpInfo =
 			Returns =
 			{
 				{ Name = "minItemLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRatedSoloShuffleRewards",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "honor", Type = "number", Nilable = false },
+				{ Name = "experience", Type = "number", Nilable = false },
+				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
+				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
 			},
 		},
 		{
@@ -663,6 +684,15 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "IsBrawlSoloShuffle",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isBrawlSoloShuffle", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsInBrawl",
 			Type = "Function",
 
@@ -723,6 +753,15 @@ local PvpInfo =
 			Returns =
 			{
 				{ Name = "isRatedMap", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsRatedSoloShuffle",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isRatedSoloShuffle", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -820,6 +859,11 @@ local PvpInfo =
 			Name = "BattlefieldAutoQueue",
 			Type = "Event",
 			LiteralName = "BATTLEFIELD_AUTO_QUEUE",
+		},
+		{
+			Name = "BattlefieldAutoQueueEject",
+			Type = "Event",
+			LiteralName = "BATTLEFIELD_AUTO_QUEUE_EJECT",
 		},
 		{
 			Name = "BattlefieldQueueTimeout",
@@ -972,6 +1016,7 @@ local PvpInfo =
 				{ Name = "wargameBattlegrounds", Type = "bool", Nilable = false },
 				{ Name = "ratedBattlegrounds", Type = "bool", Nilable = false },
 				{ Name = "ratedArenas", Type = "bool", Nilable = false },
+				{ Name = "ratedSoloShuffle", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -1034,6 +1079,11 @@ local PvpInfo =
 				{ Name = "tournamentRules", Type = "bool", Nilable = false },
 			},
 		},
+		{
+			Name = "WorldPvpQueue",
+			Type = "Event",
+			LiteralName = "WORLD_PVP_QUEUE",
+		},
 	},
 
 	Tables =
@@ -1084,6 +1134,17 @@ local PvpInfo =
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "texture", Type = "number", Nilable = false },
 				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "BattlefieldRewards",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "honor", Type = "number", Nilable = false },
+				{ Name = "experience", Type = "number", Nilable = false },
+				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
+				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
 			},
 		},
 		{
@@ -1183,6 +1244,10 @@ local PvpInfo =
 				{ Name = "hasWonBracketToday", Type = "bool", Nilable = false },
 				{ Name = "tier", Type = "number", Nilable = false },
 				{ Name = "ranking", Type = "number", Nilable = true },
+				{ Name = "roundsSeasonPlayed", Type = "number", Nilable = false },
+				{ Name = "roundsSeasonWon", Type = "number", Nilable = false },
+				{ Name = "roundsWeeklyPlayed", Type = "number", Nilable = false },
+				{ Name = "roundsWeeklyWon", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -1305,6 +1370,17 @@ local PvpInfo =
 				{ Name = "hasRandomWinToday", Type = "bool", Nilable = false },
 				{ Name = "minLevel", Type = "number", Nilable = false },
 				{ Name = "maxLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RatedSoloShuffleSpecStats",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "weeklyMostPlayedSpecID", Type = "number", Nilable = false },
+				{ Name = "weeklyMostPlayedSpecRounds", Type = "number", Nilable = false },
+				{ Name = "seasonMostPlayedSpecID", Type = "number", Nilable = false },
+				{ Name = "seasonMostPlayedSpecRounds", Type = "number", Nilable = false },
 			},
 		},
 	},

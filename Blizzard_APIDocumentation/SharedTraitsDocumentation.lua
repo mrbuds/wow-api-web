@@ -38,6 +38,21 @@ local SharedTraits =
 			},
 		},
 		{
+			Name = "CascadeRepurchaseRanks",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+				{ Name = "nodeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "success", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CloseTraitSystemInteraction",
 			Type = "Function",
 		},
@@ -91,6 +106,20 @@ local SharedTraits =
 			Arguments =
 			{
 				{ Name = "systemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetConfigIDByTreeID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "treeID", Type = "number", Nilable = false },
 			},
 
 			Returns =
@@ -200,6 +229,20 @@ local SharedTraits =
 			},
 		},
 		{
+			Name = "GetStagedPurchases",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "nodeIDsWithPurchases", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetTraitCurrencyInfo",
 			Type = "Function",
 
@@ -245,6 +288,21 @@ local SharedTraits =
 			Returns =
 			{
 				{ Name = "treeCurrencyInfo", Type = "table", InnerType = "TreeCurrencyInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTreeHash",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+				{ Name = "treeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "table", InnerType = "number", Nilable = false },
 			},
 		},
 		{
@@ -389,6 +447,15 @@ local SharedTraits =
 	Events =
 	{
 		{
+			Name = "ConfigCommitFailed",
+			Type = "Event",
+			LiteralName = "CONFIG_COMMIT_FAILED",
+			Payload =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "TraitCondInfoChanged",
 			Type = "Event",
 			LiteralName = "TRAIT_COND_INFO_CHANGED",
@@ -404,6 +471,15 @@ local SharedTraits =
 			Payload =
 			{
 				{ Name = "configInfo", Type = "TraitConfigInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "TraitConfigDeleted",
+			Type = "Event",
+			LiteralName = "TRAIT_CONFIG_DELETED",
+			Payload =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -449,7 +525,7 @@ local SharedTraits =
 			LiteralName = "TRAIT_SYSTEM_INTERACTION_STARTED",
 			Payload =
 			{
-				{ Name = "systemID", Type = "number", Nilable = false },
+				{ Name = "treeID", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -507,6 +583,7 @@ local SharedTraits =
 				{ Name = "type", Type = "TraitConfigType", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "treeIDs", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "usesSharedActionBars", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -528,6 +605,7 @@ local SharedTraits =
 				{ Name = "overrideSubtext", Type = "string", Nilable = false },
 				{ Name = "overrideDescription", Type = "string", Nilable = false },
 				{ Name = "overrideIcon", Type = "number", Nilable = true },
+				{ Name = "overriddenSpellID", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -570,6 +648,7 @@ local SharedTraits =
 				{ Name = "posY", Type = "number", Nilable = false },
 				{ Name = "flags", Type = "number", Nilable = false },
 				{ Name = "entryIDs", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "entryIDsWithCommittedRanks", Type = "table", InnerType = "number", Nilable = false },
 				{ Name = "canPurchaseRank", Type = "bool", Nilable = false },
 				{ Name = "canRefundRank", Type = "bool", Nilable = false },
 				{ Name = "isAvailable", Type = "bool", Nilable = false },
@@ -585,6 +664,8 @@ local SharedTraits =
 				{ Name = "meetsEdgeRequirements", Type = "bool", Nilable = false },
 				{ Name = "groupIDs", Type = "table", InnerType = "number", Nilable = false },
 				{ Name = "conditionIDs", Type = "table", InnerType = "number", Nilable = false },
+				{ Name = "isCascadeRepurchasable", Type = "bool", Nilable = false },
+				{ Name = "cascadeRepurchaseEntryID", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -600,6 +681,7 @@ local SharedTraits =
 				{ Name = "activeRank", Type = "number", Nilable = true },
 				{ Name = "currentRank", Type = "number", Nilable = true },
 				{ Name = "meetsEdgeRequirements", Type = "bool", Nilable = true },
+				{ Name = "isCascadeRepurchasable", Type = "bool", Nilable = true },
 			},
 		},
 		{
@@ -620,6 +702,7 @@ local SharedTraits =
 			{
 				{ Name = "ID", Type = "number", Nilable = false },
 				{ Name = "gates", Type = "table", InnerType = "TraitGateInfo", Nilable = false },
+				{ Name = "hideSingleRankNumbers", Type = "bool", Nilable = false },
 			},
 		},
 		{

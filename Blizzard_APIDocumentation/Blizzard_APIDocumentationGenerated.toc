@@ -17,6 +17,7 @@ AzeriteEssenceDocumentation.lua
 AzeriteItemDocumentation.lua
 BankDocumentation.lua
 BarberShopDocumentation.lua
+BattleNetDocumentation.lua
 BattlePetDocumentation.lua
 BehavioralMessagingDocumentation.lua
 BlackMarketInfoDocumentation.lua
@@ -70,6 +71,7 @@ MerchantFrameDocumentation.lua
 MinimapDocumentation.lua
 MinimapFrameAPIDocumentation.lua
 NamePlateManagerDocumentation.lua
+NewItemsDocumentation.lua
 PaperDollInfoDocumentation.lua
 PartyInfoDocumentation.lua
 PartyPoseUIDocumentation.lua
@@ -77,6 +79,7 @@ PetInfoDocumentation.lua
 PetJournalInfoDocumentation.lua
 PlatformDocumentation.lua
 PlayerInfoDocumentation.lua
+PlayerInteractionManagerDocumentation.lua
 PlayerLocationDocumentation.lua
 PvpInfoDocumentation.lua
 QuestLineInfoDocumentation.lua
@@ -172,7 +175,6 @@ AlliedRacesFrameDocumentation.lua
 AnimaDiversionUIDocumentation.lua
 ArdenwealdGardeningDocumentation.lua
 ArtifactUIDocumentation.lua
-BattleNetDocumentation.lua
 CVarDocumentation.lua
 CameraDocumentation.lua
 ChallengeModeInfoDocumentation.lua
@@ -203,6 +205,7 @@ LevelLinkDocumentation.lua
 LevelSquishDocumentation.lua
 LootJournalDocumentation.lua
 LoreTextDocumentation.lua
+MajorFactionsDocumentation.lua
 MapDocumentation.lua
 MountJournalDocumentation.lua
 MythicPlusInfoDocumentation.lua
@@ -213,6 +216,7 @@ ProfessionSpecUIDocumentation.lua
 QuestItemUseDocumentation.lua
 RecruitAFriendDocumentation.lua
 ResearchInfoDocumentation.lua
+ReturningPlayerUIDocumentation.lua
 ScenarioInfoDocumentation.lua
 ScrappingMachineUIDocumentation.lua
 ScriptedAnimationsDocumentation.lua
@@ -252,12 +256,14 @@ DamageConstantsDocumentation.lua
 EditModeManagerSharedDocumentation.lua
 GamePadConstDocumentation.lua
 GarrisonConstantsDocumentation.lua
+GossipConstantsDocumentation.lua
 GuildInfoSharedDocumentation.lua
 InputConstantsDocumentation.lua
 ItemConstantsDocumentation.lua
 ItemSharedDocumentation.lua
 LFGConstantsDocumentation.lua
 LevelConstantsDocumentation.lua
+LootConstantsDocumentation.lua
 MinimapConstantsDocumentation.lua
 ModelSceneDocumentation.lua
 NamePlateDocumentation.lua
@@ -265,18 +271,22 @@ PVPMgrConstantsDocumentation.lua
 PetBattleConstantsDocumentation.lua
 PetScalingConstantsDocumentation.lua
 PlayerDocumentation.lua
+PlayerInteractionManagerConstantsDocumentation.lua
 PlayerMentorshipConstantsDocumentation.lua
 ProfessionConstantsDocumentation.lua
 PvPFactionConstantsDocumentation.lua
 PvpInfoConstantsDocumentation.lua
 QuestConstantsDocumentation.lua
+QuestRewardsDocumentation.lua
 QuestSessionConstantsDocumentation.lua
 QueueSpecificDocumentation.lua
+RecruitAFriendSharedDocumentation.lua
 ReportSystemConstantsDocumentation.lua
 ScriptRegionSharedDocumentation.lua
 SharedScriptObjectModelLightDocumentation.lua
 SharedTraitsEnumsDocumentation.lua
 SimpleHTMLSharedDocumentation.lua
+SoftTargetConstantsDocumentation.lua
 TextureSharedDocumentation.lua
 TimeDocumentation.lua
 TradeSkillUITypesDocumentation.lua
@@ -292,6 +302,7 @@ ValidateNameConstantsDocumentation.lua
 VectorSharedDocumentation.lua
 VehicleConstantsDocumentation.lua
 VignetteConstantsDocumentation.lua
+AuctionHouseConstants_MainlineDocumentation.lua
 ClickBindingsConstantsDocumentation.lua
 CovenantCallingsConstantsDocumentation.lua
 CovenantSanctumConstantsDocumentation.lua
@@ -301,10 +312,10 @@ CurrencyConstants_MainlineDocumentation.lua
 GarrisonSharedDocumentation.lua
 ItemConstants_MainlineDocumentation.lua
 LegendaryCraftingTypesDocumentation.lua
+MajorFactionsConstantsDocumentation.lua
 MythicPlusInfoSharedDocumentation.lua
 ProfessionSpecConstantsDocumentation.lua
 QuestConstants_MainlineDocumentation.lua
-RecruitAFriendSharedDocumentation.lua
 SoulbindsConstantsDocumentation.lua
 SuperTrackManagerSharedDocumentation.lua
 TransmogConstantsDocumentation.lua

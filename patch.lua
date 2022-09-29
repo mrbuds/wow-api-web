@@ -1,6 +1,6 @@
 -- fix missing values
 
-Enum = {
+local Enum = {
     PlayerCurrencyFlagsDbFlags = {
         IgnoreMaxQtyOnload = 1,
         Reuse1 = 2,
@@ -10,9 +10,9 @@ Enum = {
     }
 }
 
-CustomOptionTattoo = 5
-CustomOptionTattooColor = 8
-Constants = {
+local CustomOptionTattoo = 5
+local CustomOptionTattooColor = 8
+local Constants = {
     CharCustomizationConstants = {
         CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST = CustomOptionTattoo,
         CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST = CustomOptionTattooColor

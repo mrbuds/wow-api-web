@@ -65,7 +65,6 @@ LFGListInfoDocumentation.lua
 LoadingScreenDocumentation.lua
 LootDocumentation.lua
 LossOfControlDocumentation.lua
-MailInfoDocumentation.lua
 MapExplorationDocumentation.lua
 MerchantFrameDocumentation.lua
 MinimapDocumentation.lua
@@ -147,10 +146,10 @@ SummonInfoDocumentation.lua
 TTSSettingsDocumentation.lua
 TaxiMapDocumentation.lua
 TextureUtilsDocumentation.lua
-TooltipConstantsDocumentation.lua
+TooltipComparisonDocumentation.lua
+TooltipInfoDocumentation.lua
 ToyBoxInfoDocumentation.lua
 TradeInfoDocumentation.lua
-TradeSkillUIDocumentation.lua
 TrainerDocumentation.lua
 TraitConfigDocumentation.lua
 TutorialDocumentation.lua
@@ -205,6 +204,7 @@ LevelLinkDocumentation.lua
 LevelSquishDocumentation.lua
 LootJournalDocumentation.lua
 LoreTextDocumentation.lua
+MailInfoDocumentation.lua
 MajorFactionsDocumentation.lua
 MapDocumentation.lua
 MountJournalDocumentation.lua
@@ -226,6 +226,7 @@ SplashScreenDocumentation.lua
 SuperTrackManagerDocumentation.lua
 SystemDocumentation.lua
 TalkingHeadDocumentation.lua
+TradeSkillUIDocumentation.lua
 TransmogDocumentation.lua
 TransmogItemsDocumentation.lua
 TransmogSetsDocumentation.lua
@@ -289,6 +290,8 @@ SimpleHTMLSharedDocumentation.lua
 SoftTargetConstantsDocumentation.lua
 TextureSharedDocumentation.lua
 TimeDocumentation.lua
+TooltipConstantsDocumentation.lua
+TooltipInfoSharedDocumentation.lua
 TradeSkillUITypesDocumentation.lua
 TraitConstantsDocumentation.lua
 TransmogSharedDocumentation.lua
@@ -320,4 +323,5 @@ SoulbindsConstantsDocumentation.lua
 SuperTrackManagerSharedDocumentation.lua
 TransmogConstantsDocumentation.lua
 UnitConstantsDocumentation.lua
+WeeklyRewardsSharedDocumentation.lua
 # End documentation files here

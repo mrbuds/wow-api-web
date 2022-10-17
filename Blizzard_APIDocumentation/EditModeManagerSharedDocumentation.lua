@@ -122,7 +122,7 @@ local EditModeManagerShared =
 		{
 			Name = "EditModeActionBarSystemIndices",
 			Type = "Enumeration",
-			NumValues = 8,
+			NumValues = 11,
 			MinValue = 1,
 			MaxValue = 13,
 			Fields =
@@ -132,6 +132,9 @@ local EditModeManagerShared =
 				{ Name = "Bar3", Type = "EditModeActionBarSystemIndices", EnumValue = 3 },
 				{ Name = "RightBar1", Type = "EditModeActionBarSystemIndices", EnumValue = 4 },
 				{ Name = "RightBar2", Type = "EditModeActionBarSystemIndices", EnumValue = 5 },
+				{ Name = "ExtraBar1", Type = "EditModeActionBarSystemIndices", EnumValue = 6 },
+				{ Name = "ExtraBar2", Type = "EditModeActionBarSystemIndices", EnumValue = 7 },
+				{ Name = "ExtraBar3", Type = "EditModeActionBarSystemIndices", EnumValue = 8 },
 				{ Name = "StanceBar", Type = "EditModeActionBarSystemIndices", EnumValue = 11 },
 				{ Name = "PetActionBar", Type = "EditModeActionBarSystemIndices", EnumValue = 12 },
 				{ Name = "PossessActionBar", Type = "EditModeActionBarSystemIndices", EnumValue = 13 },
@@ -280,9 +283,9 @@ local EditModeManagerShared =
 		{
 			Name = "EditModeUnitFrameSetting",
 			Type = "Enumeration",
-			NumValues = 16,
+			NumValues = 17,
 			MinValue = 0,
-			MaxValue = 15,
+			MaxValue = 16,
 			Fields =
 			{
 				{ Name = "HidePortrait", Type = "EditModeUnitFrameSetting", EnumValue = 0 },
@@ -301,6 +304,7 @@ local EditModeManagerShared =
 				{ Name = "RaidGroupDisplayType", Type = "EditModeUnitFrameSetting", EnumValue = 13 },
 				{ Name = "SortPlayersBy", Type = "EditModeUnitFrameSetting", EnumValue = 14 },
 				{ Name = "RowSize", Type = "EditModeUnitFrameSetting", EnumValue = 15 },
+				{ Name = "FrameSize", Type = "EditModeUnitFrameSetting", EnumValue = 16 },
 			},
 		},
 		{

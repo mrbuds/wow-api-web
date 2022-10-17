@@ -84,6 +84,16 @@ local TradeSkillUITypes =
 			},
 		},
 		{
+			Name = "CraftingCurrencyResultData",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "currencyID", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "quantity", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "associatedItemGUID", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "CraftingItemResultData",
 			Type = "Structure",
 			Fields =
@@ -97,8 +107,9 @@ local TradeSkillUITypes =
 				{ Name = "isCrit", Type = "bool", Nilable = false, Default = false },
 				{ Name = "critBonusSkill", Type = "number", Nilable = false, Default = 0 },
 				{ Name = "recraftable", Type = "bool", Nilable = false, Default = false },
-				{ Name = "awardSpecPoint", Type = "bool", Nilable = false, Default = false },
+				{ Name = "bonusCraft", Type = "bool", Nilable = false, Default = false },
 				{ Name = "multicraft", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "associatedItemGUID", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -183,6 +194,7 @@ local TradeSkillUITypes =
 				{ Name = "dataSlotType", Type = "TradeskillSlotDataType", Nilable = false, Default = "Reagent" },
 				{ Name = "dataSlotIndex", Type = "number", Nilable = false },
 				{ Name = "slotIndex", Type = "number", Nilable = false },
+				{ Name = "orderSource", Type = "CraftingOrderReagentSource", Nilable = true },
 			},
 		},
 		{
@@ -264,12 +276,22 @@ local TradeSkillUITypes =
 				{ Name = "profession", Type = "Profession", Nilable = true },
 				{ Name = "professionID", Type = "number", Nilable = false },
 				{ Name = "professionName", Type = "string", Nilable = false },
+				{ Name = "expansionName", Type = "string", Nilable = false },
 				{ Name = "skillLevel", Type = "number", Nilable = false },
 				{ Name = "maxSkillLevel", Type = "number", Nilable = false },
 				{ Name = "skillModifier", Type = "number", Nilable = false },
 				{ Name = "isPrimaryProfession", Type = "bool", Nilable = false },
 				{ Name = "parentProfessionID", Type = "number", Nilable = true },
 				{ Name = "parentProfessionName", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "RegularReagentInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -294,6 +316,7 @@ local TradeSkillUITypes =
 				{ Name = "craftable", Type = "bool", Nilable = false, Default = true },
 				{ Name = "disabledReason", Type = "string", Nilable = true },
 				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = false },
 				{ Name = "previousRecipeID", Type = "number", Nilable = true },
 				{ Name = "nextRecipeID", Type = "number", Nilable = true },
 				{ Name = "icon", Type = "number", Nilable = true },

@@ -65,12 +65,26 @@ local ProfessionSpecUI =
 			},
 		},
 		{
+			Name = "GetCurrencyInfoForSkillLine",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "SpecializationCurrencyInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "GetDefaultSpecSkillLine",
 			Type = "Function",
 
 			Returns =
 			{
-				{ Name = "defaultSpecSkillLine", Type = "number", Nilable = false },
+				{ Name = "defaultSpecSkillLine", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -294,20 +308,6 @@ local ProfessionSpecUI =
 			Returns =
 			{
 				{ Name = "unlockRank", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "GetUnspentPointsForSkillLine",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "unspentPoints", Type = "number", Nilable = false },
 			},
 		},
 		{

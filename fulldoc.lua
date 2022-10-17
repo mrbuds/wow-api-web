@@ -1,23 +1,4 @@
--- fix missing values
 
-Enum = {
-    PlayerCurrencyFlagsDbFlags = {
-        IgnoreMaxQtyOnload = 1,
-        Reuse1 = 2,
-        InBackpack = 4,
-        UnusedInUI = 8,
-        Reuse2 = 16,
-    }
-}
-
-CustomOptionTattoo = 5
-CustomOptionTattooColor = 8
-Constants = {
-    CharCustomizationConstants = {
-        CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_FIRST = CustomOptionTattoo,
-        CHAR_CUSTOMIZE_CUSTOM_DISPLAY_OPTION_LAST = CustomOptionTattooColor
-    }
-}
 
 local AccountInfo =
 {
@@ -8117,7 +8098,7 @@ local Container =
 			{
 				{ Name = "containerIndex", Type = "number", Nilable = false },
 				{ Name = "slotIndex", Type = "number", Nilable = false },
-				{ Name = "isEquipped", Type = "bool", Nilable = false },
+				{ Name = "isEquipped", Type = "bool", Nilable = false, Default = false },
 			},
 		},
 		{
@@ -9983,6 +9964,16 @@ local Cursor =
 			Type = "Event",
 			LiteralName = "MOUNT_CURSOR_CLEAR",
 		},
+		{
+			Name = "WorldCursorTooltipUpdate",
+			Type = "Event",
+			LiteralName = "WORLD_CURSOR_TOOLTIP_UPDATE",
+			Documentation = { "Sends an update when the mouse enters or leaves something in-world (object, unit, etc) that should display a tooltip" },
+			Payload =
+			{
+				{ Name = "anchorType", Type = "WorldCursorAnchorType", Nilable = false },
+			},
+		},
 	},
 
 	Tables =
@@ -10015,6 +10006,20 @@ local Cursor =
 				{ Name = "Mount", Type = "UICursorType", EnumValue = 18 },
 				{ Name = "Toy", Type = "UICursorType", EnumValue = 19 },
 				{ Name = "ConduitCollectionItem", Type = "UICursorType", EnumValue = 20 },
+			},
+		},
+		{
+			Name = "WorldCursorAnchorType",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "None", Type = "WorldCursorAnchorType", EnumValue = 0 },
+				{ Name = "Default", Type = "WorldCursorAnchorType", EnumValue = 1 },
+				{ Name = "Cursor", Type = "WorldCursorAnchorType", EnumValue = 2 },
+				{ Name = "Nameplate", Type = "WorldCursorAnchorType", EnumValue = 3 },
 			},
 		},
 	},
@@ -13017,6 +13022,20 @@ local Item =
 			},
 		},
 		{
+			Name = "GetItemLinkByGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "itemLink", Type = "string", Nilable = true },
+			},
+		},
+		{
 			Name = "GetItemLocation",
 			Type = "Function",
 
@@ -15559,141 +15578,6 @@ local LossOfControl =
 };
 
 APIDocumentation:AddDocumentationTable(LossOfControl);
-local MailInfo =
-{
-	Name = "MailInfo",
-	Type = "System",
-	Namespace = "C_Mail",
-
-	Functions =
-	{
-		{
-			Name = "CanCheckInbox",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "canCheckInbox", Type = "bool", Nilable = false },
-				{ Name = "secondsUntilAllowed", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "HasInboxMoney",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "inboxIndex", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "inboxItemHasMoneyAttached", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "IsCommandPending",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "isCommandPending", Type = "bool", Nilable = false },
-			},
-		},
-	},
-
-	Events =
-	{
-		{
-			Name = "CloseInboxItem",
-			Type = "Event",
-			LiteralName = "CLOSE_INBOX_ITEM",
-			Payload =
-			{
-				{ Name = "mailIndex", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "MailClosed",
-			Type = "Event",
-			LiteralName = "MAIL_CLOSED",
-		},
-		{
-			Name = "MailFailed",
-			Type = "Event",
-			LiteralName = "MAIL_FAILED",
-			Payload =
-			{
-				{ Name = "itemID", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "MailInboxUpdate",
-			Type = "Event",
-			LiteralName = "MAIL_INBOX_UPDATE",
-		},
-		{
-			Name = "MailLockSendItems",
-			Type = "Event",
-			LiteralName = "MAIL_LOCK_SEND_ITEMS",
-			Payload =
-			{
-				{ Name = "attachSlot", Type = "number", Nilable = false },
-				{ Name = "itemLink", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "MailSendInfoUpdate",
-			Type = "Event",
-			LiteralName = "MAIL_SEND_INFO_UPDATE",
-		},
-		{
-			Name = "MailSendSuccess",
-			Type = "Event",
-			LiteralName = "MAIL_SEND_SUCCESS",
-		},
-		{
-			Name = "MailShow",
-			Type = "Event",
-			LiteralName = "MAIL_SHOW",
-		},
-		{
-			Name = "MailSuccess",
-			Type = "Event",
-			LiteralName = "MAIL_SUCCESS",
-			Payload =
-			{
-				{ Name = "itemID", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "MailUnlockSendItems",
-			Type = "Event",
-			LiteralName = "MAIL_UNLOCK_SEND_ITEMS",
-		},
-		{
-			Name = "SendMailCodChanged",
-			Type = "Event",
-			LiteralName = "SEND_MAIL_COD_CHANGED",
-		},
-		{
-			Name = "SendMailMoneyChanged",
-			Type = "Event",
-			LiteralName = "SEND_MAIL_MONEY_CHANGED",
-		},
-		{
-			Name = "UpdatePendingMail",
-			Type = "Event",
-			LiteralName = "UPDATE_PENDING_MAIL",
-		},
-	},
-
-	Tables =
-	{
-	},
-};
-
-APIDocumentation:AddDocumentationTable(MailInfo);
 local MapExploration =
 {
 	Name = "MapExplorationInfo",
@@ -16792,6 +16676,7 @@ local PaperDollInfo =
 			Payload =
 			{
 				{ Name = "skillLineID", Type = "number", Nilable = false },
+				{ Name = "isTool", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -22074,6 +21959,15 @@ local SharedTraits =
 			},
 		},
 		{
+			Name = "ClearCascadeRepurchaseHistory",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "configID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "CloseTraitSystemInteraction",
 			Type = "Function",
 		},
@@ -22344,6 +22238,7 @@ local SharedTraits =
 		{
 			Name = "GetTreeNodes",
 			Type = "Function",
+			Documentation = { "Returns a list of nodeIDs, sorted ascending, for a given treeID. Contains nodes for all class specializations." },
 
 			Arguments =
 			{
@@ -22353,6 +22248,15 @@ local SharedTraits =
 			Returns =
 			{
 				{ Name = "nodeIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "HasValidInspectData",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasValidInspectData", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -22502,6 +22406,11 @@ local SharedTraits =
 			{
 				{ Name = "configID", Type = "number", Nilable = false },
 			},
+		},
+		{
+			Name = "TraitConfigListUpdated",
+			Type = "Event",
+			LiteralName = "TRAIT_CONFIG_LIST_UPDATED",
 		},
 		{
 			Name = "TraitConfigUpdated",
@@ -23573,6 +23482,19 @@ local SimpleAnimGroupAPI =
 			Returns =
 			{
 				{ Name = "isPlaying", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsReverse",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+
+			Returns =
+			{
+				{ Name = "isReverse", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -33428,14 +33350,45 @@ local TextureUtils =
 };
 
 APIDocumentation:AddDocumentationTable(TextureUtils);
-local TooltipConstants =
+local TooltipComparison =
 {
-	Name = "Tooltip",
+	Name = "TooltipComparison",
 	Type = "System",
-	Namespace = "C_Tooltip",
+	Namespace = "C_TooltipComparison",
 
 	Functions =
 	{
+		{
+			Name = "GetItemComparisonDelta",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "comparisonItem", Type = "table", Nilable = false },
+				{ Name = "equippedItem", Type = "table", Nilable = false },
+				{ Name = "pairedItem", Type = "table", Nilable = true },
+				{ Name = "addPairedStats", Type = "bool", Nilable = true, Documentation = { "Whether the paired item's stats are added or subtracted" } },
+			},
+
+			Returns =
+			{
+				{ Name = "lines", Type = "table", InnerType = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemComparisonInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "comparisonItem", Type = "table", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "TooltipItemComparisonInfo", Nilable = false },
+			},
+		},
 	},
 
 	Events =
@@ -33445,52 +33398,1275 @@ local TooltipConstants =
 	Tables =
 	{
 		{
-			Name = "TooltipSide",
+			Name = "TooltipComparisonMethod",
 			Type = "Enumeration",
 			NumValues = 4,
 			MinValue = 0,
 			MaxValue = 3,
 			Fields =
 			{
-				{ Name = "Left", Type = "TooltipSide", EnumValue = 0 },
-				{ Name = "Right", Type = "TooltipSide", EnumValue = 1 },
-				{ Name = "Top", Type = "TooltipSide", EnumValue = 2 },
-				{ Name = "Bottom", Type = "TooltipSide", EnumValue = 3 },
+				{ Name = "Single", Type = "TooltipComparisonMethod", EnumValue = 0 },
+				{ Name = "WithBothHands", Type = "TooltipComparisonMethod", EnumValue = 1 },
+				{ Name = "WithBagMainHandItem", Type = "TooltipComparisonMethod", EnumValue = 2 },
+				{ Name = "WithBagOffHandItem", Type = "TooltipComparisonMethod", EnumValue = 3 },
 			},
 		},
 		{
-			Name = "TooltipTextureAnchor",
-			Type = "Enumeration",
-			NumValues = 7,
-			MinValue = 0,
-			MaxValue = 6,
+			Name = "TooltipItemComparisonInfo",
+			Type = "Structure",
 			Fields =
 			{
-				{ Name = "LeftTop", Type = "TooltipTextureAnchor", EnumValue = 0 },
-				{ Name = "LeftCenter", Type = "TooltipTextureAnchor", EnumValue = 1 },
-				{ Name = "LeftBottom", Type = "TooltipTextureAnchor", EnumValue = 2 },
-				{ Name = "RightTop", Type = "TooltipTextureAnchor", EnumValue = 3 },
-				{ Name = "RightCenter", Type = "TooltipTextureAnchor", EnumValue = 4 },
-				{ Name = "RightBottom", Type = "TooltipTextureAnchor", EnumValue = 5 },
-				{ Name = "All", Type = "TooltipTextureAnchor", EnumValue = 6 },
-			},
-		},
-		{
-			Name = "TooltipTextureRelativeRegion",
-			Type = "Enumeration",
-			NumValues = 2,
-			MinValue = 0,
-			MaxValue = 1,
-			Fields =
-			{
-				{ Name = "LeftLine", Type = "TooltipTextureRelativeRegion", EnumValue = 0 },
-				{ Name = "RightLine", Type = "TooltipTextureRelativeRegion", EnumValue = 1 },
+				{ Name = "method", Type = "TooltipComparisonMethod", Nilable = false, Default = "Single" },
+				{ Name = "item", Type = "table", Nilable = false },
+				{ Name = "additionalItems", Type = "table", InnerType = "table", Nilable = false },
 			},
 		},
 	},
 };
 
-APIDocumentation:AddDocumentationTable(TooltipConstants);
+APIDocumentation:AddDocumentationTable(TooltipComparison);
+local TooltipInfo =
+{
+	Name = "TooltipInfo",
+	Type = "System",
+	Namespace = "C_TooltipInfo",
+
+	Functions =
+	{
+		{
+			Name = "GetAchievementByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "achievementID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAction",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "actionID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetArtifactItem",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetArtifactPowerByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "powerID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAzeriteEssence",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "essenceID", Type = "number", Nilable = false },
+				{ Name = "rank", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAzeriteEssenceSlot",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "AzeriteEssenceSlot", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAzeritePower",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "itemLevel", Type = "number", Nilable = false },
+				{ Name = "powerID", Type = "number", Nilable = false },
+				{ Name = "owningItemLink", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetBackpackToken",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetBagItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "bagIndex", Type = "number", Nilable = false },
+				{ Name = "slotIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetBagItemChild",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "bagIndex", Type = "number", Nilable = false },
+				{ Name = "slotIndex", Type = "number", Nilable = false },
+				{ Name = "equipSlotIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetBuybackItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCompanionPet",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "petGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetConduit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "conduitID", Type = "number", Nilable = false },
+				{ Name = "conduitRank", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCurrencyByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "currencyID", Type = "number", Nilable = false },
+				{ Name = "amount", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCurrencyToken",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "tokenIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetEnhancedConduit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "conduitID", Type = "number", Nilable = false },
+				{ Name = "rank", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetEquipmentSet",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "setID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetExistingSocketGem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+				{ Name = "toDestroy", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetGuildBankItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "tab", Type = "number", Nilable = false },
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetHeirloomByItemID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetHyperlink",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "hyperlink", Type = "string", Nilable = false },
+				{ Name = "optionalArg1", Type = "number", Nilable = true },
+				{ Name = "optionalArg2", Type = "number", Nilable = true },
+				{ Name = "hideVendorPrice", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetInboxItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "messageIndex", Type = "number", Nilable = false },
+				{ Name = "attachmentIndex", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetInstanceLockEncountersComplete",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetInventoryItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+				{ Name = "slot", Type = "number", Nilable = false },
+				{ Name = "hideUselessStats", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetInventoryItemByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemByGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "guid", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "quality", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemInteractionItem",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemKey",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "itemLevel", Type = "number", Nilable = false },
+				{ Name = "itemSuffix", Type = "number", Nilable = false },
+				{ Name = "requiredLevel", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLFGDungeonReward",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "dungeonID", Type = "number", Nilable = false },
+				{ Name = "lootIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLFGDungeonShortageReward",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "dungeonID", Type = "number", Nilable = false },
+				{ Name = "shortageSeverity", Type = "number", Nilable = false },
+				{ Name = "lootIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLootCurrency",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLootItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLootRollItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "id", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMerchantCostItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+				{ Name = "costIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMerchantItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMinimapMouseover",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMountBySpellID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "checkIndoors", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetOwnedItemByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPetAction",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPossession",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPvpBrawl",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "isSpecial", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPvpTalent",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "talentID", Type = "number", Nilable = false },
+				{ Name = "isInspect", Type = "bool", Nilable = true },
+				{ Name = "groupIndex", Type = "number", Nilable = true },
+				{ Name = "talentIndex", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQuestCurrency",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "type", Type = "string", Nilable = false },
+				{ Name = "currencyIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQuestItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "type", Type = "string", Nilable = false },
+				{ Name = "itemIndex", Type = "number", Nilable = false },
+				{ Name = "allowCollectionText", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQuestLogCurrency",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "type", Type = "string", Nilable = false },
+				{ Name = "currencyIndex", Type = "number", Nilable = false },
+				{ Name = "questID", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQuestLogItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "type", Type = "string", Nilable = false },
+				{ Name = "itemIndex", Type = "number", Nilable = false },
+				{ Name = "questID", Type = "number", Nilable = true },
+				{ Name = "allowCollectionText", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQuestLogRewardSpell",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "spellIndex", Type = "number", Nilable = false },
+				{ Name = "questID", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQuestLogSpecialItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQuestPartyProgress",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+				{ Name = "omitTitle", Type = "bool", Nilable = true },
+				{ Name = "ignoreActivePlayer", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQuestRewardSpell",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "spellIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeRankInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "rank", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeReagentItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "dataSlotIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeResultItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
+				{ Name = "recraftItemGUID", Type = "string", Nilable = true },
+				{ Name = "recipeLevel", Type = "number", Nilable = true },
+				{ Name = "overrideQualityID", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeResultItemForOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
+				{ Name = "orderID", Type = "number", Nilable = true },
+				{ Name = "recipeLevel", Type = "number", Nilable = true },
+				{ Name = "overrideQualityID", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRuneforgeResultItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemGUID", Type = "string", Nilable = false },
+				{ Name = "itemLevel", Type = "number", Nilable = false },
+				{ Name = "powerID", Type = "number", Nilable = true },
+				{ Name = "modifiers", Type = "table", InnerType = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSendMailItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "attachmentIndex", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetShapeshift",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSlottedKeystone",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSocketGem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "index", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSocketedItem",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSocketedRelic",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slotIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSpellBookItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+				{ Name = "spellBookType", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSpellByID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "isPet", Type = "bool", Nilable = true },
+				{ Name = "showSubtext", Type = "bool", Nilable = true },
+				{ Name = "dontOverride", Type = "bool", Nilable = true },
+				{ Name = "difficultyID", Type = "number", Nilable = true },
+				{ Name = "isLink", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTalent",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "talentID", Type = "number", Nilable = false },
+				{ Name = "isInspect", Type = "bool", Nilable = true },
+				{ Name = "groupIndex", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTotem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetToyByItemID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTradePlayerItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTradeTargetItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTrainerService",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "serviceIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTraitEntry",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "entryID", Type = "number", Nilable = false },
+				{ Name = "rank", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTransmogrifyItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "transmogLocation", Type = "table", Mixin = "TransmogLocationMixin", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "string", Nilable = false },
+				{ Name = "hideStatus", Type = "bool", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitAura",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = false },
+				{ Name = "index", Type = "number", Nilable = false },
+				{ Name = "filter", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitBuff",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = false },
+				{ Name = "index", Type = "number", Nilable = false },
+				{ Name = "filter", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitBuffByAuraInstanceID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitTokenString", Type = "string", Nilable = false },
+				{ Name = "auraInstanceID", Type = "number", Nilable = false },
+				{ Name = "filter", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitDebuff",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = false },
+				{ Name = "index", Type = "number", Nilable = false },
+				{ Name = "filter", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitDebuffByAuraInstanceID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitTokenString", Type = "string", Nilable = false },
+				{ Name = "auraInstanceID", Type = "number", Nilable = false },
+				{ Name = "filter", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUpgradeItem",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetVoidDepositItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetVoidItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "tab", Type = "number", Nilable = false },
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetVoidWithdrawalItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+		{
+			Name = "GetWorldCursor",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "data", Type = "TooltipData", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+		{
+			Name = "HideHyperlinkTooltip",
+			Type = "Event",
+			LiteralName = "HIDE_HYPERLINK_TOOLTIP",
+		},
+		{
+			Name = "ShowHyperlinkTooltip",
+			Type = "Event",
+			LiteralName = "SHOW_HYPERLINK_TOOLTIP",
+			Payload =
+			{
+				{ Name = "hyperlink", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "TooltipDataUpdate",
+			Type = "Event",
+			LiteralName = "TOOLTIP_DATA_UPDATE",
+			Documentation = { "Sends an update to the UI that a sparse or cache lookup has resolved" },
+		},
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(TooltipInfo);
 local ToyBoxInfo =
 {
 	Name = "ToyBoxInfo",
@@ -33697,855 +34873,6 @@ local TradeInfo =
 };
 
 APIDocumentation:AddDocumentationTable(TradeInfo);
-local TradeSkillUI =
-{
-	Name = "TradeSkillUI",
-	Type = "System",
-	Namespace = "C_TradeSkillUI",
-
-	Functions =
-	{
-		{
-			Name = "CloseTradeSkill",
-			Type = "Function",
-		},
-		{
-			Name = "ContinueRecast",
-			Type = "Function",
-		},
-		{
-			Name = "CraftEnchant",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-				{ Name = "numCasts", Type = "number", Nilable = false, Default = 1 },
-				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
-				{ Name = "itemTarget", Type = "table", Mixin = "ItemLocationMixin", Nilable = true },
-			},
-		},
-		{
-			Name = "CraftRecipe",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-				{ Name = "numCasts", Type = "number", Nilable = false, Default = 1 },
-				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
-				{ Name = "recipeLevel", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "CraftSalvage",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-				{ Name = "numCasts", Type = "number", Nilable = false, Default = 1 },
-				{ Name = "itemTarget", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
-			},
-		},
-		{
-			Name = "DoesRecraftingRecipeAcceptItem",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "itemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
-				{ Name = "recipeID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "result", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "GetAllProfessionTradeSkillLines",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "skillLineID", Type = "table", InnerType = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetBaseProfessionInfo",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "info", Type = "ProfessionInfo", Nilable = false },
-			},
-		},
-		{
-			Name = "GetChildProfessionInfo",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "info", Type = "ProfessionInfo", Nilable = false },
-			},
-		},
-		{
-			Name = "GetChildProfessionInfos",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "infos", Type = "table", InnerType = "ProfessionInfo", Nilable = false },
-			},
-		},
-		{
-			Name = "GetCraftableCount",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-				{ Name = "recipeLevel", Type = "number", Nilable = true },
-			},
-
-			Returns =
-			{
-				{ Name = "numAvailable", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetCraftingOperationInfo",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
-				{ Name = "recraftItemGUID", Type = "string", Nilable = true },
-			},
-
-			Returns =
-			{
-				{ Name = "info", Type = "CraftingOperationInfo", Nilable = true },
-			},
-		},
-		{
-			Name = "GetCraftingReagentBonusText",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-				{ Name = "craftingReagentIndex", Type = "number", Nilable = false },
-				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
-				{ Name = "recraftItemGUID", Type = "string", Nilable = true },
-			},
-
-			Returns =
-			{
-				{ Name = "bonusText", Type = "table", InnerType = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "GetEnchantItems",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "items", Type = "table", InnerType = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "GetFactionSpecificOutputItem",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "itemID", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "GetGatheringOperationInfo",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "info", Type = "GatheringOperationInfo", Nilable = true },
-			},
-		},
-		{
-			Name = "GetItemCraftedQualityByItemInfo",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "itemInfo", Type = "string", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "quality", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "GetItemReagentQualityByItemInfo",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "itemInfo", Type = "string", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "quality", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "GetItemSlotModifications",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "itemGUID", Type = "string", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "slotMods", Type = "table", InnerType = "CraftingItemSlotModification", Nilable = false },
-			},
-		},
-		{
-			Name = "GetOriginalCraftRecipeID",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "itemGUID", Type = "string", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "GetProfessionChildSkillLineID",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetProfessionInfoBySkillLineID",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "info", Type = "ProfessionInfo", Nilable = false },
-			},
-		},
-		{
-			Name = "GetProfessionSkillLineID",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "profession", Type = "Profession", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetProfessionSlots",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "profession", Type = "Profession", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "slots", Type = "table", InnerType = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetProfessionSpells",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "professionID", Type = "number", Nilable = false },
-				{ Name = "skillLineID", Type = "number", Nilable = true },
-			},
-
-			Returns =
-			{
-				{ Name = "knownSpells", Type = "table", InnerType = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetReagentDifficultyText",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "craftingReagentIndex", Type = "number", Nilable = false },
-				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "bonusText", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "GetReagentSlotStatus",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "mcrSlotID", Type = "number", Nilable = false },
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "locked", Type = "bool", Nilable = false },
-				{ Name = "lockedReason", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "GetRecipeDescription",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
-				{ Name = "recraftItemGUID", Type = "string", Nilable = true },
-			},
-
-			Returns =
-			{
-				{ Name = "description", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "GetRecipeFixedReagentItemLink",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "dataSlotIndex", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "link", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "GetRecipeInfo",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-				{ Name = "recipeLevel", Type = "number", Nilable = true },
-			},
-
-			Returns =
-			{
-				{ Name = "recipeInfo", Type = "TradeSkillRecipeInfo", Nilable = true },
-			},
-		},
-		{
-			Name = "GetRecipeOutputItemData",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-				{ Name = "reagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
-				{ Name = "recraftItemGUID", Type = "string", Nilable = true },
-			},
-
-			Returns =
-			{
-				{ Name = "outputInfo", Type = "CraftingRecipeOutputInfo", Nilable = false },
-			},
-		},
-		{
-			Name = "GetRecipeQualityReagentItemLink",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "dataSlotIndex", Type = "number", Nilable = false },
-				{ Name = "qualityIndex", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "link", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "GetRecipeRepeatCount",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "recastTimes", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetRecipeSchematic",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-				{ Name = "isRecraft", Type = "bool", Nilable = false },
-				{ Name = "recipeLevel", Type = "number", Nilable = true },
-			},
-
-			Returns =
-			{
-				{ Name = "schematic", Type = "CraftingRecipeSchematic", Nilable = false },
-			},
-		},
-		{
-			Name = "GetRecipesTracked",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "recipeIDs", Type = "table", InnerType = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetRecraftItems",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "items", Type = "table", InnerType = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "GetSalvagableItemIDs",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "itemIDs", Type = "table", InnerType = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "GetShowLearned",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "flag", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "GetShowUnlearned",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "flag", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "GetTradeSkillDisplayName",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "professionDisplayName", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "HasRecipesTracked",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "hasRecipesTracked", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "IsNPCCrafting",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "result", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "IsOriginalCraftRecipeLearned",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "itemGUID", Type = "string", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "learned", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "IsRecipeInSkillLine",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "result", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "IsRecipeProfessionLearned",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "recipeProfessionLearned", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "IsRecipeTracked",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "tracked", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "IsRuneforging",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "result", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "OpenRecipe",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "OpenTradeSkill",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "opened", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "RecipeCanBeRecrafted",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "recraftable", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "RecraftRecipe",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "itemGUID", Type = "string", Nilable = false },
-				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
-			},
-
-			Returns =
-			{
-				{ Name = "result", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "SetProfessionChildSkillLineID",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "SetRecipeTracked",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "tracked", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "SetShowLearned",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "flag", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "SetShowUnlearned",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "flag", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "SetTooltipRecipeResultItem",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
-				{ Name = "recraftItemGUID", Type = "string", Nilable = true },
-				{ Name = "recipeLevel", Type = "number", Nilable = true },
-				{ Name = "overrideQualityID", Type = "number", Nilable = true },
-			},
-		},
-	},
-
-	Events =
-	{
-		{
-			Name = "CraftingDetailsUpdate",
-			Type = "Event",
-			LiteralName = "CRAFTING_DETAILS_UPDATE",
-		},
-		{
-			Name = "NewRecipeLearned",
-			Type = "Event",
-			LiteralName = "NEW_RECIPE_LEARNED",
-			Payload =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "recipeLevel", Type = "number", Nilable = true },
-				{ Name = "baseRecipeID", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "ObliterumForgePendingItemChanged",
-			Type = "Event",
-			LiteralName = "OBLITERUM_FORGE_PENDING_ITEM_CHANGED",
-		},
-		{
-			Name = "OpenRecipeResponse",
-			Type = "Event",
-			LiteralName = "OPEN_RECIPE_RESPONSE",
-			Payload =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-				{ Name = "expansionSkillLineID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "TrackedRecipeUpdate",
-			Type = "Event",
-			LiteralName = "TRACKED_RECIPE_UPDATE",
-			Payload =
-			{
-				{ Name = "recipeID", Type = "number", Nilable = false },
-				{ Name = "tracked", Type = "bool", Nilable = false },
-			},
-		},
-		{
-			Name = "TradeSkillClose",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_CLOSE",
-		},
-		{
-			Name = "TradeSkillCraftBegin",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_CRAFT_BEGIN",
-			Payload =
-			{
-				{ Name = "recipeSpellID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "TradeSkillCraftingReagentBonusTextUpdated",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_CRAFTING_REAGENT_BONUS_TEXT_UPDATED",
-			Payload =
-			{
-				{ Name = "itemID", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "TradeSkillDataSourceChanged",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_DATA_SOURCE_CHANGED",
-		},
-		{
-			Name = "TradeSkillDataSourceChanging",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_DATA_SOURCE_CHANGING",
-		},
-		{
-			Name = "TradeSkillDetailsUpdate",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_DETAILS_UPDATE",
-		},
-		{
-			Name = "TradeSkillItemCraftedResult",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_ITEM_CRAFTED_RESULT",
-			Payload =
-			{
-				{ Name = "data", Type = "CraftingItemResultData", Nilable = false },
-			},
-		},
-		{
-			Name = "TradeSkillItemUpdate",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_ITEM_UPDATE",
-			Payload =
-			{
-				{ Name = "itemGUID", Type = "string", Nilable = false },
-			},
-		},
-		{
-			Name = "TradeSkillListUpdate",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_LIST_UPDATE",
-		},
-		{
-			Name = "TradeSkillNameUpdate",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_NAME_UPDATE",
-		},
-		{
-			Name = "TradeSkillShow",
-			Type = "Event",
-			LiteralName = "TRADE_SKILL_SHOW",
-		},
-		{
-			Name = "UpdateTradeskillCastComplete",
-			Type = "Event",
-			LiteralName = "UPDATE_TRADESKILL_CAST_COMPLETE",
-		},
-		{
-			Name = "UpdateTradeskillRecast",
-			Type = "Event",
-			LiteralName = "UPDATE_TRADESKILL_RECAST",
-		},
-	},
-
-	Tables =
-	{
-		{
-			Name = "CraftingReagentItemFlag",
-			Type = "Enumeration",
-			NumValues = 1,
-			MinValue = 0,
-			MaxValue = 0,
-			Fields =
-			{
-				{ Name = "TooltipShowsAsStatModifications", Type = "CraftingReagentItemFlag", EnumValue = 0 },
-			},
-		},
-	},
-};
-
-APIDocumentation:AddDocumentationTable(TradeSkillUI);
 local Trainer =
 {
 	Name = "Trainer",
@@ -36222,6 +36549,7 @@ local UIWidgetManager =
 				{ Name = "fillValue", Type = "number", Nilable = false },
 				{ Name = "numTotalFrames", Type = "number", Nilable = false },
 				{ Name = "numFullFrames", Type = "number", Nilable = false },
+				{ Name = "pulseFillingFrame", Type = "bool", Nilable = false },
 				{ Name = "tooltip", Type = "string", Nilable = false },
 				{ Name = "tooltipLoc", Type = "UIWidgetTooltipLocation", Nilable = false },
 				{ Name = "widgetSizeSetting", Type = "number", Nilable = false },
@@ -37135,6 +37463,20 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitPercentHealthFromGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "percentHealth", Type = "number", Nilable = true },
+			},
+		},
+		{
 			Name = "UnitPhaseReason",
 			Type = "Function",
 
@@ -37262,6 +37604,20 @@ local Unit =
 			Returns =
 			{
 				{ Name = "sex", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "UnitTokenFromGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = true },
 			},
 		},
 		{
@@ -38732,9 +39088,9 @@ local Video =
 		{
 			Name = "GraphicsValidationResult",
 			Type = "Enumeration",
-			NumValues = 21,
+			NumValues = 42,
 			MinValue = 0,
-			MaxValue = 20,
+			MaxValue = 41,
 			Fields =
 			{
 				{ Name = "Supported", Type = "GraphicsValidationResult", EnumValue = 0 },
@@ -38742,22 +39098,43 @@ local Video =
 				{ Name = "Unsupported", Type = "GraphicsValidationResult", EnumValue = 2 },
 				{ Name = "Graphics", Type = "GraphicsValidationResult", EnumValue = 3 },
 				{ Name = "DualCore", Type = "GraphicsValidationResult", EnumValue = 4 },
-				{ Name = "CpuMem_2", Type = "GraphicsValidationResult", EnumValue = 5 },
-				{ Name = "CpuMem_4", Type = "GraphicsValidationResult", EnumValue = 6 },
-				{ Name = "Needs_5_0", Type = "GraphicsValidationResult", EnumValue = 7 },
-				{ Name = "Needs_6_0", Type = "GraphicsValidationResult", EnumValue = 8 },
-				{ Name = "NeedsRt", Type = "GraphicsValidationResult", EnumValue = 9 },
-				{ Name = "NeedsDx12", Type = "GraphicsValidationResult", EnumValue = 10 },
-				{ Name = "NeedsDx12Vrs2", Type = "GraphicsValidationResult", EnumValue = 11 },
-				{ Name = "NeedsMacOs_10_13", Type = "GraphicsValidationResult", EnumValue = 12 },
-				{ Name = "NeedsMacOs_10_14", Type = "GraphicsValidationResult", EnumValue = 13 },
-				{ Name = "NeedsMacOs_10_15", Type = "GraphicsValidationResult", EnumValue = 14 },
-				{ Name = "NeedsMacOs_11_0", Type = "GraphicsValidationResult", EnumValue = 15 },
-				{ Name = "NeedsWindows_10", Type = "GraphicsValidationResult", EnumValue = 16 },
-				{ Name = "MacOsUnsupported", Type = "GraphicsValidationResult", EnumValue = 17 },
-				{ Name = "WindowsUnsupported", Type = "GraphicsValidationResult", EnumValue = 18 },
-				{ Name = "GpuDriver", Type = "GraphicsValidationResult", EnumValue = 19 },
-				{ Name = "Unknown", Type = "GraphicsValidationResult", EnumValue = 20 },
+				{ Name = "QuadCore", Type = "GraphicsValidationResult", EnumValue = 5 },
+				{ Name = "CpuMem_2", Type = "GraphicsValidationResult", EnumValue = 6 },
+				{ Name = "CpuMem_4", Type = "GraphicsValidationResult", EnumValue = 7 },
+				{ Name = "CpuMem_8", Type = "GraphicsValidationResult", EnumValue = 8 },
+				{ Name = "Needs_5_0", Type = "GraphicsValidationResult", EnumValue = 9 },
+				{ Name = "Needs_6_0", Type = "GraphicsValidationResult", EnumValue = 10 },
+				{ Name = "NeedsRt", Type = "GraphicsValidationResult", EnumValue = 11 },
+				{ Name = "NeedsDx12", Type = "GraphicsValidationResult", EnumValue = 12 },
+				{ Name = "NeedsDx12Vrs2", Type = "GraphicsValidationResult", EnumValue = 13 },
+				{ Name = "NeedsAppleGpu", Type = "GraphicsValidationResult", EnumValue = 14 },
+				{ Name = "NeedsAmdGpu", Type = "GraphicsValidationResult", EnumValue = 15 },
+				{ Name = "NeedsIntelGpu", Type = "GraphicsValidationResult", EnumValue = 16 },
+				{ Name = "NeedsNvidiaGpu", Type = "GraphicsValidationResult", EnumValue = 17 },
+				{ Name = "NeedsQualcommGpu", Type = "GraphicsValidationResult", EnumValue = 18 },
+				{ Name = "NeedsMacOs_10_13", Type = "GraphicsValidationResult", EnumValue = 19 },
+				{ Name = "NeedsMacOs_10_14", Type = "GraphicsValidationResult", EnumValue = 20 },
+				{ Name = "NeedsMacOs_10_15", Type = "GraphicsValidationResult", EnumValue = 21 },
+				{ Name = "NeedsMacOs_11_0", Type = "GraphicsValidationResult", EnumValue = 22 },
+				{ Name = "NeedsMacOs_12_0", Type = "GraphicsValidationResult", EnumValue = 23 },
+				{ Name = "NeedsMacOs_13_0", Type = "GraphicsValidationResult", EnumValue = 24 },
+				{ Name = "NeedsWindows_10", Type = "GraphicsValidationResult", EnumValue = 25 },
+				{ Name = "NeedsWindows_11", Type = "GraphicsValidationResult", EnumValue = 26 },
+				{ Name = "MacOsUnsupported", Type = "GraphicsValidationResult", EnumValue = 27 },
+				{ Name = "WindowsUnsupported", Type = "GraphicsValidationResult", EnumValue = 28 },
+				{ Name = "LegacyUnsupported", Type = "GraphicsValidationResult", EnumValue = 29 },
+				{ Name = "Dx11Unsupported", Type = "GraphicsValidationResult", EnumValue = 30 },
+				{ Name = "Dx12Win7Unsupported", Type = "GraphicsValidationResult", EnumValue = 31 },
+				{ Name = "RemoteDesktopUnsupported", Type = "GraphicsValidationResult", EnumValue = 32 },
+				{ Name = "WineUnsupported", Type = "GraphicsValidationResult", EnumValue = 33 },
+				{ Name = "NvapiWineUnsupported", Type = "GraphicsValidationResult", EnumValue = 34 },
+				{ Name = "AppleGpuUnsupported", Type = "GraphicsValidationResult", EnumValue = 35 },
+				{ Name = "AmdGpuUnsupported", Type = "GraphicsValidationResult", EnumValue = 36 },
+				{ Name = "IntelGpuUnsupported", Type = "GraphicsValidationResult", EnumValue = 37 },
+				{ Name = "NvidiaGpuUnsupported", Type = "GraphicsValidationResult", EnumValue = 38 },
+				{ Name = "QualcommGpuUnsupported", Type = "GraphicsValidationResult", EnumValue = 39 },
+				{ Name = "GpuDriver", Type = "GraphicsValidationResult", EnumValue = 40 },
+				{ Name = "Unknown", Type = "GraphicsValidationResult", EnumValue = 41 },
 			},
 		},
 		{
@@ -42286,10 +42663,6 @@ local ChallengeModeInfo =
 			Type = "Function",
 		},
 		{
-			Name = "SetKeystoneTooltip",
-			Type = "Function",
-		},
-		{
 			Name = "SlotKeystone",
 			Type = "Function",
 		},
@@ -42656,9 +43029,9 @@ local ClassTalents =
 			},
 		},
 		{
-			Name = "IsConfigReady",
+			Name = "IsConfigPopulated",
 			Type = "Function",
-			Documentation = { "New configs may or may not be ready to load immediately after creation" },
+			Documentation = { "New configs may or may not be populated and ready to load immediately after creation. Avoid calling for configs intentionally created empty." },
 
 			Arguments =
 			{
@@ -42667,7 +43040,7 @@ local ClassTalents =
 
 			Returns =
 			{
-				{ Name = "isReady", Type = "bool", Nilable = false },
+				{ Name = "isPopulated", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -47588,8 +47961,108 @@ local CraftingOrderUI =
 	Functions =
 	{
 		{
+			Name = "CalculateCraftingOrderPostingFee",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = false },
+				{ Name = "orderType", Type = "CraftingOrderType", Nilable = false },
+				{ Name = "orderDuration", Type = "CraftingOrderDuration", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "deposit", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CanOrderSkillAbility",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "canOrder", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CancelOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "ClaimOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+				{ Name = "profession", Type = "Profession", Nilable = false },
+			},
+		},
+		{
+			Name = "CloseCrafterCraftingOrders",
+			Type = "Function",
+		},
+		{
 			Name = "CloseCustomerCraftingOrders",
 			Type = "Function",
+		},
+		{
+			Name = "FulfillOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+				{ Name = "crafterNote", Type = "string", Nilable = false },
+				{ Name = "profession", Type = "Profession", Nilable = false },
+			},
+		},
+		{
+			Name = "GetClaimedOrder",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "order", Type = "CraftingOrderInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCrafterBuckets",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "buckets", Type = "table", InnerType = "CraftingOrderBucketInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCrafterOrders",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "orders", Type = "table", InnerType = "CraftingOrderInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCraftingOrderTime",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "time", Type = "number", Nilable = false },
+			},
 		},
 		{
 			Name = "GetCustomerCategories",
@@ -47612,6 +48085,47 @@ local CraftingOrderUI =
 			Returns =
 			{
 				{ Name = "results", Type = "CraftingOrderCustomerSearchResults", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCustomerOrders",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "customerOrders", Type = "table", InnerType = "CraftingOrderInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetDefaultOrdersSkillLine",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMyOrders",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "myOrders", Type = "table", InnerType = "CraftingOrderInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetOrderClaimInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "profession", Type = "Profession", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "claimInfo", Type = "CraftingOrderClaimsRemainingInfo", Nilable = false },
 			},
 		},
 		{
@@ -47638,8 +48152,65 @@ local CraftingOrderUI =
 			},
 		},
 		{
+			Name = "ListMyOrders",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "request", Type = "CraftingOrderRequestMyOrdersInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "ParseCustomerOptions",
 			Type = "Function",
+		},
+		{
+			Name = "PlaceNewOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "orderInfo", Type = "NewCraftingOrderInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "RejectOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+				{ Name = "crafterNote", Type = "string", Nilable = false },
+				{ Name = "profession", Type = "Profession", Nilable = false },
+			},
+		},
+		{
+			Name = "ReleaseOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+				{ Name = "profession", Type = "Profession", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestCrafterOrders",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "request", Type = "CraftingOrderRequestInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "RequestCustomerOrders",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "request", Type = "CraftingOrderRequestInfo", Nilable = false },
+			},
 		},
 		{
 			Name = "SetCustomerOptionFavorited",
@@ -47651,10 +48222,67 @@ local CraftingOrderUI =
 				{ Name = "favorited", Type = "bool", Nilable = false },
 			},
 		},
+		{
+			Name = "ShouldShowCraftingOrderTab",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "showTab", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SkillLineHasOrders",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasOrders", Type = "bool", Nilable = false },
+			},
+		},
 	},
 
 	Events =
 	{
+		{
+			Name = "CraftingordersCanRequest",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_CAN_REQUEST",
+		},
+		{
+			Name = "CraftingordersClaimOrderResponse",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_CLAIM_ORDER_RESPONSE",
+			Payload =
+			{
+				{ Name = "result", Type = "CraftingOrderResult", Nilable = false },
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CraftingordersClaimedOrderAdded",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_CLAIMED_ORDER_ADDED",
+		},
+		{
+			Name = "CraftingordersClaimedOrderRemoved",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_CLAIMED_ORDER_REMOVED",
+		},
+		{
+			Name = "CraftingordersClaimedOrderUpdated",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_CLAIMED_ORDER_UPDATED",
+			Payload =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+		},
 		{
 			Name = "CraftingordersCustomerFavoritesChanged",
 			Type = "Event",
@@ -47664,6 +48292,16 @@ local CraftingOrderUI =
 			Name = "CraftingordersCustomerOptionsParsed",
 			Type = "Event",
 			LiteralName = "CRAFTINGORDERS_CUSTOMER_OPTIONS_PARSED",
+		},
+		{
+			Name = "CraftingordersFulfillOrderResponse",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_FULFILL_ORDER_RESPONSE",
+			Payload =
+			{
+				{ Name = "result", Type = "CraftingOrderResult", Nilable = false },
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
 		},
 		{
 			Name = "CraftingordersHideCrafter",
@@ -47676,6 +48314,44 @@ local CraftingOrderUI =
 			LiteralName = "CRAFTINGORDERS_HIDE_CUSTOMER",
 		},
 		{
+			Name = "CraftingordersOrderCancelResponse",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_ORDER_CANCEL_RESPONSE",
+			Payload =
+			{
+				{ Name = "result", Type = "CraftingOrderResult", Nilable = false },
+			},
+		},
+		{
+			Name = "CraftingordersOrderPlacementResponse",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_ORDER_PLACEMENT_RESPONSE",
+			Payload =
+			{
+				{ Name = "result", Type = "CraftingOrderResult", Nilable = false },
+			},
+		},
+		{
+			Name = "CraftingordersRejectOrderResponse",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_REJECT_ORDER_RESPONSE",
+			Payload =
+			{
+				{ Name = "result", Type = "CraftingOrderResult", Nilable = false },
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CraftingordersReleaseOrderResponse",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_RELEASE_ORDER_RESPONSE",
+			Payload =
+			{
+				{ Name = "result", Type = "CraftingOrderResult", Nilable = false },
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "CraftingordersShowCrafter",
 			Type = "Event",
 			LiteralName = "CRAFTINGORDERS_SHOW_CRAFTER",
@@ -47685,10 +48361,48 @@ local CraftingOrderUI =
 			Type = "Event",
 			LiteralName = "CRAFTINGORDERS_SHOW_CUSTOMER",
 		},
+		{
+			Name = "CraftingordersUpdateCustomerName",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_UPDATE_CUSTOMER_NAME",
+			Payload =
+			{
+				{ Name = "customerName", Type = "string", Nilable = false },
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+		},
 	},
 
 	Tables =
 	{
+		{
+			Name = "CraftingOrderRequestInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "orderType", Type = "CraftingOrderType", Nilable = false },
+				{ Name = "selectedSkillLineAbility", Type = "number", Nilable = true },
+				{ Name = "searchFavorites", Type = "bool", Nilable = false },
+				{ Name = "initialNonPublicSearch", Type = "bool", Nilable = false },
+				{ Name = "primarySort", Type = "CraftingOrderSortInfo", Nilable = false },
+				{ Name = "secondarySort", Type = "CraftingOrderSortInfo", Nilable = false },
+				{ Name = "forCrafter", Type = "bool", Nilable = false },
+				{ Name = "offset", Type = "number", Nilable = false },
+				{ Name = "callback", Type = "CraftingOrderRequestCallback", Nilable = false },
+				{ Name = "profession", Type = "Profession", Nilable = true },
+			},
+		},
+		{
+			Name = "CraftingOrderRequestMyOrdersInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "primarySort", Type = "CraftingOrderSortInfo", Nilable = false },
+				{ Name = "secondarySort", Type = "CraftingOrderSortInfo", Nilable = false },
+				{ Name = "offset", Type = "number", Nilable = false },
+				{ Name = "callback", Type = "CraftingOrderRequestMyOrdersCallback", Nilable = false },
+			},
+		},
 	},
 };
 
@@ -48052,6 +48766,8 @@ local EncounterJournal =
 				{ Name = "handError", Type = "bool", Nilable = true },
 				{ Name = "weaponTypeError", Type = "bool", Nilable = true },
 				{ Name = "displayAsPerPlayerLoot", Type = "bool", Nilable = true },
+				{ Name = "displayAsVeryRare", Type = "bool", Nilable = true },
+				{ Name = "displayAsExtremelyRare", Type = "bool", Nilable = true },
 			},
 		},
 		{
@@ -50399,14 +51115,6 @@ local ItemInteractionUI =
 			Type = "Function",
 		},
 		{
-			Name = "SetCorruptionReforgerItemTooltip",
-			Type = "Function",
-		},
-		{
-			Name = "SetItemConversionOutputTooltip",
-			Type = "Function",
-		},
-		{
 			Name = "SetPendingItem",
 			Type = "Function",
 
@@ -51018,6 +51726,155 @@ local LoreText =
 };
 
 APIDocumentation:AddDocumentationTable(LoreText);
+local MailInfo =
+{
+	Name = "MailInfo",
+	Type = "System",
+	Namespace = "C_Mail",
+
+	Functions =
+	{
+		{
+			Name = "CanCheckInbox",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "canCheckInbox", Type = "bool", Nilable = false },
+				{ Name = "secondsUntilAllowed", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCraftingOrderMailInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "inboxIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "CraftingOrderMailInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "HasInboxMoney",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "inboxIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "inboxItemHasMoneyAttached", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsCommandPending",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isCommandPending", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+		{
+			Name = "CloseInboxItem",
+			Type = "Event",
+			LiteralName = "CLOSE_INBOX_ITEM",
+			Payload =
+			{
+				{ Name = "mailIndex", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "MailClosed",
+			Type = "Event",
+			LiteralName = "MAIL_CLOSED",
+		},
+		{
+			Name = "MailFailed",
+			Type = "Event",
+			LiteralName = "MAIL_FAILED",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "MailInboxUpdate",
+			Type = "Event",
+			LiteralName = "MAIL_INBOX_UPDATE",
+		},
+		{
+			Name = "MailLockSendItems",
+			Type = "Event",
+			LiteralName = "MAIL_LOCK_SEND_ITEMS",
+			Payload =
+			{
+				{ Name = "attachSlot", Type = "number", Nilable = false },
+				{ Name = "itemLink", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "MailSendInfoUpdate",
+			Type = "Event",
+			LiteralName = "MAIL_SEND_INFO_UPDATE",
+		},
+		{
+			Name = "MailSendSuccess",
+			Type = "Event",
+			LiteralName = "MAIL_SEND_SUCCESS",
+		},
+		{
+			Name = "MailShow",
+			Type = "Event",
+			LiteralName = "MAIL_SHOW",
+		},
+		{
+			Name = "MailSuccess",
+			Type = "Event",
+			LiteralName = "MAIL_SUCCESS",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "MailUnlockSendItems",
+			Type = "Event",
+			LiteralName = "MAIL_UNLOCK_SEND_ITEMS",
+		},
+		{
+			Name = "SendMailCodChanged",
+			Type = "Event",
+			LiteralName = "SEND_MAIL_COD_CHANGED",
+		},
+		{
+			Name = "SendMailMoneyChanged",
+			Type = "Event",
+			LiteralName = "SEND_MAIL_MONEY_CHANGED",
+		},
+		{
+			Name = "UpdatePendingMail",
+			Type = "Event",
+			LiteralName = "UPDATE_PENDING_MAIL",
+		},
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(MailInfo);
 local MajorFactions =
 {
 	Name = "MajorFactionsUI",
@@ -51144,20 +52001,6 @@ local MajorFactions =
 			},
 		},
 		{
-			Name = "IsMajorFaction",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "factionID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "IsMajorFaction", Type = "bool", Nilable = false },
-			},
-		},
-		{
 			Name = "IsPlayerInRenownCatchUpMode",
 			Type = "Function",
 
@@ -51242,7 +52085,6 @@ local MajorFactions =
 				{ Name = "renownLevelThreshold", Type = "number", Nilable = false },
 				{ Name = "textureKit", Type = "string", Nilable = false },
 				{ Name = "celebrationSoundKit", Type = "number", Nilable = false },
-				{ Name = "upgradeTabSelectSoundKitID", Type = "number", Nilable = false },
 				{ Name = "renownFanfareSoundKitID", Type = "number", Nilable = false },
 			},
 		},
@@ -53357,12 +54199,26 @@ local ProfessionSpecUI =
 			},
 		},
 		{
+			Name = "GetCurrencyInfoForSkillLine",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "SpecializationCurrencyInfo", Nilable = false },
+			},
+		},
+		{
 			Name = "GetDefaultSpecSkillLine",
 			Type = "Function",
 
 			Returns =
 			{
-				{ Name = "defaultSpecSkillLine", Type = "number", Nilable = false },
+				{ Name = "defaultSpecSkillLine", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -53586,20 +54442,6 @@ local ProfessionSpecUI =
 			Returns =
 			{
 				{ Name = "unlockRank", Type = "number", Nilable = true },
-			},
-		},
-		{
-			Name = "GetUnspentPointsForSkillLine",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "skillLineID", Type = "number", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "unspentPoints", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -54165,6 +55007,10 @@ local ReturningPlayerUI =
 	{
 		{
 			Name = "AcceptPrompt",
+			Type = "Function",
+		},
+		{
+			Name = "DeclinePrompt",
 			Type = "Function",
 		},
 	},
@@ -55826,6 +56672,1022 @@ local TalkingHead =
 };
 
 APIDocumentation:AddDocumentationTable(TalkingHead);
+local TradeSkillUI =
+{
+	Name = "TradeSkillUI",
+	Type = "System",
+	Namespace = "C_TradeSkillUI",
+
+	Functions =
+	{
+		{
+			Name = "CloseTradeSkill",
+			Type = "Function",
+		},
+		{
+			Name = "ContinueRecast",
+			Type = "Function",
+		},
+		{
+			Name = "CraftEnchant",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "numCasts", Type = "number", Nilable = false, Default = 1 },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
+				{ Name = "itemTarget", Type = "table", Mixin = "ItemLocationMixin", Nilable = true },
+			},
+		},
+		{
+			Name = "CraftRecipe",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "numCasts", Type = "number", Nilable = false, Default = 1 },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
+				{ Name = "recipeLevel", Type = "number", Nilable = true },
+				{ Name = "orderID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "CraftSalvage",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "numCasts", Type = "number", Nilable = false, Default = 1 },
+				{ Name = "itemTarget", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+			},
+		},
+		{
+			Name = "DoesRecraftingRecipeAcceptItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLocation", Type = "table", Mixin = "ItemLocationMixin", Nilable = false },
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAllProfessionTradeSkillLines",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "skillLineID", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetBaseProfessionInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "info", Type = "ProfessionInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetChildProfessionInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "info", Type = "ProfessionInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetChildProfessionInfos",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "infos", Type = "table", InnerType = "ProfessionInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCraftableCount",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "recipeLevel", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "numAvailable", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCraftingOperationInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
+				{ Name = "allocationItemGUID", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "CraftingOperationInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCraftingOperationInfoForOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "CraftingOperationInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCraftingReagentBonusText",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "craftingReagentIndex", Type = "number", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
+				{ Name = "allocationItemGUID", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "bonusText", Type = "table", InnerType = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetEnchantItems",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "items", Type = "table", InnerType = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetFactionSpecificOutputItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "itemID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetGatheringOperationInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "GatheringOperationInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetHideUnownedFlags",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "cannotModifyHideUnowned", Type = "bool", Nilable = false },
+				{ Name = "alwaysShowUnowned", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemCraftedQualityByItemInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemInfo", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "quality", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetItemReagentQualityByItemInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemInfo", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "quality", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetItemSlotModifications",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "slotMods", Type = "table", InnerType = "CraftingItemSlotModification", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemSlotModificationsForOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "slotMods", Type = "table", InnerType = "CraftingItemSlotModification", Nilable = false },
+			},
+		},
+		{
+			Name = "GetOriginalCraftRecipeID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = true },
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetProfessionChildSkillLineID",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetProfessionInfoBySkillLineID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "info", Type = "ProfessionInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetProfessionInventorySlots",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "invSlots", Type = "table", InnerType = "InventorySlots", Nilable = false },
+			},
+		},
+		{
+			Name = "GetProfessionSkillLineID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "profession", Type = "Profession", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetProfessionSlots",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "profession", Type = "Profession", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "slots", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetProfessionSpells",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "professionID", Type = "number", Nilable = false },
+				{ Name = "skillLineID", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "knownSpells", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetQualitiesForRecipe",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "qualityIDs", Type = "table", InnerType = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetReagentDifficultyText",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "craftingReagentIndex", Type = "number", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "bonusText", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetReagentSlotStatus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "mcrSlotID", Type = "number", Nilable = false },
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "locked", Type = "bool", Nilable = false },
+				{ Name = "lockedReason", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeDescription",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
+				{ Name = "allocationItemGUID", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "description", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeFixedReagentItemLink",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "dataSlotIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "link", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "recipeLevel", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "recipeInfo", Type = "TradeSkillRecipeInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetRecipeInfoForSkillLineAbility",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = false },
+				{ Name = "recipeLevel", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "recipeInfo", Type = "TradeSkillRecipeInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetRecipeOutputItemData",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "reagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
+				{ Name = "allocationItemGUID", Type = "string", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "outputInfo", Type = "CraftingRecipeOutputInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeQualityReagentItemLink",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "dataSlotIndex", Type = "number", Nilable = false },
+				{ Name = "qualityIndex", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "link", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeRepeatCount",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "recastTimes", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipeSchematic",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+				{ Name = "isRecraft", Type = "bool", Nilable = false },
+				{ Name = "recipeLevel", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "schematic", Type = "CraftingRecipeSchematic", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecipesTracked",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "recipeIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRecraftItems",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "items", Type = "table", InnerType = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSalvagableItemIDs",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "itemIDs", Type = "table", InnerType = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetShowLearned",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "flag", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetShowUnlearned",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "flag", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSkillLineForGear",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemInfo", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetSourceTypeFilter",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "sourceTypeFilter", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTradeSkillDisplayName",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "professionDisplayName", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "HasFavoriteOrderRecipes",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasFavorites", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasRecipesTracked",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasRecipesTracked", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsNPCCrafting",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsNearProfessionSpellFocus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "profession", Type = "Profession", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "nearFocus", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsOriginalCraftRecipeLearned",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemGUID", Type = "string", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "learned", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsRecipeInSkillLine",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsRecipeProfessionLearned",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "recipeProfessionLearned", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsRecipeTracked",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "tracked", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsRuneforging",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "OpenRecipe",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "OpenTradeSkill",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "opened", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RecipeCanBeRecrafted",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "recraftable", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RecraftRecipe",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemGUID", Type = "string", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RecraftRecipeForOrder",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+				{ Name = "itemGUID", Type = "string", Nilable = false },
+				{ Name = "craftingReagents", Type = "table", InnerType = "CraftingReagentInfo", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetOnlyShowAvailableForOrders",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "flag", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetProfessionChildSkillLineID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SetRecipeTracked",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "tracked", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetShowLearned",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "flag", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetShowUnlearned",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "flag", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "SetSourceTypeFilter",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "sourceTypeFilter", Type = "number", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+		{
+			Name = "CraftingDetailsUpdate",
+			Type = "Event",
+			LiteralName = "CRAFTING_DETAILS_UPDATE",
+		},
+		{
+			Name = "NewRecipeLearned",
+			Type = "Event",
+			LiteralName = "NEW_RECIPE_LEARNED",
+			Payload =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "recipeLevel", Type = "number", Nilable = true },
+				{ Name = "baseRecipeID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "ObliterumForgePendingItemChanged",
+			Type = "Event",
+			LiteralName = "OBLITERUM_FORGE_PENDING_ITEM_CHANGED",
+		},
+		{
+			Name = "OpenRecipeResponse",
+			Type = "Event",
+			LiteralName = "OPEN_RECIPE_RESPONSE",
+			Payload =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "skillLineID", Type = "number", Nilable = false },
+				{ Name = "expansionSkillLineID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "TrackedRecipeUpdate",
+			Type = "Event",
+			LiteralName = "TRACKED_RECIPE_UPDATE",
+			Payload =
+			{
+				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "tracked", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "TradeSkillClose",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_CLOSE",
+		},
+		{
+			Name = "TradeSkillCraftBegin",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_CRAFT_BEGIN",
+			Payload =
+			{
+				{ Name = "recipeSpellID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "TradeSkillCraftingReagentBonusTextUpdated",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_CRAFTING_REAGENT_BONUS_TEXT_UPDATED",
+			Payload =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "TradeSkillCurrencyRewardResult",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_CURRENCY_REWARD_RESULT",
+			Payload =
+			{
+				{ Name = "data", Type = "CraftingCurrencyResultData", Nilable = false },
+			},
+		},
+		{
+			Name = "TradeSkillDataSourceChanged",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_DATA_SOURCE_CHANGED",
+		},
+		{
+			Name = "TradeSkillDataSourceChanging",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_DATA_SOURCE_CHANGING",
+		},
+		{
+			Name = "TradeSkillDetailsUpdate",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_DETAILS_UPDATE",
+		},
+		{
+			Name = "TradeSkillFavoritesChanged",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_FAVORITES_CHANGED",
+		},
+		{
+			Name = "TradeSkillItemCraftedResult",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_ITEM_CRAFTED_RESULT",
+			Payload =
+			{
+				{ Name = "data", Type = "CraftingItemResultData", Nilable = false },
+			},
+		},
+		{
+			Name = "TradeSkillItemUpdate",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_ITEM_UPDATE",
+			Payload =
+			{
+				{ Name = "itemGUID", Type = "string", Nilable = false },
+			},
+		},
+		{
+			Name = "TradeSkillListUpdate",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_LIST_UPDATE",
+		},
+		{
+			Name = "TradeSkillNameUpdate",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_NAME_UPDATE",
+		},
+		{
+			Name = "TradeSkillShow",
+			Type = "Event",
+			LiteralName = "TRADE_SKILL_SHOW",
+		},
+		{
+			Name = "UpdateTradeskillCastComplete",
+			Type = "Event",
+			LiteralName = "UPDATE_TRADESKILL_CAST_COMPLETE",
+		},
+		{
+			Name = "UpdateTradeskillRecast",
+			Type = "Event",
+			LiteralName = "UPDATE_TRADESKILL_RECAST",
+		},
+	},
+
+	Tables =
+	{
+		{
+			Name = "CraftingReagentItemFlag",
+			Type = "Enumeration",
+			NumValues = 1,
+			MinValue = 0,
+			MaxValue = 0,
+			Fields =
+			{
+				{ Name = "TooltipShowsAsStatModifications", Type = "CraftingReagentItemFlag", EnumValue = 0 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(TradeSkillUI);
 local Transmog =
 {
 	Name = "Transmogrify",
@@ -58412,6 +60274,15 @@ local WeeklyRewards =
 			},
 		},
 		{
+			Name = "GetWeeklyRewardTextureKit",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "uiTextureKit", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "HasAvailableRewards",
 			Type = "Function",
 
@@ -58450,6 +60321,15 @@ local WeeklyRewards =
 		{
 			Name = "OnUIInteract",
 			Type = "Function",
+		},
+		{
+			Name = "ShouldShowRetirementMessage",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "showRetirementMessage", Type = "bool", Nilable = false },
+			},
 		},
 	},
 
@@ -59072,9 +60952,9 @@ local BattlePetConstants =
 		{
 			Name = "BattlePetSpeciesFlags",
 			Type = "Enumeration",
-			NumValues = 16,
+			NumValues = 17,
 			MinValue = 1,
-			MaxValue = 32768,
+			MaxValue = 65536,
 			Fields =
 			{
 				{ Name = "NoRename", Type = "BattlePetSpeciesFlags", EnumValue = 1 },
@@ -59093,6 +60973,7 @@ local BattlePetConstants =
 				{ Name = "AddsAllowedWithBoss", Type = "BattlePetSpeciesFlags", EnumValue = 8192 },
 				{ Name = "HideUntilLearned", Type = "BattlePetSpeciesFlags", EnumValue = 16384 },
 				{ Name = "MatchPlayerHighPetLevel", Type = "BattlePetSpeciesFlags", EnumValue = 32768 },
+				{ Name = "NoWildPetAddsAllowed", Type = "BattlePetSpeciesFlags", EnumValue = 65536 },
 			},
 		},
 		{
@@ -59675,8 +61556,8 @@ local CharacterCustomizationShared =
 				{ Name = "isNew", Type = "bool", Nilable = false },
 				{ Name = "swatchColor1", Type = "table", Mixin = "ColorMixin", Nilable = true },
 				{ Name = "swatchColor2", Type = "table", Mixin = "ColorMixin", Nilable = true },
-				{ Name = "showLocked", Type = "bool", Nilable = false },
-				{ Name = "lockedTooltip", Type = "string", Nilable = false },
+				{ Name = "isLocked", Type = "bool", Nilable = false },
+				{ Name = "lockedText", Type = "string", Nilable = true },
 			},
 		},
 		{
@@ -59994,6 +61875,9 @@ local CurrencyConstants =
 				{ Name = "CURRENCY_ID_RENOWN_NECROLORD", Type = "number", Value = 1832 },
 				{ Name = "CURRENCY_ID_WILLING_SOUL", Type = "number", Value = 1810 },
 				{ Name = "CURRENCY_ID_RESERVOIR_ANIMA", Type = "number", Value = 1813 },
+				{ Name = "CURRENCY_ID_ACCOUNT_WIDE_CATALYST_CHARGES", Type = "number", Value = 2166 },
+				{ Name = "CURRENCY_ID_PERSONAL_CATALYST_CHARGES", Type = "number", Value = 2167 },
+				{ Name = "CATALYST_CHARGE_CAP", Type = "number", Value = 6 },
 			},
 		},
 	},
@@ -60321,7 +62205,7 @@ local EditModeManagerShared =
 		{
 			Name = "EditModeActionBarSystemIndices",
 			Type = "Enumeration",
-			NumValues = 8,
+			NumValues = 11,
 			MinValue = 1,
 			MaxValue = 13,
 			Fields =
@@ -60331,6 +62215,9 @@ local EditModeManagerShared =
 				{ Name = "Bar3", Type = "EditModeActionBarSystemIndices", EnumValue = 3 },
 				{ Name = "RightBar1", Type = "EditModeActionBarSystemIndices", EnumValue = 4 },
 				{ Name = "RightBar2", Type = "EditModeActionBarSystemIndices", EnumValue = 5 },
+				{ Name = "ExtraBar1", Type = "EditModeActionBarSystemIndices", EnumValue = 6 },
+				{ Name = "ExtraBar2", Type = "EditModeActionBarSystemIndices", EnumValue = 7 },
+				{ Name = "ExtraBar3", Type = "EditModeActionBarSystemIndices", EnumValue = 8 },
 				{ Name = "StanceBar", Type = "EditModeActionBarSystemIndices", EnumValue = 11 },
 				{ Name = "PetActionBar", Type = "EditModeActionBarSystemIndices", EnumValue = 12 },
 				{ Name = "PossessActionBar", Type = "EditModeActionBarSystemIndices", EnumValue = 13 },
@@ -60479,9 +62366,9 @@ local EditModeManagerShared =
 		{
 			Name = "EditModeUnitFrameSetting",
 			Type = "Enumeration",
-			NumValues = 16,
+			NumValues = 17,
 			MinValue = 0,
-			MaxValue = 15,
+			MaxValue = 16,
 			Fields =
 			{
 				{ Name = "HidePortrait", Type = "EditModeUnitFrameSetting", EnumValue = 0 },
@@ -60500,6 +62387,7 @@ local EditModeManagerShared =
 				{ Name = "RaidGroupDisplayType", Type = "EditModeUnitFrameSetting", EnumValue = 13 },
 				{ Name = "SortPlayersBy", Type = "EditModeUnitFrameSetting", EnumValue = 14 },
 				{ Name = "RowSize", Type = "EditModeUnitFrameSetting", EnumValue = 15 },
+				{ Name = "FrameSize", Type = "EditModeUnitFrameSetting", EnumValue = 16 },
 			},
 		},
 		{
@@ -61536,15 +63424,16 @@ local ItemConstants =
 		{
 			Name = "UIItemInteractionFlags",
 			Type = "Enumeration",
-			NumValues = 4,
+			NumValues = 5,
 			MinValue = 1,
-			MaxValue = 8,
+			MaxValue = 16,
 			Fields =
 			{
 				{ Name = "DisplayWithInset", Type = "UIItemInteractionFlags", EnumValue = 1 },
 				{ Name = "ConfirmationHasDelay", Type = "UIItemInteractionFlags", EnumValue = 2 },
 				{ Name = "ConversionMode", Type = "UIItemInteractionFlags", EnumValue = 4 },
 				{ Name = "ClickShowsFlyout", Type = "UIItemInteractionFlags", EnumValue = 8 },
+				{ Name = "AddCurrency", Type = "UIItemInteractionFlags", EnumValue = 16 },
 			},
 		},
 		{
@@ -61560,6 +63449,14 @@ local ItemConstants =
 				{ Name = "CleanseCorruption", Type = "UIItemInteractionType", EnumValue = 2 },
 				{ Name = "RunecarverScrapping", Type = "UIItemInteractionType", EnumValue = 3 },
 				{ Name = "ItemConversion", Type = "UIItemInteractionType", EnumValue = 4 },
+			},
+		},
+		{
+			Name = "ItemConsts",
+			Type = "Constants",
+			Values =
+			{
+				{ Name = "NUM_ITEM_ENCHANTMENT_SOCKETS", Type = "number", Value = 3 },
 			},
 		},
 		{
@@ -62207,6 +64104,164 @@ local ProfessionConstants =
 	Tables =
 	{
 		{
+			Name = "CraftingOrderDuration",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Short", Type = "CraftingOrderDuration", EnumValue = 0 },
+				{ Name = "Medium", Type = "CraftingOrderDuration", EnumValue = 1 },
+				{ Name = "Long", Type = "CraftingOrderDuration", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "CraftingOrderFlags",
+			Type = "Enumeration",
+			NumValues = 5,
+			MinValue = 1,
+			MaxValue = 16,
+			Fields =
+			{
+				{ Name = "IsRecraft", Type = "CraftingOrderFlags", EnumValue = 1 },
+				{ Name = "HasNoneReagents", Type = "CraftingOrderFlags", EnumValue = 2 },
+				{ Name = "HasSomeReagents", Type = "CraftingOrderFlags", EnumValue = 4 },
+				{ Name = "HasAllReagents", Type = "CraftingOrderFlags", EnumValue = 8 },
+				{ Name = "IsFulfillable", Type = "CraftingOrderFlags", EnumValue = 16 },
+			},
+		},
+		{
+			Name = "CraftingOrderItemType",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Reagent", Type = "CraftingOrderItemType", EnumValue = 0 },
+				{ Name = "Recraft", Type = "CraftingOrderItemType", EnumValue = 1 },
+				{ Name = "CraftedResult", Type = "CraftingOrderItemType", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "CraftingOrderReagentSource",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Any", Type = "CraftingOrderReagentSource", EnumValue = 0 },
+				{ Name = "Customer", Type = "CraftingOrderReagentSource", EnumValue = 1 },
+				{ Name = "Crafter", Type = "CraftingOrderReagentSource", EnumValue = 2 },
+				{ Name = "None", Type = "CraftingOrderReagentSource", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "CraftingOrderResult",
+			Type = "Enumeration",
+			NumValues = 36,
+			MinValue = 0,
+			MaxValue = 35,
+			Fields =
+			{
+				{ Name = "Ok", Type = "CraftingOrderResult", EnumValue = 0 },
+				{ Name = "AlreadyClaimed", Type = "CraftingOrderResult", EnumValue = 1 },
+				{ Name = "AlreadyCrafted", Type = "CraftingOrderResult", EnumValue = 2 },
+				{ Name = "CannotBeOrdered", Type = "CraftingOrderResult", EnumValue = 3 },
+				{ Name = "CannotCancel", Type = "CraftingOrderResult", EnumValue = 4 },
+				{ Name = "CannotClaim", Type = "CraftingOrderResult", EnumValue = 5 },
+				{ Name = "CannotClaimOwnOrder", Type = "CraftingOrderResult", EnumValue = 6 },
+				{ Name = "CannotCraft", Type = "CraftingOrderResult", EnumValue = 7 },
+				{ Name = "CannotCreate", Type = "CraftingOrderResult", EnumValue = 8 },
+				{ Name = "CannotCreateForSelf", Type = "CraftingOrderResult", EnumValue = 9 },
+				{ Name = "CannotFulfill", Type = "CraftingOrderResult", EnumValue = 10 },
+				{ Name = "CannotRecraft", Type = "CraftingOrderResult", EnumValue = 11 },
+				{ Name = "CannotReject", Type = "CraftingOrderResult", EnumValue = 12 },
+				{ Name = "CannotRelease", Type = "CraftingOrderResult", EnumValue = 13 },
+				{ Name = "DatabaseError", Type = "CraftingOrderResult", EnumValue = 14 },
+				{ Name = "Expired", Type = "CraftingOrderResult", EnumValue = 15 },
+				{ Name = "InvalidDuration", Type = "CraftingOrderResult", EnumValue = 16 },
+				{ Name = "InvalidMinQuality", Type = "CraftingOrderResult", EnumValue = 17 },
+				{ Name = "InvalidNotes", Type = "CraftingOrderResult", EnumValue = 18 },
+				{ Name = "InvalidReagent", Type = "CraftingOrderResult", EnumValue = 19 },
+				{ Name = "InvalidRecipe", Type = "CraftingOrderResult", EnumValue = 20 },
+				{ Name = "InvalidTarget", Type = "CraftingOrderResult", EnumValue = 21 },
+				{ Name = "InvalidType", Type = "CraftingOrderResult", EnumValue = 22 },
+				{ Name = "MissingItem", Type = "CraftingOrderResult", EnumValue = 23 },
+				{ Name = "MissingOrder", Type = "CraftingOrderResult", EnumValue = 24 },
+				{ Name = "MissingRecraftItem", Type = "CraftingOrderResult", EnumValue = 25 },
+				{ Name = "NotClaimed", Type = "CraftingOrderResult", EnumValue = 26 },
+				{ Name = "NotCrafted", Type = "CraftingOrderResult", EnumValue = 27 },
+				{ Name = "NotInGuild", Type = "CraftingOrderResult", EnumValue = 28 },
+				{ Name = "NotYetImplemented", Type = "CraftingOrderResult", EnumValue = 29 },
+				{ Name = "OutOfPublicOrderCapacity", Type = "CraftingOrderResult", EnumValue = 30 },
+				{ Name = "ServerIsNotAvailable", Type = "CraftingOrderResult", EnumValue = 31 },
+				{ Name = "ThrottleViolation", Type = "CraftingOrderResult", EnumValue = 32 },
+				{ Name = "TargetCannotCraft", Type = "CraftingOrderResult", EnumValue = 33 },
+				{ Name = "Timeout", Type = "CraftingOrderResult", EnumValue = 34 },
+				{ Name = "TooManyItems", Type = "CraftingOrderResult", EnumValue = 35 },
+			},
+		},
+		{
+			Name = "CraftingOrderSortType",
+			Type = "Enumeration",
+			NumValues = 8,
+			MinValue = 0,
+			MaxValue = 7,
+			Fields =
+			{
+				{ Name = "ItemName", Type = "CraftingOrderSortType", EnumValue = 0 },
+				{ Name = "AveTip", Type = "CraftingOrderSortType", EnumValue = 1 },
+				{ Name = "MaxTip", Type = "CraftingOrderSortType", EnumValue = 2 },
+				{ Name = "Quantity", Type = "CraftingOrderSortType", EnumValue = 3 },
+				{ Name = "Reagents", Type = "CraftingOrderSortType", EnumValue = 4 },
+				{ Name = "Tip", Type = "CraftingOrderSortType", EnumValue = 5 },
+				{ Name = "TimeRemaining", Type = "CraftingOrderSortType", EnumValue = 6 },
+				{ Name = "Status", Type = "CraftingOrderSortType", EnumValue = 7 },
+			},
+		},
+		{
+			Name = "CraftingOrderState",
+			Type = "Enumeration",
+			NumValues = 16,
+			MinValue = 0,
+			MaxValue = 15,
+			Fields =
+			{
+				{ Name = "None", Type = "CraftingOrderState", EnumValue = 0 },
+				{ Name = "Creating", Type = "CraftingOrderState", EnumValue = 1 },
+				{ Name = "Created", Type = "CraftingOrderState", EnumValue = 2 },
+				{ Name = "Claiming", Type = "CraftingOrderState", EnumValue = 3 },
+				{ Name = "Claimed", Type = "CraftingOrderState", EnumValue = 4 },
+				{ Name = "Rejecting", Type = "CraftingOrderState", EnumValue = 5 },
+				{ Name = "Rejected", Type = "CraftingOrderState", EnumValue = 6 },
+				{ Name = "Releasing", Type = "CraftingOrderState", EnumValue = 7 },
+				{ Name = "Crafting", Type = "CraftingOrderState", EnumValue = 8 },
+				{ Name = "Recrafting", Type = "CraftingOrderState", EnumValue = 9 },
+				{ Name = "Fulfilling", Type = "CraftingOrderState", EnumValue = 10 },
+				{ Name = "Fulfilled", Type = "CraftingOrderState", EnumValue = 11 },
+				{ Name = "Canceling", Type = "CraftingOrderState", EnumValue = 12 },
+				{ Name = "Canceled", Type = "CraftingOrderState", EnumValue = 13 },
+				{ Name = "Expiring", Type = "CraftingOrderState", EnumValue = 14 },
+				{ Name = "Expired", Type = "CraftingOrderState", EnumValue = 15 },
+			},
+		},
+		{
+			Name = "CraftingOrderType",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Public", Type = "CraftingOrderType", EnumValue = 0 },
+				{ Name = "Guild", Type = "CraftingOrderType", EnumValue = 1 },
+				{ Name = "Personal", Type = "CraftingOrderType", EnumValue = 2 },
+			},
+		},
+		{
 			Name = "CraftingReagentType",
 			Type = "Enumeration",
 			NumValues = 3,
@@ -62324,6 +64379,22 @@ local ProfessionConstants =
 			},
 		},
 		{
+			Name = "RcoCloseReason",
+			Type = "Enumeration",
+			NumValues = 6,
+			MinValue = 0,
+			MaxValue = 5,
+			Fields =
+			{
+				{ Name = "RcoCloseFulfill", Type = "RcoCloseReason", EnumValue = 0 },
+				{ Name = "RcoCloseExpire", Type = "RcoCloseReason", EnumValue = 1 },
+				{ Name = "RcoCloseCancel", Type = "RcoCloseReason", EnumValue = 2 },
+				{ Name = "RcoCloseReject", Type = "RcoCloseReason", EnumValue = 3 },
+				{ Name = "RcoCloseGmCancel", Type = "RcoCloseReason", EnumValue = 4 },
+				{ Name = "RcoCloseInvalid", Type = "RcoCloseReason", EnumValue = 5 },
+			},
+		},
+		{
 			Name = "SkinningState",
 			Type = "Enumeration",
 			NumValues = 5,
@@ -62348,6 +64419,7 @@ local ProfessionConstants =
 				{ Name = "RUNEFORGING_SKILL_LINE_ID", Type = "number", Value = 960 },
 				{ Name = "RUNEFORGING_ROOT_CATEGORY_ID", Type = "number", Value = 210 },
 				{ Name = "MAX_CRAFTING_REAGENT_SLOTS", Type = "number", Value = 12 },
+				{ Name = "CRAFTING_ORDER_CLAIM_DURATION", Type = "number", Value = 0 },
 			},
 		},
 	},
@@ -62758,6 +64830,180 @@ local Time =
 };
 
 APIDocumentation:AddDocumentationTable(Time);
+local TooltipConstants =
+{
+	Tables =
+	{
+		{
+			Name = "TooltipSide",
+			Type = "Enumeration",
+			NumValues = 4,
+			MinValue = 0,
+			MaxValue = 3,
+			Fields =
+			{
+				{ Name = "Left", Type = "TooltipSide", EnumValue = 0 },
+				{ Name = "Right", Type = "TooltipSide", EnumValue = 1 },
+				{ Name = "Top", Type = "TooltipSide", EnumValue = 2 },
+				{ Name = "Bottom", Type = "TooltipSide", EnumValue = 3 },
+			},
+		},
+		{
+			Name = "TooltipTextureAnchor",
+			Type = "Enumeration",
+			NumValues = 7,
+			MinValue = 0,
+			MaxValue = 6,
+			Fields =
+			{
+				{ Name = "LeftTop", Type = "TooltipTextureAnchor", EnumValue = 0 },
+				{ Name = "LeftCenter", Type = "TooltipTextureAnchor", EnumValue = 1 },
+				{ Name = "LeftBottom", Type = "TooltipTextureAnchor", EnumValue = 2 },
+				{ Name = "RightTop", Type = "TooltipTextureAnchor", EnumValue = 3 },
+				{ Name = "RightCenter", Type = "TooltipTextureAnchor", EnumValue = 4 },
+				{ Name = "RightBottom", Type = "TooltipTextureAnchor", EnumValue = 5 },
+				{ Name = "All", Type = "TooltipTextureAnchor", EnumValue = 6 },
+			},
+		},
+		{
+			Name = "TooltipTextureRelativeRegion",
+			Type = "Enumeration",
+			NumValues = 2,
+			MinValue = 0,
+			MaxValue = 1,
+			Fields =
+			{
+				{ Name = "LeftLine", Type = "TooltipTextureRelativeRegion", EnumValue = 0 },
+				{ Name = "RightLine", Type = "TooltipTextureRelativeRegion", EnumValue = 1 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(TooltipConstants);
+local TooltipInfoShared =
+{
+	Tables =
+	{
+		{
+			Name = "TooltipDataLineType",
+			Type = "Enumeration",
+			NumValues = 15,
+			MinValue = 0,
+			MaxValue = 14,
+			Fields =
+			{
+				{ Name = "None", Type = "TooltipDataLineType", EnumValue = 0 },
+				{ Name = "Blank", Type = "TooltipDataLineType", EnumValue = 1 },
+				{ Name = "UnitName", Type = "TooltipDataLineType", EnumValue = 2 },
+				{ Name = "GemSocket", Type = "TooltipDataLineType", EnumValue = 3 },
+				{ Name = "AzeriteEssenceSlot", Type = "TooltipDataLineType", EnumValue = 4 },
+				{ Name = "AzeriteEssencePower", Type = "TooltipDataLineType", EnumValue = 5 },
+				{ Name = "LearnableSpell", Type = "TooltipDataLineType", EnumValue = 6 },
+				{ Name = "UnitThreat", Type = "TooltipDataLineType", EnumValue = 7 },
+				{ Name = "QuestObjective", Type = "TooltipDataLineType", EnumValue = 8 },
+				{ Name = "AzeriteItemPowerDescription", Type = "TooltipDataLineType", EnumValue = 9 },
+				{ Name = "RuneforgeLegendaryPowerDescription", Type = "TooltipDataLineType", EnumValue = 10 },
+				{ Name = "SellPrice", Type = "TooltipDataLineType", EnumValue = 11 },
+				{ Name = "ProfessionCraftingQuality", Type = "TooltipDataLineType", EnumValue = 12 },
+				{ Name = "SpellName", Type = "TooltipDataLineType", EnumValue = 13 },
+				{ Name = "CurrencyTotal", Type = "TooltipDataLineType", EnumValue = 14 },
+			},
+		},
+		{
+			Name = "TooltipDataType",
+			Type = "Enumeration",
+			NumValues = 27,
+			MinValue = 0,
+			MaxValue = 26,
+			Fields =
+			{
+				{ Name = "Item", Type = "TooltipDataType", EnumValue = 0 },
+				{ Name = "Spell", Type = "TooltipDataType", EnumValue = 1 },
+				{ Name = "Unit", Type = "TooltipDataType", EnumValue = 2 },
+				{ Name = "Corpse", Type = "TooltipDataType", EnumValue = 3 },
+				{ Name = "Object", Type = "TooltipDataType", EnumValue = 4 },
+				{ Name = "Currency", Type = "TooltipDataType", EnumValue = 5 },
+				{ Name = "BattlePet", Type = "TooltipDataType", EnumValue = 6 },
+				{ Name = "UnitAura", Type = "TooltipDataType", EnumValue = 7 },
+				{ Name = "AzeriteEssence", Type = "TooltipDataType", EnumValue = 8 },
+				{ Name = "CompanionPet", Type = "TooltipDataType", EnumValue = 9 },
+				{ Name = "Mount", Type = "TooltipDataType", EnumValue = 10 },
+				{ Name = "PetAction", Type = "TooltipDataType", EnumValue = 11 },
+				{ Name = "Achievement", Type = "TooltipDataType", EnumValue = 12 },
+				{ Name = "EnhancedConduit", Type = "TooltipDataType", EnumValue = 13 },
+				{ Name = "EquipmentSet", Type = "TooltipDataType", EnumValue = 14 },
+				{ Name = "InstanceLock", Type = "TooltipDataType", EnumValue = 15 },
+				{ Name = "PvPBrawl", Type = "TooltipDataType", EnumValue = 16 },
+				{ Name = "RecipeRankInfo", Type = "TooltipDataType", EnumValue = 17 },
+				{ Name = "Totem", Type = "TooltipDataType", EnumValue = 18 },
+				{ Name = "Toy", Type = "TooltipDataType", EnumValue = 19 },
+				{ Name = "CorruptionCleanser", Type = "TooltipDataType", EnumValue = 20 },
+				{ Name = "MinimapMouseover", Type = "TooltipDataType", EnumValue = 21 },
+				{ Name = "Flyout", Type = "TooltipDataType", EnumValue = 22 },
+				{ Name = "Quest", Type = "TooltipDataType", EnumValue = 23 },
+				{ Name = "QuestPartyProgress", Type = "TooltipDataType", EnumValue = 24 },
+				{ Name = "Macro", Type = "TooltipDataType", EnumValue = 25 },
+				{ Name = "Debug", Type = "TooltipDataType", EnumValue = 26 },
+			},
+		},
+		{
+			Name = "TooltipComparisonLine",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "text", Type = "string", Nilable = false },
+				{ Name = "color", Type = "table", Mixin = "ColorMixin", Nilable = false },
+			},
+		},
+		{
+			Name = "TooltipData",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "lines", Type = "table", InnerType = "TooltipDataLine", Nilable = false },
+				{ Name = "args", Type = "table", InnerType = "TooltipDataArg", Nilable = false },
+			},
+		},
+		{
+			Name = "TooltipDataArg",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "field", Type = "string", Nilable = false },
+				{ Name = "stringVal", Type = "string", Nilable = true },
+				{ Name = "intVal", Type = "number", Nilable = true },
+				{ Name = "floatVal", Type = "number", Nilable = true },
+				{ Name = "boolVal", Type = "bool", Nilable = true },
+				{ Name = "colorVal", Type = "table", Mixin = "ColorMixin", Nilable = true },
+				{ Name = "guidVal", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "TooltipDataLine",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "args", Type = "table", InnerType = "TooltipDataArg", Nilable = false },
+			},
+		},
+		{
+			Name = "TooltipDataLineText",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "leftText", Type = "string", Nilable = false },
+				{ Name = "rightText", Type = "string", Nilable = true },
+				{ Name = "leftColor", Type = "table", Mixin = "ColorMixin", Nilable = true },
+				{ Name = "rightColor", Type = "table", Mixin = "ColorMixin", Nilable = true },
+				{ Name = "wrapped", Type = "bool", Nilable = true },
+				{ Name = "leftOffsetPixels", Type = "number", Nilable = true },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(TooltipInfoShared);
 local TradeSkillUITypes =
 {
 	Tables =
@@ -62844,6 +65090,16 @@ local TradeSkillUITypes =
 			},
 		},
 		{
+			Name = "CraftingCurrencyResultData",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "currencyID", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "quantity", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "associatedItemGUID", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "CraftingItemResultData",
 			Type = "Structure",
 			Fields =
@@ -62857,8 +65113,9 @@ local TradeSkillUITypes =
 				{ Name = "isCrit", Type = "bool", Nilable = false, Default = false },
 				{ Name = "critBonusSkill", Type = "number", Nilable = false, Default = 0 },
 				{ Name = "recraftable", Type = "bool", Nilable = false, Default = false },
-				{ Name = "awardSpecPoint", Type = "bool", Nilable = false, Default = false },
+				{ Name = "bonusCraft", Type = "bool", Nilable = false, Default = false },
 				{ Name = "multicraft", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "associatedItemGUID", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -62943,6 +65200,7 @@ local TradeSkillUITypes =
 				{ Name = "dataSlotType", Type = "TradeskillSlotDataType", Nilable = false, Default = "Reagent" },
 				{ Name = "dataSlotIndex", Type = "number", Nilable = false },
 				{ Name = "slotIndex", Type = "number", Nilable = false },
+				{ Name = "orderSource", Type = "CraftingOrderReagentSource", Nilable = true },
 			},
 		},
 		{
@@ -63024,12 +65282,22 @@ local TradeSkillUITypes =
 				{ Name = "profession", Type = "Profession", Nilable = true },
 				{ Name = "professionID", Type = "number", Nilable = false },
 				{ Name = "professionName", Type = "string", Nilable = false },
+				{ Name = "expansionName", Type = "string", Nilable = false },
 				{ Name = "skillLevel", Type = "number", Nilable = false },
 				{ Name = "maxSkillLevel", Type = "number", Nilable = false },
 				{ Name = "skillModifier", Type = "number", Nilable = false },
 				{ Name = "isPrimaryProfession", Type = "bool", Nilable = false },
 				{ Name = "parentProfessionID", Type = "number", Nilable = true },
 				{ Name = "parentProfessionName", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "RegularReagentInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -63054,6 +65322,7 @@ local TradeSkillUITypes =
 				{ Name = "craftable", Type = "bool", Nilable = false, Default = true },
 				{ Name = "disabledReason", Type = "string", Nilable = true },
 				{ Name = "recipeID", Type = "number", Nilable = false },
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = false },
 				{ Name = "previousRecipeID", Type = "number", Nilable = true },
 				{ Name = "nextRecipeID", Type = "number", Nilable = true },
 				{ Name = "icon", Type = "number", Nilable = true },
@@ -63854,6 +66123,41 @@ local CraftingOrderUIConstants =
 			},
 		},
 		{
+			Name = "CraftingOrderReagentsType",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "All", Type = "CraftingOrderReagentsType", EnumValue = 0 },
+				{ Name = "Some", Type = "CraftingOrderReagentsType", EnumValue = 1 },
+				{ Name = "None", Type = "CraftingOrderReagentsType", EnumValue = 2 },
+			},
+		},
+		{
+			Name = "CraftingOrderBucketInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = false },
+				{ Name = "tipAmountAvg", Type = "number", Nilable = false },
+				{ Name = "tipAmountMax", Type = "number", Nilable = false },
+				{ Name = "numAvailable", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CraftingOrderClaimsRemainingInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "claimsRemaining", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "hoursToRecharge", Type = "number", Nilable = true },
+			},
+		},
+		{
 			Name = "CraftingOrderCustomerCategory",
 			Type = "Structure",
 			Fields =
@@ -63889,9 +66193,9 @@ local CraftingOrderUIConstants =
 				{ Name = "itemName", Type = "string", Nilable = false },
 				{ Name = "primaryCategoryID", Type = "number", Nilable = false },
 				{ Name = "iLvl", Type = "number", Nilable = false },
-				{ Name = "level", Type = "number", Nilable = false },
 				{ Name = "quality", Type = "ItemQuality", Nilable = true },
 				{ Name = "slots", Type = "number", Nilable = true },
+				{ Name = "level", Type = "number", Nilable = true },
 				{ Name = "skill", Type = "number", Nilable = true },
 				{ Name = "secondaryCategoryID", Type = "number", Nilable = true },
 				{ Name = "tertiaryCategoryID", Type = "number", Nilable = true },
@@ -63928,6 +66232,112 @@ local CraftingOrderUIConstants =
 				{ Name = "extraColumnType", Type = "AuctionHouseExtraColumn", Nilable = true },
 			},
 		},
+		{
+			Name = "CraftingOrderInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = false },
+				{ Name = "orderType", Type = "CraftingOrderType", Nilable = false },
+				{ Name = "orderState", Type = "CraftingOrderState", Nilable = false },
+				{ Name = "expirationTime", Type = "number", Nilable = false },
+				{ Name = "claimEndTime", Type = "number", Nilable = false },
+				{ Name = "minQuality", Type = "number", Nilable = false },
+				{ Name = "tipAmount", Type = "number", Nilable = false },
+				{ Name = "consortiumCut", Type = "number", Nilable = false },
+				{ Name = "isRecraft", Type = "bool", Nilable = false },
+				{ Name = "isFulfillable", Type = "bool", Nilable = false },
+				{ Name = "reagentState", Type = "CraftingOrderReagentsType", Nilable = false },
+				{ Name = "customerGuid", Type = "string", Nilable = true },
+				{ Name = "customerName", Type = "string", Nilable = true },
+				{ Name = "crafterGuid", Type = "string", Nilable = true },
+				{ Name = "crafterName", Type = "string", Nilable = true },
+				{ Name = "customerNotes", Type = "string", Nilable = false },
+				{ Name = "reagents", Type = "table", InnerType = "CraftingOrderReagentInfo", Nilable = false },
+				{ Name = "outputItemHyperlink", Type = "string", Nilable = true },
+				{ Name = "outputItemGUID", Type = "string", Nilable = true },
+				{ Name = "recraftItemHyperlink", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "CraftingOrderMailInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "reason", Type = "RcoCloseReason", Nilable = false },
+				{ Name = "recipeName", Type = "string", Nilable = false },
+				{ Name = "commissionPaid", Type = "number", Nilable = true },
+				{ Name = "crafterNote", Type = "string", Nilable = true },
+				{ Name = "crafterGUID", Type = "string", Nilable = true },
+				{ Name = "crafterName", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "CraftingOrderReagentInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "reagent", Type = "CraftingReagentInfo", Nilable = false },
+				{ Name = "reagentSlot", Type = "number", Nilable = false },
+				{ Name = "source", Type = "CraftingOrderReagentSource", Nilable = false },
+				{ Name = "isBasicReagent", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CraftingOrderSortInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "sortType", Type = "CraftingOrderSortType", Nilable = false },
+				{ Name = "reversed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "NewCraftingOrderInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "skillLineAbilityID", Type = "number", Nilable = false },
+				{ Name = "orderType", Type = "CraftingOrderType", Nilable = false },
+				{ Name = "orderDuration", Type = "CraftingOrderDuration", Nilable = false },
+				{ Name = "tipAmount", Type = "number", Nilable = false },
+				{ Name = "customerNotes", Type = "string", Nilable = false },
+				{ Name = "reagentItems", Type = "table", InnerType = "RegularReagentInfo", Nilable = false },
+				{ Name = "craftingReagentItems", Type = "table", InnerType = "CraftingReagentInfo", Nilable = false },
+				{ Name = "minCraftingQualityID", Type = "number", Nilable = true },
+				{ Name = "orderTarget", Type = "string", Nilable = true },
+				{ Name = "recraftItem", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "CraftingOrderRequestCallback",
+			Type = "CallbackType",
+
+			Arguments =
+			{
+				{ Name = "result", Type = "CraftingOrderResult", Nilable = false },
+				{ Name = "orderType", Type = "CraftingOrderType", Nilable = false },
+				{ Name = "displayBuckets", Type = "bool", Nilable = false },
+				{ Name = "expectMoreRows", Type = "bool", Nilable = false },
+				{ Name = "offset", Type = "number", Nilable = false },
+				{ Name = "isSorted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CraftingOrderRequestMyOrdersCallback",
+			Type = "CallbackType",
+
+			Arguments =
+			{
+				{ Name = "result", Type = "CraftingOrderResult", Nilable = false },
+				{ Name = "expectMoreRows", Type = "bool", Nilable = false },
+				{ Name = "offset", Type = "number", Nilable = false },
+				{ Name = "isSorted", Type = "bool", Nilable = false },
+			},
+		},
 	},
 };
 
@@ -63961,9 +66371,9 @@ local CurrencyConstants_Mainline =
 		{
 			Name = "CurrencySource",
 			Type = "Enumeration",
-			NumValues = 57,
+			NumValues = 61,
 			MinValue = 0,
-			MaxValue = 56,
+			MaxValue = 60,
 			Fields =
 			{
 				{ Name = "ConvertOldItem", Type = "CurrencySource", EnumValue = 0 },
@@ -64022,7 +66432,11 @@ local CurrencyConstants_Mainline =
 				{ Name = "PhBuffer_53", Type = "CurrencySource", EnumValue = 53 },
 				{ Name = "PhBuffer_54", Type = "CurrencySource", EnumValue = 54 },
 				{ Name = "RenownRepGain", Type = "CurrencySource", EnumValue = 55 },
-				{ Name = "Last", Type = "CurrencySource", EnumValue = 56 },
+				{ Name = "CraftingOrder", Type = "CurrencySource", EnumValue = 56 },
+				{ Name = "CatalystBalancing", Type = "CurrencySource", EnumValue = 57 },
+				{ Name = "CatalystCraft", Type = "CurrencySource", EnumValue = 58 },
+				{ Name = "ProfessionInitialAward", Type = "CurrencySource", EnumValue = 59 },
+				{ Name = "Last", Type = "CurrencySource", EnumValue = 60 },
 			},
 		},
 	},
@@ -64477,6 +66891,15 @@ local ProfessionSpecConstants =
 			},
 		},
 		{
+			Name = "SpecializationCurrencyInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "numAvailable", Type = "number", Nilable = false },
+				{ Name = "currencyName", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "SpecializationTabInfo",
 			Type = "Structure",
 			Fields =
@@ -64681,3 +67104,11 @@ local UnitConstants =
 };
 
 APIDocumentation:AddDocumentationTable(UnitConstants);
+local WeeklyRewardsShared =
+{
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(WeeklyRewardsShared);

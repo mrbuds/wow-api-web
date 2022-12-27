@@ -363,6 +363,22 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitPartialPower",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "string", Nilable = false },
+				{ Name = "powerType", Type = "PowerType", Nilable = false, Default = "NumPowerTypes" },
+				{ Name = "unmodified", Type = "bool", Nilable = false, Default = false },
+			},
+
+			Returns =
+			{
+				{ Name = "partialPower", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitPercentHealthFromGUID",
 			Type = "Function",
 
@@ -731,6 +747,11 @@ local Unit =
 			LiteralName = "PET_UI_UPDATE",
 		},
 		{
+			Name = "PlayerCanGlideChanged",
+			Type = "Event",
+			LiteralName = "PLAYER_CAN_GLIDE_CHANGED",
+		},
+		{
 			Name = "PlayerDamageDoneMods",
 			Type = "Event",
 			LiteralName = "PLAYER_DAMAGE_DONE_MODS",
@@ -848,6 +869,11 @@ local Unit =
 				{ Name = "oldTarget", Type = "string", Nilable = false },
 				{ Name = "newTarget", Type = "string", Nilable = false },
 			},
+		},
+		{
+			Name = "PlayerSoftTargetInteraction",
+			Type = "Event",
+			LiteralName = "PLAYER_SOFT_TARGET_INTERACTION",
 		},
 		{
 			Name = "PlayerSpecializationChanged",

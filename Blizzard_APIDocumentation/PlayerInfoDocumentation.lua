@@ -35,6 +35,20 @@ local PlayerInfo =
 			},
 		},
 		{
+			Name = "CanUseItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isUseable", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "GetAlternateFormInfo",
 			Type = "Function",
 
@@ -73,6 +87,26 @@ local PlayerInfo =
 			},
 		},
 		{
+			Name = "GetDisplayID",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "displayID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetGlidingInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isGliding", Type = "bool", Nilable = false },
+				{ Name = "canGlide", Type = "bool", Nilable = false },
+				{ Name = "forwardSpeed", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetInstancesUnlockedAtLevel",
 			Type = "Function",
 
@@ -88,6 +122,15 @@ local PlayerInfo =
 			},
 		},
 		{
+			Name = "GetPlayerCharacterData",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "characterData", Type = "PlayerInfoCharacterData", Nilable = false },
+			},
+		},
+		{
 			Name = "GetPlayerMythicPlusRatingSummary",
 			Type = "Function",
 			Documentation = { "Returns the players mythic+ rating summary which includes the runs they've completed as well as their current season m+ rating" },
@@ -100,6 +143,34 @@ local PlayerInfo =
 			Returns =
 			{
 				{ Name = "ratingSummary", Type = "MythicPlusRatingSummary", Nilable = false },
+			},
+		},
+		{
+			Name = "HasVisibleInvSlot",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isVisible", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsExpansionLandingPageUnlockedForPlayer",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "expansionID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isUnlocked", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -138,6 +209,15 @@ local PlayerInfo =
 			Returns =
 			{
 				{ Name = "isRestricted", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsTravelersLogAvailable",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isAvailable", Type = "bool", Nilable = false },
 			},
 		},
 	},

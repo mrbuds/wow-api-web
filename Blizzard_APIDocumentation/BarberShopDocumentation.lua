@@ -52,7 +52,7 @@ local BarberShop =
 
 			Returns =
 			{
-				{ Name = "characterData", Type = "BarberShopCharacterData", Nilable = false },
+				{ Name = "characterData", Type = "PlayerInfoCharacterData", Nilable = false },
 			},
 		},
 		{
@@ -62,6 +62,15 @@ local BarberShop =
 			Returns =
 			{
 				{ Name = "cost", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCustomizationScope",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "customizationScope", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -274,26 +283,6 @@ local BarberShop =
 
 	Tables =
 	{
-		{
-			Name = "BarberShopCharacterData",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "raceData", Type = "BarberShopRaceData", Nilable = false },
-				{ Name = "sex", Type = "number", Nilable = false },
-			},
-		},
-		{
-			Name = "BarberShopRaceData",
-			Type = "Structure",
-			Fields =
-			{
-				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "fileName", Type = "string", Nilable = false },
-				{ Name = "alternateFormRaceData", Type = "CharacterAlternateFormData", Nilable = true },
-				{ Name = "createScreenIconAtlas", Type = "string", Nilable = false },
-			},
-		},
 	},
 };
 

@@ -51,6 +51,14 @@ local CraftingOrderUIConstants =
 			},
 		},
 		{
+			Name = "CraftingOrderConsts",
+			Type = "Constants",
+			Values =
+			{
+				{ Name = "MAX_CRAFTING_ORDER_FAVORITE_RECIPES", Type = "number", Value = 100 },
+			},
+		},
+		{
 			Name = "CraftingOrderCustomerCategory",
 			Type = "Structure",
 			Fields =
@@ -86,6 +94,8 @@ local CraftingOrderUIConstants =
 				{ Name = "itemName", Type = "string", Nilable = false },
 				{ Name = "primaryCategoryID", Type = "number", Nilable = false },
 				{ Name = "iLvl", Type = "number", Nilable = false },
+				{ Name = "qualityIlvlBonuses", Type = "table", InnerType = "number", Nilable = true },
+				{ Name = "craftingQualityIDs", Type = "table", InnerType = "number", Nilable = true },
 				{ Name = "quality", Type = "ItemQuality", Nilable = true },
 				{ Name = "slots", Type = "number", Nilable = true },
 				{ Name = "level", Type = "number", Nilable = true },
@@ -166,6 +176,8 @@ local CraftingOrderUIConstants =
 				{ Name = "crafterNote", Type = "string", Nilable = true },
 				{ Name = "crafterGUID", Type = "string", Nilable = true },
 				{ Name = "crafterName", Type = "string", Nilable = true },
+				{ Name = "customerGUID", Type = "string", Nilable = true },
+				{ Name = "customerName", Type = "string", Nilable = true },
 			},
 		},
 		{

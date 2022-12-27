@@ -3,6 +3,19 @@ local TradeSkillUITypes =
 	Tables =
 	{
 		{
+			Name = "RecipeRequirementType",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "SpellFocus", Type = "RecipeRequirementType", EnumValue = 0 },
+				{ Name = "Totem", Type = "RecipeRequirementType", EnumValue = 1 },
+				{ Name = "Area", Type = "RecipeRequirementType", EnumValue = 2 },
+			},
+		},
+		{
 			Name = "TradeskillOrderDuration",
 			Type = "Enumeration",
 			NumValues = 3,
@@ -90,7 +103,9 @@ local TradeSkillUITypes =
 			{
 				{ Name = "currencyID", Type = "number", Nilable = false, Default = 0 },
 				{ Name = "quantity", Type = "number", Nilable = false, Default = 0 },
-				{ Name = "associatedItemGUID", Type = "string", Nilable = false },
+				{ Name = "operationID", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "firstCraftReward", Type = "bool", Nilable = false, Default = false },
+				{ Name = "showCurrencyText", Type = "bool", Nilable = false, Default = true },
 			},
 		},
 		{
@@ -100,6 +115,7 @@ local TradeSkillUITypes =
 			{
 				{ Name = "resourcesReturned", Type = "table", InnerType = "CraftingResourceReturnInfo", Nilable = true },
 				{ Name = "craftingQuality", Type = "number", Nilable = true },
+				{ Name = "qualityProgress", Type = "number", Nilable = false, Default = 0 },
 				{ Name = "itemID", Type = "number", Nilable = false, Default = 0 },
 				{ Name = "itemGUID", Type = "string", Nilable = false },
 				{ Name = "quantity", Type = "number", Nilable = false, Default = 0 },
@@ -109,7 +125,9 @@ local TradeSkillUITypes =
 				{ Name = "recraftable", Type = "bool", Nilable = false, Default = false },
 				{ Name = "bonusCraft", Type = "bool", Nilable = false, Default = false },
 				{ Name = "multicraft", Type = "number", Nilable = false, Default = 0 },
-				{ Name = "associatedItemGUID", Type = "string", Nilable = false },
+				{ Name = "operationID", Type = "number", Nilable = false, Default = 0 },
+				{ Name = "firstCraftReward", Type = "bool", Nilable = false, Default = false },
+				{ Name = "isEnchant", Type = "bool", Nilable = false, Default = false },
 			},
 		},
 		{
@@ -150,6 +168,7 @@ local TradeSkillUITypes =
 				{ Name = "craftingDataID", Type = "number", Nilable = false },
 				{ Name = "lowerSkillThreshold", Type = "number", Nilable = false },
 				{ Name = "upperSkillTreshold", Type = "number", Nilable = false },
+				{ Name = "guaranteedCraftingQualityID", Type = "number", Nilable = false },
 				{ Name = "bonusStats", Type = "table", InnerType = "CraftingOperationBonusStatInfo", Nilable = false },
 			},
 		},
@@ -208,6 +227,16 @@ local TradeSkillUITypes =
 			},
 		},
 		{
+			Name = "CraftingRecipeRequirement",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "met", Type = "bool", Nilable = false },
+				{ Name = "type", Type = "RecipeRequirementType", Nilable = false },
+			},
+		},
+		{
 			Name = "CraftingRecipeSchematic",
 			Type = "Structure",
 			Fields =
@@ -241,6 +270,17 @@ local TradeSkillUITypes =
 			Fields =
 			{
 				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "quantity", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CraftingTargetItem",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "itemID", Type = "number", Nilable = false },
+				{ Name = "itemGUID", Type = "string", Nilable = false },
+				{ Name = "hyperlink", Type = "string", Nilable = true },
 				{ Name = "quantity", Type = "number", Nilable = false },
 			},
 		},
@@ -331,7 +371,7 @@ local TradeSkillUITypes =
 				{ Name = "qualityIlvlBonuses", Type = "table", InnerType = "number", Nilable = true },
 				{ Name = "maxQuality", Type = "number", Nilable = true },
 				{ Name = "qualityIDs", Type = "table", InnerType = "number", Nilable = true },
-				{ Name = "createsItem", Type = "bool", Nilable = false, Default = true },
+				{ Name = "canCreateMultiple", Type = "bool", Nilable = false, Default = true },
 				{ Name = "abilityVerb", Type = "string", Nilable = true },
 				{ Name = "abilityAllVerb", Type = "string", Nilable = true },
 				{ Name = "isRecraft", Type = "bool", Nilable = false, Default = false },

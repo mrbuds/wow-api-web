@@ -7,6 +7,15 @@ local CraftingOrderUI =
 	Functions =
 	{
 		{
+			Name = "AreOrderNotesDisabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "areNotesDisabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "CalculateCraftingOrderPostingFee",
 			Type = "Function",
 
@@ -161,6 +170,15 @@ local CraftingOrderUI =
 			},
 		},
 		{
+			Name = "GetNumFavoriteCustomerOptions",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "numFavorites", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetOrderClaimInfo",
 			Type = "Function",
 
@@ -204,6 +222,28 @@ local CraftingOrderUI =
 			Arguments =
 			{
 				{ Name = "request", Type = "CraftingOrderRequestMyOrdersInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "OpenCrafterCraftingOrders",
+			Type = "Function",
+		},
+		{
+			Name = "OpenCustomerCraftingOrders",
+			Type = "Function",
+		},
+		{
+			Name = "OrderCanBeRecrafted",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "recraftable", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -291,10 +331,19 @@ local CraftingOrderUI =
 				{ Name = "hasOrders", Type = "bool", Nilable = false },
 			},
 		},
+		{
+			Name = "UpdateIgnoreList",
+			Type = "Function",
+		},
 	},
 
 	Events =
 	{
+		{
+			Name = "CraftingHouseDisabled",
+			Type = "Event",
+			LiteralName = "CRAFTING_HOUSE_DISABLED",
+		},
 		{
 			Name = "CraftingordersCanRequest",
 			Type = "Event",
@@ -415,6 +464,16 @@ local CraftingOrderUI =
 			{
 				{ Name = "customerName", Type = "string", Nilable = false },
 				{ Name = "orderID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "CraftingordersUpdateOrderCount",
+			Type = "Event",
+			LiteralName = "CRAFTINGORDERS_UPDATE_ORDER_COUNT",
+			Payload =
+			{
+				{ Name = "orderType", Type = "CraftingOrderType", Nilable = false },
+				{ Name = "numOrders", Type = "number", Nilable = false },
 			},
 		},
 	},

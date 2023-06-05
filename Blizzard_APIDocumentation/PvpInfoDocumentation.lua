@@ -126,7 +126,7 @@ local PvpInfo =
 
 			Returns =
 			{
-				{ Name = "seconds", Type = "number", Nilable = false },
+				{ Name = "seconds", Type = "time_t", Nilable = false },
 			},
 		},
 		{
@@ -153,7 +153,7 @@ local PvpInfo =
 
 			Arguments =
 			{
-				{ Name = "playerToken", Type = "string", Nilable = false },
+				{ Name = "playerToken", Type = "UnitToken", Nilable = false },
 			},
 
 			Returns =
@@ -178,6 +178,7 @@ local PvpInfo =
 				{ Name = "experience", Type = "number", Nilable = false },
 				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
 				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
+				{ Name = "roleShortageBonus", Type = "RoleShortageReward", Nilable = true },
 			},
 		},
 		{
@@ -190,6 +191,21 @@ local PvpInfo =
 				{ Name = "experience", Type = "number", Nilable = false },
 				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
 				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
+				{ Name = "roleShortageBonus", Type = "RoleShortageReward", Nilable = true },
+			},
+		},
+		{
+			Name = "GetAssignedSpecForBattlefieldQueue",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "queueID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "specializationID", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -208,7 +224,7 @@ local PvpInfo =
 
 			Arguments =
 			{
-				{ Name = "flagIndex", Type = "number", Nilable = false },
+				{ Name = "flagIndex", Type = "luaIndex", Nilable = false },
 				{ Name = "uiMapId", Type = "number", Nilable = false },
 			},
 
@@ -225,7 +241,7 @@ local PvpInfo =
 
 			Arguments =
 			{
-				{ Name = "vehicleIndex", Type = "number", Nilable = false },
+				{ Name = "vehicleIndex", Type = "luaIndex", Nilable = false },
 				{ Name = "uiMapID", Type = "number", Nilable = false },
 			},
 
@@ -263,6 +279,7 @@ local PvpInfo =
 				{ Name = "experience", Type = "number", Nilable = false },
 				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
 				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
+				{ Name = "roleShortageBonus", Type = "RoleShortageReward", Nilable = true },
 				{ Name = "hasWon", Type = "bool", Nilable = false },
 			},
 		},
@@ -365,7 +382,7 @@ local PvpInfo =
 
 			Returns =
 			{
-				{ Name = "pvpWaitTime", Type = "number", Nilable = false },
+				{ Name = "pvpWaitTime", Type = "time_t", Nilable = false },
 			},
 		},
 		{
@@ -375,6 +392,15 @@ local PvpInfo =
 			Returns =
 			{
 				{ Name = "info", Type = "PVPPersonalRatedInfo", Nilable = true },
+			},
+		},
+		{
+			Name = "GetPVPActiveRatedMatchDeserterPenalty",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "deserterPenalty", Type = "RatedMatchDeserterPenalty", Nilable = true },
 			},
 		},
 		{
@@ -429,7 +455,7 @@ local PvpInfo =
 			Arguments =
 			{
 				{ Name = "tierEnum", Type = "number", Nilable = false },
-				{ Name = "bracketEnum", Type = "number", Nilable = false },
+				{ Name = "bracketEnum", Type = "luaIndex", Nilable = false },
 			},
 
 			Returns =
@@ -470,6 +496,7 @@ local PvpInfo =
 				{ Name = "experience", Type = "number", Nilable = false },
 				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
 				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
+				{ Name = "roleShortageBonus", Type = "RoleShortageReward", Nilable = true },
 			},
 		},
 		{
@@ -491,6 +518,7 @@ local PvpInfo =
 				{ Name = "experience", Type = "number", Nilable = false },
 				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
 				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
+				{ Name = "roleShortageBonus", Type = "RoleShortageReward", Nilable = true },
 			},
 		},
 		{
@@ -503,6 +531,7 @@ local PvpInfo =
 				{ Name = "experience", Type = "number", Nilable = false },
 				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
 				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
+				{ Name = "roleShortageBonus", Type = "RoleShortageReward", Nilable = true },
 			},
 		},
 		{
@@ -524,6 +553,7 @@ local PvpInfo =
 				{ Name = "experience", Type = "number", Nilable = false },
 				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
 				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
+				{ Name = "roleShortageBonus", Type = "RoleShortageReward", Nilable = true },
 			},
 		},
 		{
@@ -547,7 +577,7 @@ local PvpInfo =
 
 			Arguments =
 			{
-				{ Name = "offsetIndex", Type = "number", Nilable = false },
+				{ Name = "offsetIndex", Type = "luaIndex", Nilable = false },
 			},
 
 			Returns =
@@ -561,7 +591,7 @@ local PvpInfo =
 
 			Arguments =
 			{
-				{ Name = "guid", Type = "string", Nilable = false },
+				{ Name = "guid", Type = "WOWGUID", Nilable = false },
 			},
 
 			Returns =
@@ -729,6 +759,33 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "IsInRatedMatchWithDeserterPenalty",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isInRatedMatchWithDeserterPenalty", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsMatchActive",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isActive", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsMatchComplete",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isComplete", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsMatchConsideredArena",
 			Type = "Function",
 
@@ -842,7 +899,7 @@ local PvpInfo =
 
 			Arguments =
 			{
-				{ Name = "playerToken", Type = "string", Nilable = false },
+				{ Name = "playerToken", Type = "UnitToken", Nilable = false },
 			},
 		},
 		{
@@ -868,8 +925,8 @@ local PvpInfo =
 			LiteralName = "ARENA_OPPONENT_UPDATE",
 			Payload =
 			{
-				{ Name = "unitToken", Type = "string", Nilable = false },
-				{ Name = "updateReason", Type = "string", Nilable = false },
+				{ Name = "unitToken", Type = "cstring", Nilable = false },
+				{ Name = "updateReason", Type = "cstring", Nilable = false },
 			},
 		},
 		{
@@ -942,7 +999,7 @@ local PvpInfo =
 			LiteralName = "NOTIFY_PVP_AFK_RESULT",
 			Payload =
 			{
-				{ Name = "offender", Type = "string", Nilable = false },
+				{ Name = "offender", Type = "cstring", Nilable = false },
 				{ Name = "numBlackMarksOnOffender", Type = "number", Nilable = false },
 				{ Name = "numPlayersIHaveReported", Type = "number", Nilable = false },
 			},
@@ -951,6 +1008,11 @@ local PvpInfo =
 			Name = "PlayerEnteringBattleground",
 			Type = "Event",
 			LiteralName = "PLAYER_ENTERING_BATTLEGROUND",
+		},
+		{
+			Name = "PlayerJoinedPvpMatch",
+			Type = "Event",
+			LiteralName = "PLAYER_JOINED_PVP_MATCH",
 		},
 		{
 			Name = "PostMatchCurrencyRewardUpdate",
@@ -983,7 +1045,7 @@ local PvpInfo =
 			Payload =
 			{
 				{ Name = "winner", Type = "number", Nilable = false },
-				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "duration", Type = "time_t", Nilable = false },
 			},
 		},
 		{
@@ -1009,11 +1071,6 @@ local PvpInfo =
 			{
 				{ Name = "readyCheckInfo", Type = "PvpReadyCheckInfo", Nilable = false },
 			},
-		},
-		{
-			Name = "PvpRolePopupJoinedMatch",
-			Type = "Event",
-			LiteralName = "PVP_ROLE_POPUP_JOINED_MATCH",
 		},
 		{
 			Name = "PvpRolePopupShow",
@@ -1100,9 +1157,9 @@ local PvpInfo =
 			LiteralName = "WARGAME_REQUESTED",
 			Payload =
 			{
-				{ Name = "opposingPartyMemberName", Type = "string", Nilable = false },
-				{ Name = "battlegroundName", Type = "string", Nilable = false },
-				{ Name = "timeoutSeconds", Type = "number", Nilable = false },
+				{ Name = "opposingPartyMemberName", Type = "cstring", Nilable = false },
+				{ Name = "battlegroundName", Type = "cstring", Nilable = false },
+				{ Name = "timeoutSeconds", Type = "time_t", Nilable = false },
 				{ Name = "tournamentRules", Type = "bool", Nilable = false },
 			},
 		},
@@ -1133,14 +1190,17 @@ local PvpInfo =
 		{
 			Name = "PvPMatchState",
 			Type = "Enumeration",
-			NumValues = 3,
+			NumValues = 6,
 			MinValue = 0,
-			MaxValue = 2,
+			MaxValue = 5,
 			Fields =
 			{
 				{ Name = "Inactive", Type = "PvPMatchState", EnumValue = 0 },
-				{ Name = "Active", Type = "PvPMatchState", EnumValue = 1 },
-				{ Name = "Complete", Type = "PvPMatchState", EnumValue = 2 },
+				{ Name = "Waiting", Type = "PvPMatchState", EnumValue = 1 },
+				{ Name = "StartUp", Type = "PvPMatchState", EnumValue = 2 },
+				{ Name = "Engaged", Type = "PvPMatchState", EnumValue = 3 },
+				{ Name = "PostRound", Type = "PvPMatchState", EnumValue = 4 },
+				{ Name = "Complete", Type = "PvPMatchState", EnumValue = 5 },
 			},
 		},
 		{
@@ -1158,8 +1218,8 @@ local PvpInfo =
 			Fields =
 			{
 				{ Name = "id", Type = "number", Nilable = false },
-				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "texture", Type = "number", Nilable = false },
+				{ Name = "name", Type = "cstring", Nilable = false },
+				{ Name = "texture", Type = "fileID", Nilable = false },
 				{ Name = "quantity", Type = "number", Nilable = false },
 			},
 		},
@@ -1172,6 +1232,7 @@ local PvpInfo =
 				{ Name = "experience", Type = "number", Nilable = false },
 				{ Name = "itemRewards", Type = "table", InnerType = "BattlefieldItemReward", Nilable = true },
 				{ Name = "currencyRewards", Type = "table", InnerType = "BattlefieldCurrencyReward", Nilable = true },
+				{ Name = "roleShortageBonus", Type = "RoleShortageReward", Nilable = true },
 			},
 		},
 		{
@@ -1181,9 +1242,9 @@ local PvpInfo =
 			{
 				{ Name = "x", Type = "number", Nilable = false },
 				{ Name = "y", Type = "number", Nilable = false },
-				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "name", Type = "cstring", Nilable = false },
 				{ Name = "isOccupied", Type = "bool", Nilable = false },
-				{ Name = "atlas", Type = "string", Nilable = false },
+				{ Name = "atlas", Type = "textureAtlas", Nilable = false },
 				{ Name = "textureWidth", Type = "number", Nilable = false },
 				{ Name = "textureHeight", Type = "number", Nilable = false },
 				{ Name = "facing", Type = "number", Nilable = false },
@@ -1201,7 +1262,7 @@ local PvpInfo =
 				{ Name = "instanceType", Type = "number", Nilable = false },
 				{ Name = "minPlayers", Type = "number", Nilable = false },
 				{ Name = "maxPlayers", Type = "number", Nilable = false },
-				{ Name = "icon", Type = "number", Nilable = false },
+				{ Name = "icon", Type = "fileID", Nilable = false },
 				{ Name = "longDescription", Type = "string", Nilable = false },
 				{ Name = "shortDescription", Type = "string", Nilable = false },
 			},
@@ -1212,7 +1273,7 @@ local PvpInfo =
 			Fields =
 			{
 				{ Name = "honorLevelName", Type = "string", Nilable = false },
-				{ Name = "badgeFileDataID", Type = "number", Nilable = false },
+				{ Name = "badgeFileDataID", Type = "fileID", Nilable = false },
 				{ Name = "achievementRewardedID", Type = "number", Nilable = false },
 			},
 		},
@@ -1222,7 +1283,7 @@ local PvpInfo =
 			Fields =
 			{
 				{ Name = "id", Type = "number", Nilable = false },
-				{ Name = "icon", Type = "number", Nilable = false },
+				{ Name = "icon", Type = "fileID", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "isEpic", Type = "bool", Nilable = false },
 			},
@@ -1236,6 +1297,7 @@ local PvpInfo =
 				{ Name = "columnHeaderID", Type = "number", Nilable = false },
 				{ Name = "orderIndex", Type = "number", Nilable = false },
 				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "tooltipTitle", Type = "string", Nilable = false },
 				{ Name = "tooltip", Type = "string", Nilable = false },
 			},
 		},
@@ -1318,7 +1380,7 @@ local PvpInfo =
 			Type = "Structure",
 			Fields =
 			{
-				{ Name = "role", Type = "string", Nilable = false },
+				{ Name = "role", Type = "cstring", Nilable = false },
 				{ Name = "totalRole", Type = "number", Nilable = false },
 				{ Name = "totalAccepted", Type = "number", Nilable = false },
 				{ Name = "totalDeclined", Type = "number", Nilable = false },
@@ -1331,7 +1393,7 @@ local PvpInfo =
 			{
 				{ Name = "scalingDataID", Type = "number", Nilable = false },
 				{ Name = "specializationID", Type = "number", Nilable = false },
-				{ Name = "name", Type = "string", Nilable = false },
+				{ Name = "name", Type = "cstring", Nilable = false },
 				{ Name = "value", Type = "number", Nilable = false },
 			},
 		},
@@ -1341,7 +1403,7 @@ local PvpInfo =
 			Fields =
 			{
 				{ Name = "name", Type = "string", Nilable = false },
-				{ Name = "guid", Type = "string", Nilable = false },
+				{ Name = "guid", Type = "WOWGUID", Nilable = false },
 				{ Name = "killingBlows", Type = "number", Nilable = false },
 				{ Name = "honorableKills", Type = "number", Nilable = false },
 				{ Name = "deaths", Type = "number", Nilable = false },
@@ -1356,6 +1418,7 @@ local PvpInfo =
 				{ Name = "ratingChange", Type = "number", Nilable = false },
 				{ Name = "prematchMMR", Type = "number", Nilable = false },
 				{ Name = "mmrChange", Type = "number", Nilable = false },
+				{ Name = "postmatchMMR", Type = "number", Nilable = false },
 				{ Name = "talentSpec", Type = "string", Nilable = false },
 				{ Name = "honorLevel", Type = "number", Nilable = false },
 				{ Name = "roleAssigned", Type = "number", Nilable = false },
@@ -1398,7 +1461,7 @@ local PvpInfo =
 				{ Name = "descendTier", Type = "number", Nilable = false },
 				{ Name = "ascendTier", Type = "number", Nilable = false },
 				{ Name = "pvpTierEnum", Type = "number", Nilable = false },
-				{ Name = "tierIconID", Type = "number", Nilable = false },
+				{ Name = "tierIconID", Type = "fileID", Nilable = false },
 			},
 		},
 		{
@@ -1414,6 +1477,16 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "RatedMatchDeserterPenalty",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "personalRatingChange", Type = "number", Nilable = false },
+				{ Name = "queuePenaltySpellID", Type = "number", Nilable = false },
+				{ Name = "queuePenaltyDuration", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "RatedSoloShuffleSpecStats",
 			Type = "Structure",
 			Fields =
@@ -1422,6 +1495,16 @@ local PvpInfo =
 				{ Name = "weeklyMostPlayedSpecRounds", Type = "number", Nilable = false },
 				{ Name = "seasonMostPlayedSpecID", Type = "number", Nilable = false },
 				{ Name = "seasonMostPlayedSpecRounds", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RoleShortageReward",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "validRoles", Type = "table", InnerType = "cstring", Nilable = false },
+				{ Name = "rewardSpellID", Type = "number", Nilable = false },
+				{ Name = "rewardItemID", Type = "number", Nilable = false },
 			},
 		},
 	},

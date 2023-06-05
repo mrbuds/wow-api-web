@@ -44,7 +44,7 @@ local ItemConstants =
 				{ Name = "IndexEquipablespellOffensiveType", Type = "InventoryType", EnumValue = 31 },
 				{ Name = "IndexEquipablespellUtilityType", Type = "InventoryType", EnumValue = 32 },
 				{ Name = "IndexEquipablespellDefensiveType", Type = "InventoryType", EnumValue = 33 },
-				{ Name = "IndexEquipablespellMobilityType", Type = "InventoryType", EnumValue = 34 },
+				{ Name = "IndexEquipablespellWeaponType", Type = "InventoryType", EnumValue = 34 },
 			},
 		},
 		{
@@ -67,6 +67,23 @@ local ItemConstants =
 				{ Name = "Totem", Type = "ItemArmorSubclass", EnumValue = 9 },
 				{ Name = "Sigil", Type = "ItemArmorSubclass", EnumValue = 10 },
 				{ Name = "Relic", Type = "ItemArmorSubclass", EnumValue = 11 },
+			},
+		},
+		{
+			Name = "ItemBind",
+			Type = "Enumeration",
+			NumValues = 7,
+			MinValue = 0,
+			MaxValue = 6,
+			Fields =
+			{
+				{ Name = "None", Type = "ItemBind", EnumValue = 0 },
+				{ Name = "OnAcquire", Type = "ItemBind", EnumValue = 1 },
+				{ Name = "OnEquip", Type = "ItemBind", EnumValue = 2 },
+				{ Name = "OnUse", Type = "ItemBind", EnumValue = 3 },
+				{ Name = "Quest", Type = "ItemBind", EnumValue = 4 },
+				{ Name = "Unused1", Type = "ItemBind", EnumValue = 5 },
+				{ Name = "Unused2", Type = "ItemBind", EnumValue = 6 },
 			},
 		},
 		{
@@ -120,9 +137,9 @@ local ItemConstants =
 		{
 			Name = "ItemGemColor",
 			Type = "Enumeration",
-			NumValues = 25,
+			NumValues = 26,
 			MinValue = 1,
-			MaxValue = 16777216,
+			MaxValue = 33554432,
 			Fields =
 			{
 				{ Name = "Meta", Type = "ItemGemColor", EnumValue = 1 },
@@ -150,6 +167,7 @@ local ItemConstants =
 				{ Name = "DominationUnholy", Type = "ItemGemColor", EnumValue = 4194304 },
 				{ Name = "Cypher", Type = "ItemGemColor", EnumValue = 8388608 },
 				{ Name = "Tinker", Type = "ItemGemColor", EnumValue = 16777216 },
+				{ Name = "Primordial", Type = "ItemGemColor", EnumValue = 33554432 },
 			},
 		},
 		{
@@ -250,9 +268,9 @@ local ItemConstants =
 		{
 			Name = "ItemSocketType",
 			Type = "Enumeration",
-			NumValues = 25,
+			NumValues = 26,
 			MinValue = 0,
-			MaxValue = 24,
+			MaxValue = 25,
 			Fields =
 			{
 				{ Name = "None", Type = "ItemSocketType", EnumValue = 0 },
@@ -280,6 +298,7 @@ local ItemConstants =
 				{ Name = "Domination", Type = "ItemSocketType", EnumValue = 22 },
 				{ Name = "Cypher", Type = "ItemSocketType", EnumValue = 23 },
 				{ Name = "Tinker", Type = "ItemSocketType", EnumValue = 24 },
+				{ Name = "Primordial", Type = "ItemSocketType", EnumValue = 25 },
 			},
 		},
 		{

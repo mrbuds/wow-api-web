@@ -24,6 +24,15 @@ local ContentTracking =
 			},
 		},
 		{
+			Name = "GetCollectableSourceTrackingEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isEnabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "GetCollectableSourceTypes",
 			Type = "Function",
 
@@ -155,6 +164,21 @@ local ContentTracking =
 			},
 		},
 		{
+			Name = "GetWaypointText",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "trackableType", Type = "ContentTrackingType", Nilable = false },
+				{ Name = "trackableID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "waypointText", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "IsNavigable",
 			Type = "Function",
 			Documentation = { "If successful, returns if the trackable is either on your current map, or if we're able to determine a route to that map from your location via waypoints." },
@@ -224,6 +248,7 @@ local ContentTracking =
 			{
 				{ Name = "type", Type = "ContentTrackingType", Nilable = false },
 				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "stopType", Type = "ContentTrackingStopType", Nilable = false },
 			},
 		},
 		{
@@ -234,6 +259,7 @@ local ContentTracking =
 			{
 				{ Name = "type", Type = "ContentTrackingType", Nilable = false },
 				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "stopType", Type = "ContentTrackingStopType", Nilable = false },
 			},
 
 			Returns =
@@ -245,6 +271,15 @@ local ContentTracking =
 
 	Events =
 	{
+		{
+			Name = "ContentTrackingIsEnabledUpdate",
+			Type = "Event",
+			LiteralName = "CONTENT_TRACKING_IS_ENABLED_UPDATE",
+			Payload =
+			{
+				{ Name = "isEnabled", Type = "bool", Nilable = false },
+			},
+		},
 		{
 			Name = "ContentTrackingListUpdate",
 			Type = "Event",

@@ -205,6 +205,10 @@ local GossipInfo =
 			Name = "GossipClosed",
 			Type = "Event",
 			LiteralName = "GOSSIP_CLOSED",
+			Payload =
+			{
+				{ Name = "interactionIsContinuing", Type = "bool", Nilable = false },
+			},
 		},
 		{
 			Name = "GossipConfirm",
@@ -354,6 +358,7 @@ local GossipInfo =
 				{ Name = "isLegendary", Type = "bool", Nilable = false },
 				{ Name = "isIgnored", Type = "bool", Nilable = false },
 				{ Name = "questID", Type = "number", Nilable = false },
+				{ Name = "isImportant", Type = "bool", Nilable = false },
 			},
 		},
 	},

@@ -638,6 +638,20 @@ local QuestLog =
 			},
 		},
 		{
+			Name = "IsImportantQuest",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "questID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isImportant", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsLegendaryQuest",
 			Type = "Function",
 
@@ -1304,6 +1318,7 @@ local QuestLog =
 				{ Name = "overridesSortOrder", Type = "bool", Nilable = false },
 				{ Name = "readyForTranslation", Type = "bool", Nilable = false, Default = true },
 				{ Name = "isLegendarySort", Type = "bool", Nilable = false },
+				{ Name = "isInternalOnly", Type = "bool", Nilable = false },
 			},
 		},
 		{

@@ -17,6 +17,7 @@ local Cinematic =
 			Payload =
 			{
 				{ Name = "canBeCancelled", Type = "bool", Nilable = false },
+				{ Name = "forcedAspectRatio", Type = "CameraModeAspectRatio", Nilable = false },
 			},
 		},
 		{
@@ -36,6 +37,16 @@ local Cinematic =
 			Payload =
 			{
 				{ Name = "movieID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "ShowSubtitle",
+			Type = "Event",
+			LiteralName = "SHOW_SUBTITLE",
+			Payload =
+			{
+				{ Name = "subtitle", Type = "cstring", Nilable = false },
+				{ Name = "sender", Type = "cstring", Nilable = true },
 			},
 		},
 		{

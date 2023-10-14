@@ -733,7 +733,7 @@ APIDocumentation:AddDocumentationTable(
 
 			Returns =
 			{
-				{ Name = "state", Type = "number", Nilable = false },
+				{ Name = "state", Type = "AddOnEnableState", Nilable = false },
 			},
 		},
 		{
@@ -751,7 +751,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "title", Type = "cstring", Nilable = false },
 				{ Name = "notes", Type = "cstring", Nilable = false },
 				{ Name = "loadable", Type = "bool", Nilable = false },
-				{ Name = "reason", Type = "string", Nilable = true },
+				{ Name = "reason", Type = "cstring", Nilable = false },
 				{ Name = "security", Type = "cstring", Nilable = false },
 				{ Name = "updateAvailable", Type = "bool", Nilable = false },
 			},
@@ -806,6 +806,23 @@ APIDocumentation:AddDocumentationTable(
 			Returns =
 			{
 				{ Name = "loadOnDemand", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsAddOnLoadable",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "uiAddon", Nilable = false },
+				{ Name = "character", Type = "cstring", Nilable = false, Default = "0" },
+				{ Name = "demandLoaded", Type = "bool", Nilable = false, Default = false },
+			},
+
+			Returns =
+			{
+				{ Name = "loadable", Type = "bool", Nilable = false },
+				{ Name = "reason", Type = "cstring", Nilable = false },
 			},
 		},
 		{
@@ -905,6 +922,19 @@ APIDocumentation:AddDocumentationTable(
 	Tables =
 	{
 		{
+			Name = "AddOnEnableState",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "None", Type = "AddOnEnableState", EnumValue = 0 },
+				{ Name = "Some", Type = "AddOnEnableState", EnumValue = 1 },
+				{ Name = "All", Type = "AddOnEnableState", EnumValue = 2 },
+			},
+		},
+		{
 			Name = "AddOnInfo",
 			Type = "Structure",
 			Fields =
@@ -913,9 +943,18 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "title", Type = "cstring", Nilable = false },
 				{ Name = "notes", Type = "cstring", Nilable = false },
 				{ Name = "loadable", Type = "bool", Nilable = false },
-				{ Name = "reason", Type = "string", Nilable = true },
+				{ Name = "reason", Type = "cstring", Nilable = false },
 				{ Name = "security", Type = "cstring", Nilable = false },
 				{ Name = "updateAvailable", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "AddOnLoadableInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "loadable", Type = "bool", Nilable = false },
+				{ Name = "reason", Type = "cstring", Nilable = false },
 			},
 		},
 	},
@@ -3989,6 +4028,34 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "success", Type = "bool", Nilable = false },
 			},
 		},
+	},
+
+	Tables =
+	{
+	},
+});
+
+APIDocumentation:AddDocumentationTable(
+{
+	Name = "BarberShop",
+	Type = "System",
+	Namespace = "C_BarberShopInternal",
+
+	Functions =
+	{
+		{
+			Name = "SetQAMode",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "qaModeEnabled", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
 	},
 
 	Tables =
@@ -23854,6 +23921,15 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "IsBrawlSoloRBG",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isBrawlSoloRBG", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsBrawlSoloShuffle",
 			Type = "Function",
 
@@ -23959,6 +24035,15 @@ APIDocumentation:AddDocumentationTable(
 			Returns =
 			{
 				{ Name = "isRatedSoloShuffle", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSoloRBG",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isSoloRBG", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -34942,6 +35027,14 @@ APIDocumentation:AddDocumentationTable(
 	Functions =
 	{
 		{
+			Name = "ClearParentKey",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+		},
+		{
 			Name = "GetDebugName",
 			Type = "Function",
 
@@ -40817,19 +40910,19 @@ APIDocumentation:AddDocumentationTable(
 
 	Functions =
 	{
+		{
+			Name = "SetMacroExecuteLineCallback",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "cb", Type = "MacroExecuteLineCallback", Nilable = false },
+			},
+		},
 	},
 
 	Events =
 	{
-		{
-			Name = "ExecuteChatLine",
-			Type = "Event",
-			LiteralName = "EXECUTE_CHAT_LINE",
-			Payload =
-			{
-				{ Name = "chatLine", Type = "cstring", Nilable = false },
-			},
-		},
 		{
 			Name = "UpdateMacros",
 			Type = "Event",
@@ -40839,6 +40932,15 @@ APIDocumentation:AddDocumentationTable(
 
 	Tables =
 	{
+		{
+			Name = "MacroExecuteLineCallback",
+			Type = "CallbackType",
+
+			Arguments =
+			{
+				{ Name = "macroLine", Type = "cstring", Nilable = false },
+			},
+		},
 	},
 });
 
@@ -57014,6 +57116,14 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "ResetNextHandSlot",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+		},
+		{
 			Name = "SetAutoDress",
 			Type = "Function",
 
@@ -68141,9 +68251,9 @@ APIDocumentation:AddDocumentationTable(
 		{
 			Name = "EventToastDisplayType",
 			Type = "Enumeration",
-			NumValues = 9,
+			NumValues = 11,
 			MinValue = 0,
-			MaxValue = 8,
+			MaxValue = 10,
 			Fields =
 			{
 				{ Name = "NormalSingleLine", Type = "EventToastDisplayType", EnumValue = 0 },
@@ -68155,14 +68265,16 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "Scenario", Type = "EventToastDisplayType", EnumValue = 6 },
 				{ Name = "ChallengeMode", Type = "EventToastDisplayType", EnumValue = 7 },
 				{ Name = "ScenarioClickExpand", Type = "EventToastDisplayType", EnumValue = 8 },
+				{ Name = "WeeklyRewardUnlock", Type = "EventToastDisplayType", EnumValue = 9 },
+				{ Name = "WeeklyRewardUpgrade", Type = "EventToastDisplayType", EnumValue = 10 },
 			},
 		},
 		{
 			Name = "EventToastEventType",
 			Type = "Enumeration",
-			NumValues = 23,
+			NumValues = 25,
 			MinValue = 0,
-			MaxValue = 22,
+			MaxValue = 24,
 			Fields =
 			{
 				{ Name = "LevelUp", Type = "EventToastEventType", EnumValue = 0 },
@@ -68188,6 +68300,8 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "PvPTierUpdate", Type = "EventToastEventType", EnumValue = 20 },
 				{ Name = "SpellLearned", Type = "EventToastEventType", EnumValue = 21 },
 				{ Name = "TreasureItem", Type = "EventToastEventType", EnumValue = 22 },
+				{ Name = "WeeklyRewardUnlock", Type = "EventToastEventType", EnumValue = 23 },
+				{ Name = "WeeklyRewardUpgrade", Type = "EventToastEventType", EnumValue = 24 },
 			},
 		},
 		{
@@ -68795,6 +68909,20 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "GetDifficultyIDForActivityTier",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "activityTierID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "difficultyID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetExampleRewardItemHyperlinks",
 			Type = "Function",
 
@@ -68824,6 +68952,24 @@ APIDocumentation:AddDocumentationTable(
 			},
 		},
 		{
+			Name = "GetNextActivitiesIncrease",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "activityTierID", Type = "number", Nilable = false },
+				{ Name = "level", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasSeasonData", Type = "bool", Nilable = false },
+				{ Name = "nextActivityTierID", Type = "number", Nilable = true },
+				{ Name = "nextLevel", Type = "number", Nilable = true },
+				{ Name = "itemLevel", Type = "number", Nilable = true },
+			},
+		},
+		{
 			Name = "GetNextMythicPlusIncrease",
 			Type = "Function",
 
@@ -68837,6 +68983,17 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "hasSeasonData", Type = "bool", Nilable = false },
 				{ Name = "nextMythicPlusLevel", Type = "number", Nilable = true },
 				{ Name = "itemLevel", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetNumCompletedDungeonRuns",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "numHeroic", Type = "number", Nilable = false },
+				{ Name = "numMythic", Type = "number", Nilable = false },
+				{ Name = "numMythicPlus", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -68971,6 +69128,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "threshold", Type = "number", Nilable = false },
 				{ Name = "progress", Type = "number", Nilable = false },
 				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "activityTierID", Type = "number", Nilable = false },
 				{ Name = "level", Type = "number", Nilable = false },
 				{ Name = "claimID", Type = "number", Nilable = true },
 				{ Name = "raidString", Type = "cstring", Nilable = true },
@@ -69402,7 +69560,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "timeRemaining", Type = "time_t", Nilable = false },
 				{ Name = "purchased", Type = "bool", Nilable = false },
 				{ Name = "refundable", Type = "bool", Nilable = false },
-				{ Name = "pending", Type = "bool", Nilable = false },
+				{ Name = "isPurchasePending", Type = "bool", Nilable = false },
 				{ Name = "price", Type = "number", Nilable = false },
 				{ Name = "perksVendorItemID", Type = "number", Nilable = false },
 				{ Name = "itemID", Type = "number", Nilable = false },
@@ -69497,7 +69655,7 @@ APIDocumentation:AddDocumentationTable(
 		{
 			Name = "AccountStateFlags",
 			Type = "Enumeration",
-			NumValues = 35,
+			NumValues = 36,
 			MinValue = 0,
 			MaxValue = 2147483648,
 			Fields =
@@ -69537,6 +69695,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "PerksPendingPurchaseLoaded", Type = "AccountStateFlags", EnumValue = 2147483648 },
 				{ Name = "AccountWowlabsLoaded", Type = "AccountStateFlags", EnumValue = 0 },
 				{ Name = "AccountUpgradeComplete", Type = "AccountStateFlags", EnumValue = 0 },
+				{ Name = "WoWTokenPurchaseLoaded", Type = "AccountStateFlags", EnumValue = 0 },
 			},
 		},
 		{
@@ -70621,12 +70780,13 @@ APIDocumentation:AddDocumentationTable(
 		{
 			Name = "ChrCustomizationCategoryFlag",
 			Type = "Enumeration",
-			NumValues = 1,
+			NumValues = 2,
 			MinValue = 1,
-			MaxValue = 1,
+			MaxValue = 2,
 			Fields =
 			{
 				{ Name = "UndressModel", Type = "ChrCustomizationCategoryFlag", EnumValue = 1 },
+				{ Name = "Subcategory", Type = "ChrCustomizationCategoryFlag", EnumValue = 2 },
 			},
 		},
 		{
@@ -70681,6 +70841,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "icon", Type = "textureAtlas", Nilable = false },
 				{ Name = "selectedIcon", Type = "textureAtlas", Nilable = false },
 				{ Name = "undressModel", Type = "bool", Nilable = false },
+				{ Name = "subcategory", Type = "bool", Nilable = false },
 				{ Name = "cameraZoomLevel", Type = "number", Nilable = false },
 				{ Name = "cameraDistanceOffset", Type = "number", Nilable = false },
 				{ Name = "spellShapeshiftFormID", Type = "number", Nilable = true },
@@ -73180,6 +73341,7 @@ APIDocumentation:AddDocumentationTable(
 			Values =
 			{
 				{ Name = "NUM_ITEM_ENCHANTMENT_SOCKETS", Type = "number", Value = 3 },
+				{ Name = "MAX_LOOT_OBJECT_ITEMS", Type = "number", Value = 31 },
 			},
 		},
 		{
@@ -73310,9 +73472,9 @@ APIDocumentation:AddDocumentationTable(
 		{
 			Name = "UIMapFlag",
 			Type = "Enumeration",
-			NumValues = 19,
+			NumValues = 20,
 			MinValue = 1,
-			MaxValue = 262144,
+			MaxValue = 524288,
 			Fields =
 			{
 				{ Name = "NoHighlight", Type = "UIMapFlag", EnumValue = 1 },
@@ -73334,6 +73496,7 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "AlwaysAllowUserWaypoints", Type = "UIMapFlag", EnumValue = 65536 },
 				{ Name = "AlwaysAllowTaxiPathing", Type = "UIMapFlag", EnumValue = 131072 },
 				{ Name = "ForceAllowMapLinks", Type = "UIMapFlag", EnumValue = 262144 },
+				{ Name = "DoNotShowOnNavbar", Type = "UIMapFlag", EnumValue = 524288 },
 			},
 		},
 		{
@@ -76623,9 +76786,9 @@ APIDocumentation:AddDocumentationTable(
 		{
 			Name = "CurrencySource",
 			Type = "Enumeration",
-			NumValues = 63,
+			NumValues = 66,
 			MinValue = 0,
-			MaxValue = 62,
+			MaxValue = 65,
 			Fields =
 			{
 				{ Name = "ConvertOldItem", Type = "CurrencySource", EnumValue = 0 },
@@ -76690,7 +76853,10 @@ APIDocumentation:AddDocumentationTable(
 				{ Name = "ProfessionInitialAward", Type = "CurrencySource", EnumValue = 59 },
 				{ Name = "PlayerTraitRefund", Type = "CurrencySource", EnumValue = 60 },
 				{ Name = "AccountHwmUpdate", Type = "CurrencySource", EnumValue = 61 },
-				{ Name = "Last", Type = "CurrencySource", EnumValue = 62 },
+				{ Name = "ConvertItemsToCurrencyAndReputation", Type = "CurrencySource", EnumValue = 62 },
+				{ Name = "PhBuffer_63", Type = "CurrencySource", EnumValue = 63 },
+				{ Name = "PhBuffer_64", Type = "CurrencySource", EnumValue = 64 },
+				{ Name = "Last", Type = "CurrencySource", EnumValue = 65 },
 			},
 		},
 	},

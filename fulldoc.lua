@@ -717,7 +717,7 @@ local AddOns =
 
 			Returns =
 			{
-				{ Name = "state", Type = "number", Nilable = false },
+				{ Name = "state", Type = "AddOnEnableState", Nilable = false },
 			},
 		},
 		{
@@ -735,7 +735,7 @@ local AddOns =
 				{ Name = "title", Type = "cstring", Nilable = false },
 				{ Name = "notes", Type = "cstring", Nilable = false },
 				{ Name = "loadable", Type = "bool", Nilable = false },
-				{ Name = "reason", Type = "string", Nilable = true },
+				{ Name = "reason", Type = "cstring", Nilable = false },
 				{ Name = "security", Type = "cstring", Nilable = false },
 				{ Name = "updateAvailable", Type = "bool", Nilable = false },
 			},
@@ -790,6 +790,23 @@ local AddOns =
 			Returns =
 			{
 				{ Name = "loadOnDemand", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsAddOnLoadable",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "uiAddon", Nilable = false },
+				{ Name = "character", Type = "cstring", Nilable = false, Default = "0" },
+				{ Name = "demandLoaded", Type = "bool", Nilable = false, Default = false },
+			},
+
+			Returns =
+			{
+				{ Name = "loadable", Type = "bool", Nilable = false },
+				{ Name = "reason", Type = "cstring", Nilable = false },
 			},
 		},
 		{
@@ -889,6 +906,19 @@ local AddOns =
 	Tables =
 	{
 		{
+			Name = "AddOnEnableState",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "None", Type = "AddOnEnableState", EnumValue = 0 },
+				{ Name = "Some", Type = "AddOnEnableState", EnumValue = 1 },
+				{ Name = "All", Type = "AddOnEnableState", EnumValue = 2 },
+			},
+		},
+		{
 			Name = "AddOnInfo",
 			Type = "Structure",
 			Fields =
@@ -897,9 +927,18 @@ local AddOns =
 				{ Name = "title", Type = "cstring", Nilable = false },
 				{ Name = "notes", Type = "cstring", Nilable = false },
 				{ Name = "loadable", Type = "bool", Nilable = false },
-				{ Name = "reason", Type = "string", Nilable = true },
+				{ Name = "reason", Type = "cstring", Nilable = false },
 				{ Name = "security", Type = "cstring", Nilable = false },
 				{ Name = "updateAvailable", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "AddOnLoadableInfo",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "loadable", Type = "bool", Nilable = false },
+				{ Name = "reason", Type = "cstring", Nilable = false },
 			},
 		},
 	},
@@ -3991,6 +4030,35 @@ local BarberShop =
 };
 
 APIDocumentation:AddDocumentationTable(BarberShop);
+local BarberShopInternal =
+{
+	Name = "BarberShop",
+	Type = "System",
+	Namespace = "C_BarberShopInternal",
+
+	Functions =
+	{
+		{
+			Name = "SetQAMode",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "qaModeEnabled", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(BarberShopInternal);
 local BattleNet =
 {
 	Name = "BattleNet",
@@ -23942,6 +24010,15 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "IsBrawlSoloRBG",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isBrawlSoloRBG", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsBrawlSoloShuffle",
 			Type = "Function",
 
@@ -24047,6 +24124,15 @@ local PvpInfo =
 			Returns =
 			{
 				{ Name = "isRatedSoloShuffle", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSoloRBG",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isSoloRBG", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -35074,6 +35160,14 @@ local SimpleObjectAPI =
 	Functions =
 	{
 		{
+			Name = "ClearParentKey",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+		},
+		{
 			Name = "GetDebugName",
 			Type = "Function",
 
@@ -40984,19 +41078,19 @@ local UIMacros =
 
 	Functions =
 	{
+		{
+			Name = "SetMacroExecuteLineCallback",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "cb", Type = "MacroExecuteLineCallback", Nilable = false },
+			},
+		},
 	},
 
 	Events =
 	{
-		{
-			Name = "ExecuteChatLine",
-			Type = "Event",
-			LiteralName = "EXECUTE_CHAT_LINE",
-			Payload =
-			{
-				{ Name = "chatLine", Type = "cstring", Nilable = false },
-			},
-		},
 		{
 			Name = "UpdateMacros",
 			Type = "Event",
@@ -41006,6 +41100,15 @@ local UIMacros =
 
 	Tables =
 	{
+		{
+			Name = "MacroExecuteLineCallback",
+			Type = "CallbackType",
+
+			Arguments =
+			{
+				{ Name = "macroLine", Type = "cstring", Nilable = false },
+			},
+		},
 	},
 };
 
@@ -57224,6 +57327,14 @@ local FrameAPIModelSceneFrameActor =
 			},
 		},
 		{
+			Name = "ResetNextHandSlot",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+		},
+		{
 			Name = "SetAutoDress",
 			Type = "Function",
 
@@ -68394,9 +68505,9 @@ local UIEventToastManager =
 		{
 			Name = "EventToastDisplayType",
 			Type = "Enumeration",
-			NumValues = 9,
+			NumValues = 11,
 			MinValue = 0,
-			MaxValue = 8,
+			MaxValue = 10,
 			Fields =
 			{
 				{ Name = "NormalSingleLine", Type = "EventToastDisplayType", EnumValue = 0 },
@@ -68408,14 +68519,16 @@ local UIEventToastManager =
 				{ Name = "Scenario", Type = "EventToastDisplayType", EnumValue = 6 },
 				{ Name = "ChallengeMode", Type = "EventToastDisplayType", EnumValue = 7 },
 				{ Name = "ScenarioClickExpand", Type = "EventToastDisplayType", EnumValue = 8 },
+				{ Name = "WeeklyRewardUnlock", Type = "EventToastDisplayType", EnumValue = 9 },
+				{ Name = "WeeklyRewardUpgrade", Type = "EventToastDisplayType", EnumValue = 10 },
 			},
 		},
 		{
 			Name = "EventToastEventType",
 			Type = "Enumeration",
-			NumValues = 23,
+			NumValues = 25,
 			MinValue = 0,
-			MaxValue = 22,
+			MaxValue = 24,
 			Fields =
 			{
 				{ Name = "LevelUp", Type = "EventToastEventType", EnumValue = 0 },
@@ -68441,6 +68554,8 @@ local UIEventToastManager =
 				{ Name = "PvPTierUpdate", Type = "EventToastEventType", EnumValue = 20 },
 				{ Name = "SpellLearned", Type = "EventToastEventType", EnumValue = 21 },
 				{ Name = "TreasureItem", Type = "EventToastEventType", EnumValue = 22 },
+				{ Name = "WeeklyRewardUnlock", Type = "EventToastEventType", EnumValue = 23 },
+				{ Name = "WeeklyRewardUpgrade", Type = "EventToastEventType", EnumValue = 24 },
 			},
 		},
 		{
@@ -69053,6 +69168,20 @@ local WeeklyRewards =
 			},
 		},
 		{
+			Name = "GetDifficultyIDForActivityTier",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "activityTierID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "difficultyID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetExampleRewardItemHyperlinks",
 			Type = "Function",
 
@@ -69082,6 +69211,24 @@ local WeeklyRewards =
 			},
 		},
 		{
+			Name = "GetNextActivitiesIncrease",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "activityTierID", Type = "number", Nilable = false },
+				{ Name = "level", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "hasSeasonData", Type = "bool", Nilable = false },
+				{ Name = "nextActivityTierID", Type = "number", Nilable = true },
+				{ Name = "nextLevel", Type = "number", Nilable = true },
+				{ Name = "itemLevel", Type = "number", Nilable = true },
+			},
+		},
+		{
 			Name = "GetNextMythicPlusIncrease",
 			Type = "Function",
 
@@ -69095,6 +69242,17 @@ local WeeklyRewards =
 				{ Name = "hasSeasonData", Type = "bool", Nilable = false },
 				{ Name = "nextMythicPlusLevel", Type = "number", Nilable = true },
 				{ Name = "itemLevel", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetNumCompletedDungeonRuns",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "numHeroic", Type = "number", Nilable = false },
+				{ Name = "numMythic", Type = "number", Nilable = false },
+				{ Name = "numMythicPlus", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -69229,6 +69387,7 @@ local WeeklyRewards =
 				{ Name = "threshold", Type = "number", Nilable = false },
 				{ Name = "progress", Type = "number", Nilable = false },
 				{ Name = "id", Type = "number", Nilable = false },
+				{ Name = "activityTierID", Type = "number", Nilable = false },
 				{ Name = "level", Type = "number", Nilable = false },
 				{ Name = "claimID", Type = "number", Nilable = true },
 				{ Name = "raidString", Type = "cstring", Nilable = true },
@@ -69662,7 +69821,7 @@ local PerksProgram =
 				{ Name = "timeRemaining", Type = "time_t", Nilable = false },
 				{ Name = "purchased", Type = "bool", Nilable = false },
 				{ Name = "refundable", Type = "bool", Nilable = false },
-				{ Name = "pending", Type = "bool", Nilable = false },
+				{ Name = "isPurchasePending", Type = "bool", Nilable = false },
 				{ Name = "price", Type = "number", Nilable = false },
 				{ Name = "perksVendorItemID", Type = "number", Nilable = false },
 				{ Name = "itemID", Type = "number", Nilable = false },
@@ -69758,7 +69917,7 @@ local AccountConstants =
 		{
 			Name = "AccountStateFlags",
 			Type = "Enumeration",
-			NumValues = 35,
+			NumValues = 36,
 			MinValue = 0,
 			MaxValue = 2147483648,
 			Fields =
@@ -69798,6 +69957,7 @@ local AccountConstants =
 				{ Name = "PerksPendingPurchaseLoaded", Type = "AccountStateFlags", EnumValue = 2147483648 },
 				{ Name = "AccountWowlabsLoaded", Type = "AccountStateFlags", EnumValue = 0 },
 				{ Name = "AccountUpgradeComplete", Type = "AccountStateFlags", EnumValue = 0 },
+				{ Name = "WoWTokenPurchaseLoaded", Type = "AccountStateFlags", EnumValue = 0 },
 			},
 		},
 		{
@@ -70894,12 +71054,13 @@ local CharacterCustomizationShared =
 		{
 			Name = "ChrCustomizationCategoryFlag",
 			Type = "Enumeration",
-			NumValues = 1,
+			NumValues = 2,
 			MinValue = 1,
-			MaxValue = 1,
+			MaxValue = 2,
 			Fields =
 			{
 				{ Name = "UndressModel", Type = "ChrCustomizationCategoryFlag", EnumValue = 1 },
+				{ Name = "Subcategory", Type = "ChrCustomizationCategoryFlag", EnumValue = 2 },
 			},
 		},
 		{
@@ -70954,6 +71115,7 @@ local CharacterCustomizationShared =
 				{ Name = "icon", Type = "textureAtlas", Nilable = false },
 				{ Name = "selectedIcon", Type = "textureAtlas", Nilable = false },
 				{ Name = "undressModel", Type = "bool", Nilable = false },
+				{ Name = "subcategory", Type = "bool", Nilable = false },
 				{ Name = "cameraZoomLevel", Type = "number", Nilable = false },
 				{ Name = "cameraDistanceOffset", Type = "number", Nilable = false },
 				{ Name = "spellShapeshiftFormID", Type = "number", Nilable = true },
@@ -73473,6 +73635,7 @@ local ItemConstants =
 			Values =
 			{
 				{ Name = "NUM_ITEM_ENCHANTMENT_SOCKETS", Type = "number", Value = 3 },
+				{ Name = "MAX_LOOT_OBJECT_ITEMS", Type = "number", Value = 31 },
 			},
 		},
 		{
@@ -73608,9 +73771,9 @@ local MapConstants =
 		{
 			Name = "UIMapFlag",
 			Type = "Enumeration",
-			NumValues = 19,
+			NumValues = 20,
 			MinValue = 1,
-			MaxValue = 262144,
+			MaxValue = 524288,
 			Fields =
 			{
 				{ Name = "NoHighlight", Type = "UIMapFlag", EnumValue = 1 },
@@ -73632,6 +73795,7 @@ local MapConstants =
 				{ Name = "AlwaysAllowUserWaypoints", Type = "UIMapFlag", EnumValue = 65536 },
 				{ Name = "AlwaysAllowTaxiPathing", Type = "UIMapFlag", EnumValue = 131072 },
 				{ Name = "ForceAllowMapLinks", Type = "UIMapFlag", EnumValue = 262144 },
+				{ Name = "DoNotShowOnNavbar", Type = "UIMapFlag", EnumValue = 524288 },
 			},
 		},
 		{
@@ -76977,9 +77141,9 @@ local CurrencyConstants_Mainline =
 		{
 			Name = "CurrencySource",
 			Type = "Enumeration",
-			NumValues = 63,
+			NumValues = 66,
 			MinValue = 0,
-			MaxValue = 62,
+			MaxValue = 65,
 			Fields =
 			{
 				{ Name = "ConvertOldItem", Type = "CurrencySource", EnumValue = 0 },
@@ -77044,7 +77208,10 @@ local CurrencyConstants_Mainline =
 				{ Name = "ProfessionInitialAward", Type = "CurrencySource", EnumValue = 59 },
 				{ Name = "PlayerTraitRefund", Type = "CurrencySource", EnumValue = 60 },
 				{ Name = "AccountHwmUpdate", Type = "CurrencySource", EnumValue = 61 },
-				{ Name = "Last", Type = "CurrencySource", EnumValue = 62 },
+				{ Name = "ConvertItemsToCurrencyAndReputation", Type = "CurrencySource", EnumValue = 62 },
+				{ Name = "PhBuffer_63", Type = "CurrencySource", EnumValue = 63 },
+				{ Name = "PhBuffer_64", Type = "CurrencySource", EnumValue = 64 },
+				{ Name = "Last", Type = "CurrencySource", EnumValue = 65 },
 			},
 		},
 	},

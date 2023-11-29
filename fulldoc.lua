@@ -2477,6 +2477,11 @@ local AuctionHouse =
 			},
 		},
 		{
+			Name = "CommoditySearchResultsReceived",
+			Type = "Event",
+			LiteralName = "COMMODITY_SEARCH_RESULTS_RECEIVED",
+		},
+		{
 			Name = "CommoditySearchResultsUpdated",
 			Type = "Event",
 			LiteralName = "COMMODITY_SEARCH_RESULTS_UPDATED",
@@ -4642,6 +4647,15 @@ local Build =
 			Returns =
 			{
 				{ Name = "is64Bit", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsDebugBuild",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isDebugBuild", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -8586,6 +8600,34 @@ local ConfigurationWarnings =
 };
 
 APIDocumentation:AddDocumentationTable(ConfigurationWarnings);
+local Connection =
+{
+	Name = "ConnectionScript",
+	Type = "System",
+
+	Functions =
+	{
+		{
+			Name = "SelectedRealmName",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "selectedRealmName", Type = "cstring", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(Connection);
 local Console =
 {
 	Name = "Console",
@@ -10800,6 +10842,49 @@ local DeathInfo =
 };
 
 APIDocumentation:AddDocumentationTable(DeathInfo);
+local DebugToggle =
+{
+	Name = "DebugToggle",
+	Type = "System",
+
+	Functions =
+	{
+		{
+			Name = "ToggleCollision",
+			Type = "Function",
+		},
+		{
+			Name = "ToggleCollisionDisplay",
+			Type = "Function",
+		},
+		{
+			Name = "ToggleGravity",
+			Type = "Function",
+		},
+		{
+			Name = "TogglePlayerBounds",
+			Type = "Function",
+		},
+		{
+			Name = "TogglePortals",
+			Type = "Function",
+		},
+		{
+			Name = "ToggleTris",
+			Type = "Function",
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(DebugToggle);
 local DuelInfo =
 {
 	Name = "DuelInfo",
@@ -16505,6 +16590,35 @@ local Item =
 			},
 		},
 		{
+			Name = "GetItemStatDelta",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLink1", Type = "cstring", Nilable = false },
+				{ Name = "itemLink2", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "statTable", Type = "LuaValueVariant", Nilable = false },
+			},
+		},
+		{
+			Name = "GetItemStats",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "itemLink", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "statTable", Type = "LuaValueVariant", Nilable = false },
+			},
+		},
+		{
 			Name = "GetItemUniquenessByID",
 			Type = "Function",
 
@@ -16537,6 +16651,21 @@ local Item =
 				{ Name = "quantity", Type = "number", Nilable = false },
 				{ Name = "maxQuantity", Type = "number", Nilable = false },
 				{ Name = "totalEarned", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSetBonusesForSpecializationByItemID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "specID", Type = "number", Nilable = false },
+				{ Name = "itemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "itemSetSpellIDs", Type = "table", InnerType = "number", Nilable = false },
 			},
 		},
 		{
@@ -17568,12 +17697,35 @@ local LFGInfo =
 			},
 		},
 		{
+			Name = "IsInLFGFollowerDungeon",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsLFDEnabled",
 			Type = "Function",
 
 			Returns =
 			{
 				{ Name = "enabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsLFGFollowerDungeon",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "dungeonID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -17617,6 +17769,11 @@ local LFGInfo =
 			Name = "LfgCompletionReward",
 			Type = "Event",
 			LiteralName = "LFG_COMPLETION_REWARD",
+		},
+		{
+			Name = "LfgEnabledStateChanged",
+			Type = "Event",
+			LiteralName = "LFG_ENABLED_STATE_CHANGED",
 		},
 		{
 			Name = "LfgInvalidErrorMessage",
@@ -18601,6 +18758,20 @@ local Localization =
 			},
 		},
 		{
+			Name = "CaseAccentInsensitiveParse",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "string", Nilable = false },
+			},
+		},
+		{
 			Name = "DeclineName",
 			Type = "Function",
 
@@ -18629,6 +18800,20 @@ local Localization =
 			Returns =
 			{
 				{ Name = "numDeclensionSets", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "LocalizedClassList",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "isFemale", Type = "bool", Nilable = false, Default = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "LuaValueVariant", Nilable = false },
 			},
 		},
 	},
@@ -19169,6 +19354,102 @@ local LossOfControl =
 };
 
 APIDocumentation:AddDocumentationTable(LossOfControl);
+local MacOptions =
+{
+	Name = "MacOptions",
+	Type = "System",
+	Namespace = "C_MacOptions",
+
+	Functions =
+	{
+		{
+			Name = "AreOSShortcutsDisabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "osShortcutsDisabledCVar", Type = "bool", Nilable = true },
+				{ Name = "osShortcutsDisabled", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetGameBundleName",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "HasNewStyleInputMonitoring",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsInputMonitoringEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsMicrophoneEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsUniversalAccessEnabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "OpenInputMonitoring",
+			Type = "Function",
+		},
+		{
+			Name = "OpenMicrophoneRequestDialogue",
+			Type = "Function",
+		},
+		{
+			Name = "OpenUniversalAccess",
+			Type = "Function",
+		},
+		{
+			Name = "SetOSShortcutsDisabled",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "disable", Type = "bool", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(MacOptions);
 local MapExploration =
 {
 	Name = "MapExplorationInfo",
@@ -21329,6 +21610,21 @@ local PartyInfo =
 			},
 		},
 		{
+			Name = "GetMinItemLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "avgItemLevelCategory", Type = "AvgItemLevelCategories", Nilable = false, Documentation = { "The active party is always used" } },
+			},
+
+			Returns =
+			{
+				{ Name = "minItemLevel", Type = "number", Nilable = false },
+				{ Name = "playerNameWithLowestItemLevel", Type = "cstring", Nilable = false },
+			},
+		},
+		{
 			Name = "GetMinLevel",
 			Type = "Function",
 
@@ -21940,6 +22236,10 @@ local PetJournalInfo =
 	Functions =
 	{
 		{
+			Name = "ClearHoveredBattlePet",
+			Type = "Function",
+		},
+		{
 			Name = "GetDisplayIDByIndex",
 			Type = "Function",
 
@@ -22125,6 +22425,15 @@ local PetJournalInfo =
 		{
 			Name = "SetDefaultFilters",
 			Type = "Function",
+		},
+		{
+			Name = "SetHoveredBattlePet",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "battlePetGUID", Type = "WOWGUID", Nilable = false },
+			},
 		},
 		{
 			Name = "SpellTargetBattlePet",
@@ -22330,6 +22639,38 @@ local PingManager =
 			},
 		},
 		{
+			Name = "GetCooldownInfo",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "cooldownInfo", Type = "PingCooldownInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetDefaultPingOptions",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "pingTypes", Type = "table", InnerType = "PingTypeInfo", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTextureKitForType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "type", Type = "PingSubjectType", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "uiTextureKitID", Type = "textureKit", Nilable = false },
+			},
+		},
+		{
 			Name = "SendMacroPing",
 			Type = "Function",
 
@@ -22395,24 +22736,6 @@ local PingManagerSecure =
 			},
 		},
 		{
-			Name = "GetCooldownInfo",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "cooldownInfo", Type = "PingCooldownInfo", Nilable = false },
-			},
-		},
-		{
-			Name = "GetDefaultPingOptions",
-			Type = "Function",
-
-			Returns =
-			{
-				{ Name = "pingTypes", Type = "table", InnerType = "PingTypeInfo", Nilable = false },
-			},
-		},
-		{
 			Name = "GetTargetPingReceiver",
 			Type = "Function",
 
@@ -22449,20 +22772,6 @@ local PingManagerSecure =
 			Returns =
 			{
 				{ Name = "result", Type = "ContextualWorldPingResult", Nilable = false },
-			},
-		},
-		{
-			Name = "GetTextureKitForType",
-			Type = "Function",
-
-			Arguments =
-			{
-				{ Name = "type", Type = "PingSubjectType", Nilable = false },
-			},
-
-			Returns =
-			{
-				{ Name = "uiTextureKitID", Type = "textureKit", Nilable = false },
 			},
 		},
 		{
@@ -22894,6 +23203,15 @@ local PlayerInfo =
 			},
 		},
 		{
+			Name = "IsMirrorImage",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isMirrorImage", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsPlayerEligibleForNPE",
 			Type = "Function",
 
@@ -23217,6 +23535,1027 @@ local PlayerLocation =
 };
 
 APIDocumentation:AddDocumentationTable(PlayerLocation);
+local PlayerScript =
+{
+	Name = "PlayerScript",
+	Type = "System",
+
+	Functions =
+	{
+		{
+			Name = "AcceptGuild",
+			Type = "Function",
+		},
+		{
+			Name = "AcceptResurrect",
+			Type = "Function",
+		},
+		{
+			Name = "AutoEquipCursorItem",
+			Type = "Function",
+		},
+		{
+			Name = "ConfirmTalentWipe",
+			Type = "Function",
+		},
+		{
+			Name = "DeclineGuild",
+			Type = "Function",
+		},
+		{
+			Name = "DeclineResurrect",
+			Type = "Function",
+		},
+		{
+			Name = "Dismount",
+			Type = "Function",
+		},
+		{
+			Name = "GetAllowLowLevelRaid",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAttackPowerForStat",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "stat", Type = "luaIndex", Nilable = false },
+				{ Name = "value", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAutoDeclineGuildInvites",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetAvoidance",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetBlockChance",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCombatRating",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ratingIndex", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCombatRatingBonus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ratingIndex", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCombatRatingBonusForCombatRatingValue",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ratingIndex", Type = "luaIndex", Nilable = false },
+				{ Name = "value", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetCorruption",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCorruptionResistance",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCritChance",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetCritChanceProvidesParryEffect",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetDodgeChance",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetDodgeChanceFromAttribute",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetExpertise",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "mainhandExpertise", Type = "number", Nilable = false },
+				{ Name = "offhandExpertise", Type = "number", Nilable = false },
+				{ Name = "rangedExpertise", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetHaste",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetHitModifier",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetJailersTowerLevel",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetLifesteal",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetManaRegen",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "baseManaRegen", Type = "number", Nilable = false },
+				{ Name = "castingManaRegen", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMastery",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMasteryEffect",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "masteryEffect", Type = "number", Nilable = false },
+				{ Name = "bonusCoefficient", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMaxCombatRatingBonus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "ratingIndex", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetMaxPlayerLevel",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "maxPlayerLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMeleeHaste",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetModResilienceDamageReduction",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetMoney",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetNormalizedRealmName",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "GetOverrideAPBySpellPower",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetOverrideSpellPowerByAP",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPVPDesired",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPVPGearStatRules",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPVPLifetimeStats",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "lifetimeHonorableKills", Type = "number", Nilable = false },
+				{ Name = "lifetimeMaxPVPRank", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPVPSessionStats",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "honorableKills", Type = "number", Nilable = false },
+				{ Name = "dishonorableKills", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPVPTimer",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPVPYesterdayStats",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "honorableKills", Type = "number", Nilable = false },
+				{ Name = "dishonorableKills", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetParryChance",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetParryChanceFromAttribute",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPetMeleeHaste",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPetSpellBonusDamage",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPlayerFacing",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetPlayerInfoByGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "guid", Type = "WOWGUID", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "localizedClass", Type = "cstring", Nilable = false },
+				{ Name = "englishClass", Type = "cstring", Nilable = false },
+				{ Name = "localizedRace", Type = "cstring", Nilable = false },
+				{ Name = "englishRace", Type = "cstring", Nilable = false },
+				{ Name = "sex", Type = "number", Nilable = false },
+				{ Name = "name", Type = "cstring", Nilable = false },
+				{ Name = "realmName", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPowerRegen",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "basePowerRegen", Type = "number", Nilable = false },
+				{ Name = "castingPowerRegen", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPowerRegenForPowerType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "powerType", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "basePowerRegen", Type = "number", Nilable = false },
+				{ Name = "castingPowerRegen", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPvpPowerDamage",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetPvpPowerHealing",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRangedCritChance",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRangedHaste",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetResSicknessDuration",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "string", Nilable = true },
+			},
+		},
+		{
+			Name = "GetRestState",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "exhaustionID", Type = "number", Nilable = false },
+				{ Name = "name", Type = "cstring", Nilable = false },
+				{ Name = "factor", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRuneCooldown",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "runeIndex", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "startTime", Type = "number", Nilable = false },
+				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "isRuneReady", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRuneCount",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "runeIndex", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSheathState",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetShieldBlock",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSpeed",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSpellBonusDamage",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "school", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetSpellBonusHealing",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSpellCritChance",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSpellHitModifier",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSpellPenetration",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetSturdiness",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetTaxiBenchmarkMode",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetVersatilityBonus",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "combatRating", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetXPExhaustion",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "HasAPEffectsSpellPower",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasDualWieldPenalty",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasFullControl",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasNoReleaseAura",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "hasCannotReleaseEffect", Type = "bool", Nilable = false },
+				{ Name = "longestDuration", Type = "number", Nilable = false },
+				{ Name = "hasUntilCancelledDuration", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "HasSPEffectsAttackPower",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsAccountSecured",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsAdvancedFlyableArea",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsDualWielding",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsFlyableArea",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsGuildLeader",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsInGuild",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsInJailersTower",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsIndoors",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsInsane",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsJailersTowerLayerTimeLocked",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "layerLevel", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "IsLoggedIn",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsMounted",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsOnGroundFloorInJailersTower",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsOutOfBounds",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsOutdoors",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsPVPTimerRunning",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsRangedWeapon",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsResting",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsStealthed",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsXPUserDisabled",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "NoPlayTime",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = true },
+			},
+		},
+		{
+			Name = "PartialPlayTime",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = true },
+			},
+		},
+		{
+			Name = "PlayerCanTeleport",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "PlayerEffectiveAttackPower",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "mainHandAttackPower", Type = "number", Nilable = false },
+				{ Name = "offHandAttackPower", Type = "number", Nilable = false },
+				{ Name = "rangedAttackPower", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "RepopMe",
+			Type = "Function",
+		},
+		{
+			Name = "RespondInstanceLock",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "acceptLock", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "RetrieveCorpse",
+			Type = "Function",
+		},
+		{
+			Name = "SetAllowLowLevelRaid",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "allow", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "SetAutoDeclineGuildInvites",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "allow", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "SetTaxiBenchmarkMode",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "enable", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "TimeoutResurrect",
+			Type = "Function",
+		},
+		{
+			Name = "ToggleSheath",
+			Type = "Function",
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(PlayerScript);
 local Pony =
 {
 	Name = "Pony",
@@ -23893,6 +25232,15 @@ local PvpInfo =
 			},
 		},
 		{
+			Name = "GetSoloRBGMinItemLevel",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "minItemLevel", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetSpecialEventBrawlInfo",
 			Type = "Function",
 
@@ -24361,7 +25709,7 @@ local PvpInfo =
 			LiteralName = "PVP_ROLE_POPUP_HIDE",
 			Payload =
 			{
-				{ Name = "readyCheckInfo", Type = "PvpReadyCheckInfo", Nilable = false },
+				{ Name = "readyCheckInfo", Type = "PvpReadyCheckInfo", Nilable = true },
 			},
 		},
 		{
@@ -24483,9 +25831,9 @@ local PvpInfo =
 		{
 			Name = "BrawlType",
 			Type = "Enumeration",
-			NumValues = 5,
+			NumValues = 6,
 			MinValue = 0,
-			MaxValue = 4,
+			MaxValue = 5,
 			Fields =
 			{
 				{ Name = "None", Type = "BrawlType", EnumValue = 0 },
@@ -24493,6 +25841,7 @@ local PvpInfo =
 				{ Name = "Arena", Type = "BrawlType", EnumValue = 2 },
 				{ Name = "LFG", Type = "BrawlType", EnumValue = 3 },
 				{ Name = "SoloShuffle", Type = "BrawlType", EnumValue = 4 },
+				{ Name = "SoloRbg", Type = "BrawlType", EnumValue = 5 },
 			},
 		},
 		{
@@ -24626,6 +25975,7 @@ local PvpInfo =
 				{ Name = "brawlType", Type = "BrawlType", Nilable = false },
 				{ Name = "mapNames", Type = "table", InnerType = "string", Nilable = false },
 				{ Name = "includesAllArenas", Type = "bool", Nilable = false, Default = false },
+				{ Name = "minItemLevel", Type = "number", Nilable = false, Default = 0 },
 			},
 		},
 		{
@@ -29558,6 +30908,69 @@ local SimpleAnimTranslationLineAPI =
 };
 
 APIDocumentation:AddDocumentationTable(SimpleAnimTranslationLineAPI);
+local SimpleAnimVertexColorAPI =
+{
+	Name = "SimpleAnimVertexColorAPI",
+	Type = "ScriptObject",
+
+	Functions =
+	{
+		{
+			Name = "GetEndColor",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+
+			Returns =
+			{
+				{ Name = "color", Type = "colorRGBA", Mixin = "ColorMixin", Nilable = false },
+			},
+		},
+		{
+			Name = "GetStartColor",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+
+			Returns =
+			{
+				{ Name = "color", Type = "colorRGBA", Mixin = "ColorMixin", Nilable = false },
+			},
+		},
+		{
+			Name = "SetEndColor",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "color", Type = "colorRGBA", Mixin = "ColorMixin", Nilable = false },
+			},
+		},
+		{
+			Name = "SetStartColor",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "color", Type = "colorRGBA", Mixin = "ColorMixin", Nilable = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(SimpleAnimVertexColorAPI);
 local SimpleAnimatableObjectAPI =
 {
 	Name = "SimpleAnimatableObjectAPI",
@@ -30299,6 +31712,45 @@ local SimpleColorSelectAPI =
 			},
 		},
 		{
+			Name = "GetColorAlpha",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+
+			Returns =
+			{
+				{ Name = "alpha", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetColorAlphaTexture",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+
+			Returns =
+			{
+				{ Name = "texture", Type = "SimpleTexture", Nilable = false },
+			},
+		},
+		{
+			Name = "GetColorAlphaThumbTexture",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+
+			Returns =
+			{
+				{ Name = "texture", Type = "SimpleTexture", Nilable = false },
+			},
+		},
+		{
 			Name = "GetColorHSV",
 			Type = "Function",
 
@@ -30378,6 +31830,33 @@ local SimpleColorSelectAPI =
 			Returns =
 			{
 				{ Name = "texture", Type = "SimpleTexture", Nilable = false },
+			},
+		},
+		{
+			Name = "SetColorAlpha",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "alpha", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "SetColorAlphaTexture",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "texture", Type = "SimpleTexture", Nilable = false },
+			},
+		},
+		{
+			Name = "SetColorAlphaThumbTexture",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "texture", Type = "TextureAsset", Nilable = false },
 			},
 		},
 		{
@@ -32647,6 +34126,19 @@ local SimpleFrameAPI =
 			Returns =
 			{
 				{ Name = "propagate", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "GetRaisedFrameLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+			},
+
+			Returns =
+			{
+				{ Name = "frameLevel", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -35214,6 +36706,7 @@ local SimpleObjectAPI =
 			Arguments =
 			{
 				{ Name = "parentKey", Type = "cstring", Nilable = false },
+				{ Name = "clearOtherKeys", Type = "bool", Nilable = false, Default = false },
 			},
 		},
 	},
@@ -39016,6 +40509,196 @@ local TTSSettings =
 };
 
 APIDocumentation:AddDocumentationTable(TTSSettings);
+local TargetScript =
+{
+	Name = "TargetScript",
+	Type = "System",
+
+	Functions =
+	{
+		{
+			Name = "AssistUnit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false, Default = "" },
+				{ Name = "exactMatch", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "AttackTarget",
+			Type = "Function",
+		},
+		{
+			Name = "ClearFocus",
+			Type = "Function",
+		},
+		{
+			Name = "ClearTarget",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "willMakeChange", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "FocusUnit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false, Default = "" },
+			},
+		},
+		{
+			Name = "IsTargetLoose",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isTargetLoose", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "TargetDirectionEnemy",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "facing", Type = "number", Nilable = false },
+				{ Name = "coneAngle", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "TargetDirectionFinished",
+			Type = "Function",
+		},
+		{
+			Name = "TargetDirectionFriend",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "facing", Type = "number", Nilable = false },
+				{ Name = "coneAngle", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "TargetLastEnemy",
+			Type = "Function",
+		},
+		{
+			Name = "TargetLastFriend",
+			Type = "Function",
+		},
+		{
+			Name = "TargetLastTarget",
+			Type = "Function",
+		},
+		{
+			Name = "TargetNearest",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "reverse", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "TargetNearestEnemy",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "reverse", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "TargetNearestEnemyPlayer",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "reverse", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "TargetNearestFriend",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "reverse", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "TargetNearestFriendPlayer",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "reverse", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "TargetNearestPartyMember",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "reverse", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "TargetNearestRaidMember",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "reverse", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "TargetPriorityHighlightEnd",
+			Type = "Function",
+		},
+		{
+			Name = "TargetPriorityHighlightStart",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "useStartDelay", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+		{
+			Name = "TargetToggle",
+			Type = "Function",
+		},
+		{
+			Name = "TargetUnit",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false, Default = "" },
+				{ Name = "exactMatch", Type = "bool", Nilable = false, Default = false },
+			},
+		},
+	},
+
+	Events =
+	{
+	},
+
+	Tables =
+	{
+	},
+};
+
+APIDocumentation:AddDocumentationTable(TargetScript);
 local TaxiMap =
 {
 	Name = "TaxiMap",
@@ -43508,6 +45191,85 @@ local Unit =
 	Functions =
 	{
 		{
+			Name = "CanEjectPassengerFromSeat",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "virtualSeatIndex", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "CanSwitchVehicleSeat",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ClosestGameObjectPosition",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "gameObjectID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "xPos", Type = "number", Nilable = false },
+				{ Name = "yPos", Type = "number", Nilable = false },
+				{ Name = "distance", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "ClosestUnitPosition",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "creatureID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "xPos", Type = "number", Nilable = false },
+				{ Name = "yPos", Type = "number", Nilable = false },
+				{ Name = "distance", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "EjectPassengerFromSeat",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "virtualSeatIndex", Type = "luaIndex", Nilable = false },
+			},
+		},
+		{
+			Name = "GetComboPoints",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "target", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "GetNegativeCorruptionEffectInfo",
 			Type = "Function",
 
@@ -43571,6 +45333,34 @@ local Unit =
 			Returns =
 			{
 				{ Name = "duration", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitHealthModifier",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitMaxHealthModifier",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -43673,6 +45463,106 @@ local Unit =
 			},
 		},
 		{
+			Name = "GetUnitPowerModifier",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetUnitSpeed",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "currentSpeed", Type = "number", Nilable = false },
+				{ Name = "runSpeed", Type = "number", Nilable = false },
+				{ Name = "flightSpeed", Type = "number", Nilable = false },
+				{ Name = "swimSpeed", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetVehicleUIIndicator",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "vehicleIndicatorID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "backgroundTextureID", Type = "fileID", Nilable = false },
+				{ Name = "numSeatIndicators", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "GetVehicleUIIndicatorSeat",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "vehicleIndicatorID", Type = "number", Nilable = false },
+				{ Name = "indicatorSeatIndex", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "virtualSeatIndex", Type = "number", Nilable = false },
+				{ Name = "xPos", Type = "number", Nilable = false },
+				{ Name = "yPos", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "InitiateRolePoll",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsFalling",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsFlying",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "IsPlayerInGuildFromGUID",
 			Type = "Function",
 
@@ -43684,6 +45574,34 @@ local Unit =
 			Returns =
 			{
 				{ Name = "IsInGuild", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSubmerged",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsSwimming",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -43701,12 +45619,50 @@ local Unit =
 			},
 		},
 		{
+			Name = "PlayerIsPVPInactive",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "PlayerVehicleHasComboPoints",
 			Type = "Function",
 
 			Returns =
 			{
 				{ Name = "vehicleHasComboPoints", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "ReportPlayerIsPVPAFK",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+		},
+		{
+			Name = "ResistancePercent",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "resistance", Type = "number", Nilable = false },
+				{ Name = "casterLevel", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -43748,6 +45704,34 @@ local Unit =
 			},
 		},
 		{
+			Name = "ShowBossFrameWhenUninteractable",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitAffectingCombat",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitAlliedRaceInfo",
 			Type = "Function",
 
@@ -43760,6 +45744,54 @@ local Unit =
 			{
 				{ Name = "isAlliedRace", Type = "bool", Nilable = false },
 				{ Name = "hasHeritageArmorUnlocked", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitArmor",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "base", Type = "number", Nilable = false },
+				{ Name = "effective", Type = "number", Nilable = false },
+				{ Name = "real", Type = "number", Nilable = false },
+				{ Name = "bonus", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitAttackPower",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "attackPower", Type = "number", Nilable = false },
+				{ Name = "posBuff", Type = "number", Nilable = false },
+				{ Name = "negBuff", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitAttackSpeed",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "attackSpeed", Type = "number", Nilable = false },
+				{ Name = "offhandAttackSpeed", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -43865,6 +45897,51 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitCastingInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false },
+				{ Name = "displayName", Type = "cstring", Nilable = false },
+				{ Name = "textureID", Type = "fileID", Nilable = false },
+				{ Name = "startTimeMs", Type = "number", Nilable = false },
+				{ Name = "endTimeMs", Type = "number", Nilable = false },
+				{ Name = "isTradeskill", Type = "bool", Nilable = false },
+				{ Name = "castID", Type = "WOWGUID", Nilable = false },
+				{ Name = "notInterruptible", Type = "bool", Nilable = false },
+				{ Name = "castingSpellID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitChannelInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false },
+				{ Name = "displayName", Type = "cstring", Nilable = false },
+				{ Name = "textureID", Type = "fileID", Nilable = false },
+				{ Name = "startTimeMs", Type = "number", Nilable = false },
+				{ Name = "endTimeMs", Type = "number", Nilable = false },
+				{ Name = "isTradeskill", Type = "bool", Nilable = false },
+				{ Name = "notInterruptible", Type = "bool", Nilable = false },
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "isEmpowered", Type = "bool", Nilable = false },
+				{ Name = "numEmpowerStages", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitChromieTimeID",
 			Type = "Function",
 
@@ -43910,6 +45987,101 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitClassification",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitControllingVehicle",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitCreatureFamily",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitCreatureType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitDamage",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "minDamage", Type = "number", Nilable = false },
+				{ Name = "maxDamage", Type = "number", Nilable = false },
+				{ Name = "offhandMinDamage", Type = "number", Nilable = false },
+				{ Name = "offhandMaxDamage", Type = "number", Nilable = false },
+				{ Name = "posBuff", Type = "number", Nilable = false },
+				{ Name = "negBuff", Type = "number", Nilable = false },
+				{ Name = "percent", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitDetailedThreatSituation",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "mobGUID", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isTanking", Type = "bool", Nilable = false },
+				{ Name = "status", Type = "number", Nilable = false },
+				{ Name = "scaledPercentage", Type = "number", Nilable = false },
+				{ Name = "rawPercentage", Type = "number", Nilable = false },
+				{ Name = "rawThreat", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitDistanceSquared",
 			Type = "Function",
 
@@ -43922,6 +46094,20 @@ local Unit =
 			{
 				{ Name = "distance", Type = "number", Nilable = false },
 				{ Name = "checkedDistance", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitEffectiveLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -43955,6 +46141,78 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitFullName",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "unitName", Type = "cstring", Nilable = false },
+				{ Name = "unitServer", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitGUID",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "WOWGUID", Nilable = true },
+			},
+		},
+		{
+			Name = "UnitGetIncomingHeals",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "healerGUID", Type = "UnitToken", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "UnitGetTotalAbsorbs",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitGetTotalHealAbsorbs",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitGroupRolesAssigned",
 			Type = "Function",
 
@@ -43966,6 +46224,147 @@ local Unit =
 			Returns =
 			{
 				{ Name = "result", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitGroupRolesAssignedEnum",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitHPPerStamina",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitHasRelicSlot",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitHasVehiclePlayerFrameUI",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitHasVehicleUI",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitHealthMax",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitHealth",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "usePredicted", Type = "bool", Nilable = false, Default = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitHonor",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitHonorLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitHonorMax",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -44006,6 +46405,20 @@ local Unit =
 			{
 				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
 				{ Name = "partyIndex", Type = "luaIndex", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitInPartyIsAI",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
 			},
 
 			Returns =
@@ -44073,6 +46486,48 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitInVehicle",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitInVehicleControlSeat",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitInVehicleHidesPetFrame",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitIsAFK",
 			Type = "Function",
 
@@ -44115,6 +46570,20 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitIsBossMob",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitIsCharmed",
 			Type = "Function",
 
@@ -44140,6 +46609,20 @@ local Unit =
 			Returns =
 			{
 				{ Name = "isConnected", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitIsControlling",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -44171,6 +46654,34 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitIsDead",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitIsDeadOrGhost",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitIsEnemy",
 			Type = "Function",
 
@@ -44178,6 +46689,20 @@ local Unit =
 			{
 				{ Name = "unit", Type = "UnitToken", Nilable = false },
 				{ Name = "target", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitIsFeignDeath",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
 			},
 
 			Returns =
@@ -44215,6 +46740,20 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitIsGhost",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitIsInMyGuild",
 			Type = "Function",
 
@@ -44235,6 +46774,20 @@ local Unit =
 			Arguments =
 			{
 				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitIsMercenary",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false },
 			},
 
 			Returns =
@@ -44357,12 +46910,82 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitIsQuestBoss",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitIsRaidOfficer",
 			Type = "Function",
 
 			Arguments =
 			{
 				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitIsSameServer",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitName", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitIsTapDenied",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitIsTrivial",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitIsUnconscious",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
 			},
 
 			Returns =
@@ -44414,6 +47037,50 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitLevel",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitName",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "unitName", Type = "cstring", Nilable = false },
+				{ Name = "unitServer", Type = "cstring", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitNameUnmodified",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "unitName", Type = "cstring", Nilable = false },
+				{ Name = "unitServer", Type = "cstring", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitNameplateShowsWidgetsOnly",
 			Type = "Function",
 
@@ -44425,6 +47092,48 @@ local Unit =
 			Returns =
 			{
 				{ Name = "nameplateShowsWidgetsOnly", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitNumPowerBarTimers",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitOnTaxi",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitPVPName",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "string", Nilable = false },
 			},
 		},
 		{
@@ -44516,6 +47225,23 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitPosition",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "positionX", Type = "number", Nilable = false },
+				{ Name = "positionY", Type = "number", Nilable = false },
+				{ Name = "positionZ", Type = "number", Nilable = false },
+				{ Name = "mapID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitPower",
 			Type = "Function",
 
@@ -44546,6 +47272,24 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitPowerBarTimerInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "index", Type = "luaIndex", Nilable = false, Default = 0 },
+			},
+
+			Returns =
+			{
+				{ Name = "duration", Type = "number", Nilable = false },
+				{ Name = "expiration", Type = "number", Nilable = false },
+				{ Name = "barID", Type = "number", Nilable = false },
+				{ Name = "auraID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitPowerDisplayMod",
 			Type = "Function",
 
@@ -44573,6 +47317,25 @@ local Unit =
 			Returns =
 			{
 				{ Name = "maxPower", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitPowerType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "index", Type = "number", Nilable = false, Default = 0 },
+			},
+
+			Returns =
+			{
+				{ Name = "powerType", Type = "PowerType", Nilable = false },
+				{ Name = "powerTypeToken", Type = "string", Nilable = false },
+				{ Name = "rgbX", Type = "number", Nilable = false },
+				{ Name = "rgbY", Type = "number", Nilable = false },
+				{ Name = "rgbZ", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -44618,6 +47381,57 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitRace",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "localizedRaceName", Type = "cstring", Nilable = false },
+				{ Name = "englishRaceName", Type = "cstring", Nilable = false },
+				{ Name = "raceID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitRangedAttackPower",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "attackPower", Type = "number", Nilable = false },
+				{ Name = "posBuff", Type = "number", Nilable = false },
+				{ Name = "negBuff", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitRangedDamage",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "speed", Type = "number", Nilable = false },
+				{ Name = "minDamage", Type = "number", Nilable = false },
+				{ Name = "maxDamage", Type = "number", Nilable = false },
+				{ Name = "posBuff", Type = "number", Nilable = false },
+				{ Name = "negBuff", Type = "number", Nilable = false },
+				{ Name = "percent", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitReaction",
 			Type = "Function",
 
@@ -44633,6 +47447,83 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitRealmRelationship",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "realmRelationship", Type = "luaIndex", Nilable = true },
+			},
+		},
+		{
+			Name = "UnitSelectionColor",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "useExtendedColors", Type = "bool", Nilable = false, Default = false },
+			},
+
+			Returns =
+			{
+				{ Name = "resultR", Type = "number", Nilable = false },
+				{ Name = "resultG", Type = "number", Nilable = false },
+				{ Name = "resultB", Type = "number", Nilable = false },
+				{ Name = "resultA", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitSelectionType",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "useExtendedColors", Type = "bool", Nilable = false, Default = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitSetRole",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "roleStr", Type = "cstring", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitSetRoleEnum",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "role", Type = "LFGRole", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitSex",
 			Type = "Function",
 
@@ -44644,6 +47535,120 @@ local Unit =
 			Returns =
 			{
 				{ Name = "sex", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "UnitShouldDisplayName",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitSpellHaste",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitStagger",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitStat",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "index", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "currentStat", Type = "number", Nilable = false },
+				{ Name = "effectiveStat", Type = "number", Nilable = false },
+				{ Name = "statPositiveBuff", Type = "number", Nilable = false },
+				{ Name = "statNegativeBuff", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitSwitchToVehicleSeat",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "virtualSeatIndex", Type = "luaIndex", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitTargetsVehicleInRaidUI",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitThreatPercentageOfLead",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "mobGUID", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "UnitThreatSituation",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "mobGUID", Type = "UnitToken", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -44691,6 +47696,97 @@ local Unit =
 			},
 		},
 		{
+			Name = "UnitTrialXP",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitUsingVehicle",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitVehicleSeatCount",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitVehicleSeatInfo",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+				{ Name = "virtualSeatIndex", Type = "luaIndex", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "controlType", Type = "cstring", Nilable = false },
+				{ Name = "occupantName", Type = "cstring", Nilable = false },
+				{ Name = "serverName", Type = "cstring", Nilable = false },
+				{ Name = "ejectable", Type = "bool", Nilable = false },
+				{ Name = "canSwitchSeats", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitVehicleSkin",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false, Default = "WOWGUID_NULL" },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "fileID", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitWeaponAttackPower",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "mainHandWeaponAttackPower", Type = "number", Nilable = false },
+				{ Name = "offHandWeaponAttackPower", Type = "number", Nilable = false },
+				{ Name = "rangedWeaponAttackPower", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "UnitWidgetSet",
 			Type = "Function",
 
@@ -44702,6 +47798,48 @@ local Unit =
 			Returns =
 			{
 				{ Name = "uiWidgetSet", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitXP",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitXPMax",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "WorldLootObjectExists",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unit", Type = "UnitToken", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "result", Type = "bool", Nilable = false },
 			},
 		},
 	},
@@ -44927,6 +48065,20 @@ local Unit =
 			Name = "PlayerFocusChanged",
 			Type = "Event",
 			LiteralName = "PLAYER_FOCUS_CHANGED",
+		},
+		{
+			Name = "PlayerImpulseApplied",
+			Type = "Event",
+			LiteralName = "PLAYER_IMPULSE_APPLIED",
+		},
+		{
+			Name = "PlayerIsGlidingChanged",
+			Type = "Event",
+			LiteralName = "PLAYER_IS_GLIDING_CHANGED",
+			Payload =
+			{
+				{ Name = "isGliding", Type = "bool", Nilable = false },
+			},
 		},
 		{
 			Name = "PlayerLeaveCombat",
@@ -45900,6 +49052,39 @@ local Unit =
 				{ Name = "name", Type = "string", Nilable = false },
 				{ Name = "description", Type = "string", Nilable = false },
 				{ Name = "minCorruption", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitCastingInfoResult",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false },
+				{ Name = "displayName", Type = "cstring", Nilable = false },
+				{ Name = "textureID", Type = "fileID", Nilable = false },
+				{ Name = "startTimeMs", Type = "number", Nilable = false },
+				{ Name = "endTimeMs", Type = "number", Nilable = false },
+				{ Name = "isTradeskill", Type = "bool", Nilable = false },
+				{ Name = "castID", Type = "WOWGUID", Nilable = false },
+				{ Name = "notInterruptible", Type = "bool", Nilable = false },
+				{ Name = "castingSpellID", Type = "number", Nilable = false },
+			},
+		},
+		{
+			Name = "UnitChannelInfoResult",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "name", Type = "cstring", Nilable = false },
+				{ Name = "displayName", Type = "cstring", Nilable = false },
+				{ Name = "textureID", Type = "fileID", Nilable = false },
+				{ Name = "startTimeMs", Type = "number", Nilable = false },
+				{ Name = "endTimeMs", Type = "number", Nilable = false },
+				{ Name = "isTradeskill", Type = "bool", Nilable = false },
+				{ Name = "notInterruptible", Type = "bool", Nilable = false },
+				{ Name = "spellID", Type = "number", Nilable = false },
+				{ Name = "isEmpowered", Type = "bool", Nilable = false },
+				{ Name = "numEmpowerStages", Type = "number", Nilable = false },
 			},
 		},
 		{
@@ -46925,6 +50110,15 @@ local VoiceChat =
 			Returns =
 			{
 				{ Name = "isAllowed", Type = "bool", Nilable = false },
+			},
+		},
+		{
+			Name = "IsTranscribing",
+			Type = "Function",
+
+			Returns =
+			{
+				{ Name = "isTranscribing", Type = "bool", Nilable = false },
 			},
 		},
 		{
@@ -60521,6 +63715,16 @@ local LootHistory =
 			},
 		},
 		{
+			Name = "LootHistoryOneHundredRoll",
+			Type = "Event",
+			LiteralName = "LOOT_HISTORY_ONE_HUNDRED_ROLL",
+			Payload =
+			{
+				{ Name = "encounterID", Type = "number", Nilable = false },
+				{ Name = "lootListID", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "LootHistoryUpdateDrop",
 			Type = "Event",
 			LiteralName = "LOOT_HISTORY_UPDATE_DROP",
@@ -62227,19 +65431,11 @@ local PerksActivities =
 			Name = "PerksActivitiesTrackedUpdated",
 			Type = "Event",
 			LiteralName = "PERKS_ACTIVITIES_TRACKED_UPDATED",
-			Payload =
-			{
-				{ Name = "trackedPerksActivities", Type = "PerksActivitiesTracked", Nilable = false },
-			},
 		},
 		{
 			Name = "PerksActivitiesUpdated",
 			Type = "Event",
 			LiteralName = "PERKS_ACTIVITIES_UPDATED",
-			Payload =
-			{
-				{ Name = "info", Type = "PerksActivitiesInfo", Nilable = false },
-			},
 		},
 		{
 			Name = "PerksActivityCompleted",
@@ -62283,6 +65479,16 @@ local PerksActivities =
 			},
 		},
 		{
+			Name = "PerksActivityCondition",
+			Type = "Structure",
+			Fields =
+			{
+				{ Name = "isMet", Type = "bool", Nilable = false },
+				{ Name = "text", Type = "cstring", Nilable = false },
+				{ Name = "uiPriority", Type = "number", Nilable = false },
+			},
+		},
+		{
 			Name = "PerksActivityCriteria",
 			Type = "Structure",
 			Fields =
@@ -62301,9 +65507,13 @@ local PerksActivities =
 				{ Name = "description", Type = "string", Nilable = false },
 				{ Name = "thresholdContributionAmount", Type = "number", Nilable = false },
 				{ Name = "completed", Type = "bool", Nilable = false },
+				{ Name = "inProgress", Type = "bool", Nilable = false },
 				{ Name = "tracked", Type = "bool", Nilable = false },
 				{ Name = "supersedes", Type = "number", Nilable = false },
 				{ Name = "uiPriority", Type = "number", Nilable = false },
+				{ Name = "areAllConditionsMet", Type = "bool", Nilable = false },
+				{ Name = "conditions", Type = "table", InnerType = "PerksActivityCondition", Nilable = false },
+				{ Name = "eventName", Type = "cstring", Nilable = true },
 				{ Name = "eventStartTime", Type = "time_t", Nilable = true },
 				{ Name = "eventEndTime", Type = "time_t", Nilable = true },
 				{ Name = "requirementsList", Type = "table", InnerType = "PerksActivityRequirement", Nilable = false },
@@ -66878,6 +70088,16 @@ local Transmog =
 			LiteralName = "TRANSMOG_COLLECTION_CAMERA_UPDATE",
 		},
 		{
+			Name = "TransmogCollectionItemFavoriteUpdate",
+			Type = "Event",
+			LiteralName = "TRANSMOG_COLLECTION_ITEM_FAVORITE_UPDATE",
+			Payload =
+			{
+				{ Name = "itemAppearanceID", Type = "number", Nilable = false },
+				{ Name = "isFavorite", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "TransmogCollectionItemUpdate",
 			Type = "Event",
 			LiteralName = "TRANSMOG_COLLECTION_ITEM_UPDATE",
@@ -68766,6 +71986,22 @@ local UnitAura =
 			},
 		},
 		{
+			Name = "GetAuraDataByIndex",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "cstring", Nilable = false },
+				{ Name = "index", Type = "luaIndex", Nilable = false },
+				{ Name = "filter", Type = "cstring", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "aura", Type = "AuraData", Nilable = true },
+			},
+		},
+		{
 			Name = "GetAuraDataBySlot",
 			Type = "Function",
 
@@ -68773,6 +72009,40 @@ local UnitAura =
 			{
 				{ Name = "unitToken", Type = "cstring", Nilable = false },
 				{ Name = "slot", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "aura", Type = "AuraData", Nilable = true },
+			},
+		},
+		{
+			Name = "GetAuraSlots",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "UnitToken", Nilable = false },
+				{ Name = "filter", Type = "cstring", Nilable = true },
+				{ Name = "maxSlots", Type = "number", Nilable = true },
+				{ Name = "continuationToken", Type = "number", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "outContinuationToken", Type = "number", Nilable = true },
+				{ Name = "slots", Type = "number", Nilable = false, StrideIndex = 1 },
+			},
+		},
+		{
+			Name = "GetBuffDataByIndex",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "cstring", Nilable = false },
+				{ Name = "index", Type = "luaIndex", Nilable = false },
+				{ Name = "filter", Type = "cstring", Nilable = true },
 			},
 
 			Returns =
@@ -68792,6 +72062,22 @@ local UnitAura =
 			Returns =
 			{
 				{ Name = "cooldownSpellID", Type = "number", Nilable = true },
+			},
+		},
+		{
+			Name = "GetDebuffDataByIndex",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "unitToken", Type = "cstring", Nilable = false },
+				{ Name = "index", Type = "luaIndex", Nilable = false },
+				{ Name = "filter", Type = "cstring", Nilable = true },
+			},
+
+			Returns =
+			{
+				{ Name = "aura", Type = "AuraData", Nilable = true },
 			},
 		},
 		{
@@ -69426,6 +72712,20 @@ local ZoneAbility =
 				{ Name = "zoneAbilities", Type = "table", InnerType = "ZoneAbilityInfo", Nilable = false },
 			},
 		},
+		{
+			Name = "GetZoneAbilityIcon",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "zoneAbilitySpellID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "zoneAbilityIconID", Type = "number", Nilable = true },
+			},
+		},
 	},
 
 	Events =
@@ -69591,6 +72891,20 @@ local PerksProgram =
 			},
 		},
 		{
+			Name = "IsFrozenPerksVendorItem",
+			Type = "Function",
+
+			Arguments =
+			{
+				{ Name = "perksVendorItemID", Type = "number", Nilable = false },
+			},
+
+			Returns =
+			{
+				{ Name = "isFrozen", Type = "bool", Nilable = false },
+			},
+		},
+		{
 			Name = "ItemSelectedTelemetry",
 			Type = "Function",
 
@@ -69732,6 +73046,11 @@ local PerksProgram =
 			},
 		},
 		{
+			Name = "PerksProgramResultError",
+			Type = "Event",
+			LiteralName = "PERKS_PROGRAM_RESULT_ERROR",
+		},
+		{
 			Name = "PerksProgramSetFrozenItem",
 			Type = "Event",
 			LiteralName = "PERKS_PROGRAM_SET_FROZEN_ITEM",
@@ -69785,6 +73104,8 @@ local PerksProgram =
 			{
 				{ Name = "overrideModelSceneID", Type = "number", Nilable = true },
 				{ Name = "creatureDisplayInfoID", Type = "number", Nilable = true },
+				{ Name = "mainHandItemModifiedAppearanceID", Type = "number", Nilable = true },
+				{ Name = "offHandItemModifiedAppearanceID", Type = "number", Nilable = true },
 			},
 		},
 		{
@@ -69917,7 +73238,7 @@ local AccountConstants =
 		{
 			Name = "AccountStateFlags",
 			Type = "Enumeration",
-			NumValues = 36,
+			NumValues = 37,
 			MinValue = 0,
 			MaxValue = 2147483648,
 			Fields =
@@ -69957,6 +73278,7 @@ local AccountConstants =
 				{ Name = "PerksPendingPurchaseLoaded", Type = "AccountStateFlags", EnumValue = 2147483648 },
 				{ Name = "AccountWowlabsLoaded", Type = "AccountStateFlags", EnumValue = 0 },
 				{ Name = "AccountUpgradeComplete", Type = "AccountStateFlags", EnumValue = 0 },
+				{ Name = "BitVectorsLoaded", Type = "AccountStateFlags", EnumValue = 0 },
 				{ Name = "WoWTokenPurchaseLoaded", Type = "AccountStateFlags", EnumValue = 0 },
 			},
 		},
@@ -73691,11 +77013,33 @@ local LFGConstants =
 			},
 		},
 		{
+			Name = "LFGRole",
+			Type = "Enumeration",
+			NumValues = 3,
+			MinValue = 0,
+			MaxValue = 2,
+			Fields =
+			{
+				{ Name = "Tank", Type = "LFGRole", EnumValue = 0 },
+				{ Name = "Healer", Type = "LFGRole", EnumValue = 1 },
+				{ Name = "Damage", Type = "LFGRole", EnumValue = 2 },
+			},
+		},
+		{
 			Name = "GroupFinderConstants",
 			Type = "Constants",
 			Values =
 			{
 				{ Name = "MAX_GROUP_FINDER_ACTIVITIES", Type = "number", Value = 41 },
+			},
+		},
+		{
+			Name = "LFG_ROLEConstants",
+			Type = "Constants",
+			Values =
+			{
+				{ Name = "LFG_ROLE_NO_ROLE", Type = "LFGRole", Value = -1 },
+				{ Name = "LFG_ROLE_ANY", Type = "LFGRole", Value = Enum.LFGRoleMeta.NumValues },
 			},
 		},
 	},
@@ -73909,6 +77253,30 @@ local PVPMgrConstants =
 };
 
 APIDocumentation:AddDocumentationTable(PVPMgrConstants);
+local PartyConstants =
+{
+	Tables =
+	{
+		{
+			Name = "AvgItemLevelCategories",
+			Type = "Enumeration",
+			NumValues = 6,
+			MinValue = 0,
+			MaxValue = 5,
+			Fields =
+			{
+				{ Name = "Base", Type = "AvgItemLevelCategories", EnumValue = 0 },
+				{ Name = "EquippedBase", Type = "AvgItemLevelCategories", EnumValue = 1 },
+				{ Name = "EquippedEffective", Type = "AvgItemLevelCategories", EnumValue = 2 },
+				{ Name = "PvP", Type = "AvgItemLevelCategories", EnumValue = 3 },
+				{ Name = "PvPWeighted", Type = "AvgItemLevelCategories", EnumValue = 4 },
+				{ Name = "EquippedEffectiveWeighted", Type = "AvgItemLevelCategories", EnumValue = 5 },
+			},
+		},
+	},
+};
+
+APIDocumentation:AddDocumentationTable(PartyConstants);
 local PerksVendorConstants =
 {
 	Tables =
@@ -77210,7 +80578,7 @@ local CurrencyConstants_Mainline =
 				{ Name = "AccountHwmUpdate", Type = "CurrencySource", EnumValue = 61 },
 				{ Name = "ConvertItemsToCurrencyAndReputation", Type = "CurrencySource", EnumValue = 62 },
 				{ Name = "PhBuffer_63", Type = "CurrencySource", EnumValue = 63 },
-				{ Name = "PhBuffer_64", Type = "CurrencySource", EnumValue = 64 },
+				{ Name = "SpellSkipLinkedCurrency", Type = "CurrencySource", EnumValue = 64 },
 				{ Name = "Last", Type = "CurrencySource", EnumValue = 65 },
 			},
 		},

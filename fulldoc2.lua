@@ -7,6 +7,9 @@ local Enum = {
         InBackpack = 4,
         UnusedInUI = 8,
         Reuse2 = 16,
+    },
+    LFGRoleMeta = {
+        NumValues = 2
     }
 }
 
